@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "box-silver",
+    "texture": "03e4128c-276d-4885-b9c5-fa43653f8af3",
+    "atlas": "",
+    "rect": [
+      1,
+      1,
+      120,
+      246
+    ],
+    "offset": [
+      -0.5,
+      0.5
+    ],
+    "originalSize": [
+      123,
+      249
+    ]
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "b180d93b-cd50-418c-b360-ea0c85f53ab5",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "chutou_1": {
+      "ver": "1.0.3",
+      "uuid": "f3e09b1f-3188-4005-8478-bc4332403855",
+      "rawTextureUuid": "b180d93b-cd50-418c-b360-ea0c85f53ab5",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -0.5,
+      "offsetY": 0.5,
+      "trimX": 1,
+      "trimY": 1,
+      "width": 80,
+      "height": 66,
+      "rawWidth": 83,
+      "rawHeight": 69,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

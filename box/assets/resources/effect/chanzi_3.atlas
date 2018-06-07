@@ -1,0 +1,13 @@
+
+chanzi_3.png
+size: 81,80
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+chanzi_3
+  rotate: false
+  xy: 1, 1
+  size: 78, 77
+  orig: 78, 77
+  offset: 0, 0
+  index: -1

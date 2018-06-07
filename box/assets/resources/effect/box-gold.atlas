@@ -1,0 +1,27 @@
+
+box-gold.png
+size: 128,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+box_jin1
+  rotate: false
+  xy: 1, 1
+  size: 120, 111
+  orig: 120, 111
+  offset: 0, 0
+  index: -1
+box_jin2
+  rotate: false
+  xy: 1, 114
+  size: 115, 71
+  orig: 115, 71
+  offset: 0, 0
+  index: -1
+box_jin3
+  rotate: false
+  xy: 1, 187
+  size: 120, 60
+  orig: 120, 60
+  offset: 0, 0
+  index: -1

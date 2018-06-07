@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "chanzi_3",
+    "texture": "d9352f7c-58a2-4545-9532-93180cb6e9eb",
+    "atlas": "",
+    "rect": [
+      1,
+      1,
+      78,
+      77
+    ],
+    "offset": [
+      -0.5,
+      0.5
+    ],
+    "originalSize": [
+      81,
+      80
+    ]
+  }
+}

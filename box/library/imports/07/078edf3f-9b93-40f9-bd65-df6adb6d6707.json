@@ -1,0 +1,155 @@
+{
+  "__type__": "cc.SpriteAtlas",
+  "_name": "box.plist",
+  "_objFlags": 0,
+  "_rawFiles": null,
+  "_spriteFrames": {
+    "bg_1": {
+      "__uuid__": "b732a76a-0378-4cee-992f-8f8656d9b1d4"
+    },
+    "bg_2": {
+      "__uuid__": "56c14012-36a5-4277-94f0-2ee1e5b18059"
+    },
+    "bg_tk": {
+      "__uuid__": "b9afaa16-845a-49e7-b186-e65008547705"
+    },
+    "box-gold": {
+      "__uuid__": "7e80e823-5253-4b8d-8128-0ea5e36aa65e"
+    },
+    "box-silver": {
+      "__uuid__": "eea5fb48-c298-41af-8bb1-67f5db74d2a6"
+    },
+    "btn_heise": {
+      "__uuid__": "ebb5c33e-ff2c-4dad-936b-fad65edc5ddc"
+    },
+    "btn_juhuang": {
+      "__uuid__": "89d91f5f-ace3-43f8-8d5d-962e3a337275"
+    },
+    "btn_lanse": {
+      "__uuid__": "073b7b06-9a91-4f7b-bfb6-1937579d605b"
+    },
+    "btn_level-up": {
+      "__uuid__": "f9fca23c-0479-48dc-a5ca-79ebbfa8670f"
+    },
+    "btn_level_open": {
+      "__uuid__": "d0fde012-9dfd-459f-aaf5-a2d0cedc1892"
+    },
+    "chanzi_1": {
+      "__uuid__": "2b0ad79c-fafc-45fb-a479-aa8745bd0517"
+    },
+    "chanzi_2": {
+      "__uuid__": "d8c1ac5f-2cce-4d93-8d3d-9ebe5d455c78"
+    },
+    "chanzi_3": {
+      "__uuid__": "8c9781b9-06c1-4fde-a18a-4b507e626bc3"
+    },
+    "chuizi_1": {
+      "__uuid__": "c4109ab3-a19d-49c0-8967-0b2374e1f6e4"
+    },
+    "chuizi_2": {
+      "__uuid__": "b0225e29-1286-47d1-b0f6-38ef95cf3232"
+    },
+    "chutou_1": {
+      "__uuid__": "eda651f3-bf4b-456f-a16e-28940dbc3841"
+    },
+    "chutou_2": {
+      "__uuid__": "f345a8c8-ccdf-4e5e-926c-2e84bbd14070"
+    },
+    "chutou_3": {
+      "__uuid__": "bdbfc4f7-655d-493a-9875-45b40f2352b6"
+    },
+    "dianzuan_1": {
+      "__uuid__": "a31ce2fd-ecac-411f-95a3-fe58aa0129af"
+    },
+    "dianzuan_2": {
+      "__uuid__": "d370a46c-5d55-499f-992e-fce44ff8c7af"
+    },
+    "icon_baoshi": {
+      "__uuid__": "95472f00-a3de-4c6e-a775-d23391eb140a"
+    },
+    "icon_dianji": {
+      "__uuid__": "865e237c-4667-4fc6-bd8f-bed437bada06"
+    },
+    "icon_huoqu": {
+      "__uuid__": "eeb73360-0d37-42a6-95d5-1b72a7e0414f"
+    },
+    "icon_jinbi": {
+      "__uuid__": "4312c6c4-46b1-48f7-8449-905b4f5460d1"
+    },
+    "icon_shipin": {
+      "__uuid__": "e0479184-f0b2-4ef2-b86e-3bdfa1a81aec"
+    },
+    "img_diban": {
+      "__uuid__": "a32f78ac-f388-42e6-8954-a542f977624d"
+    },
+    "img_jy": {
+      "__uuid__": "019dd701-372f-4cc5-a739-bd0a8190f9ac"
+    },
+    "img_jy_di": {
+      "__uuid__": "340fb218-c11d-4400-b0fd-3cbad2aba7e0"
+    },
+    "img_jy_di1": {
+      "__uuid__": "358a90ba-fd25-468d-a17a-314930887d09"
+    },
+    "img_shijian": {
+      "__uuid__": "d7f466a0-f6c7-48ed-8e9a-4e0635adbb4a"
+    },
+    "j_1": {
+      "__uuid__": "c5737748-ffa9-4b32-807f-a06dc35f8b66"
+    },
+    "j_1_100": {
+      "__uuid__": "acf73e2c-e697-4ef4-839e-830492793e48"
+    },
+    "j_2": {
+      "__uuid__": "000abe2e-f124-49d2-a117-35fd0442ce64"
+    },
+    "j_3": {
+      "__uuid__": "972a967f-1793-4162-b413-dd464e75966e"
+    },
+    "s_1": {
+      "__uuid__": "3e09a5da-366c-4640-b549-deeb09fda90d"
+    },
+    "s_1_100": {
+      "__uuid__": "de34308c-40c9-47e9-b127-56a79a95f9e1"
+    },
+    "s_2": {
+      "__uuid__": "f429cbe8-20cd-4a7c-ae08-c2e290aa32f7"
+    },
+    "s_2_100": {
+      "__uuid__": "4f827f9d-0d89-43a3-9f2a-e4215d72821a"
+    },
+    "s_3": {
+      "__uuid__": "657a334b-f016-4c05-b7bf-6a403e00e0ed"
+    },
+    "t_0": {
+      "__uuid__": "fff47bc1-29bd-4acd-9022-1166ab265dcc"
+    },
+    "t_0_100": {
+      "__uuid__": "f25d02f1-75d5-4196-bc22-e907051ecd66"
+    },
+    "t_1": {
+      "__uuid__": "d4ced7ed-87db-4af4-a0d4-9296dc99ec2a"
+    },
+    "t_1_100": {
+      "__uuid__": "03dd06d8-37f0-4ff5-9cb7-192ee9ba1add"
+    },
+    "t_2": {
+      "__uuid__": "06f73ed7-070a-4e2b-ba8b-e33bc2b49818"
+    },
+    "t_2_100": {
+      "__uuid__": "84c82582-9f6c-401e-936a-5e3f1fa69658"
+    },
+    "t_3": {
+      "__uuid__": "8691997c-f314-4c16-a37e-1884b13fe4eb"
+    },
+    "t_3_100": {
+      "__uuid__": "0a8a99cc-d4f8-4623-a7d3-077b9d8b27aa"
+    },
+    "t_4": {
+      "__uuid__": "d7d2bf62-2b7f-4c4a-83df-75e83db2eb1c"
+    },
+    "ui_tc": {
+      "__uuid__": "dede077b-b780-4ff8-b199-c89fed0dea1c"
+    }
+  }
+}

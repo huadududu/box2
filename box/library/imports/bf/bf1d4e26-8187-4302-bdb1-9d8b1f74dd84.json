@@ -1,0 +1,111 @@
+{
+  "__type__": "sp.SkeletonData",
+  "_name": "chanzi_1",
+  "_objFlags": 0,
+  "_rawFiles": [
+    "raw-skeleton.json"
+  ],
+  "_skeletonJson": {
+    "skeleton": {
+      "fps": 24,
+      "hash": " ",
+      "name": "MovieClip"
+    },
+    "bones": [
+      {
+        "name": "root"
+      },
+      {
+        "name": "chanzi_1",
+        "parent": "root"
+      }
+    ],
+    "slots": [
+      {
+        "name": "chanzi_1",
+        "bone": "chanzi_1"
+      }
+    ],
+    "skins": {
+      "default": {
+        "chanzi_1": {
+          "chanzi_1": {
+            "name": "chanzi_1",
+            "width": 71,
+            "height": 72
+          }
+        }
+      }
+    },
+    "animations": {
+      "newAnimation": {
+        "bones": {
+          "chanzi_1": {
+            "translate": [
+              {
+                "time": 0,
+                "x": 84.33,
+                "y": 8.55
+              },
+              {
+                "time": 0.125,
+                "x": 50.9,
+                "y": -14.39
+              },
+              {
+                "time": 0.25,
+                "x": 84.33,
+                "y": 8.55
+              }
+            ],
+            "rotate": [
+              {
+                "time": 0,
+                "angle": 0
+              },
+              {
+                "time": 0.125,
+                "angle": -14.65
+              },
+              {
+                "time": 0.25,
+                "angle": 0
+              }
+            ],
+            "shear": [
+              {
+                "time": 0
+              },
+              {
+                "time": 0.125
+              },
+              {
+                "time": 0.25
+              }
+            ]
+          }
+        },
+        "slots": {
+          "chanzi_1": {
+            "attachment": [
+              {
+                "time": 0,
+                "name": "chanzi_1"
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "_atlasText": "\nchanzi_1.png\nsize: 74,75\nformat: RGBA8888\nfilter: Linear,Linear\nrepeat: none\nchanzi_1\n  rotate: false\n  xy: 1, 1\n  size: 71, 72\n  orig: 71, 72\n  offset: 0, 0\n  index: -1\n",
+  "atlasUrl": {
+    "__uuid__": "4269c44a-e362-4a25-bc16-58645381a170"
+  },
+  "textures": [
+    {
+      "__uuid__": "901b6a4d-1e6a-4fe1-a886-812a16553cad"
+    }
+  ],
+  "scale": 1
+}

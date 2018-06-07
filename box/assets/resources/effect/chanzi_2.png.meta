@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "ff65ebe5-38b1-4abc-97fd-cbc2dcef03eb",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "chanzi_2": {
+      "ver": "1.0.3",
+      "uuid": "a52430ac-715f-4f65-bd45-98215e4b6e62",
+      "rawTextureUuid": "ff65ebe5-38b1-4abc-97fd-cbc2dcef03eb",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -0.5,
+      "offsetY": 0.5,
+      "trimX": 1,
+      "trimY": 1,
+      "width": 71,
+      "height": 72,
+      "rawWidth": 74,
+      "rawHeight": 75,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

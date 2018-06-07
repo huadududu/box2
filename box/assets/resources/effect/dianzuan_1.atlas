@@ -1,0 +1,20 @@
+
+dianzuan_1.png
+size: 117,59
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+dianzuan_2
+  rotate: false
+  xy: 83, 1
+  size: 32, 24
+  orig: 32, 24
+  offset: 0, 0
+  index: -1
+dianzuan_1
+  rotate: false
+  xy: 1, 1
+  size: 80, 56
+  orig: 80, 56
+  offset: 0, 0
+  index: -1

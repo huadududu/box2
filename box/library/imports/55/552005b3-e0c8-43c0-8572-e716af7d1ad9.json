@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "dianzuan_1",
+    "texture": "4bab1fb8-4408-4ed6-ab86-940b7e9809a7",
+    "atlas": "",
+    "rect": [
+      1,
+      1,
+      114,
+      56
+    ],
+    "offset": [
+      -0.5,
+      0.5
+    ],
+    "originalSize": [
+      117,
+      59
+    ]
+  }
+}

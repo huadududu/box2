@@ -1,0 +1,84 @@
+2018-06-07T11:52:56.436Z - normal: Load ~/.CocosCreator/settings.json
+2018-06-07T11:52:56.439Z - normal: checking language setting...
+2018-06-07T11:52:56.439Z - normal: Language: zh
+2018-06-07T11:52:56.995Z - success: protocol editor-framework registered
+2018-06-07T11:52:56.995Z - success: protocol app registered
+2018-06-07T11:52:56.995Z - success: protocol theme registered
+2018-06-07T11:52:56.996Z - success: protocol packages registered
+2018-06-07T11:52:56.996Z - success: protocol unpack registerred
+2018-06-07T11:52:56.996Z - success: protocol disable-commonjs registerred
+2018-06-07T11:52:57.100Z - normal: connected!
+2018-06-07T11:52:57.102Z - normal: Check project /Users/bolex1/work/game/box/box
+2018-06-07T11:52:57.103Z - normal: Initializing Cocos2d
+2018-06-07T11:52:57.244Z - normal: Initializing Asset Database
+2018-06-07T11:52:57.270Z - success: protocol uuid registerred
+2018-06-07T11:52:57.270Z - success: protocol db registerred
+2018-06-07T11:52:57.270Z - success: protocol thumbnail registerred
+2018-06-07T11:52:57.270Z - normal: Loading editor/builtin packages
+2018-06-07T11:52:57.287Z - success: anysdk loaded
+2018-06-07T11:52:57.375Z - success: assets loaded
+2018-06-07T11:52:57.377Z - success: builder loaded
+2018-06-07T11:52:57.379Z - success: cocos-analytics loaded
+2018-06-07T11:52:57.382Z - success: console loaded
+2018-06-07T11:52:57.407Z - success: fb-instant-games loaded
+2018-06-07T11:52:57.411Z - success: hierarchy loaded
+2018-06-07T11:52:57.415Z - success: inspector loaded
+2018-06-07T11:52:57.417Z - success: keystore loaded
+2018-06-07T11:52:57.424Z - success: node-library loaded
+2018-06-07T11:52:57.426Z - success: package-asset loaded
+2018-06-07T11:52:57.428Z - success: preferences loaded
+2018-06-07T11:52:57.431Z - success: project-exporter loaded
+2018-06-07T11:52:57.443Z - success: project-importer loaded
+2018-06-07T11:52:57.445Z - success: project-settings loaded
+2018-06-07T11:52:57.448Z - success: ui-kit loaded
+2018-06-07T11:52:57.451Z - success: ui-grid loaded
+2018-06-07T11:52:57.454Z - success: scene loaded
+2018-06-07T11:52:57.455Z - success: sprite-editor loaded
+2018-06-07T11:52:57.458Z - success: store loaded
+2018-06-07T11:52:57.463Z - success: timeline loaded
+2018-06-07T11:52:57.463Z - normal: Loading builtin packages
+2018-06-07T11:52:57.466Z - success: asset-db-debugger loaded
+2018-06-07T11:52:57.466Z - success: color-picker loaded
+2018-06-07T11:52:57.469Z - success: package-manager loaded
+2018-06-07T11:52:57.474Z - success: sdkbox loaded
+2018-06-07T11:52:57.479Z - success: tester loaded
+2018-06-07T11:52:57.482Z - success: ui-kit-preview-extra loaded
+2018-06-07T11:52:57.485Z - success: ui-kit-preview loaded
+2018-06-07T11:52:57.488Z - success: ui-tree loaded
+2018-06-07T11:52:58.244Z - normal: Initializing project /Users/bolex1/work/game/box/box
+2018-06-07T11:52:58.247Z - normal: Loading packages
+2018-06-07T11:52:58.250Z - normal: Watching packages
+2018-06-07T11:52:58.260Z - normal: Run Application
+2018-06-07T11:52:58.740Z - success: preview server running at http://localhost:7456
+2018-06-07T11:53:02.580Z - normal: 1.9.1
+2018-06-07T11:53:03.512Z - warn: The Asset used by component "cc.Sprite" in prefab "blocksmall.prefab" is missing. Detailed information:
+Node path: "blocks"
+Asset url: "db://assets/resources/prefab/blocksmall.prefab"
+Missing uuid: "43928313-2ffc-4e64-952d-c6e5f4cda6ca"
+
+2018-06-07T11:53:03.513Z - warn: The Asset used by component "cc.Sprite" in prefab "blockbig.prefab" is missing. Detailed information:
+Node path: "blockb"
+Asset url: "db://assets/resources/prefab/blockbig.prefab"
+Missing uuid: "8fac2c53-e19c-49d8-b467-e4ce848a45e4"
+
+2018-06-07T11:55:03.887Z - warn: The Asset used by component "cc.Sprite" in prefab "blockbig.prefab" is missing. Detailed information:
+Node path: "blockb"
+Asset url: "db://assets/resources/prefab/blockbig.prefab"
+Missing uuid: "8fac2c53-e19c-49d8-b467-e4ce848a45e4"
+
+2018-06-07T11:55:03.889Z - warn: The Asset used by component "cc.Sprite" in prefab "blocksmall.prefab" is missing. Detailed information:
+Node path: "blocks"
+Asset url: "db://assets/resources/prefab/blocksmall.prefab"
+Missing uuid: "43928313-2ffc-4e64-952d-c6e5f4cda6ca"
+
+2018-06-07T11:57:00.459Z - warn: The Asset used by component "cc.Sprite" in prefab "blockbig.prefab" is missing. Detailed information:
+Node path: "blockb"
+Asset url: "db://assets/resources/prefab/blockbig.prefab"
+Missing uuid: "8fac2c53-e19c-49d8-b467-e4ce848a45e4"
+
+2018-06-07T11:57:00.463Z - warn: The Asset used by component "cc.Sprite" in prefab "blocksmall.prefab" is missing. Detailed information:
+Node path: "blocks"
+Asset url: "db://assets/resources/prefab/blocksmall.prefab"
+Missing uuid: "43928313-2ffc-4e64-952d-c6e5f4cda6ca"
+
+2018-06-07T11:59:38.324Z - info: shutdown preview server

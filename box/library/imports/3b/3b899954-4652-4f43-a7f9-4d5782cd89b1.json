@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "chutou_2",
+    "texture": "5c85de46-bc91-43a2-b177-a6059c0eff38",
+    "atlas": "",
+    "rect": [
+      1,
+      1,
+      82,
+      66
+    ],
+    "offset": [
+      -0.5,
+      0.5
+    ],
+    "originalSize": [
+      85,
+      69
+    ]
+  }
+}

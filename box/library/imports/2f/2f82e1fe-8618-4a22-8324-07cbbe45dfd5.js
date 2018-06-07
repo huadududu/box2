@@ -1,0 +1,25 @@
+"use strict";
+cc._RF.push(module, '2f82eH+hhhKIoMkB8u+Rd/V', 'GameType');
+// src/model/GameType.js
+
+"use strict";
+
+/**
+ * Created by bing on 18/04/2018.
+ */
+
+module.exports = {
+    profabType: cc.Enum({
+        BlockBig: 0, //大方格
+        BlockSmall: 1, //小方格
+        UIBottom: 2 //底部控件
+    }),
+    bottomRadio: cc.Enum({
+        Accelerator: 0, //加速
+        Tool: 1, //工具
+        Efficiency: 2 //倍数
+    })
+
+};
+
+cc._RF.pop();

@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "CCCCi",
+    "texture": "2a88f044-b72f-447b-a7f6-7df0fa8bd7a0",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      1130,
+      720
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      1130,
+      720
+    ]
+  }
+}

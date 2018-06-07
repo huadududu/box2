@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "box-gold",
+    "texture": "fb3cd670-9833-461f-bd62-fef2241a13b8",
+    "atlas": "",
+    "rect": [
+      1,
+      1,
+      120,
+      246
+    ],
+    "offset": [
+      -3,
+      4
+    ],
+    "originalSize": [
+      128,
+      256
+    ]
+  }
+}

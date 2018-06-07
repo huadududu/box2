@@ -1,0 +1,255 @@
+{
+  "__type__": "sp.SkeletonData",
+  "_name": "box-gold",
+  "_objFlags": 0,
+  "_rawFiles": [
+    "raw-skeleton.json"
+  ],
+  "_skeletonJson": {
+    "skeleton": {
+      "fps": 24,
+      "hash": " ",
+      "name": "MovieClip"
+    },
+    "bones": [
+      {
+        "name": "root"
+      },
+      {
+        "name": "box_jin1",
+        "parent": "root"
+      },
+      {
+        "name": "box_jin2",
+        "parent": "root"
+      },
+      {
+        "name": "box_jin3",
+        "parent": "root"
+      }
+    ],
+    "slots": [
+      {
+        "name": "box_jin1",
+        "bone": "box_jin1"
+      },
+      {
+        "name": "box_jin2",
+        "bone": "box_jin2"
+      },
+      {
+        "name": "box_jin3",
+        "bone": "box_jin3"
+      }
+    ],
+    "skins": {
+      "default": {
+        "box_jin3": {
+          "box_jin3": {
+            "name": "box_jin3",
+            "width": 120,
+            "height": 60
+          }
+        },
+        "box_jin2": {
+          "box_jin2": {
+            "name": "box_jin2",
+            "width": 115,
+            "height": 71
+          }
+        },
+        "box_jin1": {
+          "box_jin1": {
+            "name": "box_jin1",
+            "width": 120,
+            "height": 111
+          }
+        }
+      }
+    },
+    "animations": {
+      "newAnimation": {
+        "bones": {
+          "box_jin1": {
+            "rotate": [
+              {
+                "time": 0,
+                "angle": 0
+              },
+              {
+                "time": 0.5833,
+                "angle": 0
+              },
+              {
+                "time": 0.625,
+                "angle": 8
+              },
+              {
+                "time": 0.7083,
+                "angle": -8
+              },
+              {
+                "time": 0.7916,
+                "angle": 8
+              },
+              {
+                "time": 0.8749,
+                "angle": -8
+              },
+              {
+                "time": 0.9582,
+                "angle": 8
+              },
+              {
+                "time": 0.9999,
+                "angle": 0
+              }
+            ],
+            "scale": [
+              {
+                "time": 0,
+                "x": 0.6,
+                "y": 0.6
+              },
+              {
+                "time": 0.5833,
+                "x": 1,
+                "y": 1
+              },
+              {
+                "time": 1,
+                "x": 1,
+                "y": 1
+              },
+              {
+                "time": 1.0417,
+                "x": 0.5,
+                "y": 0.5
+              },
+              {
+                "time": 1.125,
+                "x": 1,
+                "y": 1
+              }
+            ],
+            "shear": [
+              {
+                "time": 0
+              },
+              {
+                "time": 0.5833
+              },
+              {
+                "time": 0.625
+              },
+              {
+                "time": 0.7083
+              },
+              {
+                "time": 0.7916
+              },
+              {
+                "time": 0.8749
+              },
+              {
+                "time": 0.9582
+              },
+              {
+                "time": 0.9999
+              }
+            ]
+          },
+          "box_jin2": {
+            "translate": [
+              {
+                "time": 0,
+                "x": -1.03,
+                "y": 39.95
+              }
+            ]
+          },
+          "box_jin3": {
+            "translate": [
+              {
+                "time": 0,
+                "y": -25.43
+              }
+            ]
+          }
+        },
+        "slots": {
+          "box_jin1": {
+            "attachment": [
+              {
+                "time": 0,
+                "name": "box_jin1"
+              }
+            ],
+            "color": [
+              {
+                "time": 0,
+                "color": "FFFFFFFF"
+              },
+              {
+                "time": 1.0417,
+                "color": "FFFFFFFF"
+              },
+              {
+                "time": 1.125,
+                "color": "FFFFFF00"
+              }
+            ]
+          },
+          "box_jin2": {
+            "attachment": [
+              {
+                "time": 0,
+                "name": "box_jin2"
+              }
+            ],
+            "color": [
+              {
+                "time": 0,
+                "curve": "stepped",
+                "color": "FFFFFF00"
+              },
+              {
+                "time": 1.125,
+                "color": "FFFFFFFF"
+              }
+            ]
+          },
+          "box_jin3": {
+            "attachment": [
+              {
+                "time": 0,
+                "name": "box_jin3"
+              }
+            ],
+            "color": [
+              {
+                "time": 0,
+                "curve": "stepped",
+                "color": "FFFFFF00"
+              },
+              {
+                "time": 1.125,
+                "color": "FFFFFFFF"
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "_atlasText": "\nbox-gold.png\nsize: 128,256\nformat: RGBA8888\nfilter: Linear,Linear\nrepeat: none\nbox_jin1\n  rotate: false\n  xy: 1, 1\n  size: 120, 111\n  orig: 120, 111\n  offset: 0, 0\n  index: -1\nbox_jin2\n  rotate: false\n  xy: 1, 114\n  size: 115, 71\n  orig: 115, 71\n  offset: 0, 0\n  index: -1\nbox_jin3\n  rotate: false\n  xy: 1, 187\n  size: 120, 60\n  orig: 120, 60\n  offset: 0, 0\n  index: -1\n",
+  "atlasUrl": {
+    "__uuid__": "5141359d-a378-47db-aa74-dde0d96897c9"
+  },
+  "textures": [
+    {
+      "__uuid__": "fb3cd670-9833-461f-bd62-fef2241a13b8"
+    }
+  ],
+  "scale": 1
+}
