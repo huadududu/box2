@@ -22,7 +22,7 @@ var ParticleSystemCenter = require("ParticleSystemCenter");
 var winsize = cc.winSize;
 var BaseHeight = winsize.height / 2;
 var BaseWidth = winsize.width / 2;
-var GameHeight = 504;
+var GameHeight = 514;
 var GameCenterY = 360;
 var BaseGame = 257;
 
@@ -342,7 +342,7 @@ cc.Class({
         this.Bgbz.y = bzYbottom;
         if (other > 0) {
             this.Sky.active = true;
-            this.Sky.height = other;
+            this.Sky.height = other + 10;
             skyposy = (GameHeight - other) / 2;
             this.Sky.y = skyposy;
             this.camera.node.setPositionY(GameCenterY);
@@ -367,26 +367,25 @@ cc.Class({
         }
         this.hammer.node.active = true;
         var range = this.geScreenRange();
-        var line = GameUtils.randomInt(range.min, range.max);
+        // let line = GameUtils.randomInt(range.min,range.max);
+        var line = this.curMaxLine;
         var find = false;
-        for (var row = 0; row < this.rowNum; row++) {
-            if (this.blocks[line] && this.checkCanDestroy(line, row)) {
-
-                var location = this.hammerpos(line, row);
-                var texiao = this.getEffByBlock(line, row);
-                ParticleSystemCenter.addParticleForNode(texiao + ".plist", this.blocks[line][row], { x: 0, y: 0 });
-                this.HattingPos = { x: line, y: row };
-                this.hammer.node.position = location;
-
-                find = true;
-            }
-            if (find) {
-                // this.sm.play();
-                this.playHammerSpine();
-                break;
+        var canclick = [];
+        for (var i = 0; i < this.rowNum; i++) {
+            if (this.blocks[line] && this.checkCanDestroy(line, i)) {
+                canclick.push(i);
             }
         }
-        if (!find) this.setSmPosition();
+
+        var num = GameUtils.randomInt(0, canclick.length - 1);
+        var row = canclick[num];
+
+        var location = this.hammerpos(line, row);
+        var texiao = this.getEffByBlock(line, row);
+        ParticleSystemCenter.addParticleForNode(texiao + ".plist", this.blocks[line][row], { x: 0, y: 0 });
+        this.HattingPos = { x: line, y: row };
+        this.hammer.node.position = location;
+        this.playHammerSpine();
     },
     //根据小块的位置 过的特效文件
     getEffByBlock: function getEffByBlock(line, row) {

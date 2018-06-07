@@ -16,7 +16,7 @@ let ParticleSystemCenter = require("ParticleSystemCenter");
 let winsize = cc.winSize;
 const BaseHeight =  winsize.height/2;
 const BaseWidth =  winsize.width/2;
-const GameHeight = 504;
+const GameHeight = 514;
 const GameCenterY = 360;
 const BaseGame = 257 ;
 
@@ -347,7 +347,7 @@ cc.Class({
         this.Bgbz.y=bzYbottom;
         if(other>0){
             this.Sky.active = true;
-            this.Sky.height = other;
+            this.Sky.height = other+10;
             skyposy= (GameHeight - other)/2;
             this.Sky.y=skyposy;
             this.camera.node.setPositionY(GameCenterY);
@@ -375,27 +375,26 @@ cc.Class({
         }
          this.hammer.node.active = true;
         let range = this.geScreenRange();
-        let line = GameUtils.randomInt(range.min,range.max);
+        // let line = GameUtils.randomInt(range.min,range.max);
+         let line = this.curMaxLine;
         let find = false;
-        for(var row = 0;row<this.rowNum;row++){
-            if(this.blocks[line]&&this.checkCanDestroy(line,row) ){
+        let canclick=[];
+        for(var i = 0;i<this.rowNum;i++){
+            if(this.blocks[line]&&this.checkCanDestroy(line,i) ){
+                canclick.push(i);
 
-                let location = this.hammerpos(line,row);
-                let texiao=this.getEffByBlock(line,row);
-                ParticleSystemCenter.addParticleForNode(texiao+".plist",this.blocks[line][row],{x:0,y:0})
-                this.HattingPos ={x:line,y:row};
-                this.hammer.node.position=location;
-
-                find= true;
-            }
-            if(find) {
-                // this.sm.play();
-                this.playHammerSpine();
-                break;
             }
         }
-        if(!find)
-            this.setSmPosition();
+
+       let num = GameUtils.randomInt(0,canclick.length-1);
+        let row= canclick[num];
+
+        let location = this.hammerpos(line,row);
+        let texiao=this.getEffByBlock(line,row);
+        ParticleSystemCenter.addParticleForNode(texiao+".plist",this.blocks[line][row],{x:0,y:0})
+        this.HattingPos ={x:line,y:row};
+        this.hammer.node.position=location;
+        this.playHammerSpine();
     },
     //根据小块的位置 过的特效文件
     getEffByBlock(line,row){

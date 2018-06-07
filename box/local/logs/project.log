@@ -1,84 +1,342 @@
-2018-06-07T11:52:56.436Z - normal: Load ~/.CocosCreator/settings.json
-2018-06-07T11:52:56.439Z - normal: checking language setting...
-2018-06-07T11:52:56.439Z - normal: Language: zh
-2018-06-07T11:52:56.995Z - success: protocol editor-framework registered
-2018-06-07T11:52:56.995Z - success: protocol app registered
-2018-06-07T11:52:56.995Z - success: protocol theme registered
-2018-06-07T11:52:56.996Z - success: protocol packages registered
-2018-06-07T11:52:56.996Z - success: protocol unpack registerred
-2018-06-07T11:52:56.996Z - success: protocol disable-commonjs registerred
-2018-06-07T11:52:57.100Z - normal: connected!
-2018-06-07T11:52:57.102Z - normal: Check project /Users/bolex1/work/game/box/box
-2018-06-07T11:52:57.103Z - normal: Initializing Cocos2d
-2018-06-07T11:52:57.244Z - normal: Initializing Asset Database
-2018-06-07T11:52:57.270Z - success: protocol uuid registerred
-2018-06-07T11:52:57.270Z - success: protocol db registerred
-2018-06-07T11:52:57.270Z - success: protocol thumbnail registerred
-2018-06-07T11:52:57.270Z - normal: Loading editor/builtin packages
-2018-06-07T11:52:57.287Z - success: anysdk loaded
-2018-06-07T11:52:57.375Z - success: assets loaded
-2018-06-07T11:52:57.377Z - success: builder loaded
-2018-06-07T11:52:57.379Z - success: cocos-analytics loaded
-2018-06-07T11:52:57.382Z - success: console loaded
-2018-06-07T11:52:57.407Z - success: fb-instant-games loaded
-2018-06-07T11:52:57.411Z - success: hierarchy loaded
-2018-06-07T11:52:57.415Z - success: inspector loaded
-2018-06-07T11:52:57.417Z - success: keystore loaded
-2018-06-07T11:52:57.424Z - success: node-library loaded
-2018-06-07T11:52:57.426Z - success: package-asset loaded
-2018-06-07T11:52:57.428Z - success: preferences loaded
-2018-06-07T11:52:57.431Z - success: project-exporter loaded
-2018-06-07T11:52:57.443Z - success: project-importer loaded
-2018-06-07T11:52:57.445Z - success: project-settings loaded
-2018-06-07T11:52:57.448Z - success: ui-kit loaded
-2018-06-07T11:52:57.451Z - success: ui-grid loaded
-2018-06-07T11:52:57.454Z - success: scene loaded
-2018-06-07T11:52:57.455Z - success: sprite-editor loaded
-2018-06-07T11:52:57.458Z - success: store loaded
-2018-06-07T11:52:57.463Z - success: timeline loaded
-2018-06-07T11:52:57.463Z - normal: Loading builtin packages
-2018-06-07T11:52:57.466Z - success: asset-db-debugger loaded
-2018-06-07T11:52:57.466Z - success: color-picker loaded
-2018-06-07T11:52:57.469Z - success: package-manager loaded
-2018-06-07T11:52:57.474Z - success: sdkbox loaded
-2018-06-07T11:52:57.479Z - success: tester loaded
-2018-06-07T11:52:57.482Z - success: ui-kit-preview-extra loaded
-2018-06-07T11:52:57.485Z - success: ui-kit-preview loaded
-2018-06-07T11:52:57.488Z - success: ui-tree loaded
-2018-06-07T11:52:58.244Z - normal: Initializing project /Users/bolex1/work/game/box/box
-2018-06-07T11:52:58.247Z - normal: Loading packages
-2018-06-07T11:52:58.250Z - normal: Watching packages
-2018-06-07T11:52:58.260Z - normal: Run Application
-2018-06-07T11:52:58.740Z - success: preview server running at http://localhost:7456
-2018-06-07T11:53:02.580Z - normal: 1.9.1
-2018-06-07T11:53:03.512Z - warn: The Asset used by component "cc.Sprite" in prefab "blocksmall.prefab" is missing. Detailed information:
+2018-06-07T16:58:39.651Z - normal: Load ~/.CocosCreator/settings.json
+2018-06-07T16:58:39.655Z - normal: checking language setting...
+2018-06-07T16:58:39.656Z - normal: Language: en
+2018-06-07T16:58:40.381Z - success: protocol editor-framework registered
+2018-06-07T16:58:40.381Z - success: protocol app registered
+2018-06-07T16:58:40.382Z - success: protocol theme registered
+2018-06-07T16:58:40.382Z - success: protocol packages registered
+2018-06-07T16:58:40.382Z - success: protocol unpack registerred
+2018-06-07T16:58:40.382Z - success: protocol disable-commonjs registerred
+2018-06-07T16:58:40.540Z - normal: connected!
+2018-06-07T16:58:40.542Z - normal: Check project /Users/lichao/Desktop/gittest/box2/box
+2018-06-07T16:58:40.544Z - normal: Initializing Cocos2d
+2018-06-07T16:58:40.697Z - normal: Initializing Asset Database
+2018-06-07T16:58:40.721Z - success: protocol uuid registerred
+2018-06-07T16:58:40.721Z - success: protocol db registerred
+2018-06-07T16:58:40.722Z - success: protocol thumbnail registerred
+2018-06-07T16:58:40.722Z - normal: Loading editor/builtin packages
+2018-06-07T16:58:40.738Z - success: anysdk loaded
+2018-06-07T16:58:40.828Z - success: assets loaded
+2018-06-07T16:58:40.831Z - success: builder loaded
+2018-06-07T16:58:40.832Z - success: cocos-analytics loaded
+2018-06-07T16:58:40.836Z - success: console loaded
+2018-06-07T16:58:40.863Z - success: fb-instant-games loaded
+2018-06-07T16:58:40.866Z - success: hierarchy loaded
+2018-06-07T16:58:40.870Z - success: inspector loaded
+2018-06-07T16:58:40.871Z - success: keystore loaded
+2018-06-07T16:58:40.878Z - success: node-library loaded
+2018-06-07T16:58:40.885Z - success: package-asset loaded
+2018-06-07T16:58:40.887Z - success: preferences loaded
+2018-06-07T16:58:40.889Z - success: project-exporter loaded
+2018-06-07T16:58:40.902Z - success: project-importer loaded
+2018-06-07T16:58:40.905Z - success: project-settings loaded
+2018-06-07T16:58:40.908Z - success: ui-kit loaded
+2018-06-07T16:58:40.913Z - success: ui-grid loaded
+2018-06-07T16:58:40.916Z - success: scene loaded
+2018-06-07T16:58:40.918Z - success: sprite-editor loaded
+2018-06-07T16:58:40.921Z - success: store loaded
+2018-06-07T16:58:40.927Z - success: timeline loaded
+2018-06-07T16:58:40.927Z - normal: Loading builtin packages
+2018-06-07T16:58:40.931Z - success: asset-db-debugger loaded
+2018-06-07T16:58:40.932Z - success: color-picker loaded
+2018-06-07T16:58:40.935Z - success: package-manager loaded
+2018-06-07T16:58:40.940Z - success: sdkbox loaded
+2018-06-07T16:58:40.945Z - success: tester loaded
+2018-06-07T16:58:40.947Z - success: ui-kit-preview-extra loaded
+2018-06-07T16:58:40.951Z - success: ui-kit-preview loaded
+2018-06-07T16:58:40.953Z - success: ui-tree loaded
+2018-06-07T16:58:41.715Z - normal: Initializing project /Users/lichao/Desktop/gittest/box2/box
+2018-06-07T16:58:41.716Z - normal: Loading packages
+2018-06-07T16:58:41.719Z - normal: Watching packages
+2018-06-07T16:58:41.731Z - normal: Run Application
+2018-06-07T16:58:42.484Z - failed: [db-task][init] Failed to import asset /Users/lichao/Desktop/gittest/box2/box/assets/src/controller/GameMenuController.js, message: Compile error: SyntaxError: /Users/lichao/Desktop/gittest/box2/box/assets/src/controller/GameMenuController.js: Unexpected token, expected , (24:12)
+  22 |         radioButton:{
+  23 |             default:[]
+> 24 |             type:cc.Toggle
+     |             ^
+  25 |         } ,
+  26 | 
+  27 |     },
+    at Parser.pp$5.raise (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:4454:13)
+    at Parser.pp.unexpected (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:1761:8)
+    at Parser.pp.expect (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:1749:33)
+    at Parser.pp$3.parseObj (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:3978:12)
+    at Parser.pp$3.parseExprAtom (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:3719:19)
+    at Parser.pp$3.parseExprSubscripts (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:3494:19)
+    at Parser.pp$3.parseMaybeUnary (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:3474:19)
+    at Parser.pp$3.parseExprOps (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:3404:19)
+    at Parser.pp$3.parseMaybeConditional (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:3381:19)
+    at Parser.pp$3.parseMaybeAssign (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:3344:19)
+2018-06-07T16:58:42.791Z - success: preview server running at http://localhost:7456
+2018-06-07T16:58:47.358Z - normal: 1.9.1
+2018-06-07T16:58:48.031Z - failed: load script [GameMenuController] failed : Error: Cannot find module 'GameMenuController'
+    at Module._resolveFilename (module.js:470:15)
+    at Function.Module._resolveFilename [as _resolveFilenameVendor] (/Applications/CocosCreator.app/Contents/Resources/electron.asar/common/reset-search-paths.js:35:12)
+    at Function.Module._resolveFilename (/Applications/CocosCreator.app/Contents/Resources/app.asar/editor/page/project-scripts.js:1:1361)
+    at Function.Module._load (module.js:418:25)
+    at Module.require (module.js:498:17)
+    at require (internal/module.js:20:19)
+    at Object.cc.require (/Applications/CocosCreator.app/Contents/Resources/app.asar/editor/page/project-scripts.js:1:967)
+    at /Users/lichao/Desktop/gittest/box2/box/temp/quick-scripts/assets/src/controller/BoxController.js:1:363
+    at __define (/Users/lichao/Desktop/gittest/box2/box/temp/quick-scripts/assets/src/controller/BoxController.js:44:29)
+    at /Users/lichao/Desktop/gittest/box2/box/temp/quick-scripts/assets/src/controller/BoxController.js:497:13
+2018-06-07T16:58:48.292Z - warn: Class "1fc47DQ14RMSbRbdbHJzBGp" used by component "BoxController" in scene "boxa.fire" is missing or invalid. Detailed information:
+Node path: "Canvas"
+Asset url: "db://assets/sc/boxa.fire"
+
+2018-06-07T16:58:48.408Z - warn: The Asset used by component "cc.Sprite" in prefab "blocksmall.prefab" is missing. Detailed information:
 Node path: "blocks"
 Asset url: "db://assets/resources/prefab/blocksmall.prefab"
 Missing uuid: "43928313-2ffc-4e64-952d-c6e5f4cda6ca"
 
-2018-06-07T11:53:03.513Z - warn: The Asset used by component "cc.Sprite" in prefab "blockbig.prefab" is missing. Detailed information:
+2018-06-07T16:58:48.409Z - warn: The Asset used by component "cc.Sprite" in prefab "blockbig.prefab" is missing. Detailed information:
 Node path: "blockb"
 Asset url: "db://assets/resources/prefab/blockbig.prefab"
 Missing uuid: "8fac2c53-e19c-49d8-b467-e4ce848a45e4"
 
-2018-06-07T11:55:03.887Z - warn: The Asset used by component "cc.Sprite" in prefab "blockbig.prefab" is missing. Detailed information:
+2018-06-07T16:59:17.109Z - error: getComponent: Type must be non-nil
+    at Object.errorID (/Applications/CocosCreator.app/Contents/Resources/engine/CCDebugger.js:338:24)
+    at getConstructor (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/utils/base-node.js:43:12)
+    at cc_Node.getComponent (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/utils/base-node.js:748:27)
+    at HTMLElement.scene:query-node-info (file:///Applications/CocosCreator.app/Contents/Resources/app.asar/editor/builtin/scene/panel/scene.js:1:7215)
+    at Object.Panel._dispatch (/Applications/CocosCreator.app/Contents/Resources/app.asar/editor-framework/lib/renderer/panel.js:1:2283)
+    at EventEmitter.ipcRenderer.on.o (/Applications/CocosCreator.app/Contents/Resources/app.asar/editor-framework/lib/renderer/ipc.js:1:3960)
+    at emitMany (events.js:127:13)
+    at EventEmitter.emit (events.js:204:7)
+2018-06-07T17:00:19.367Z - failed: [db-task][sync-changes] Failed to import asset /Users/lichao/Desktop/gittest/box2/box/assets/src/controller/GameMenuController.js, message: Compile error: SyntaxError: /Users/lichao/Desktop/gittest/box2/box/assets/src/controller/GameMenuController.js: Unexpected token, expected , (24:12)
+  22 |         radioButton:{
+  23 |             default:[]
+> 24 |             type:cc.Toggle
+     |             ^
+  25 |         } ,
+  26 | 
+  27 |     },
+    at Parser.pp$5.raise (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:4454:13)
+    at Parser.pp.unexpected (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:1761:8)
+    at Parser.pp.expect (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:1749:33)
+    at Parser.pp$3.parseObj (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:3978:12)
+    at Parser.pp$3.parseExprAtom (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:3719:19)
+    at Parser.pp$3.parseExprSubscripts (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:3494:19)
+    at Parser.pp$3.parseMaybeUnary (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:3474:19)
+    at Parser.pp$3.parseExprOps (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:3404:19)
+    at Parser.pp$3.parseMaybeConditional (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:3381:19)
+    at Parser.pp$3.parseMaybeAssign (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:3344:19)
+2018-06-07T17:00:38.535Z - warn: Error: ipc timeout. message: scene:query-node, session: scene@renderer:3487
+2018-06-07T17:00:38.552Z - warn: Error: ipc timeout. message: scene:query-node, session: scene@renderer:3490
+2018-06-07T17:00:38.553Z - warn: Error: ipc timeout. message: scene:query-node, session: scene@renderer:3492
+2018-06-07T17:01:20.577Z - warn: The Asset used by component "cc.Sprite" in prefab "blockbig.prefab" is missing. Detailed information:
 Node path: "blockb"
 Asset url: "db://assets/resources/prefab/blockbig.prefab"
 Missing uuid: "8fac2c53-e19c-49d8-b467-e4ce848a45e4"
 
-2018-06-07T11:55:03.889Z - warn: The Asset used by component "cc.Sprite" in prefab "blocksmall.prefab" is missing. Detailed information:
+2018-06-07T17:01:20.579Z - warn: The Asset used by component "cc.Sprite" in prefab "blocksmall.prefab" is missing. Detailed information:
 Node path: "blocks"
 Asset url: "db://assets/resources/prefab/blocksmall.prefab"
 Missing uuid: "43928313-2ffc-4e64-952d-c6e5f4cda6ca"
 
-2018-06-07T11:57:00.459Z - warn: The Asset used by component "cc.Sprite" in prefab "blockbig.prefab" is missing. Detailed information:
+2018-06-07T17:04:32.960Z - warn: Error: ipc timeout. message: scene:query-node, session: scene@renderer:8574
+2018-06-07T17:04:32.962Z - warn: Error: ipc timeout. message: scene:query-node, session: scene@renderer:8577
+2018-06-07T17:04:40.654Z - warn: Error: ipc timeout. message: scene:query-node, session: scene@renderer:8627
+2018-06-07T17:04:51.083Z - warn: Error: ipc timeout. message: scene:query-node, session: scene@renderer:8688
+2018-06-07T17:05:05.567Z - warn: Error: ipc timeout. message: scene:query-node, session: scene@renderer:8769
+2018-06-07T17:05:05.568Z - warn: Error: ipc timeout. message: scene:query-node, session: scene@renderer:8772
+2018-06-07T17:07:24.069Z - warn: The Asset used by component "cc.Sprite" in prefab "blockbig.prefab" is missing. Detailed information:
 Node path: "blockb"
 Asset url: "db://assets/resources/prefab/blockbig.prefab"
 Missing uuid: "8fac2c53-e19c-49d8-b467-e4ce848a45e4"
 
-2018-06-07T11:57:00.463Z - warn: The Asset used by component "cc.Sprite" in prefab "blocksmall.prefab" is missing. Detailed information:
+2018-06-07T17:07:24.071Z - warn: The Asset used by component "cc.Sprite" in prefab "blocksmall.prefab" is missing. Detailed information:
 Node path: "blocks"
 Asset url: "db://assets/resources/prefab/blocksmall.prefab"
 Missing uuid: "43928313-2ffc-4e64-952d-c6e5f4cda6ca"
 
-2018-06-07T11:59:38.324Z - info: shutdown preview server
+2018-06-07T17:10:26.786Z - warn: The Asset used by component "cc.Sprite" in prefab "blockbig.prefab" is missing. Detailed information:
+Node path: "blockb"
+Asset url: "db://assets/resources/prefab/blockbig.prefab"
+Missing uuid: "8fac2c53-e19c-49d8-b467-e4ce848a45e4"
+
+2018-06-07T17:10:26.788Z - warn: The Asset used by component "cc.Sprite" in prefab "blocksmall.prefab" is missing. Detailed information:
+Node path: "blocks"
+Asset url: "db://assets/resources/prefab/blocksmall.prefab"
+Missing uuid: "43928313-2ffc-4e64-952d-c6e5f4cda6ca"
+
+2018-06-07T17:13:31.619Z - failed: [db-task][sync-changes] Failed to import asset /Users/lichao/Desktop/gittest/box2/box/assets/src/controller/GameMenuController.js, message: Compile error: SyntaxError: /Users/lichao/Desktop/gittest/box2/box/assets/src/controller/GameMenuController.js: Unexpected token (122:31)
+  120 |               break;
+  121 |         }
+> 122 |         setCheckToggle:function( num){
+      |                                ^
+  123 |             for( let i=0;i < this.radioButton.length;i++)
+  124 |             {
+  125 |                 if(i == num){
+    at Parser.pp$5.raise (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:4454:13)
+    at Parser.pp.unexpected (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:1761:8)
+    at Parser.pp$1.parseFunction (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:2378:10)
+    at Parser.pp$1.parseFunctionStatement (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:2053:15)
+    at Parser.pp$1.parseStatement (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:1839:19)
+    at Parser.pp$1.parseLabeledStatement (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:2228:20)
+    at Parser.pp$1.parseStatement (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:1909:17)
+    at Parser.pp$1.parseBlockBody (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:2268:21)
+    at Parser.pp$1.parseBlock (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:2247:8)
+    at Parser.pp$3.parseFunctionBody (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:4235:22)
+2018-06-07T17:15:03.144Z - failed: [db-task][sync-changes] Failed to import asset /Users/lichao/Desktop/gittest/box2/box/assets/src/controller/GameMenuController.js, message: Compile error: SyntaxError: /Users/lichao/Desktop/gittest/box2/box/assets/src/controller/GameMenuController.js: Unexpected token (122:31)
+  120 |               break;
+  121 |         }
+> 122 |         setCheckToggle:function( num){
+      |                                ^
+  123 |             for( let i=0;i < this.radioButton.length;i++)
+  124 |             {
+  125 |                 if(i == num){
+    at Parser.pp$5.raise (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:4454:13)
+    at Parser.pp.unexpected (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:1761:8)
+    at Parser.pp$1.parseFunction (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:2378:10)
+    at Parser.pp$1.parseFunctionStatement (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:2053:15)
+    at Parser.pp$1.parseStatement (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:1839:19)
+    at Parser.pp$1.parseLabeledStatement (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:2228:20)
+    at Parser.pp$1.parseStatement (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:1909:17)
+    at Parser.pp$1.parseBlockBody (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:2268:21)
+    at Parser.pp$1.parseBlock (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:2247:8)
+    at Parser.pp$3.parseFunctionBody (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:4235:22)
+2018-06-07T17:15:31.657Z - failed: [db-task][sync-changes] Failed to import asset /Users/lichao/Desktop/gittest/box2/box/assets/src/controller/GameMenuController.js, message: Compile error: SyntaxError: /Users/lichao/Desktop/gittest/box2/box/assets/src/controller/GameMenuController.js: Unexpected token (122:32)
+  120 |               break;
+  121 |         }
+> 122 |         setCheckToggle: function(num){
+      |                                 ^
+  123 |             for( let i=0;i < this.radioButton.length;i++)
+  124 |             {
+  125 |                 if(i == num){
+    at Parser.pp$5.raise (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:4454:13)
+    at Parser.pp.unexpected (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:1761:8)
+    at Parser.pp$1.parseFunction (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:2378:10)
+    at Parser.pp$1.parseFunctionStatement (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:2053:15)
+    at Parser.pp$1.parseStatement (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:1839:19)
+    at Parser.pp$1.parseLabeledStatement (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:2228:20)
+    at Parser.pp$1.parseStatement (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:1909:17)
+    at Parser.pp$1.parseBlockBody (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:2268:21)
+    at Parser.pp$1.parseBlock (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:2247:8)
+    at Parser.pp$3.parseFunctionBody (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:4235:22)
+2018-06-07T17:15:55.116Z - failed: [db-task][sync-changes] Failed to import asset /Users/lichao/Desktop/gittest/box2/box/assets/src/controller/GameMenuController.js, message: Compile error: SyntaxError: /Users/lichao/Desktop/gittest/box2/box/assets/src/controller/GameMenuController.js: Unexpected token (122:32)
+  120 |               break;
+  121 |         }
+> 122 |         setCheckToggle: function(num) {
+      |                                 ^
+  123 |             for( let i=0;i < this.radioButton.length;i++)
+  124 |             {
+  125 |                 if(i == num){
+    at Parser.pp$5.raise (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:4454:13)
+    at Parser.pp.unexpected (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:1761:8)
+    at Parser.pp$1.parseFunction (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:2378:10)
+    at Parser.pp$1.parseFunctionStatement (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:2053:15)
+    at Parser.pp$1.parseStatement (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:1839:19)
+    at Parser.pp$1.parseLabeledStatement (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:2228:20)
+    at Parser.pp$1.parseStatement (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:1909:17)
+    at Parser.pp$1.parseBlockBody (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:2268:21)
+    at Parser.pp$1.parseBlock (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:2247:8)
+    at Parser.pp$3.parseFunctionBody (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:4235:22)
+2018-06-07T17:17:02.281Z - failed: [db-task][sync-changes] Failed to import asset /Users/lichao/Desktop/gittest/box2/box/assets/src/controller/GameMenuController.js, message: Compile error: SyntaxError: /Users/lichao/Desktop/gittest/box2/box/assets/src/controller/GameMenuController.js: Unexpected token (121:9)
+  119 |           default:
+  120 |               break;
+> 121 |         },
+      |          ^
+  122 | 
+  123 |         setCheckToggle: function(num) {
+  124 |             for( let i=0;i < this.radioButton.length;i++)
+    at Parser.pp$5.raise (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:4454:13)
+    at Parser.pp.unexpected (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:1761:8)
+    at Parser.pp$3.parseExprAtom (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:3750:12)
+    at Parser.pp$3.parseExprSubscripts (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:3494:19)
+    at Parser.pp$3.parseMaybeUnary (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:3474:19)
+    at Parser.pp$3.parseExprOps (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:3404:19)
+    at Parser.pp$3.parseMaybeConditional (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:3381:19)
+    at Parser.pp$3.parseMaybeAssign (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:3344:19)
+    at Parser.pp$3.parseExpression (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:3306:19)
+    at Parser.pp$1.parseStatement (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:1906:19)
+2018-06-07T17:17:33.580Z - warn: The Asset used by component "cc.Sprite" in prefab "blockbig.prefab" is missing. Detailed information:
+Node path: "blockb"
+Asset url: "db://assets/resources/prefab/blockbig.prefab"
+Missing uuid: "8fac2c53-e19c-49d8-b467-e4ce848a45e4"
+
+2018-06-07T17:17:33.581Z - warn: The Asset used by component "cc.Sprite" in prefab "blocksmall.prefab" is missing. Detailed information:
+Node path: "blocks"
+Asset url: "db://assets/resources/prefab/blocksmall.prefab"
+Missing uuid: "43928313-2ffc-4e64-952d-c6e5f4cda6ca"
+
+2018-06-07T17:21:26.451Z - warn: The Asset used by component "cc.Sprite" in prefab "blockbig.prefab" is missing. Detailed information:
+Node path: "blockb"
+Asset url: "db://assets/resources/prefab/blockbig.prefab"
+Missing uuid: "8fac2c53-e19c-49d8-b467-e4ce848a45e4"
+
+2018-06-07T17:21:26.456Z - warn: The Asset used by component "cc.Sprite" in prefab "blocksmall.prefab" is missing. Detailed information:
+Node path: "blocks"
+Asset url: "db://assets/resources/prefab/blocksmall.prefab"
+Missing uuid: "43928313-2ffc-4e64-952d-c6e5f4cda6ca"
+
+2018-06-07T17:22:05.852Z - warn: The Asset used by component "cc.Sprite" in prefab "blockbig.prefab" is missing. Detailed information:
+Node path: "blockb"
+Asset url: "db://assets/resources/prefab/blockbig.prefab"
+Missing uuid: "8fac2c53-e19c-49d8-b467-e4ce848a45e4"
+
+2018-06-07T17:22:05.865Z - warn: The Asset used by component "cc.Sprite" in prefab "blocksmall.prefab" is missing. Detailed information:
+Node path: "blocks"
+Asset url: "db://assets/resources/prefab/blocksmall.prefab"
+Missing uuid: "43928313-2ffc-4e64-952d-c6e5f4cda6ca"
+
+2018-06-07T17:33:48.958Z - warn: The Asset used by component "cc.Sprite" in prefab "blockbig.prefab" is missing. Detailed information:
+Node path: "blockb"
+Asset url: "db://assets/resources/prefab/blockbig.prefab"
+Missing uuid: "8fac2c53-e19c-49d8-b467-e4ce848a45e4"
+
+2018-06-07T17:33:48.963Z - warn: The Asset used by component "cc.Sprite" in prefab "blocksmall.prefab" is missing. Detailed information:
+Node path: "blocks"
+Asset url: "db://assets/resources/prefab/blocksmall.prefab"
+Missing uuid: "43928313-2ffc-4e64-952d-c6e5f4cda6ca"
+
+2018-06-07T17:41:02.563Z - warn: The Asset used by component "cc.Sprite" in prefab "blockbig.prefab" is missing. Detailed information:
+Node path: "blockb"
+Asset url: "db://assets/resources/prefab/blockbig.prefab"
+Missing uuid: "8fac2c53-e19c-49d8-b467-e4ce848a45e4"
+
+2018-06-07T17:41:02.571Z - warn: The Asset used by component "cc.Sprite" in prefab "blocksmall.prefab" is missing. Detailed information:
+Node path: "blocks"
+Asset url: "db://assets/resources/prefab/blocksmall.prefab"
+Missing uuid: "43928313-2ffc-4e64-952d-c6e5f4cda6ca"
+
+2018-06-07T17:46:02.259Z - warn: The Asset used by component "cc.Sprite" in prefab "blockbig.prefab" is missing. Detailed information:
+Node path: "blockb"
+Asset url: "db://assets/resources/prefab/blockbig.prefab"
+Missing uuid: "8fac2c53-e19c-49d8-b467-e4ce848a45e4"
+
+2018-06-07T17:46:02.269Z - warn: The Asset used by component "cc.Sprite" in prefab "blocksmall.prefab" is missing. Detailed information:
+Node path: "blocks"
+Asset url: "db://assets/resources/prefab/blocksmall.prefab"
+Missing uuid: "43928313-2ffc-4e64-952d-c6e5f4cda6ca"
+
+2018-06-07T17:56:08.331Z - warn: The Asset used by component "cc.Sprite" in prefab "blockbig.prefab" is missing. Detailed information:
+Node path: "blockb"
+Asset url: "db://assets/resources/prefab/blockbig.prefab"
+Missing uuid: "8fac2c53-e19c-49d8-b467-e4ce848a45e4"
+
+2018-06-07T17:56:08.353Z - warn: The Asset used by component "cc.Sprite" in prefab "blocksmall.prefab" is missing. Detailed information:
+Node path: "blocks"
+Asset url: "db://assets/resources/prefab/blocksmall.prefab"
+Missing uuid: "43928313-2ffc-4e64-952d-c6e5f4cda6ca"
+
+2018-06-07T17:58:30.357Z - warn: The Asset used by component "cc.Sprite" in prefab "blockbig.prefab" is missing. Detailed information:
+Node path: "blockb"
+Asset url: "db://assets/resources/prefab/blockbig.prefab"
+Missing uuid: "8fac2c53-e19c-49d8-b467-e4ce848a45e4"
+
+2018-06-07T17:58:30.605Z - warn: The Asset used by component "cc.Sprite" in prefab "blocksmall.prefab" is missing. Detailed information:
+Node path: "blocks"
+Asset url: "db://assets/resources/prefab/blocksmall.prefab"
+Missing uuid: "43928313-2ffc-4e64-952d-c6e5f4cda6ca"
+
+2018-06-07T18:01:40.856Z - warn: The Asset used by component "cc.Sprite" in prefab "blockbig.prefab" is missing. Detailed information:
+Node path: "blockb"
+Asset url: "db://assets/resources/prefab/blockbig.prefab"
+Missing uuid: "8fac2c53-e19c-49d8-b467-e4ce848a45e4"
+
+2018-06-07T18:01:40.917Z - warn: The Asset used by component "cc.Sprite" in prefab "blocksmall.prefab" is missing. Detailed information:
+Node path: "blocks"
+Asset url: "db://assets/resources/prefab/blocksmall.prefab"
+Missing uuid: "43928313-2ffc-4e64-952d-c6e5f4cda6ca"
+
