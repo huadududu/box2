@@ -1,342 +1,169 @@
-2018-06-07T16:58:39.651Z - normal: Load ~/.CocosCreator/settings.json
-2018-06-07T16:58:39.655Z - normal: checking language setting...
-2018-06-07T16:58:39.656Z - normal: Language: en
-2018-06-07T16:58:40.381Z - success: protocol editor-framework registered
-2018-06-07T16:58:40.381Z - success: protocol app registered
-2018-06-07T16:58:40.382Z - success: protocol theme registered
-2018-06-07T16:58:40.382Z - success: protocol packages registered
-2018-06-07T16:58:40.382Z - success: protocol unpack registerred
-2018-06-07T16:58:40.382Z - success: protocol disable-commonjs registerred
-2018-06-07T16:58:40.540Z - normal: connected!
-2018-06-07T16:58:40.542Z - normal: Check project /Users/lichao/Desktop/gittest/box2/box
-2018-06-07T16:58:40.544Z - normal: Initializing Cocos2d
-2018-06-07T16:58:40.697Z - normal: Initializing Asset Database
-2018-06-07T16:58:40.721Z - success: protocol uuid registerred
-2018-06-07T16:58:40.721Z - success: protocol db registerred
-2018-06-07T16:58:40.722Z - success: protocol thumbnail registerred
-2018-06-07T16:58:40.722Z - normal: Loading editor/builtin packages
-2018-06-07T16:58:40.738Z - success: anysdk loaded
-2018-06-07T16:58:40.828Z - success: assets loaded
-2018-06-07T16:58:40.831Z - success: builder loaded
-2018-06-07T16:58:40.832Z - success: cocos-analytics loaded
-2018-06-07T16:58:40.836Z - success: console loaded
-2018-06-07T16:58:40.863Z - success: fb-instant-games loaded
-2018-06-07T16:58:40.866Z - success: hierarchy loaded
-2018-06-07T16:58:40.870Z - success: inspector loaded
-2018-06-07T16:58:40.871Z - success: keystore loaded
-2018-06-07T16:58:40.878Z - success: node-library loaded
-2018-06-07T16:58:40.885Z - success: package-asset loaded
-2018-06-07T16:58:40.887Z - success: preferences loaded
-2018-06-07T16:58:40.889Z - success: project-exporter loaded
-2018-06-07T16:58:40.902Z - success: project-importer loaded
-2018-06-07T16:58:40.905Z - success: project-settings loaded
-2018-06-07T16:58:40.908Z - success: ui-kit loaded
-2018-06-07T16:58:40.913Z - success: ui-grid loaded
-2018-06-07T16:58:40.916Z - success: scene loaded
-2018-06-07T16:58:40.918Z - success: sprite-editor loaded
-2018-06-07T16:58:40.921Z - success: store loaded
-2018-06-07T16:58:40.927Z - success: timeline loaded
-2018-06-07T16:58:40.927Z - normal: Loading builtin packages
-2018-06-07T16:58:40.931Z - success: asset-db-debugger loaded
-2018-06-07T16:58:40.932Z - success: color-picker loaded
-2018-06-07T16:58:40.935Z - success: package-manager loaded
-2018-06-07T16:58:40.940Z - success: sdkbox loaded
-2018-06-07T16:58:40.945Z - success: tester loaded
-2018-06-07T16:58:40.947Z - success: ui-kit-preview-extra loaded
-2018-06-07T16:58:40.951Z - success: ui-kit-preview loaded
-2018-06-07T16:58:40.953Z - success: ui-tree loaded
-2018-06-07T16:58:41.715Z - normal: Initializing project /Users/lichao/Desktop/gittest/box2/box
-2018-06-07T16:58:41.716Z - normal: Loading packages
-2018-06-07T16:58:41.719Z - normal: Watching packages
-2018-06-07T16:58:41.731Z - normal: Run Application
-2018-06-07T16:58:42.484Z - failed: [db-task][init] Failed to import asset /Users/lichao/Desktop/gittest/box2/box/assets/src/controller/GameMenuController.js, message: Compile error: SyntaxError: /Users/lichao/Desktop/gittest/box2/box/assets/src/controller/GameMenuController.js: Unexpected token, expected , (24:12)
-  22 |         radioButton:{
-  23 |             default:[]
-> 24 |             type:cc.Toggle
-     |             ^
-  25 |         } ,
-  26 | 
-  27 |     },
-    at Parser.pp$5.raise (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:4454:13)
-    at Parser.pp.unexpected (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:1761:8)
-    at Parser.pp.expect (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:1749:33)
-    at Parser.pp$3.parseObj (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:3978:12)
-    at Parser.pp$3.parseExprAtom (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:3719:19)
-    at Parser.pp$3.parseExprSubscripts (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:3494:19)
-    at Parser.pp$3.parseMaybeUnary (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:3474:19)
-    at Parser.pp$3.parseExprOps (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:3404:19)
-    at Parser.pp$3.parseMaybeConditional (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:3381:19)
-    at Parser.pp$3.parseMaybeAssign (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:3344:19)
-2018-06-07T16:58:42.791Z - success: preview server running at http://localhost:7456
-2018-06-07T16:58:47.358Z - normal: 1.9.1
-2018-06-07T16:58:48.031Z - failed: load script [GameMenuController] failed : Error: Cannot find module 'GameMenuController'
-    at Module._resolveFilename (module.js:470:15)
-    at Function.Module._resolveFilename [as _resolveFilenameVendor] (/Applications/CocosCreator.app/Contents/Resources/electron.asar/common/reset-search-paths.js:35:12)
-    at Function.Module._resolveFilename (/Applications/CocosCreator.app/Contents/Resources/app.asar/editor/page/project-scripts.js:1:1361)
-    at Function.Module._load (module.js:418:25)
-    at Module.require (module.js:498:17)
-    at require (internal/module.js:20:19)
-    at Object.cc.require (/Applications/CocosCreator.app/Contents/Resources/app.asar/editor/page/project-scripts.js:1:967)
-    at /Users/lichao/Desktop/gittest/box2/box/temp/quick-scripts/assets/src/controller/BoxController.js:1:363
-    at __define (/Users/lichao/Desktop/gittest/box2/box/temp/quick-scripts/assets/src/controller/BoxController.js:44:29)
-    at /Users/lichao/Desktop/gittest/box2/box/temp/quick-scripts/assets/src/controller/BoxController.js:497:13
-2018-06-07T16:58:48.292Z - warn: Class "1fc47DQ14RMSbRbdbHJzBGp" used by component "BoxController" in scene "boxa.fire" is missing or invalid. Detailed information:
-Node path: "Canvas"
-Asset url: "db://assets/sc/boxa.fire"
-
-2018-06-07T16:58:48.408Z - warn: The Asset used by component "cc.Sprite" in prefab "blocksmall.prefab" is missing. Detailed information:
-Node path: "blocks"
-Asset url: "db://assets/resources/prefab/blocksmall.prefab"
-Missing uuid: "43928313-2ffc-4e64-952d-c6e5f4cda6ca"
-
-2018-06-07T16:58:48.409Z - warn: The Asset used by component "cc.Sprite" in prefab "blockbig.prefab" is missing. Detailed information:
-Node path: "blockb"
-Asset url: "db://assets/resources/prefab/blockbig.prefab"
-Missing uuid: "8fac2c53-e19c-49d8-b467-e4ce848a45e4"
-
-2018-06-07T16:59:17.109Z - error: getComponent: Type must be non-nil
-    at Object.errorID (/Applications/CocosCreator.app/Contents/Resources/engine/CCDebugger.js:338:24)
-    at getConstructor (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/utils/base-node.js:43:12)
-    at cc_Node.getComponent (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/utils/base-node.js:748:27)
-    at HTMLElement.scene:query-node-info (file:///Applications/CocosCreator.app/Contents/Resources/app.asar/editor/builtin/scene/panel/scene.js:1:7215)
-    at Object.Panel._dispatch (/Applications/CocosCreator.app/Contents/Resources/app.asar/editor-framework/lib/renderer/panel.js:1:2283)
-    at EventEmitter.ipcRenderer.on.o (/Applications/CocosCreator.app/Contents/Resources/app.asar/editor-framework/lib/renderer/ipc.js:1:3960)
-    at emitMany (events.js:127:13)
-    at EventEmitter.emit (events.js:204:7)
-2018-06-07T17:00:19.367Z - failed: [db-task][sync-changes] Failed to import asset /Users/lichao/Desktop/gittest/box2/box/assets/src/controller/GameMenuController.js, message: Compile error: SyntaxError: /Users/lichao/Desktop/gittest/box2/box/assets/src/controller/GameMenuController.js: Unexpected token, expected , (24:12)
-  22 |         radioButton:{
-  23 |             default:[]
-> 24 |             type:cc.Toggle
-     |             ^
-  25 |         } ,
-  26 | 
-  27 |     },
-    at Parser.pp$5.raise (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:4454:13)
-    at Parser.pp.unexpected (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:1761:8)
-    at Parser.pp.expect (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:1749:33)
-    at Parser.pp$3.parseObj (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:3978:12)
-    at Parser.pp$3.parseExprAtom (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:3719:19)
-    at Parser.pp$3.parseExprSubscripts (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:3494:19)
-    at Parser.pp$3.parseMaybeUnary (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:3474:19)
-    at Parser.pp$3.parseExprOps (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:3404:19)
-    at Parser.pp$3.parseMaybeConditional (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:3381:19)
-    at Parser.pp$3.parseMaybeAssign (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:3344:19)
-2018-06-07T17:00:38.535Z - warn: Error: ipc timeout. message: scene:query-node, session: scene@renderer:3487
-2018-06-07T17:00:38.552Z - warn: Error: ipc timeout. message: scene:query-node, session: scene@renderer:3490
-2018-06-07T17:00:38.553Z - warn: Error: ipc timeout. message: scene:query-node, session: scene@renderer:3492
-2018-06-07T17:01:20.577Z - warn: The Asset used by component "cc.Sprite" in prefab "blockbig.prefab" is missing. Detailed information:
-Node path: "blockb"
-Asset url: "db://assets/resources/prefab/blockbig.prefab"
-Missing uuid: "8fac2c53-e19c-49d8-b467-e4ce848a45e4"
-
-2018-06-07T17:01:20.579Z - warn: The Asset used by component "cc.Sprite" in prefab "blocksmall.prefab" is missing. Detailed information:
-Node path: "blocks"
-Asset url: "db://assets/resources/prefab/blocksmall.prefab"
-Missing uuid: "43928313-2ffc-4e64-952d-c6e5f4cda6ca"
-
-2018-06-07T17:04:32.960Z - warn: Error: ipc timeout. message: scene:query-node, session: scene@renderer:8574
-2018-06-07T17:04:32.962Z - warn: Error: ipc timeout. message: scene:query-node, session: scene@renderer:8577
-2018-06-07T17:04:40.654Z - warn: Error: ipc timeout. message: scene:query-node, session: scene@renderer:8627
-2018-06-07T17:04:51.083Z - warn: Error: ipc timeout. message: scene:query-node, session: scene@renderer:8688
-2018-06-07T17:05:05.567Z - warn: Error: ipc timeout. message: scene:query-node, session: scene@renderer:8769
-2018-06-07T17:05:05.568Z - warn: Error: ipc timeout. message: scene:query-node, session: scene@renderer:8772
-2018-06-07T17:07:24.069Z - warn: The Asset used by component "cc.Sprite" in prefab "blockbig.prefab" is missing. Detailed information:
-Node path: "blockb"
-Asset url: "db://assets/resources/prefab/blockbig.prefab"
-Missing uuid: "8fac2c53-e19c-49d8-b467-e4ce848a45e4"
-
-2018-06-07T17:07:24.071Z - warn: The Asset used by component "cc.Sprite" in prefab "blocksmall.prefab" is missing. Detailed information:
-Node path: "blocks"
-Asset url: "db://assets/resources/prefab/blocksmall.prefab"
-Missing uuid: "43928313-2ffc-4e64-952d-c6e5f4cda6ca"
-
-2018-06-07T17:10:26.786Z - warn: The Asset used by component "cc.Sprite" in prefab "blockbig.prefab" is missing. Detailed information:
-Node path: "blockb"
-Asset url: "db://assets/resources/prefab/blockbig.prefab"
-Missing uuid: "8fac2c53-e19c-49d8-b467-e4ce848a45e4"
-
-2018-06-07T17:10:26.788Z - warn: The Asset used by component "cc.Sprite" in prefab "blocksmall.prefab" is missing. Detailed information:
-Node path: "blocks"
-Asset url: "db://assets/resources/prefab/blocksmall.prefab"
-Missing uuid: "43928313-2ffc-4e64-952d-c6e5f4cda6ca"
-
-2018-06-07T17:13:31.619Z - failed: [db-task][sync-changes] Failed to import asset /Users/lichao/Desktop/gittest/box2/box/assets/src/controller/GameMenuController.js, message: Compile error: SyntaxError: /Users/lichao/Desktop/gittest/box2/box/assets/src/controller/GameMenuController.js: Unexpected token (122:31)
-  120 |               break;
-  121 |         }
-> 122 |         setCheckToggle:function( num){
-      |                                ^
-  123 |             for( let i=0;i < this.radioButton.length;i++)
-  124 |             {
-  125 |                 if(i == num){
-    at Parser.pp$5.raise (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:4454:13)
-    at Parser.pp.unexpected (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:1761:8)
-    at Parser.pp$1.parseFunction (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:2378:10)
-    at Parser.pp$1.parseFunctionStatement (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:2053:15)
-    at Parser.pp$1.parseStatement (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:1839:19)
-    at Parser.pp$1.parseLabeledStatement (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:2228:20)
-    at Parser.pp$1.parseStatement (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:1909:17)
-    at Parser.pp$1.parseBlockBody (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:2268:21)
-    at Parser.pp$1.parseBlock (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:2247:8)
-    at Parser.pp$3.parseFunctionBody (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:4235:22)
-2018-06-07T17:15:03.144Z - failed: [db-task][sync-changes] Failed to import asset /Users/lichao/Desktop/gittest/box2/box/assets/src/controller/GameMenuController.js, message: Compile error: SyntaxError: /Users/lichao/Desktop/gittest/box2/box/assets/src/controller/GameMenuController.js: Unexpected token (122:31)
-  120 |               break;
-  121 |         }
-> 122 |         setCheckToggle:function( num){
-      |                                ^
-  123 |             for( let i=0;i < this.radioButton.length;i++)
-  124 |             {
-  125 |                 if(i == num){
-    at Parser.pp$5.raise (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:4454:13)
-    at Parser.pp.unexpected (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:1761:8)
-    at Parser.pp$1.parseFunction (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:2378:10)
-    at Parser.pp$1.parseFunctionStatement (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:2053:15)
-    at Parser.pp$1.parseStatement (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:1839:19)
-    at Parser.pp$1.parseLabeledStatement (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:2228:20)
-    at Parser.pp$1.parseStatement (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:1909:17)
-    at Parser.pp$1.parseBlockBody (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:2268:21)
-    at Parser.pp$1.parseBlock (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:2247:8)
-    at Parser.pp$3.parseFunctionBody (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:4235:22)
-2018-06-07T17:15:31.657Z - failed: [db-task][sync-changes] Failed to import asset /Users/lichao/Desktop/gittest/box2/box/assets/src/controller/GameMenuController.js, message: Compile error: SyntaxError: /Users/lichao/Desktop/gittest/box2/box/assets/src/controller/GameMenuController.js: Unexpected token (122:32)
-  120 |               break;
-  121 |         }
-> 122 |         setCheckToggle: function(num){
-      |                                 ^
-  123 |             for( let i=0;i < this.radioButton.length;i++)
-  124 |             {
-  125 |                 if(i == num){
-    at Parser.pp$5.raise (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:4454:13)
-    at Parser.pp.unexpected (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:1761:8)
-    at Parser.pp$1.parseFunction (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:2378:10)
-    at Parser.pp$1.parseFunctionStatement (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:2053:15)
-    at Parser.pp$1.parseStatement (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:1839:19)
-    at Parser.pp$1.parseLabeledStatement (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:2228:20)
-    at Parser.pp$1.parseStatement (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:1909:17)
-    at Parser.pp$1.parseBlockBody (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:2268:21)
-    at Parser.pp$1.parseBlock (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:2247:8)
-    at Parser.pp$3.parseFunctionBody (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:4235:22)
-2018-06-07T17:15:55.116Z - failed: [db-task][sync-changes] Failed to import asset /Users/lichao/Desktop/gittest/box2/box/assets/src/controller/GameMenuController.js, message: Compile error: SyntaxError: /Users/lichao/Desktop/gittest/box2/box/assets/src/controller/GameMenuController.js: Unexpected token (122:32)
-  120 |               break;
-  121 |         }
-> 122 |         setCheckToggle: function(num) {
-      |                                 ^
-  123 |             for( let i=0;i < this.radioButton.length;i++)
-  124 |             {
-  125 |                 if(i == num){
-    at Parser.pp$5.raise (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:4454:13)
-    at Parser.pp.unexpected (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:1761:8)
-    at Parser.pp$1.parseFunction (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:2378:10)
-    at Parser.pp$1.parseFunctionStatement (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:2053:15)
-    at Parser.pp$1.parseStatement (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:1839:19)
-    at Parser.pp$1.parseLabeledStatement (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:2228:20)
-    at Parser.pp$1.parseStatement (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:1909:17)
-    at Parser.pp$1.parseBlockBody (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:2268:21)
-    at Parser.pp$1.parseBlock (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:2247:8)
-    at Parser.pp$3.parseFunctionBody (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:4235:22)
-2018-06-07T17:17:02.281Z - failed: [db-task][sync-changes] Failed to import asset /Users/lichao/Desktop/gittest/box2/box/assets/src/controller/GameMenuController.js, message: Compile error: SyntaxError: /Users/lichao/Desktop/gittest/box2/box/assets/src/controller/GameMenuController.js: Unexpected token (121:9)
-  119 |           default:
-  120 |               break;
-> 121 |         },
-      |          ^
-  122 | 
-  123 |         setCheckToggle: function(num) {
-  124 |             for( let i=0;i < this.radioButton.length;i++)
-    at Parser.pp$5.raise (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:4454:13)
-    at Parser.pp.unexpected (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:1761:8)
-    at Parser.pp$3.parseExprAtom (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:3750:12)
-    at Parser.pp$3.parseExprSubscripts (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:3494:19)
-    at Parser.pp$3.parseMaybeUnary (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:3474:19)
-    at Parser.pp$3.parseExprOps (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:3404:19)
-    at Parser.pp$3.parseMaybeConditional (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:3381:19)
-    at Parser.pp$3.parseMaybeAssign (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:3344:19)
-    at Parser.pp$3.parseExpression (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:3306:19)
-    at Parser.pp$1.parseStatement (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:1906:19)
-2018-06-07T17:17:33.580Z - warn: The Asset used by component "cc.Sprite" in prefab "blockbig.prefab" is missing. Detailed information:
-Node path: "blockb"
-Asset url: "db://assets/resources/prefab/blockbig.prefab"
-Missing uuid: "8fac2c53-e19c-49d8-b467-e4ce848a45e4"
-
-2018-06-07T17:17:33.581Z - warn: The Asset used by component "cc.Sprite" in prefab "blocksmall.prefab" is missing. Detailed information:
-Node path: "blocks"
-Asset url: "db://assets/resources/prefab/blocksmall.prefab"
-Missing uuid: "43928313-2ffc-4e64-952d-c6e5f4cda6ca"
-
-2018-06-07T17:21:26.451Z - warn: The Asset used by component "cc.Sprite" in prefab "blockbig.prefab" is missing. Detailed information:
-Node path: "blockb"
-Asset url: "db://assets/resources/prefab/blockbig.prefab"
-Missing uuid: "8fac2c53-e19c-49d8-b467-e4ce848a45e4"
-
-2018-06-07T17:21:26.456Z - warn: The Asset used by component "cc.Sprite" in prefab "blocksmall.prefab" is missing. Detailed information:
-Node path: "blocks"
-Asset url: "db://assets/resources/prefab/blocksmall.prefab"
-Missing uuid: "43928313-2ffc-4e64-952d-c6e5f4cda6ca"
-
-2018-06-07T17:22:05.852Z - warn: The Asset used by component "cc.Sprite" in prefab "blockbig.prefab" is missing. Detailed information:
-Node path: "blockb"
-Asset url: "db://assets/resources/prefab/blockbig.prefab"
-Missing uuid: "8fac2c53-e19c-49d8-b467-e4ce848a45e4"
-
-2018-06-07T17:22:05.865Z - warn: The Asset used by component "cc.Sprite" in prefab "blocksmall.prefab" is missing. Detailed information:
-Node path: "blocks"
-Asset url: "db://assets/resources/prefab/blocksmall.prefab"
-Missing uuid: "43928313-2ffc-4e64-952d-c6e5f4cda6ca"
-
-2018-06-07T17:33:48.958Z - warn: The Asset used by component "cc.Sprite" in prefab "blockbig.prefab" is missing. Detailed information:
-Node path: "blockb"
-Asset url: "db://assets/resources/prefab/blockbig.prefab"
-Missing uuid: "8fac2c53-e19c-49d8-b467-e4ce848a45e4"
-
-2018-06-07T17:33:48.963Z - warn: The Asset used by component "cc.Sprite" in prefab "blocksmall.prefab" is missing. Detailed information:
-Node path: "blocks"
-Asset url: "db://assets/resources/prefab/blocksmall.prefab"
-Missing uuid: "43928313-2ffc-4e64-952d-c6e5f4cda6ca"
-
-2018-06-07T17:41:02.563Z - warn: The Asset used by component "cc.Sprite" in prefab "blockbig.prefab" is missing. Detailed information:
-Node path: "blockb"
-Asset url: "db://assets/resources/prefab/blockbig.prefab"
-Missing uuid: "8fac2c53-e19c-49d8-b467-e4ce848a45e4"
-
-2018-06-07T17:41:02.571Z - warn: The Asset used by component "cc.Sprite" in prefab "blocksmall.prefab" is missing. Detailed information:
-Node path: "blocks"
-Asset url: "db://assets/resources/prefab/blocksmall.prefab"
-Missing uuid: "43928313-2ffc-4e64-952d-c6e5f4cda6ca"
-
-2018-06-07T17:46:02.259Z - warn: The Asset used by component "cc.Sprite" in prefab "blockbig.prefab" is missing. Detailed information:
-Node path: "blockb"
-Asset url: "db://assets/resources/prefab/blockbig.prefab"
-Missing uuid: "8fac2c53-e19c-49d8-b467-e4ce848a45e4"
-
-2018-06-07T17:46:02.269Z - warn: The Asset used by component "cc.Sprite" in prefab "blocksmall.prefab" is missing. Detailed information:
-Node path: "blocks"
-Asset url: "db://assets/resources/prefab/blocksmall.prefab"
-Missing uuid: "43928313-2ffc-4e64-952d-c6e5f4cda6ca"
-
-2018-06-07T17:56:08.331Z - warn: The Asset used by component "cc.Sprite" in prefab "blockbig.prefab" is missing. Detailed information:
-Node path: "blockb"
-Asset url: "db://assets/resources/prefab/blockbig.prefab"
-Missing uuid: "8fac2c53-e19c-49d8-b467-e4ce848a45e4"
-
-2018-06-07T17:56:08.353Z - warn: The Asset used by component "cc.Sprite" in prefab "blocksmall.prefab" is missing. Detailed information:
-Node path: "blocks"
-Asset url: "db://assets/resources/prefab/blocksmall.prefab"
-Missing uuid: "43928313-2ffc-4e64-952d-c6e5f4cda6ca"
-
-2018-06-07T17:58:30.357Z - warn: The Asset used by component "cc.Sprite" in prefab "blockbig.prefab" is missing. Detailed information:
-Node path: "blockb"
-Asset url: "db://assets/resources/prefab/blockbig.prefab"
-Missing uuid: "8fac2c53-e19c-49d8-b467-e4ce848a45e4"
-
-2018-06-07T17:58:30.605Z - warn: The Asset used by component "cc.Sprite" in prefab "blocksmall.prefab" is missing. Detailed information:
-Node path: "blocks"
-Asset url: "db://assets/resources/prefab/blocksmall.prefab"
-Missing uuid: "43928313-2ffc-4e64-952d-c6e5f4cda6ca"
-
-2018-06-07T18:01:40.856Z - warn: The Asset used by component "cc.Sprite" in prefab "blockbig.prefab" is missing. Detailed information:
-Node path: "blockb"
-Asset url: "db://assets/resources/prefab/blockbig.prefab"
-Missing uuid: "8fac2c53-e19c-49d8-b467-e4ce848a45e4"
-
-2018-06-07T18:01:40.917Z - warn: The Asset used by component "cc.Sprite" in prefab "blocksmall.prefab" is missing. Detailed information:
-Node path: "blocks"
-Asset url: "db://assets/resources/prefab/blocksmall.prefab"
-Missing uuid: "43928313-2ffc-4e64-952d-c6e5f4cda6ca"
-
+2018-06-08T06:51:41.637Z - normal: Load ~/.CocosCreator/settings.json
+2018-06-08T06:51:41.640Z - normal: checking language setting...
+2018-06-08T06:51:41.640Z - normal: Language: zh
+2018-06-08T06:51:42.197Z - success: protocol editor-framework registered
+2018-06-08T06:51:42.197Z - success: protocol app registered
+2018-06-08T06:51:42.197Z - success: protocol theme registered
+2018-06-08T06:51:42.197Z - success: protocol packages registered
+2018-06-08T06:51:42.197Z - success: protocol unpack registerred
+2018-06-08T06:51:42.198Z - success: protocol disable-commonjs registerred
+2018-06-08T06:51:42.288Z - normal: connected!
+2018-06-08T06:51:42.291Z - normal: Check project /Users/bolex1/work/game/box/box
+2018-06-08T06:51:42.292Z - normal: Initializing Cocos2d
+2018-06-08T06:51:42.474Z - normal: Initializing Asset Database
+2018-06-08T06:51:42.496Z - success: protocol uuid registerred
+2018-06-08T06:51:42.496Z - success: protocol db registerred
+2018-06-08T06:51:42.496Z - success: protocol thumbnail registerred
+2018-06-08T06:51:42.497Z - normal: Loading editor/builtin packages
+2018-06-08T06:51:42.513Z - success: anysdk loaded
+2018-06-08T06:51:42.606Z - success: assets loaded
+2018-06-08T06:51:42.608Z - success: builder loaded
+2018-06-08T06:51:42.610Z - success: cocos-analytics loaded
+2018-06-08T06:51:42.613Z - success: console loaded
+2018-06-08T06:51:42.640Z - success: fb-instant-games loaded
+2018-06-08T06:51:42.643Z - success: hierarchy loaded
+2018-06-08T06:51:42.646Z - success: inspector loaded
+2018-06-08T06:51:42.648Z - success: keystore loaded
+2018-06-08T06:51:42.655Z - success: node-library loaded
+2018-06-08T06:51:42.657Z - success: package-asset loaded
+2018-06-08T06:51:42.658Z - success: preferences loaded
+2018-06-08T06:51:42.660Z - success: project-exporter loaded
+2018-06-08T06:51:42.672Z - success: project-importer loaded
+2018-06-08T06:51:42.675Z - success: project-settings loaded
+2018-06-08T06:51:42.678Z - success: ui-kit loaded
+2018-06-08T06:51:42.682Z - success: ui-grid loaded
+2018-06-08T06:51:42.686Z - success: scene loaded
+2018-06-08T06:51:42.687Z - success: sprite-editor loaded
+2018-06-08T06:51:42.690Z - success: store loaded
+2018-06-08T06:51:42.694Z - success: timeline loaded
+2018-06-08T06:51:42.694Z - normal: Loading builtin packages
+2018-06-08T06:51:42.697Z - success: asset-db-debugger loaded
+2018-06-08T06:51:42.698Z - success: color-picker loaded
+2018-06-08T06:51:42.701Z - success: package-manager loaded
+2018-06-08T06:51:42.706Z - success: sdkbox loaded
+2018-06-08T06:51:42.711Z - success: tester loaded
+2018-06-08T06:51:42.714Z - success: ui-kit-preview-extra loaded
+2018-06-08T06:51:42.717Z - success: ui-kit-preview loaded
+2018-06-08T06:51:42.720Z - success: ui-tree loaded
+2018-06-08T06:51:43.478Z - normal: Initializing project /Users/bolex1/work/game/box/box
+2018-06-08T06:51:43.479Z - normal: Loading packages
+2018-06-08T06:51:43.484Z - normal: Watching packages
+2018-06-08T06:51:43.494Z - normal: Run Application
+2018-06-08T06:51:43.976Z - success: preview server running at http://localhost:7456
+2018-06-08T06:51:47.726Z - normal: 1.9.1
+2018-06-08T06:51:48.169Z - error: Property 'GameMenuController.BoxController' must define at least one of 'default', 'get' or 'set'.
+    at Object.errorID (/Applications/CocosCreator.app/Contents/Resources/engine/CCDebugger.js:343:18)
+    at Object.exports.preprocessAttrs (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/preprocess-class.js:232:28)
+    at declareProperties (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/CCClass.js:807:20)
+    at Object.CCClass [as Class] (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/CCClass.js:947:9)
+    at __define (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/controller/GameMenuController.js:20:4)
+    at /Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/controller/GameMenuController.js:176:13
+    at Object.<anonymous> (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/controller/GameMenuController.js:183:11)
+    at Object.<anonymous> (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/controller/GameMenuController.js:186:3)
+    at Module._compile (module.js:571:32)
+2018-06-08T06:52:34.225Z - error: Property 'GameMenuController.BoxController' must define at least one of 'default', 'get' or 'set'.
+    at Object.errorID (/Applications/CocosCreator.app/Contents/Resources/engine/CCDebugger.js:343:18)
+    at Object.exports.preprocessAttrs (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/preprocess-class.js:232:28)
+    at declareProperties (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/CCClass.js:807:20)
+    at Object.CCClass [as Class] (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/CCClass.js:947:9)
+    at __define (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/controller/GameMenuController.js:19:4)
+    at /Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/controller/GameMenuController.js:175:13
+    at Object.<anonymous> (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/controller/GameMenuController.js:182:11)
+    at Object.<anonymous> (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/controller/GameMenuController.js:185:3)
+    at Module._compile (module.js:571:32)
+2018-06-08T06:52:45.485Z - error: Property 'GameMenuController.BoxController' must define at least one of 'default', 'get' or 'set'.
+    at Object.errorID (/Applications/CocosCreator.app/Contents/Resources/engine/CCDebugger.js:343:18)
+    at Object.exports.preprocessAttrs (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/preprocess-class.js:232:28)
+    at declareProperties (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/CCClass.js:807:20)
+    at Object.CCClass [as Class] (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/CCClass.js:947:9)
+    at __define (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/controller/GameMenuController.js:19:4)
+    at /Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/controller/GameMenuController.js:176:13
+    at Object.<anonymous> (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/controller/GameMenuController.js:183:11)
+    at Object.<anonymous> (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/controller/GameMenuController.js:186:3)
+    at Module._compile (module.js:571:32)
+2018-06-08T06:54:06.834Z - error: Property 'GameMenuController.BoxController' must define at least one of 'default', 'get' or 'set'.
+    at Object.errorID (/Applications/CocosCreator.app/Contents/Resources/engine/CCDebugger.js:343:18)
+    at Object.exports.preprocessAttrs (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/preprocess-class.js:232:28)
+    at declareProperties (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/CCClass.js:807:20)
+    at Object.CCClass [as Class] (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/CCClass.js:947:9)
+    at __define (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/controller/GameMenuController.js:19:4)
+    at /Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/controller/GameMenuController.js:176:13
+    at Object.<anonymous> (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/controller/GameMenuController.js:183:11)
+    at Object.<anonymous> (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/controller/GameMenuController.js:186:3)
+    at Module._compile (module.js:571:32)
+2018-06-08T06:55:34.974Z - error: Property 'GameMenuController.BoxController' must define at least one of 'default', 'get' or 'set'.
+    at Object.errorID (/Applications/CocosCreator.app/Contents/Resources/engine/CCDebugger.js:343:18)
+    at Object.exports.preprocessAttrs (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/preprocess-class.js:232:28)
+    at declareProperties (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/CCClass.js:807:20)
+    at Object.CCClass [as Class] (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/CCClass.js:947:9)
+    at __define (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/controller/GameMenuController.js:19:4)
+    at /Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/controller/GameMenuController.js:177:13
+    at Object.<anonymous> (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/controller/GameMenuController.js:184:11)
+    at Object.<anonymous> (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/controller/GameMenuController.js:187:3)
+    at Module._compile (module.js:571:32)
+2018-06-08T06:56:01.263Z - error: Property 'GameMenuController.boxController' must define at least one of 'default', 'get' or 'set'.
+    at Object.errorID (/Applications/CocosCreator.app/Contents/Resources/engine/CCDebugger.js:343:18)
+    at Object.exports.preprocessAttrs (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/preprocess-class.js:232:28)
+    at declareProperties (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/CCClass.js:807:20)
+    at Object.CCClass [as Class] (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/CCClass.js:947:9)
+    at __define (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/controller/GameMenuController.js:19:4)
+    at /Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/controller/GameMenuController.js:177:13
+    at Object.<anonymous> (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/controller/GameMenuController.js:184:11)
+    at Object.<anonymous> (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/controller/GameMenuController.js:187:3)
+    at Module._compile (module.js:571:32)
+2018-06-08T06:57:57.251Z - error: Property 'GameMenuController.BoxController' must define at least one of 'default', 'get' or 'set'.
+    at Object.errorID (/Applications/CocosCreator.app/Contents/Resources/engine/CCDebugger.js:343:18)
+    at Object.exports.preprocessAttrs (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/preprocess-class.js:232:28)
+    at declareProperties (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/CCClass.js:807:20)
+    at Object.CCClass [as Class] (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/CCClass.js:947:9)
+    at __define (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/controller/GameMenuController.js:19:4)
+    at /Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/controller/GameMenuController.js:178:13
+    at Object.<anonymous> (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/controller/GameMenuController.js:185:11)
+    at Object.<anonymous> (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/controller/GameMenuController.js:188:3)
+    at Module._compile (module.js:571:32)
+2018-06-08T06:59:08.503Z - error: Property 'GameMenuController.BoxController' must define at least one of 'default', 'get' or 'set'.
+    at Object.errorID (/Applications/CocosCreator.app/Contents/Resources/engine/CCDebugger.js:343:18)
+    at Object.exports.preprocessAttrs (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/preprocess-class.js:232:28)
+    at declareProperties (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/CCClass.js:807:20)
+    at Object.CCClass [as Class] (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/CCClass.js:947:9)
+    at __define (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/controller/GameMenuController.js:19:4)
+    at /Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/controller/GameMenuController.js:179:13
+    at Object.<anonymous> (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/controller/GameMenuController.js:186:11)
+    at Object.<anonymous> (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/controller/GameMenuController.js:189:3)
+    at Module._compile (module.js:571:32)
+2018-06-08T06:59:48.149Z - error: Property 'GameMenuController.BoxController' must define at least one of 'default', 'get' or 'set'.
+    at Object.errorID (/Applications/CocosCreator.app/Contents/Resources/engine/CCDebugger.js:343:18)
+    at Object.exports.preprocessAttrs (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/preprocess-class.js:232:28)
+    at declareProperties (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/CCClass.js:807:20)
+    at Object.CCClass [as Class] (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/CCClass.js:947:9)
+    at __define (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/controller/GameMenuController.js:19:4)
+    at /Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/controller/GameMenuController.js:179:13
+    at Object.<anonymous> (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/controller/GameMenuController.js:186:11)
+    at Object.<anonymous> (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/controller/GameMenuController.js:189:3)
+    at Module._compile (module.js:571:32)
+2018-06-08T07:37:39.564Z - normal: Introduced global variable while editing: i
+2018-06-08T07:37:39.566Z - normal: Introduced global variable while editing: l
+2018-06-08T07:50:28.309Z - normal: Introduced global variable while editing: i
+2018-06-08T07:50:28.311Z - normal: Introduced global variable while editing: l
+2018-06-08T07:51:14.023Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
+2018-06-08T07:51:54.394Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
+2018-06-08T07:54:32.806Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
+2018-06-08T08:04:06.647Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
+2018-06-08T08:32:44.553Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
+2018-06-08T08:33:24.328Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
+2018-06-08T08:35:12.240Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
+2018-06-08T08:39:00.708Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
+2018-06-08T08:39:29.945Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
+2018-06-08T08:44:08.781Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
+2018-06-08T08:44:55.410Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
+2018-06-08T08:46:35.706Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
+2018-06-08T08:47:48.899Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
+2018-06-08T08:49:38.548Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
+2018-06-08T08:55:24.187Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
+2018-06-08T08:57:40.338Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
+2018-06-08T09:00:15.623Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
+2018-06-08T09:10:33.976Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
+2018-06-08T09:14:01.116Z - warn: Error: ipc timeout. message: scene:query-node, session: scene@renderer:178437
+2018-06-08T09:33:46.251Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
+2018-06-08T09:37:36.687Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
+2018-06-08T09:40:15.021Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.

@@ -44,25 +44,6 @@ cc.Class({
     },
     getPngId: function getPngId() {
         return BlockConfig[this.pngID].texiao;
-    },
-    updateNode: function updateNode() {
-        // let self=this;
-        // cc.loader.loadRes('png/', cc.SpriteFrame, function (err, spriteFrame) {
-        //     self.sp.getComponent(cc.Sprite).spriteFrame = spriteFrame;
-        // });
-    },
-    runClick: function runClick() {
-        // if(this.runAction){
-        //   return;
-        //}
-        this.runAction = true;
-        var s1 = cc.scaleTo(0.1, 1.1, 1.1);
-        var s2 = cc.scaleTo(0.09, 1, 1);
-        var callback = cc.callFunc(function () {
-            this.runAction = false;
-        }.bind(this));
-        var seq = cc.sequence(s1, s2, callback);
-        this.sp.node.runAction(seq);
     }
 });
 

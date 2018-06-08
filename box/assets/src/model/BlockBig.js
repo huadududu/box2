@@ -10,7 +10,6 @@ cc.Class({
 
     properties:{
         sp:cc.Sprite,
-        text:cc.Label ,
         lineNum:0,
         columnNum:0,
         type:{

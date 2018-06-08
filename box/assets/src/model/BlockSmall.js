@@ -38,24 +38,5 @@ cc.Class({
     },
     getPngId:function(){
         return BlockConfig[this.pngID].texiao;
-    },
-    updateNode:function () {
-        // let self=this;
-        // cc.loader.loadRes('png/', cc.SpriteFrame, function (err, spriteFrame) {
-        //     self.sp.getComponent(cc.Sprite).spriteFrame = spriteFrame;
-        // });
-    },
-    runClick:function () {
-        // if(this.runAction){
-        //   return;
-        //}
-        this.runAction  = true;
-        let s1 = cc.scaleTo(0.1,1.1,1.1);
-        let s2 = cc.scaleTo(0.09,1,1);
-        let callback = cc.callFunc(function () {
-            this.runAction  = false;
-        }.bind(this));
-        let seq = cc.sequence(s1,s2,callback);
-        this.sp.node.runAction(seq);
     }
 });

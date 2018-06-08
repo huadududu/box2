@@ -35,8 +35,23 @@ let FC = cc.Class({
     create:function (pngname) {
         let obj= Factory.init(pngname);
         return obj;
-    }
+    },
+//边框
+    initmargins:function(pngname){
+        let newNode = this.pool.get();
+        if(!newNode){
+            let prefab = cc.loader.getRes("prefab/marginsb");
+            newNode= cc.instantiate(prefab);
+        }
+        let com = newNode.getComponent("MarginsBig");
+        com.setBlockPng(pngname);
+        return newNode;
 
+    },
+    createMargins:function(pngname){
+        let obj= Factory.initmargins(pngname);
+        return obj;
+    }
 
 
 

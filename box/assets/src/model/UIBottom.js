@@ -9,6 +9,7 @@ let SpriteFrameCenter = require("SpriteFrameCenter");
 let LanguageConfig = require("LanguageConfig");
 const config=[AcceleratorConfig,ToolConfig,EfficiencyConfig];
 const btnPng=["btn_juhuang","btn_lanse","btn_heise"];
+
 cc.Class({
     extends:cc.Component,
 
@@ -29,14 +30,17 @@ cc.Class({
             visible:false,
             default:"English"
         },
-        ID:{
-            visible:false,
-            default:1
+        ID: {
+            visible: false,
+            default: 1
+        },
+        eventcallback:{
+            visible: false,
+            default: null
         }
 
     },
     onLoad:function(){
-
 
     },
     setIcon:function(){
@@ -84,7 +88,7 @@ cc.Class({
         this.btn.node.spriteFrame = SpriteFrameCenter.getFrameFromAtlas("png/box",btnPng[type]+".png");
 
     },
-    setConfigInfo:function (type,info,language){
+    setConfigInfo:function (type,info,language,callback){
         this.type = type;
         this.ID = info.id;
         this.language = language;
@@ -94,5 +98,10 @@ cc.Class({
         this.setBtnDesc();
         this.setBtnVisible(true);
         this.setBtnPng(1);
+        this.eventcallback = callback;
+    },
+    onClickButton:function(){
+        this.eventcallback(this.type,this.ID);
+
     }
 })

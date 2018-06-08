@@ -34,14 +34,14 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 21
+        "__id__": 22
       },
       {
-        "__id__": 22
+        "__id__": 23
       }
     ],
     "_prefab": {
-      "__id__": 23
+      "__id__": 24
     },
     "_id": "",
     "_opacity": 255,
@@ -456,7 +456,7 @@
       }
     ],
     "_prefab": {
-      "__id__": 20
+      "__id__": 21
     },
     "_id": "",
     "_opacity": 255,
@@ -634,7 +634,11 @@
     },
     "duration": 0.1,
     "zoomScale": 1.2,
-    "clickEvents": [],
+    "clickEvents": [
+      {
+        "__id__": 20
+      }
+    ],
     "_N$interactable": true,
     "_N$enableAutoGrayEffect": false,
     "_N$normalColor": {
@@ -672,6 +676,15 @@
     "_N$target": {
       "__id__": 14
     }
+  },
+  {
+    "__type__": "cc.ClickEvent",
+    "target": {
+      "__id__": 1
+    },
+    "component": "UIBottom",
+    "handler": "onClickButton",
+    "customEventData": ""
   },
   {
     "__type__": "cc.PrefabInfo",

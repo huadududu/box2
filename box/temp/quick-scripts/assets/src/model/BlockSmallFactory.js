@@ -26,7 +26,6 @@ var FC = cc.Class({
         com.setBlockPng(pngname);
         return newNode;
     },
-
     put: function put(node) {
         var putnode = node.getComponent("GameComponent");
         // console.log("type",putnode.type);
@@ -39,6 +38,21 @@ var FC = cc.Class({
     //
     create: function create(pngname) {
         var obj = Factory.init(pngname);
+        return obj;
+    },
+    //边框
+    initmargins: function initmargins(pngname) {
+        var newNode = this.pool.get();
+        if (!newNode) {
+            var prefab = cc.loader.getRes("prefab/marginss");
+            newNode = cc.instantiate(prefab);
+        }
+        var com = newNode.getComponent("MarginsSmall");
+        com.setBlockPng(pngname);
+        return newNode;
+    },
+    createMargins: function createMargins(pngname) {
+        var obj = Factory.initmargins(pngname);
         return obj;
     }
 
