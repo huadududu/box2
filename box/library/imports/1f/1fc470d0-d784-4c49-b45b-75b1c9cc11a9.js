@@ -47,13 +47,10 @@ cc.Class({
 
         this.config = [AcceleratorConfig, ToolConfig, EfficiencyConfig];
         this.itemList = [];
-        if (this.myinfo == null || this.myinfo == undefined) {
-            this.myinfo = null;
-        }
     },
     addUIBottom: function addUIBottom() {
         if (this.config == undefined) {
-            this.onLoad();
+            this.config = [AcceleratorConfig, ToolConfig, EfficiencyConfig];
         }
         this.itemList = [];
         var startpos = -this.bottomlist.width / 2;

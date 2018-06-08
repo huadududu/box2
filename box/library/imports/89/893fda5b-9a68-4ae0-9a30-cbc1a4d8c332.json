@@ -970,7 +970,7 @@
     "_enabled": true,
     "_paused": false,
     "defaultSkin": "",
-    "defaultAnimation": "newAnimation",
+    "defaultAnimation": "",
     "loop": true,
     "_premultipliedAlpha": true,
     "_N$skeletonData": {
@@ -1191,7 +1191,7 @@
     "_enabled": true,
     "_paused": false,
     "defaultSkin": "",
-    "defaultAnimation": "newAnimation",
+    "defaultAnimation": "",
     "loop": false,
     "_premultipliedAlpha": true,
     "_N$skeletonData": {

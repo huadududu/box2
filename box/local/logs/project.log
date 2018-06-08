@@ -167,3 +167,5 @@
 2018-06-08T09:33:46.251Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
 2018-06-08T09:37:36.687Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
 2018-06-08T09:40:15.021Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
+2018-06-08T10:03:57.921Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
+2018-06-08T10:11:44.968Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.

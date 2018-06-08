@@ -19,6 +19,12 @@
     "box-silver": {
       "__uuid__": "eea5fb48-c298-41af-8bb1-67f5db74d2a6"
     },
+    "btn_claim": {
+      "__uuid__": "7ba3ab4c-a45c-4a03-9273-fbfe2bc87500"
+    },
+    "btn_claimx3": {
+      "__uuid__": "90e6d0e1-4aaa-423f-a8c9-e85e4dec6a89"
+    },
     "btn_heise": {
       "__uuid__": "ebb5c33e-ff2c-4dad-936b-fad65edc5ddc"
     },
@@ -93,6 +99,12 @@
     },
     "img_shijian": {
       "__uuid__": "d7f466a0-f6c7-48ed-8e9a-4e0635adbb4a"
+    },
+    "img_tanchuang": {
+      "__uuid__": "767aae23-7672-4026-86a2-c4dec81bddea"
+    },
+    "img_wenhao": {
+      "__uuid__": "e1d5356d-1191-4cb1-9fcd-b02f0f4a3f06"
     },
     "j_1": {
       "__uuid__": "c5737748-ffa9-4b32-807f-a06dc35f8b66"
