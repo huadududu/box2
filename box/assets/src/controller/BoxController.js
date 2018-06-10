@@ -44,7 +44,7 @@ cc.Class({
         GameMenuController: GameMenuController,
         language:{
             visible: false,
-            default:"English"
+            default:"English" 
         },
         hard:{
             visible : true,
