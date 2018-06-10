@@ -7,13 +7,16 @@ const CameraController = require('CameraController');
 let StageConfig = require("StageConfig");
 let BlockConfig = require("BoxConfig1");
 let CycleConfig = require("CycleConfig");
+let ToolConfig = require("ToolConfig");
+
 let GameType = require("GameType");
 let GameUtils = require("GameUtils");
 let BlockBigFactory = require("BlockBigFactory");
 let BlockSmallFactory = require("BlockSmallFactory");
 let SpriteFrameCenter = require("SpriteFrameCenter");
 let ParticleSystemCenter = require("ParticleSystemCenter");
-let GameMenuController = require('GameMenuController');
+let SkeletonDataCenter = require("SkeletonDataCenter");
+// let GameMenuController = require('GameMenuController');
 
 
 let winsize = cc.winSize;
@@ -38,10 +41,10 @@ cc.Class({
         Bgbz:cc.Node,
         Underground:cc.Node,
         motionStreak: cc.MotionStreak,
-        hammer: sp.Skeleton,
+        // hammer: sp.Skeleton,
         boxSpine:sp.Skeleton,
         btnbox:cc.Button,
-        GameMenuController: GameMenuController,
+        // GameMenuController: GameMenuController,
         language:{
             visible: false,
             default:"English" 
@@ -104,16 +107,18 @@ cc.Class({
 
     onLoad:function () {
         SpriteFrameCenter.preLoadAtlas("png/box",this.initdata.bind(this));
+        this.GameMenuController = cc.find("GameMenu").getComponent("GameMenuController");
         this.blocks = [];
         this.marginlist=[];
+        this.hammers=[];
         this.startPos = -GameHeight/2;
         // this.sm.on('stop',      this.smCallback,        this);
-        this.hammer.setCompleteListener(trackEntry => {
-            var animationName = trackEntry.animation ? trackEntry.animation.name : "";
-            cc.log("recordSpine [track %s][animation %s] end.", trackEntry.trackIndex, animationName);
-            this.hammer.node.active = false;
-              this.smCallback();
-        });
+        // this.hammer.setCompleteListener(trackEntry => {
+        //     var animationName = trackEntry.animation ? trackEntry.animation.name : "";
+        //     cc.log("recordSpine [track %s][animation %s] end.", trackEntry.trackIndex, animationName);
+        //     this.hammer.node.active = false;
+        //       this.smCallback(this.hammer);
+        // });
          this.boxSpine.node.active = false;
         this.boxSpine.setCompleteListener(trackEntry => {
             var animationName1 = trackEntry.animation ? trackEntry.animation.name : "";
@@ -127,18 +132,16 @@ cc.Class({
         this.boxSpine.node.active = true;
         this.boxSpine.setAnimation(0, "newAnimation", false);
     },
-
-
     stopBoxSpine:function () {
         this.boxSpine.node.active = false;
     },
-    playHammerSpine:function () {
+    playHammerSpine:function (hammer) {
 
-         this.hammer.node.active = true;
-         this.hammer.setAnimation(0, "newAnimation", true);
+         hammer.node.active = true;
+         hammer.setAnimation(0, "newAnimation", true);
     },
-    stopHammerSpine:function () {
-        this.hammer.node.active = false;
+    stopHammerSpine:function (hammer) {
+        hammer.node.active = false;
     },
     changeHammerSpine:function(data){
         // this.hammer.node.active = false;
@@ -150,12 +153,16 @@ cc.Class({
         if(this.myinfo == null){
             this.myinfo ={hard:1,level:1,gold:1,gem:1,exp:1,hammer:[]};
         }
+        this.myinfo ={hard:1,level:1,gold:1,gem:1,exp:1,hammer:[{"id":1,"attribute":101},{"id":2,"attribute":201},{"id":3,"attribute":301},{"id":4,"attribute":401}]};
+        cc.sys.localStorage.setItem('myinfo',JSON.stringify(this.myinfo));
         this.hard = this.myinfo["hard"];
         this.GameMenuController.initInfo(this.myinfo);
+
     },
     restart:function(){
         this.hard++;
-
+        this.myinfo.hard++;
+        this.myinfo.gold+=1000;
         this.initdata();
     },
     initdata:function(){
@@ -173,11 +180,40 @@ cc.Class({
 
         this.addBlocks();
         this.cameraStartPosY();
-        this.setSmPosition();
+        // this.setSmPosition(this.hammer);
         this.GameMenuController.addUIBottom();
-        this.playHammerSpine();
-        this.btnbox.node.active = true;
 
+        // this.playHammers(this.hammer);
+        this.btnbox.node.active = true;
+        for(let i=0;i<this.hammers.length;i++){
+            let node = this.hammers[i];
+            node.destroy();
+        }
+        this.hammers=[];
+        let timescale=1;
+        for(let i=0;i<this.myinfo.hammer.length;i++){
+            let node = this.myinfo.hammer[i];
+            if(node != null){
+                node = new  cc.Node();
+                let hammer = node.addComponent(sp.Skeleton);
+                let info = ToolConfig[i+1];
+                let animation = info.animation;
+                SkeletonDataCenter.addSkeletonData(animation,hammer) ;
+                this.gameNode.addChild(node);
+                this.hammers.push(hammer);
+                hammer.setCompleteListener(trackEntry => {
+                    var animationName = trackEntry.animation ? trackEntry.animation.name : "";
+                    cc.log("recordSpine [track %s][animation %s] end.", trackEntry.trackIndex, animationName);
+                    hammer.node.active = false;
+                    this.setSmPosition(hammer);
+                    this.smCallback(hammer);
+                });
+                timescale*=0.9;
+                hammer.timeScale = timescale;
+
+
+            }
+        }
     },
     resetMarginList:function(){
         if(this.marginlist.length>0){
@@ -412,7 +448,7 @@ cc.Class({
 
     //************camera 相关设置 end **********************
     //*********** 锤子 相关设置  start***************
-    setSmPosition:function(){
+    setSmPosition:function(hammer){
         let realwidth=this.blockWidth+this.blockBlank;
         let maxline = this.curMaxLine;
         let maxrow = this.totoalRowNum(0);
@@ -420,10 +456,10 @@ cc.Class({
         {
             this.HattingPos =null;
             // this.sm.node.visible = false;
-            this.hammer.node.active = false;
+            hammer.node.active = false;
             return ;
         }
-         this.hammer.node.active = true;
+        hammer.node.active = true;
         let range = this.geScreenRange();
         // let line = GameUtils.randomInt(range.min,range.max);
          let line = this.curMaxLine;
@@ -443,8 +479,8 @@ cc.Class({
         let texiao=this.getEffByBlock(line,row);
         ParticleSystemCenter.addParticleForNode(texiao+".plist",this.GameMenuController.node,location);
         this.HattingPos ={x:line,y:row};
-        this.hammer.node.position=location;
-        this.playHammerSpine();
+       hammer.node.position=location;
+        this.playHammerSpine(hammer);
     },
     //根据小块的位置 过的特效文件
     getEffByBlock(line,row){
@@ -479,7 +515,7 @@ cc.Class({
         return cc.p(hamX,hamY);
 
     },
-    smCallback:function(){
+    smCallback:function(hammer){
         if(this.HattingPos != null){
             let y= this.HattingPos.y;
             let x= this.HattingPos.x;
@@ -488,7 +524,7 @@ cc.Class({
                 this.destroyBlock(x,y);
             }
             this.cameraCentPosY();
-             this.setSmPosition();
+             this.setSmPosition(hammer);
         }
     },
     //*********** 锤子 相关设置  end*****************
@@ -558,28 +594,6 @@ cc.Class({
         }
         this.btnbox.node.active = false;
         this.playBoxSpine();
-    },
-    eventcallback: function(type, id) {
-        // let node= this.itemList.indexOf(sender);
-        switch (type){
-            case 0:
-                break;
-            case 1:
-                // let info = ToolConfig[id];
-                // let animation = info.animation;
-                // // BoxController.changeHammerSpine(animation);
-                // SkeletonDataCenter.addSkeletonData(animation, BoxController.changeHammerSpine);
-                this.toolChange(id);
-                break;
-            case 2:
-                break;
-        }
-    },
-    toolChange:function(id) {
-        let info = ToolConfig[id];
-        let animation = info.animation;
-        // BoxController.changeHammerSpine(animation);
-        SkeletonDataCenter.addSkeletonData(animation,this.changeHammerSpine.bind(this) );
     },
     update:function(){
         this.cameraCentPosY();

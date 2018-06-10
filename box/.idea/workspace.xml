@@ -13,13 +13,13 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.6147733">
+    <splitter split-orientation="horizontal" split-proportion="0.7592593">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file leaf-file-name="UIBottomFactory.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/assets/src/model/UIBottomFactory.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="682">
+                <state relative-caret-position="589">
                   <caret line="33" column="6" selection-start-line="33" selection-start-column="6" selection-end-line="33" selection-end-column="6" />
                   <folding>
                     <element signature="n#!!doc" expanded="true" />
@@ -31,7 +31,7 @@
           <file leaf-file-name="ToolConfig.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/assets/src/model/ToolConfig.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="66">
+                <state relative-caret-position="57">
                   <caret line="3" column="398" selection-start-line="3" selection-start-column="398" selection-end-line="3" selection-end-column="398" />
                 </state>
               </provider>
@@ -40,16 +40,21 @@
           <file leaf-file-name="BoxController.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/assets/src/controller/BoxController.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="599">
-                  <caret line="375" column="22" lean-forward="true" selection-start-line="375" selection-start-column="22" selection-end-line="375" selection-end-column="22" />
+                <state relative-caret-position="231">
+                  <caret line="205" column="50" selection-start-line="205" selection-start-column="50" selection-end-line="205" selection-end-column="50" />
                 </state>
               </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="SpriteFrameCenter.js.meta" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/assets/src/controller/SpriteFrameCenter.js.meta">
+              <provider selected="true" editor-type-id="text-editor" />
             </entry>
           </file>
           <file leaf-file-name="BlockBigFactory.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/assets/src/model/BlockBigFactory.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="418">
+                <state relative-caret-position="361">
                   <caret line="19" column="50" selection-start-line="19" selection-start-column="26" selection-end-line="19" selection-end-column="50" />
                 </state>
               </provider>
@@ -58,7 +63,7 @@
           <file leaf-file-name="GameType.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/assets/src/model/GameType.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="110">
+                <state relative-caret-position="95">
                   <caret line="5" column="14" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="14" />
                 </state>
               </provider>
@@ -72,17 +77,8 @@
           <file leaf-file-name="BlockSmall.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/assets/src/model/BlockSmall.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="418">
+                <state relative-caret-position="361">
                   <caret line="19" column="12" selection-start-line="19" selection-start-column="12" selection-end-line="19" selection-end-column="12" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="BlockSmallFactory.js" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/assets/src/model/BlockSmallFactory.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="638">
-                  <caret line="29" column="45" selection-start-line="29" selection-start-column="45" selection-end-line="29" selection-end-column="45" />
                 </state>
               </provider>
             </entry>
@@ -90,7 +86,7 @@
           <file leaf-file-name="UIBottom.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/assets/src/model/UIBottom.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1650">
+                <state relative-caret-position="1425">
                   <caret line="77" selection-start-line="77" selection-end-line="77" />
                   <folding>
                     <element signature="n#!!doc" expanded="true" />
@@ -106,8 +102,8 @@
           <file leaf-file-name="BlockBig.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/assets/src/model/BlockBig.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1232">
-                  <caret line="56" column="12" selection-start-line="56" selection-start-column="4" selection-end-line="56" selection-end-column="12" />
+                <state relative-caret-position="306">
+                  <caret line="27" column="22" lean-forward="true" selection-start-line="27" selection-start-column="22" selection-end-line="27" selection-end-column="22" />
                 </state>
               </provider>
             </entry>
@@ -115,8 +111,8 @@
           <file leaf-file-name="GameMenuController.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/assets/src/controller/GameMenuController.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="594">
-                  <caret line="27" column="27" lean-forward="true" selection-start-line="27" selection-start-column="27" selection-end-line="27" selection-end-column="27" />
+                <state relative-caret-position="364">
+                  <caret line="99" column="52" lean-forward="true" selection-start-line="99" selection-start-column="52" selection-end-line="99" selection-end-column="52" />
                   <folding>
                     <element signature="n#!!doc" expanded="true" />
                   </folding>
@@ -124,11 +120,29 @@
               </provider>
             </entry>
           </file>
+          <file leaf-file-name="LevelConfig.js" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/assets/src/model/LevelConfig.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="-140">
+                  <caret line="3" column="402" selection-start-line="3" selection-start-column="402" selection-end-line="3" selection-end-column="402" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="SkeletonDataCenter.js" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/assets/src/controller/SkeletonDataCenter.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="380">
+                  <caret line="20" column="19" selection-start-line="20" selection-start-column="4" selection-end-line="20" selection-end-column="19" />
+                </state>
+              </provider>
+            </entry>
+          </file>
           <file leaf-file-name="ParticleSystemCenter.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/assets/src/controller/ParticleSystemCenter.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="418">
-                  <caret line="19" column="6" selection-start-line="19" selection-start-column="6" selection-end-line="19" selection-end-column="6" />
+                <state relative-caret-position="646">
+                  <caret line="43" column="66" lean-forward="true" selection-start-line="43" selection-start-column="7" selection-end-line="43" selection-end-column="66" />
                 </state>
               </provider>
             </entry>
@@ -136,7 +150,7 @@
           <file leaf-file-name="StageConfig.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/assets/src/model/StageConfig.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="66">
+                <state relative-caret-position="57">
                   <caret line="3" column="863" selection-start-line="3" selection-start-column="863" selection-end-line="3" selection-end-column="863" />
                 </state>
               </provider>
@@ -145,7 +159,7 @@
           <file leaf-file-name="EfficiencyConfig.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/assets/src/model/EfficiencyConfig.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="66">
+                <state relative-caret-position="57">
                   <caret line="3" column="55" selection-start-line="3" selection-start-column="55" selection-end-line="3" selection-end-column="55" />
                 </state>
               </provider>
@@ -154,7 +168,7 @@
           <file leaf-file-name="GameMenuView.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/assets/src/view/GameMenuView.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="132">
+                <state relative-caret-position="114">
                   <caret line="8" column="2" selection-start-line="8" selection-start-column="2" selection-end-line="8" selection-end-column="39" />
                   <folding>
                     <element signature="n#!!doc" expanded="true" />
@@ -166,7 +180,7 @@
           <file leaf-file-name="smController.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/assets/src/controller/smController.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="154">
+                <state relative-caret-position="133">
                   <caret line="7" column="10" selection-start-line="7" selection-start-column="10" selection-end-line="7" selection-end-column="10" />
                 </state>
               </provider>
@@ -175,8 +189,8 @@
           <file leaf-file-name="SpriteFrameCenter.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/assets/src/controller/SpriteFrameCenter.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1210">
-                  <caret line="55" column="24" selection-start-line="55" selection-start-column="24" selection-end-line="55" selection-end-column="24" />
+                <state relative-caret-position="931">
+                  <caret line="58" column="19" selection-start-line="58" selection-start-column="19" selection-end-line="58" selection-end-column="19" />
                 </state>
               </provider>
             </entry>
@@ -194,19 +208,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>geScreenRange</find>
-      <find>visible</find>
-      <find>motionStreak</find>
-      <find>BlockBig</find>
-      <find>addBlocks</find>
-      <find>addLines</find>
-      <find>this.camera.node.</find>
-      <find>cameraCentPosY</find>
-      <find>camera</find>
-      <find>GameCenterY</find>
-      <find>BaseGame</find>
-      <find>updateTouch</find>
-      <find>BlockConfig</find>
       <find>start</find>
       <find>GameHeight</find>
       <find>active</find>
@@ -216,14 +217,27 @@
       <find>language</find>
       <find>hammerpos</find>
       <find>addParticleForNode</find>
-      <find>sss</find>
       <find>this.sm.node</find>
       <find>playBoxSpine</find>
       <find>sm</find>
       <find>sm.</find>
-      <find>hammer</find>
+      <find>updateDate</find>
+      <find>stopHammerSpine</find>
+      <find>localStorage</find>
+      <find>playHammerSpine</find>
       <find>smCallback</find>
+      <find>addSkeletonData</find>
+      <find>sss</find>
+      <find>changeHammerSpine</find>
+      <find>storage</find>
       <find>setSmPosition</find>
+      <find>this.myinfo.gold</find>
+      <find>gold</find>
+      <find>eventcallback</find>
+      <find>toolChange</find>
+      <find>hammer</find>
+      <find>hammers</find>
+      <find>playHammers</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
@@ -249,10 +263,11 @@
         <option value="$PROJECT_DIR$/assets/src/model/BlockBigFactory.js" />
         <option value="$PROJECT_DIR$/assets/src/view/GameMenuView.js" />
         <option value="$PROJECT_DIR$/assets/src/model/UIBottomFactory.js" />
-        <option value="$PROJECT_DIR$/assets/src/controller/GameMenuController.js" />
         <option value="$PROJECT_DIR$/assets/src/model/UIBottom.js" />
         <option value="$PROJECT_DIR$/assets/src/model/BlockBig.js" />
         <option value="$PROJECT_DIR$/assets/src/model/BlockSmall.js" />
+        <option value="$PROJECT_DIR$/assets/src/controller/SkeletonDataCenter.js" />
+        <option value="$PROJECT_DIR$/assets/src/controller/GameMenuController.js" />
         <option value="$PROJECT_DIR$/assets/src/controller/BoxController.js" />
       </list>
     </option>
@@ -267,8 +282,8 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="76" />
-    <option name="y" value="178" />
+    <option name="x" value="-62" />
+    <option name="y" value="267" />
     <option name="width" value="2560" />
     <option name="height" value="1333" />
   </component>
@@ -367,51 +382,52 @@
       <workItem from="1528335002148" duration="18518000" />
       <workItem from="1528364160276" duration="4581000" />
       <workItem from="1528372353056" duration="401000" />
+      <workItem from="1528629240226" duration="11728000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="94957000" />
+    <option name="totallyTimeSpent" value="106685000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="76" y="178" width="2560" height="1333" extended-state="0" />
+    <frame x="-62" y="267" width="2560" height="1333" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15714848" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.11792453" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
-      <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Run" order="2" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="bottom" id="Find" order="1" visible="true" weight="0.1797197" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Message" order="0" />
     </layout>
     <layout-to-restore>
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17336066" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Version Control" order="10" show_stripe_button="false" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" visible="true" weight="0.2539159" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Terminal" order="8" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" visible="true" weight="0.2539159" />
+      <window_info anchor="bottom" id="Version Control" order="10" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Message" order="0" />
       <window_info id="Favorites" order="2" side_tool="true" />
     </layout-to-restore>
   </component>
@@ -426,28 +442,26 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/assets/src/controller/BoxController.js</url>
-          <line>370</line>
+          <line>406</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/assets/src/controller/GameMenuController.js</url>
+          <line>37</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/assets/src/controller/GameMenuController.js</url>
+          <line>35</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="6" />
+      <option name="time" value="9" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/assets/src/model/BlockSmall.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="3" selection-start-line="3" selection-end-line="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/src/model/BlockConfig.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="3" selection-start-line="3" selection-end-line="3" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/assets/src/controller/BoxController.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2772">
@@ -594,21 +608,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/src/model/BlockSmallFactory.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="638">
-          <caret line="29" column="45" selection-start-line="29" selection-start-column="45" selection-end-line="29" selection-end-column="45" />
+        <state relative-caret-position="551">
+          <caret line="29" column="21" selection-start-line="29" selection-start-column="21" selection-end-line="29" selection-end-column="21" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/src/model/ToolConfig.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
+        <state relative-caret-position="57">
           <caret line="3" column="398" selection-start-line="3" selection-start-column="398" selection-end-line="3" selection-end-column="398" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/src/view/GameMenuView.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
+        <state relative-caret-position="114">
           <caret line="8" column="2" selection-start-line="8" selection-start-column="2" selection-end-line="8" selection-end-column="39" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
@@ -618,21 +632,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/src/model/StageConfig.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
+        <state relative-caret-position="57">
           <caret line="3" column="863" selection-start-line="3" selection-start-column="863" selection-end-line="3" selection-end-column="863" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/src/model/LevelConfig.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="3" column="269" lean-forward="true" selection-start-line="3" selection-start-column="269" selection-end-line="3" selection-end-column="269" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/src/model/GameType.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
+        <state relative-caret-position="95">
           <caret line="5" column="14" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="14" />
         </state>
       </provider>
@@ -642,21 +649,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/src/controller/smController.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
+        <state relative-caret-position="133">
           <caret line="7" column="10" selection-start-line="7" selection-start-column="10" selection-end-line="7" selection-end-column="10" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/src/model/EfficiencyConfig.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
+        <state relative-caret-position="57">
           <caret line="3" column="55" selection-start-line="3" selection-start-column="55" selection-end-line="3" selection-end-column="55" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/src/model/UIBottomFactory.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="682">
+        <state relative-caret-position="589">
           <caret line="33" column="6" selection-start-line="33" selection-start-column="6" selection-end-line="33" selection-end-column="6" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
@@ -664,16 +671,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assets/src/controller/SpriteFrameCenter.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1210">
-          <caret line="55" column="24" selection-start-line="55" selection-start-column="24" selection-end-line="55" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/assets/src/model/UIBottom.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1650">
+        <state relative-caret-position="1425">
           <caret line="77" selection-start-line="77" selection-end-line="77" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
@@ -683,7 +683,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/src/model/BlockSmall.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
+        <state relative-caret-position="361">
           <caret line="19" column="12" selection-start-line="19" selection-start-column="12" selection-end-line="19" selection-end-column="12" />
         </state>
       </provider>
@@ -693,29 +693,53 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/src/model/BlockBigFactory.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
+        <state relative-caret-position="361">
           <caret line="19" column="50" selection-start-line="19" selection-start-column="26" selection-end-line="19" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/src/controller/SpriteFrameCenter.js.meta">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/src/model/LevelConfig.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-140">
+          <caret line="3" column="402" selection-start-line="3" selection-start-column="402" selection-end-line="3" selection-end-column="402" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/src/model/BlockBig.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1232">
-          <caret line="56" column="12" selection-start-line="56" selection-start-column="4" selection-end-line="56" selection-end-column="12" />
+        <state relative-caret-position="306">
+          <caret line="27" column="22" lean-forward="true" selection-start-line="27" selection-start-column="22" selection-end-line="27" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/src/controller/SpriteFrameCenter.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="931">
+          <caret line="58" column="19" selection-start-line="58" selection-start-column="19" selection-end-line="58" selection-end-column="19" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/src/controller/ParticleSystemCenter.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="19" column="6" selection-start-line="19" selection-start-column="6" selection-end-line="19" selection-end-column="6" />
+        <state relative-caret-position="646">
+          <caret line="43" column="66" lean-forward="true" selection-start-line="43" selection-start-column="7" selection-end-line="43" selection-end-column="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/src/controller/SkeletonDataCenter.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="20" column="19" selection-start-line="20" selection-start-column="4" selection-end-line="20" selection-end-column="19" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/src/controller/GameMenuController.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="594">
-          <caret line="27" column="27" lean-forward="true" selection-start-line="27" selection-start-column="27" selection-end-line="27" selection-end-column="27" />
+        <state relative-caret-position="364">
+          <caret line="99" column="52" lean-forward="true" selection-start-line="99" selection-start-column="52" selection-end-line="99" selection-end-column="52" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
@@ -724,8 +748,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/src/controller/BoxController.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="599">
-          <caret line="375" column="22" lean-forward="true" selection-start-line="375" selection-start-column="22" selection-end-line="375" selection-end-column="22" />
+        <state relative-caret-position="231">
+          <caret line="205" column="50" selection-start-line="205" selection-start-column="50" selection-end-line="205" selection-end-column="50" />
         </state>
       </provider>
     </entry>

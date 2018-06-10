@@ -26,6 +26,7 @@ cc.Class({
         gold: cc.Label,
         gem: cc.Label,
         TopProgressBar: cc.ProgressBar,
+
         radioButton: {
             default: [],
             type: cc.Toggle
@@ -36,14 +37,11 @@ cc.Class({
             default: 0
         },
 
-        BoxController: {
-            default: null,
-            visible: false
-        }
+        BoxController: require("BoxController")
 
     },
     onLoad: function onLoad() {
-        this.BoxController = cc.find("Canvas").getComponent("BoxController");
+        // this.BoxController = cc.find("Canvas").getComponent("BoxController");
 
         this.config = [AcceleratorConfig, ToolConfig, EfficiencyConfig];
         this.itemList = [];
@@ -101,8 +99,8 @@ cc.Class({
         var info = ToolConfig[id];
         var animation = info.animation;
         // this.BoxController.changeHammerSpine(animation);
-        var node = this.BoxController.hammer;
-        SkeletonDataCenter.addSkeletonData(animation, node);
+        var node = this.BoxController.hammers[id - 1];
+        // SkeletonDataCenter.addSkeletonData(animation,node);
     },
     changeHammerSpine: function changeHammerSpine(data) {
         this.BoxController.changeHammerSpine(data);
@@ -110,7 +108,7 @@ cc.Class({
     updateDate: function updateDate(data) {
         for (var name in data) {
             if (name == 'exp') {
-                var exp = LevelConfig[this.myinfo.hard].exp;
+                var exp = LevelConfig[this.myinfo.level].exp;
                 var pro = data.exp / exp;
                 if (pro > 1) pro = 1;
 
@@ -119,6 +117,9 @@ cc.Class({
             if (name == "level") {
 
                 this.setLevel(data.level);
+            }
+            if (name == "gold") {
+                this.setGoldNum(data.gold);
             }
         }
     },
@@ -197,10 +198,19 @@ cc.Class({
     //点击升级按钮
     onClickLevel: function onClickLevel() {
         if (this.TopProgressBar.progress >= 1) {
-            this.myinfo.level += 1;
+            this.addlevel();
         }
-    }
+    },
+    addlevel: function addlevel() {
+        var level = this.myinfo.level + 1;
+        var needexp = LevelConfig[this.myinfo.level].exp;
 
+        var needgold = LevelConfig[this.myinfo.level].rewardcoin;
+        this.myinfo.level = level;
+        this.myinfo.exp -= needexp;
+        this.myinfo.gold -= needgold;
+        this.updateDate(this.myinfo);
+    }
 });
 
 cc._RF.pop();

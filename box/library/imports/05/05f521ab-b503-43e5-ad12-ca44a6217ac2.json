@@ -468,7 +468,7 @@
       }
     }
   },
-  "_atlasText": "\ndianzuan_1.png\nsize: 117,59\nformat: RGBA8888\nfilter: Linear,Linear\nrepeat: none\ndianzuan_2\n  rotate: false\n  xy: 83, 1\n  size: 32, 24\n  orig: 32, 24\n  offset: 0, 0\n  index: -1\ndianzuan_1\n  rotate: false\n  xy: 1, 1\n  size: 80, 56\n  orig: 80, 56\n  offset: 0, 0\n  index: -1\n",
+  "_atlasText": "\r\ndianzuan_1.png\r\nsize: 117,59\r\nformat: RGBA8888\r\nfilter: Linear,Linear\r\nrepeat: none\r\ndianzuan_2\r\n  rotate: false\r\n  xy: 83, 1\r\n  size: 32, 24\r\n  orig: 32, 24\r\n  offset: 0, 0\r\n  index: -1\r\ndianzuan_1\r\n  rotate: false\r\n  xy: 1, 1\r\n  size: 80, 56\r\n  orig: 80, 56\r\n  offset: 0, 0\r\n  index: -1\r\n",
   "atlasUrl": {
     "__uuid__": "6728e1b1-5b11-4a0f-8fec-c7148c89fd25"
   },

@@ -13,13 +13,17 @@ var CameraController = require('CameraController');
 var StageConfig = require("StageConfig");
 var BlockConfig = require("BoxConfig1");
 var CycleConfig = require("CycleConfig");
+var ToolConfig = require("ToolConfig");
+
 var GameType = require("GameType");
 var GameUtils = require("GameUtils");
 var BlockBigFactory = require("BlockBigFactory");
 var BlockSmallFactory = require("BlockSmallFactory");
 var SpriteFrameCenter = require("SpriteFrameCenter");
 var ParticleSystemCenter = require("ParticleSystemCenter");
-var GameMenuController = require('GameMenuController');
+var SkeletonDataCenter = require("SkeletonDataCenter");
+// let GameMenuController = require('GameMenuController');
+
 
 var winsize = cc.winSize;
 var BaseHeight = winsize.height / 2;
@@ -43,10 +47,10 @@ cc.Class({
         Bgbz: cc.Node,
         Underground: cc.Node,
         motionStreak: cc.MotionStreak,
-        hammer: sp.Skeleton,
+        // hammer: sp.Skeleton,
         boxSpine: sp.Skeleton,
         btnbox: cc.Button,
-        GameMenuController: GameMenuController,
+        // GameMenuController: GameMenuController,
         language: {
             visible: false,
             default: "English"
@@ -110,16 +114,18 @@ cc.Class({
         var _this = this;
 
         SpriteFrameCenter.preLoadAtlas("png/box", this.initdata.bind(this));
+        this.GameMenuController = cc.find("GameMenu").getComponent("GameMenuController");
         this.blocks = [];
         this.marginlist = [];
+        this.hammers = [];
         this.startPos = -GameHeight / 2;
         // this.sm.on('stop',      this.smCallback,        this);
-        this.hammer.setCompleteListener(function (trackEntry) {
-            var animationName = trackEntry.animation ? trackEntry.animation.name : "";
-            cc.log("recordSpine [track %s][animation %s] end.", trackEntry.trackIndex, animationName);
-            _this.hammer.node.active = false;
-            _this.smCallback();
-        });
+        // this.hammer.setCompleteListener(trackEntry => {
+        //     var animationName = trackEntry.animation ? trackEntry.animation.name : "";
+        //     cc.log("recordSpine [track %s][animation %s] end.", trackEntry.trackIndex, animationName);
+        //     this.hammer.node.active = false;
+        //       this.smCallback(this.hammer);
+        // });
         this.boxSpine.node.active = false;
         this.boxSpine.setCompleteListener(function (trackEntry) {
             var animationName1 = trackEntry.animation ? trackEntry.animation.name : "";
@@ -132,17 +138,16 @@ cc.Class({
         this.boxSpine.node.active = true;
         this.boxSpine.setAnimation(0, "newAnimation", false);
     },
-
     stopBoxSpine: function stopBoxSpine() {
         this.boxSpine.node.active = false;
     },
-    playHammerSpine: function playHammerSpine() {
+    playHammerSpine: function playHammerSpine(hammer) {
 
-        this.hammer.node.active = true;
-        this.hammer.setAnimation(0, "newAnimation", true);
+        hammer.node.active = true;
+        hammer.setAnimation(0, "newAnimation", true);
     },
-    stopHammerSpine: function stopHammerSpine() {
-        this.hammer.node.active = false;
+    stopHammerSpine: function stopHammerSpine(hammer) {
+        hammer.node.active = false;
     },
     changeHammerSpine: function changeHammerSpine(data) {
         // this.hammer.node.active = false;
@@ -154,15 +159,20 @@ cc.Class({
         if (this.myinfo == null) {
             this.myinfo = { hard: 1, level: 1, gold: 1, gem: 1, exp: 1, hammer: [] };
         }
+        this.myinfo = { hard: 1, level: 1, gold: 1, gem: 1, exp: 1, hammer: [{ "id": 1, "attribute": 101 }, { "id": 2, "attribute": 201 }, { "id": 3, "attribute": 301 }, { "id": 4, "attribute": 401 }] };
+        cc.sys.localStorage.setItem('myinfo', JSON.stringify(this.myinfo));
         this.hard = this.myinfo["hard"];
         this.GameMenuController.initInfo(this.myinfo);
     },
     restart: function restart() {
         this.hard++;
-
+        this.myinfo.hard++;
+        this.myinfo.gold += 1000;
         this.initdata();
     },
     initdata: function initdata() {
+        var _this2 = this;
+
         this.floorNum = StageConfig[this.hard].layer;
         for (var i = 0; i < BlockConfig.length; i++) {
             if (BlockConfig[i].blockwidth == StageConfig[this.hard].size) {
@@ -177,10 +187,40 @@ cc.Class({
 
         this.addBlocks();
         this.cameraStartPosY();
-        this.setSmPosition();
+        // this.setSmPosition(this.hammer);
         this.GameMenuController.addUIBottom();
-        this.playHammerSpine();
+
+        // this.playHammers(this.hammer);
         this.btnbox.node.active = true;
+        for (var _i = 0; _i < this.hammers.length; _i++) {
+            var node = this.hammers[_i];
+            node.destroy();
+        }
+        this.hammers = [];
+        var timescale = 1;
+        for (var _i2 = 0; _i2 < this.myinfo.hammer.length; _i2++) {
+            var _node = this.myinfo.hammer[_i2];
+            if (_node != null) {
+                (function () {
+                    _node = new cc.Node();
+                    var hammer = _node.addComponent(sp.Skeleton);
+                    var info = ToolConfig[_i2 + 1];
+                    var animation = info.animation;
+                    SkeletonDataCenter.addSkeletonData(animation, hammer);
+                    _this2.gameNode.addChild(_node);
+                    _this2.hammers.push(hammer);
+                    hammer.setCompleteListener(function (trackEntry) {
+                        var animationName = trackEntry.animation ? trackEntry.animation.name : "";
+                        cc.log("recordSpine [track %s][animation %s] end.", trackEntry.trackIndex, animationName);
+                        hammer.node.active = false;
+                        _this2.setSmPosition(hammer);
+                        _this2.smCallback(hammer);
+                    });
+                    timescale *= 0.9;
+                    hammer.timeScale = timescale;
+                })();
+            }
+        }
     },
     resetMarginList: function resetMarginList() {
         if (this.marginlist.length > 0) {
@@ -406,17 +446,17 @@ cc.Class({
 
     //************camera 相关设置 end **********************
     //*********** 锤子 相关设置  start***************
-    setSmPosition: function setSmPosition() {
+    setSmPosition: function setSmPosition(hammer) {
         var realwidth = this.blockWidth + this.blockBlank;
         var maxline = this.curMaxLine;
         var maxrow = this.totoalRowNum(0);
         if (maxline == 0 && maxrow == 0) {
             this.HattingPos = null;
             // this.sm.node.visible = false;
-            this.hammer.node.active = false;
+            hammer.node.active = false;
             return;
         }
-        this.hammer.node.active = true;
+        hammer.node.active = true;
         var range = this.geScreenRange();
         // let line = GameUtils.randomInt(range.min,range.max);
         var line = this.curMaxLine;
@@ -435,8 +475,8 @@ cc.Class({
         var texiao = this.getEffByBlock(line, row);
         ParticleSystemCenter.addParticleForNode(texiao + ".plist", this.GameMenuController.node, location);
         this.HattingPos = { x: line, y: row };
-        this.hammer.node.position = location;
-        this.playHammerSpine();
+        hammer.node.position = location;
+        this.playHammerSpine(hammer);
     },
     //根据小块的位置 过的特效文件
     getEffByBlock: function getEffByBlock(line, row) {
@@ -471,7 +511,7 @@ cc.Class({
         var hamY = realy - 42;
         return cc.p(hamX, hamY);
     },
-    smCallback: function smCallback() {
+    smCallback: function smCallback(hammer) {
         if (this.HattingPos != null) {
             var y = this.HattingPos.y;
             var x = this.HattingPos.x;
@@ -480,7 +520,7 @@ cc.Class({
                 this.destroyBlock(x, y);
             }
             this.cameraCentPosY();
-            this.setSmPosition();
+            this.setSmPosition(hammer);
         }
     },
     //*********** 锤子 相关设置  end*****************
@@ -549,28 +589,6 @@ cc.Class({
         }
         this.btnbox.node.active = false;
         this.playBoxSpine();
-    },
-    eventcallback: function eventcallback(type, id) {
-        // let node= this.itemList.indexOf(sender);
-        switch (type) {
-            case 0:
-                break;
-            case 1:
-                // let info = ToolConfig[id];
-                // let animation = info.animation;
-                // // BoxController.changeHammerSpine(animation);
-                // SkeletonDataCenter.addSkeletonData(animation, BoxController.changeHammerSpine);
-                this.toolChange(id);
-                break;
-            case 2:
-                break;
-        }
-    },
-    toolChange: function toolChange(id) {
-        var info = ToolConfig[id];
-        var animation = info.animation;
-        // BoxController.changeHammerSpine(animation);
-        SkeletonDataCenter.addSkeletonData(animation, this.changeHammerSpine.bind(this));
     },
     update: function update() {
         this.cameraCentPosY();

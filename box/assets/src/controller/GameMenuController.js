@@ -20,6 +20,7 @@ cc.Class({
         gold:cc.Label,
         gem:cc.Label,
         TopProgressBar:cc.ProgressBar,
+
         radioButton:{
             default:[],
             type:cc.Toggle
@@ -30,14 +31,11 @@ cc.Class({
             default:0
         },
 
-        BoxController:{
-            default:null,
-            visible:false
-        },
+        BoxController: require("BoxController")
 
     },
     onLoad:function(){
-        this.BoxController = cc.find("Canvas").getComponent("BoxController");
+        // this.BoxController = cc.find("Canvas").getComponent("BoxController");
 
         this.config=[AcceleratorConfig,ToolConfig,EfficiencyConfig];
         this.itemList=[];
@@ -98,27 +96,29 @@ cc.Class({
     toolChange:function(id) {
         let info = ToolConfig[id];
         let animation = info.animation;
-         // this.BoxController.changeHammerSpine(animation);
-        let node = this.BoxController.hammer;
-        SkeletonDataCenter.addSkeletonData(animation,node);
+        // this.BoxController.changeHammerSpine(animation);
+        let node = this.BoxController.hammers[id-1];
+        // SkeletonDataCenter.addSkeletonData(animation,node);
     },
     changeHammerSpine:function(data){
-         this.BoxController.changeHammerSpine(data);
+        this.BoxController.changeHammerSpine(data);
     },
     updateDate:function (data){
-        for( var name in data){
-            if(name =='exp'){
-                let exp = LevelConfig[this.myinfo.hard].exp;
-                let pro = data.exp/exp;
-                if(pro >1)
+        for( var name in data) {
+            if (name == 'exp') {
+                let exp = LevelConfig[this.myinfo.level].exp;
+                let pro = data.exp / exp;
+                if (pro > 1)
                     pro = 1;
 
                 this.setProgress(pro);
             }
-            if(name == "level"){
+            if (name == "level") {
 
                 this.setLevel(data.level);
-
+            }
+            if (name == "gold") {
+                this.setGoldNum(data.gold);
             }
         }
     },
@@ -201,10 +201,20 @@ cc.Class({
     //点击升级按钮
     onClickLevel:function(){
         if(this.TopProgressBar.progress >=1){
-            this.myinfo.level+=1;
+            this.addlevel();
 
         }
 
     },
+    addlevel:function(){
+        let level =this.myinfo.level+1;
+        let needexp = LevelConfig[ this.myinfo.level].exp;
 
+        let needgold = LevelConfig[ this.myinfo.level].rewardcoin;
+        this.myinfo.level = level;
+        this.myinfo.exp -=needexp;
+        this.myinfo.gold -= needgold;
+        this.updateDate(this.myinfo);
+
+    }
 });

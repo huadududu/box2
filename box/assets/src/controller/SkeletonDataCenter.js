@@ -23,9 +23,14 @@ let SC= cc.Class({
             hammer.skeletonData = data;
             hammer.setAnimation(0, "newAnimation", true);
         });
-
-
     },
+    addSkeletonDataForNode:function (fileName,hammer){
+        let     node = hammer.addComponent(sp.Skeleton);
+        this.addSkeletonData(fileName,node);
+
+
+    }
+
 
 
 

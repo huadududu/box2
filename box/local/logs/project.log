@@ -1,171 +1,169 @@
-2018-06-08T06:51:41.637Z - normal: Load ~/.CocosCreator/settings.json
-2018-06-08T06:51:41.640Z - normal: checking language setting...
-2018-06-08T06:51:41.640Z - normal: Language: zh
-2018-06-08T06:51:42.197Z - success: protocol editor-framework registered
-2018-06-08T06:51:42.197Z - success: protocol app registered
-2018-06-08T06:51:42.197Z - success: protocol theme registered
-2018-06-08T06:51:42.197Z - success: protocol packages registered
-2018-06-08T06:51:42.197Z - success: protocol unpack registerred
-2018-06-08T06:51:42.198Z - success: protocol disable-commonjs registerred
-2018-06-08T06:51:42.288Z - normal: connected!
-2018-06-08T06:51:42.291Z - normal: Check project /Users/bolex1/work/game/box/box
-2018-06-08T06:51:42.292Z - normal: Initializing Cocos2d
-2018-06-08T06:51:42.474Z - normal: Initializing Asset Database
-2018-06-08T06:51:42.496Z - success: protocol uuid registerred
-2018-06-08T06:51:42.496Z - success: protocol db registerred
-2018-06-08T06:51:42.496Z - success: protocol thumbnail registerred
-2018-06-08T06:51:42.497Z - normal: Loading editor/builtin packages
-2018-06-08T06:51:42.513Z - success: anysdk loaded
-2018-06-08T06:51:42.606Z - success: assets loaded
-2018-06-08T06:51:42.608Z - success: builder loaded
-2018-06-08T06:51:42.610Z - success: cocos-analytics loaded
-2018-06-08T06:51:42.613Z - success: console loaded
-2018-06-08T06:51:42.640Z - success: fb-instant-games loaded
-2018-06-08T06:51:42.643Z - success: hierarchy loaded
-2018-06-08T06:51:42.646Z - success: inspector loaded
-2018-06-08T06:51:42.648Z - success: keystore loaded
-2018-06-08T06:51:42.655Z - success: node-library loaded
-2018-06-08T06:51:42.657Z - success: package-asset loaded
-2018-06-08T06:51:42.658Z - success: preferences loaded
-2018-06-08T06:51:42.660Z - success: project-exporter loaded
-2018-06-08T06:51:42.672Z - success: project-importer loaded
-2018-06-08T06:51:42.675Z - success: project-settings loaded
-2018-06-08T06:51:42.678Z - success: ui-kit loaded
-2018-06-08T06:51:42.682Z - success: ui-grid loaded
-2018-06-08T06:51:42.686Z - success: scene loaded
-2018-06-08T06:51:42.687Z - success: sprite-editor loaded
-2018-06-08T06:51:42.690Z - success: store loaded
-2018-06-08T06:51:42.694Z - success: timeline loaded
-2018-06-08T06:51:42.694Z - normal: Loading builtin packages
-2018-06-08T06:51:42.697Z - success: asset-db-debugger loaded
-2018-06-08T06:51:42.698Z - success: color-picker loaded
-2018-06-08T06:51:42.701Z - success: package-manager loaded
-2018-06-08T06:51:42.706Z - success: sdkbox loaded
-2018-06-08T06:51:42.711Z - success: tester loaded
-2018-06-08T06:51:42.714Z - success: ui-kit-preview-extra loaded
-2018-06-08T06:51:42.717Z - success: ui-kit-preview loaded
-2018-06-08T06:51:42.720Z - success: ui-tree loaded
-2018-06-08T06:51:43.478Z - normal: Initializing project /Users/bolex1/work/game/box/box
-2018-06-08T06:51:43.479Z - normal: Loading packages
-2018-06-08T06:51:43.484Z - normal: Watching packages
-2018-06-08T06:51:43.494Z - normal: Run Application
-2018-06-08T06:51:43.976Z - success: preview server running at http://localhost:7456
-2018-06-08T06:51:47.726Z - normal: 1.9.1
-2018-06-08T06:51:48.169Z - error: Property 'GameMenuController.BoxController' must define at least one of 'default', 'get' or 'set'.
-    at Object.errorID (/Applications/CocosCreator.app/Contents/Resources/engine/CCDebugger.js:343:18)
-    at Object.exports.preprocessAttrs (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/preprocess-class.js:232:28)
-    at declareProperties (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/CCClass.js:807:20)
-    at Object.CCClass [as Class] (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/CCClass.js:947:9)
-    at __define (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/controller/GameMenuController.js:20:4)
-    at /Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/controller/GameMenuController.js:176:13
-    at Object.<anonymous> (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/controller/GameMenuController.js:183:11)
-    at Object.<anonymous> (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/controller/GameMenuController.js:186:3)
-    at Module._compile (module.js:571:32)
-2018-06-08T06:52:34.225Z - error: Property 'GameMenuController.BoxController' must define at least one of 'default', 'get' or 'set'.
-    at Object.errorID (/Applications/CocosCreator.app/Contents/Resources/engine/CCDebugger.js:343:18)
-    at Object.exports.preprocessAttrs (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/preprocess-class.js:232:28)
-    at declareProperties (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/CCClass.js:807:20)
-    at Object.CCClass [as Class] (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/CCClass.js:947:9)
-    at __define (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/controller/GameMenuController.js:19:4)
-    at /Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/controller/GameMenuController.js:175:13
-    at Object.<anonymous> (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/controller/GameMenuController.js:182:11)
-    at Object.<anonymous> (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/controller/GameMenuController.js:185:3)
-    at Module._compile (module.js:571:32)
-2018-06-08T06:52:45.485Z - error: Property 'GameMenuController.BoxController' must define at least one of 'default', 'get' or 'set'.
-    at Object.errorID (/Applications/CocosCreator.app/Contents/Resources/engine/CCDebugger.js:343:18)
-    at Object.exports.preprocessAttrs (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/preprocess-class.js:232:28)
-    at declareProperties (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/CCClass.js:807:20)
-    at Object.CCClass [as Class] (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/CCClass.js:947:9)
-    at __define (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/controller/GameMenuController.js:19:4)
-    at /Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/controller/GameMenuController.js:176:13
-    at Object.<anonymous> (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/controller/GameMenuController.js:183:11)
-    at Object.<anonymous> (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/controller/GameMenuController.js:186:3)
-    at Module._compile (module.js:571:32)
-2018-06-08T06:54:06.834Z - error: Property 'GameMenuController.BoxController' must define at least one of 'default', 'get' or 'set'.
-    at Object.errorID (/Applications/CocosCreator.app/Contents/Resources/engine/CCDebugger.js:343:18)
-    at Object.exports.preprocessAttrs (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/preprocess-class.js:232:28)
-    at declareProperties (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/CCClass.js:807:20)
-    at Object.CCClass [as Class] (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/CCClass.js:947:9)
-    at __define (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/controller/GameMenuController.js:19:4)
-    at /Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/controller/GameMenuController.js:176:13
-    at Object.<anonymous> (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/controller/GameMenuController.js:183:11)
-    at Object.<anonymous> (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/controller/GameMenuController.js:186:3)
-    at Module._compile (module.js:571:32)
-2018-06-08T06:55:34.974Z - error: Property 'GameMenuController.BoxController' must define at least one of 'default', 'get' or 'set'.
-    at Object.errorID (/Applications/CocosCreator.app/Contents/Resources/engine/CCDebugger.js:343:18)
-    at Object.exports.preprocessAttrs (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/preprocess-class.js:232:28)
-    at declareProperties (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/CCClass.js:807:20)
-    at Object.CCClass [as Class] (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/CCClass.js:947:9)
-    at __define (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/controller/GameMenuController.js:19:4)
-    at /Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/controller/GameMenuController.js:177:13
-    at Object.<anonymous> (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/controller/GameMenuController.js:184:11)
-    at Object.<anonymous> (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/controller/GameMenuController.js:187:3)
-    at Module._compile (module.js:571:32)
-2018-06-08T06:56:01.263Z - error: Property 'GameMenuController.boxController' must define at least one of 'default', 'get' or 'set'.
-    at Object.errorID (/Applications/CocosCreator.app/Contents/Resources/engine/CCDebugger.js:343:18)
-    at Object.exports.preprocessAttrs (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/preprocess-class.js:232:28)
-    at declareProperties (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/CCClass.js:807:20)
-    at Object.CCClass [as Class] (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/CCClass.js:947:9)
-    at __define (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/controller/GameMenuController.js:19:4)
-    at /Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/controller/GameMenuController.js:177:13
-    at Object.<anonymous> (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/controller/GameMenuController.js:184:11)
-    at Object.<anonymous> (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/controller/GameMenuController.js:187:3)
-    at Module._compile (module.js:571:32)
-2018-06-08T06:57:57.251Z - error: Property 'GameMenuController.BoxController' must define at least one of 'default', 'get' or 'set'.
-    at Object.errorID (/Applications/CocosCreator.app/Contents/Resources/engine/CCDebugger.js:343:18)
-    at Object.exports.preprocessAttrs (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/preprocess-class.js:232:28)
-    at declareProperties (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/CCClass.js:807:20)
-    at Object.CCClass [as Class] (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/CCClass.js:947:9)
-    at __define (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/controller/GameMenuController.js:19:4)
-    at /Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/controller/GameMenuController.js:178:13
-    at Object.<anonymous> (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/controller/GameMenuController.js:185:11)
-    at Object.<anonymous> (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/controller/GameMenuController.js:188:3)
-    at Module._compile (module.js:571:32)
-2018-06-08T06:59:08.503Z - error: Property 'GameMenuController.BoxController' must define at least one of 'default', 'get' or 'set'.
-    at Object.errorID (/Applications/CocosCreator.app/Contents/Resources/engine/CCDebugger.js:343:18)
-    at Object.exports.preprocessAttrs (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/preprocess-class.js:232:28)
-    at declareProperties (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/CCClass.js:807:20)
-    at Object.CCClass [as Class] (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/CCClass.js:947:9)
-    at __define (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/controller/GameMenuController.js:19:4)
-    at /Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/controller/GameMenuController.js:179:13
-    at Object.<anonymous> (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/controller/GameMenuController.js:186:11)
-    at Object.<anonymous> (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/controller/GameMenuController.js:189:3)
-    at Module._compile (module.js:571:32)
-2018-06-08T06:59:48.149Z - error: Property 'GameMenuController.BoxController' must define at least one of 'default', 'get' or 'set'.
-    at Object.errorID (/Applications/CocosCreator.app/Contents/Resources/engine/CCDebugger.js:343:18)
-    at Object.exports.preprocessAttrs (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/preprocess-class.js:232:28)
-    at declareProperties (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/CCClass.js:807:20)
-    at Object.CCClass [as Class] (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/CCClass.js:947:9)
-    at __define (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/controller/GameMenuController.js:19:4)
-    at /Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/controller/GameMenuController.js:179:13
-    at Object.<anonymous> (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/controller/GameMenuController.js:186:11)
-    at Object.<anonymous> (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/controller/GameMenuController.js:189:3)
-    at Module._compile (module.js:571:32)
-2018-06-08T07:37:39.564Z - normal: Introduced global variable while editing: i
-2018-06-08T07:37:39.566Z - normal: Introduced global variable while editing: l
-2018-06-08T07:50:28.309Z - normal: Introduced global variable while editing: i
-2018-06-08T07:50:28.311Z - normal: Introduced global variable while editing: l
-2018-06-08T07:51:14.023Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
-2018-06-08T07:51:54.394Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
-2018-06-08T07:54:32.806Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
-2018-06-08T08:04:06.647Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
-2018-06-08T08:32:44.553Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
-2018-06-08T08:33:24.328Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
-2018-06-08T08:35:12.240Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
-2018-06-08T08:39:00.708Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
-2018-06-08T08:39:29.945Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
-2018-06-08T08:44:08.781Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
-2018-06-08T08:44:55.410Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
-2018-06-08T08:46:35.706Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
-2018-06-08T08:47:48.899Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
-2018-06-08T08:49:38.548Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
-2018-06-08T08:55:24.187Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
-2018-06-08T08:57:40.338Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
-2018-06-08T09:00:15.623Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
-2018-06-08T09:10:33.976Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
-2018-06-08T09:14:01.116Z - warn: Error: ipc timeout. message: scene:query-node, session: scene@renderer:178437
-2018-06-08T09:33:46.251Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
-2018-06-08T09:37:36.687Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
-2018-06-08T09:40:15.021Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
-2018-06-08T10:03:57.921Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
-2018-06-08T10:11:44.968Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
+2018-06-10T11:08:33.389Z - normal: Load ~/.CocosCreator/settings.json
+2018-06-10T11:08:33.392Z - normal: checking language setting...
+2018-06-10T11:08:33.393Z - normal: Language: zh
+2018-06-10T11:08:35.680Z - success: protocol editor-framework registered
+2018-06-10T11:08:35.680Z - success: protocol app registered
+2018-06-10T11:08:35.680Z - success: protocol theme registered
+2018-06-10T11:08:35.680Z - success: protocol packages registered
+2018-06-10T11:08:35.681Z - success: protocol unpack registerred
+2018-06-10T11:08:35.681Z - success: protocol disable-commonjs registerred
+2018-06-10T11:08:35.885Z - normal: connected!
+2018-06-10T11:08:35.887Z - normal: Check project E:\gittest\box2\box
+2018-06-10T11:08:35.889Z - normal: Initializing Cocos2d
+2018-06-10T11:08:36.317Z - normal: Initializing Asset Database
+2018-06-10T11:08:36.347Z - success: protocol uuid registerred
+2018-06-10T11:08:36.348Z - success: protocol db registerred
+2018-06-10T11:08:36.348Z - success: protocol thumbnail registerred
+2018-06-10T11:08:36.348Z - normal: Loading editor/builtin packages
+2018-06-10T11:08:36.394Z - success: anysdk loaded
+2018-06-10T11:08:36.506Z - success: assets loaded
+2018-06-10T11:08:36.507Z - success: builder loaded
+2018-06-10T11:08:36.509Z - success: cocos-analytics loaded
+2018-06-10T11:08:36.512Z - success: console loaded
+2018-06-10T11:08:36.539Z - success: fb-instant-games loaded
+2018-06-10T11:08:36.541Z - success: hierarchy loaded
+2018-06-10T11:08:36.544Z - success: inspector loaded
+2018-06-10T11:08:36.546Z - success: keystore loaded
+2018-06-10T11:08:36.547Z - success: node-library loaded
+2018-06-10T11:08:36.557Z - success: package-asset loaded
+2018-06-10T11:08:36.563Z - success: preferences loaded
+2018-06-10T11:08:36.565Z - success: project-exporter loaded
+2018-06-10T11:08:36.576Z - success: project-importer loaded
+2018-06-10T11:08:36.578Z - success: project-settings loaded
+2018-06-10T11:08:36.579Z - success: ui-kit loaded
+2018-06-10T11:08:36.597Z - success: ui-grid loaded
+2018-06-10T11:08:36.599Z - success: scene loaded
+2018-06-10T11:08:36.600Z - success: sprite-editor loaded
+2018-06-10T11:08:36.603Z - success: store loaded
+2018-06-10T11:08:36.606Z - success: timeline loaded
+2018-06-10T11:08:36.606Z - normal: Loading builtin packages
+2018-06-10T11:08:36.616Z - success: asset-db-debugger loaded
+2018-06-10T11:08:36.618Z - success: code-editor loaded
+2018-06-10T11:08:36.623Z - success: color-picker loaded
+2018-06-10T11:08:36.624Z - success: package-manager loaded
+2018-06-10T11:08:36.628Z - success: sdkbox loaded
+2018-06-10T11:08:36.630Z - success: tester loaded
+2018-06-10T11:08:36.631Z - success: ui-kit-preview-extra loaded
+2018-06-10T11:08:36.632Z - success: ui-kit-preview loaded
+2018-06-10T11:08:36.634Z - success: ui-tree loaded
+2018-06-10T11:08:37.683Z - normal: Initializing project E:\gittest\box2\box
+2018-06-10T11:08:37.685Z - normal: Loading packages
+2018-06-10T11:08:37.689Z - normal: Watching packages
+2018-06-10T11:08:37.707Z - normal: Run Application
+2018-06-10T11:08:40.573Z - success: preview server running at http://localhost:7456
+2018-06-10T11:08:44.469Z - normal: 1.9.0
+2018-06-10T11:08:44.786Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
+2018-06-10T11:08:52.033Z - normal: Simulator: SCREEN DPI = 96, SCREEN SCALE = 1.00
+2018-06-10T11:08:52.036Z - normal: Simulator: WORKAREA WIDTH 1912.00, HEIGHT 990.00
+2018-06-10T11:08:52.037Z - normal: Simulator: FRAME SCALE = 1.00
+2018-06-10T11:08:52.764Z - normal: Simulator: Ready for GLSL
+2018-06-10T11:08:52.764Z - normal: Simulator: Ready for OpenGL 2.0
+2018-06-10T11:08:52.764Z - normal: Simulator: 
+2018-06-10T11:08:52.765Z - normal: Simulator: {
+2018-06-10T11:08:52.765Z - normal: Simulator: 	gl.version: 4.5.0 NVIDIA 381.65
+2018-06-10T11:08:52.765Z - normal: Simulator: 	gl.supports_NPOT: true
+2018-06-10T11:08:52.765Z - normal: Simulator: 	cocos2d.x.version: Cocos2d-x-lite v1.8.2
+2018-06-10T11:08:52.765Z - normal: Simulator: 	cocos2d.x.compiled_with_profiler: false
+2018-06-10T11:08:52.766Z - normal: Simulator: 	cocos2d.x.build_type: DEBUG
+2018-06-10T11:08:52.766Z - normal: Simulator: 	cocos2d.x.compiled_with_gl_state_cache: true
+2018-06-10T11:08:52.766Z - normal: Simulator: 	gl.max_texture_size: 32768
+2018-06-10T11:08:52.766Z - normal: Simulator: 	gl.supports_OES_packed_depth_stencil: false
+2018-06-10T11:08:52.766Z - normal: Simulator: 	gl.vendor: NVIDIA Corporation
+2018-06-10T11:08:52.767Z - normal: Simulator: 	gl.renderer: GeForce GTX 1060 6GB/PCIe/SSE2
+2018-06-10T11:08:52.767Z - normal: Simulator: 	gl.max_texture_units: 192
+2018-06-10T11:08:52.767Z - normal: Simulator: 	gl.supports_ETC1: false
+2018-06-10T11:08:52.767Z - normal: Simulator: 	gl.supports_PVRTC: false
+2018-06-10T11:08:52.767Z - normal: Simulator: 	gl.supports_BGRA8888: false
+2018-06-10T11:08:52.767Z - normal: Simulator: 	gl.supports_discard_framebuffer: false
+2018-06-10T11:08:52.767Z - normal: Simulator: 	gl.supports_vertex_array_object: true
+2018-06-10T11:08:52.767Z - normal: Simulator: 	gl.supports_OES_map_buffer: false
+2018-06-10T11:08:52.767Z - normal: Simulator: 	gl.supports_OES_depth24: false
+2018-06-10T11:08:52.767Z - normal: Simulator: }
+2018-06-10T11:08:52.767Z - normal: Simulator: 
+2018-06-10T11:08:52.768Z - normal: Simulator: 
+2018-06-10T11:08:52.768Z - normal: Simulator: cocos2d: warning, Director::setProjection() failed because size is 0
+2018-06-10T11:08:52.768Z - normal: Simulator: Project Config:
+2018-06-10T11:08:52.768Z - normal: Simulator:     project dir: E:\CocosCreator\resources\cocos2d-x\simulator\win32\
+2018-06-10T11:08:52.768Z - normal: Simulator:     writable path: $(PROJDIR)\
+2018-06-10T11:08:52.768Z - normal: Simulator:     script file: $(PROJDIR)\main.js
+2018-06-10T11:08:52.768Z - normal: Simulator:     frame size: 960 x 640
+2018-06-10T11:08:52.768Z - normal: Simulator:     frame scale: 1.00
+2018-06-10T11:08:52.768Z - normal: Simulator:     show console: NO
+2018-06-10T11:08:52.768Z - normal: Simulator:     write debug log: NO ()
+2018-06-10T11:08:52.768Z - normal: Simulator:     listen: 
+2018-06-10T11:08:52.769Z - normal: Simulator:     debugger: none
+2018-06-10T11:08:52.769Z - normal: Simulator:     add searching path:
+2018-06-10T11:08:52.769Z - normal: Simulator: 
+2018-06-10T11:08:52.769Z - normal: Simulator: 
+2018-06-10T11:08:52.769Z - normal: Simulator: 
+2018-06-10T11:08:52.769Z - normal: Simulator: ------------------------------------------------
+2018-06-10T11:08:52.769Z - normal: Simulator: LOAD Js FILE: main.js
+2018-06-10T11:08:52.769Z - normal: Simulator: ------------------------------------------------
+2018-06-10T11:08:52.836Z - normal: Simulator: D/jswrapper (364): Initializing V8, version: 6.0.286.52
+2018-06-10T11:08:53.226Z - normal: Simulator: D/jswrapper (813): libuv version: 1.13.1
+2018-06-10T11:08:53.229Z - normal: Simulator: D/jswrapper (112): Debugger listening..., visit [ chrome-devtools://devtools/bundled/inspector.html?v8only=true&ws=0.0.0.0:5086/00010002-0003-4004-8005-000600070008 ] in chrome browser to debug!
+2018-06-10T11:08:53.230Z - normal: Simulator: D/jswrapper (115): For help see https://nodejs.org/en/docs/inspector
+2018-06-10T11:08:53.369Z - normal: Simulator: D/jswrapper (125): JS: Cocos2d-x-lite v1.8.2
+2018-06-10T11:08:53.506Z - normal: Simulator: iShow!
+2018-06-10T11:08:53.519Z - normal: Simulator: D/jswrapper (144): JS: [WARN]: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
+2018-06-10T11:08:53.685Z - normal: Simulator: D/jswrapper (125): JS: InitScene: 4.466000000000008ms
+2018-06-10T11:08:53.686Z - normal: Simulator: D/jswrapper (125): JS: AutoRelease: 0.10800000000000409ms
+2018-06-10T11:08:53.686Z - normal: Simulator: D/jswrapper (125): JS: Destroy: 0.05900000000002592ms
+2018-06-10T11:08:53.686Z - normal: Simulator: D/jswrapper (125): JS: AttachPersist: 0.006000000000028649ms
+2018-06-10T11:08:57.501Z - normal: Simulator: SCREEN DPI = 96, SCREEN SCALE = 1.00
+2018-06-10T11:08:57.502Z - normal: Simulator: WORKAREA WIDTH 1912.00, HEIGHT 990.00
+2018-06-10T11:08:57.503Z - normal: Simulator: FRAME SCALE = 1.00
+2018-06-10T11:08:58.120Z - normal: Simulator: Ready for GLSL
+2018-06-10T11:08:58.120Z - normal: Simulator: Ready for OpenGL 2.0
+2018-06-10T11:08:58.121Z - normal: Simulator: 
+2018-06-10T11:08:58.121Z - normal: Simulator: {
+2018-06-10T11:08:58.121Z - normal: Simulator: 	gl.version: 4.5.0 NVIDIA 381.65
+2018-06-10T11:08:58.121Z - normal: Simulator: 	gl.supports_NPOT: true
+2018-06-10T11:08:58.121Z - normal: Simulator: 	cocos2d.x.version: Cocos2d-x-lite v1.8.2
+2018-06-10T11:08:58.121Z - normal: Simulator: 	cocos2d.x.compiled_with_profiler: false
+2018-06-10T11:08:58.121Z - normal: Simulator: 	cocos2d.x.build_type: DEBUG
+2018-06-10T11:08:58.122Z - normal: Simulator: 	cocos2d.x.compiled_with_gl_state_cache: true
+2018-06-10T11:08:58.122Z - normal: Simulator: 	gl.max_texture_size: 32768
+2018-06-10T11:08:58.122Z - normal: Simulator: 	gl.supports_OES_packed_depth_stencil: false
+2018-06-10T11:08:58.122Z - normal: Simulator: 	gl.vendor: NVIDIA Corporation
+2018-06-10T11:08:58.122Z - normal: Simulator: 	gl.renderer: GeForce GTX 1060 6GB/PCIe/SSE2
+2018-06-10T11:08:58.122Z - normal: Simulator: 	gl.max_texture_units: 192
+2018-06-10T11:08:58.122Z - normal: Simulator: 	gl.supports_ETC1: false
+2018-06-10T11:08:58.122Z - normal: Simulator: 	gl.supports_PVRTC: false
+2018-06-10T11:08:58.123Z - normal: Simulator: 	gl.supports_BGRA8888: false
+2018-06-10T11:08:58.123Z - normal: Simulator: 	gl.supports_discard_framebuffer: false
+2018-06-10T11:08:58.123Z - normal: Simulator: 	gl.supports_vertex_array_object: true
+2018-06-10T11:08:58.124Z - normal: Simulator: 	gl.supports_OES_map_buffer: false
+2018-06-10T11:08:58.124Z - normal: Simulator: 	gl.supports_OES_depth24: false
+2018-06-10T11:08:58.124Z - normal: Simulator: }
+2018-06-10T11:08:58.124Z - normal: Simulator: 
+2018-06-10T11:08:58.124Z - normal: Simulator: 
+2018-06-10T11:08:58.124Z - normal: Simulator: cocos2d: warning, Director::setProjection() failed because size is 0
+2018-06-10T11:08:58.124Z - normal: Simulator: Project Config:
+2018-06-10T11:08:58.124Z - normal: Simulator:     project dir: E:\CocosCreator\resources\cocos2d-x\simulator\win32\
+2018-06-10T11:08:58.124Z - normal: Simulator:     writable path: $(PROJDIR)\
+2018-06-10T11:08:58.124Z - normal: Simulator:     script file: $(PROJDIR)\main.js
+2018-06-10T11:08:58.124Z - normal: Simulator:     frame size: 960 x 640
+2018-06-10T11:08:58.124Z - normal: Simulator:     frame scale: 1.00
+2018-06-10T11:08:58.125Z - normal: Simulator:     show console: NO
+2018-06-10T11:08:58.125Z - normal: Simulator:     write debug log: NO ()
+2018-06-10T11:08:58.125Z - normal: Simulator:     listen: 
+2018-06-10T11:08:58.125Z - normal: Simulator:     debugger: none
+2018-06-10T11:08:58.125Z - normal: Simulator:     add searching path:
+2018-06-10T11:08:58.125Z - normal: Simulator: 
+2018-06-10T11:08:58.125Z - normal: Simulator: 
+2018-06-10T11:08:58.125Z - normal: Simulator: 
+2018-06-10T11:08:58.125Z - normal: Simulator: ------------------------------------------------
+2018-06-10T11:08:58.125Z - normal: Simulator: LOAD Js FILE: main.js
+2018-06-10T11:08:58.125Z - normal: Simulator: ------------------------------------------------
+2018-06-10T11:08:58.125Z - normal: Simulator: D/jswrapper (364): Initializing V8, version: 6.0.286.52
+2018-06-10T11:08:58.352Z - normal: Simulator: D/jswrapper (813): libuv version: 1.13.1
+2018-06-10T11:08:58.353Z - normal: Simulator: D/jswrapper (112): Debugger listening..., visit [ chrome-devtools://devtools/bundled/inspector.html?v8only=true&ws=0.0.0.0:5086/00010002-0003-4004-8005-000600070008 ] in chrome browser to debug!
+2018-06-10T11:08:58.353Z - normal: Simulator: D/jswrapper (115): For help see https://nodejs.org/en/docs/inspector
+2018-06-10T11:08:58.404Z - normal: Simulator: D/jswrapper (125): JS: Cocos2d-x-lite v1.8.2
+2018-06-10T11:08:58.542Z - normal: Simulator: iShow!
+2018-06-10T11:08:58.553Z - normal: Simulator: D/jswrapper (144): JS: [WARN]: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
+2018-06-10T11:08:58.653Z - normal: Simulator: D/jswrapper (125): JS: InitScene: 4.889999999999986ms
+2018-06-10T11:08:58.653Z - normal: Simulator: D/jswrapper (125): JS: AutoRelease: 0.13999999999998636ms
+2018-06-10T11:08:58.653Z - normal: Simulator: D/jswrapper (125): JS: Destroy: 0.09600000000000364ms
+2018-06-10T11:08:58.653Z - normal: Simulator: D/jswrapper (125): JS: AttachPersist: 0.0049999999999954525ms

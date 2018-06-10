@@ -26,6 +26,10 @@ var SC = cc.Class({
             hammer.skeletonData = data;
             hammer.setAnimation(0, "newAnimation", true);
         });
+    },
+    addSkeletonDataForNode: function addSkeletonDataForNode(fileName, hammer) {
+        var node = hammer.addComponent(sp.Skeleton);
+        this.addSkeletonData(fileName, node);
     }
 
 });
