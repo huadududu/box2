@@ -1,169 +1,66 @@
-2018-06-10T11:08:33.389Z - normal: Load ~/.CocosCreator/settings.json
-2018-06-10T11:08:33.392Z - normal: checking language setting...
-2018-06-10T11:08:33.393Z - normal: Language: zh
-2018-06-10T11:08:35.680Z - success: protocol editor-framework registered
-2018-06-10T11:08:35.680Z - success: protocol app registered
-2018-06-10T11:08:35.680Z - success: protocol theme registered
-2018-06-10T11:08:35.680Z - success: protocol packages registered
-2018-06-10T11:08:35.681Z - success: protocol unpack registerred
-2018-06-10T11:08:35.681Z - success: protocol disable-commonjs registerred
-2018-06-10T11:08:35.885Z - normal: connected!
-2018-06-10T11:08:35.887Z - normal: Check project E:\gittest\box2\box
-2018-06-10T11:08:35.889Z - normal: Initializing Cocos2d
-2018-06-10T11:08:36.317Z - normal: Initializing Asset Database
-2018-06-10T11:08:36.347Z - success: protocol uuid registerred
-2018-06-10T11:08:36.348Z - success: protocol db registerred
-2018-06-10T11:08:36.348Z - success: protocol thumbnail registerred
-2018-06-10T11:08:36.348Z - normal: Loading editor/builtin packages
-2018-06-10T11:08:36.394Z - success: anysdk loaded
-2018-06-10T11:08:36.506Z - success: assets loaded
-2018-06-10T11:08:36.507Z - success: builder loaded
-2018-06-10T11:08:36.509Z - success: cocos-analytics loaded
-2018-06-10T11:08:36.512Z - success: console loaded
-2018-06-10T11:08:36.539Z - success: fb-instant-games loaded
-2018-06-10T11:08:36.541Z - success: hierarchy loaded
-2018-06-10T11:08:36.544Z - success: inspector loaded
-2018-06-10T11:08:36.546Z - success: keystore loaded
-2018-06-10T11:08:36.547Z - success: node-library loaded
-2018-06-10T11:08:36.557Z - success: package-asset loaded
-2018-06-10T11:08:36.563Z - success: preferences loaded
-2018-06-10T11:08:36.565Z - success: project-exporter loaded
-2018-06-10T11:08:36.576Z - success: project-importer loaded
-2018-06-10T11:08:36.578Z - success: project-settings loaded
-2018-06-10T11:08:36.579Z - success: ui-kit loaded
-2018-06-10T11:08:36.597Z - success: ui-grid loaded
-2018-06-10T11:08:36.599Z - success: scene loaded
-2018-06-10T11:08:36.600Z - success: sprite-editor loaded
-2018-06-10T11:08:36.603Z - success: store loaded
-2018-06-10T11:08:36.606Z - success: timeline loaded
-2018-06-10T11:08:36.606Z - normal: Loading builtin packages
-2018-06-10T11:08:36.616Z - success: asset-db-debugger loaded
-2018-06-10T11:08:36.618Z - success: code-editor loaded
-2018-06-10T11:08:36.623Z - success: color-picker loaded
-2018-06-10T11:08:36.624Z - success: package-manager loaded
-2018-06-10T11:08:36.628Z - success: sdkbox loaded
-2018-06-10T11:08:36.630Z - success: tester loaded
-2018-06-10T11:08:36.631Z - success: ui-kit-preview-extra loaded
-2018-06-10T11:08:36.632Z - success: ui-kit-preview loaded
-2018-06-10T11:08:36.634Z - success: ui-tree loaded
-2018-06-10T11:08:37.683Z - normal: Initializing project E:\gittest\box2\box
-2018-06-10T11:08:37.685Z - normal: Loading packages
-2018-06-10T11:08:37.689Z - normal: Watching packages
-2018-06-10T11:08:37.707Z - normal: Run Application
-2018-06-10T11:08:40.573Z - success: preview server running at http://localhost:7456
-2018-06-10T11:08:44.469Z - normal: 1.9.0
-2018-06-10T11:08:44.786Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
-2018-06-10T11:08:52.033Z - normal: Simulator: SCREEN DPI = 96, SCREEN SCALE = 1.00
-2018-06-10T11:08:52.036Z - normal: Simulator: WORKAREA WIDTH 1912.00, HEIGHT 990.00
-2018-06-10T11:08:52.037Z - normal: Simulator: FRAME SCALE = 1.00
-2018-06-10T11:08:52.764Z - normal: Simulator: Ready for GLSL
-2018-06-10T11:08:52.764Z - normal: Simulator: Ready for OpenGL 2.0
-2018-06-10T11:08:52.764Z - normal: Simulator: 
-2018-06-10T11:08:52.765Z - normal: Simulator: {
-2018-06-10T11:08:52.765Z - normal: Simulator: 	gl.version: 4.5.0 NVIDIA 381.65
-2018-06-10T11:08:52.765Z - normal: Simulator: 	gl.supports_NPOT: true
-2018-06-10T11:08:52.765Z - normal: Simulator: 	cocos2d.x.version: Cocos2d-x-lite v1.8.2
-2018-06-10T11:08:52.765Z - normal: Simulator: 	cocos2d.x.compiled_with_profiler: false
-2018-06-10T11:08:52.766Z - normal: Simulator: 	cocos2d.x.build_type: DEBUG
-2018-06-10T11:08:52.766Z - normal: Simulator: 	cocos2d.x.compiled_with_gl_state_cache: true
-2018-06-10T11:08:52.766Z - normal: Simulator: 	gl.max_texture_size: 32768
-2018-06-10T11:08:52.766Z - normal: Simulator: 	gl.supports_OES_packed_depth_stencil: false
-2018-06-10T11:08:52.766Z - normal: Simulator: 	gl.vendor: NVIDIA Corporation
-2018-06-10T11:08:52.767Z - normal: Simulator: 	gl.renderer: GeForce GTX 1060 6GB/PCIe/SSE2
-2018-06-10T11:08:52.767Z - normal: Simulator: 	gl.max_texture_units: 192
-2018-06-10T11:08:52.767Z - normal: Simulator: 	gl.supports_ETC1: false
-2018-06-10T11:08:52.767Z - normal: Simulator: 	gl.supports_PVRTC: false
-2018-06-10T11:08:52.767Z - normal: Simulator: 	gl.supports_BGRA8888: false
-2018-06-10T11:08:52.767Z - normal: Simulator: 	gl.supports_discard_framebuffer: false
-2018-06-10T11:08:52.767Z - normal: Simulator: 	gl.supports_vertex_array_object: true
-2018-06-10T11:08:52.767Z - normal: Simulator: 	gl.supports_OES_map_buffer: false
-2018-06-10T11:08:52.767Z - normal: Simulator: 	gl.supports_OES_depth24: false
-2018-06-10T11:08:52.767Z - normal: Simulator: }
-2018-06-10T11:08:52.767Z - normal: Simulator: 
-2018-06-10T11:08:52.768Z - normal: Simulator: 
-2018-06-10T11:08:52.768Z - normal: Simulator: cocos2d: warning, Director::setProjection() failed because size is 0
-2018-06-10T11:08:52.768Z - normal: Simulator: Project Config:
-2018-06-10T11:08:52.768Z - normal: Simulator:     project dir: E:\CocosCreator\resources\cocos2d-x\simulator\win32\
-2018-06-10T11:08:52.768Z - normal: Simulator:     writable path: $(PROJDIR)\
-2018-06-10T11:08:52.768Z - normal: Simulator:     script file: $(PROJDIR)\main.js
-2018-06-10T11:08:52.768Z - normal: Simulator:     frame size: 960 x 640
-2018-06-10T11:08:52.768Z - normal: Simulator:     frame scale: 1.00
-2018-06-10T11:08:52.768Z - normal: Simulator:     show console: NO
-2018-06-10T11:08:52.768Z - normal: Simulator:     write debug log: NO ()
-2018-06-10T11:08:52.768Z - normal: Simulator:     listen: 
-2018-06-10T11:08:52.769Z - normal: Simulator:     debugger: none
-2018-06-10T11:08:52.769Z - normal: Simulator:     add searching path:
-2018-06-10T11:08:52.769Z - normal: Simulator: 
-2018-06-10T11:08:52.769Z - normal: Simulator: 
-2018-06-10T11:08:52.769Z - normal: Simulator: 
-2018-06-10T11:08:52.769Z - normal: Simulator: ------------------------------------------------
-2018-06-10T11:08:52.769Z - normal: Simulator: LOAD Js FILE: main.js
-2018-06-10T11:08:52.769Z - normal: Simulator: ------------------------------------------------
-2018-06-10T11:08:52.836Z - normal: Simulator: D/jswrapper (364): Initializing V8, version: 6.0.286.52
-2018-06-10T11:08:53.226Z - normal: Simulator: D/jswrapper (813): libuv version: 1.13.1
-2018-06-10T11:08:53.229Z - normal: Simulator: D/jswrapper (112): Debugger listening..., visit [ chrome-devtools://devtools/bundled/inspector.html?v8only=true&ws=0.0.0.0:5086/00010002-0003-4004-8005-000600070008 ] in chrome browser to debug!
-2018-06-10T11:08:53.230Z - normal: Simulator: D/jswrapper (115): For help see https://nodejs.org/en/docs/inspector
-2018-06-10T11:08:53.369Z - normal: Simulator: D/jswrapper (125): JS: Cocos2d-x-lite v1.8.2
-2018-06-10T11:08:53.506Z - normal: Simulator: iShow!
-2018-06-10T11:08:53.519Z - normal: Simulator: D/jswrapper (144): JS: [WARN]: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
-2018-06-10T11:08:53.685Z - normal: Simulator: D/jswrapper (125): JS: InitScene: 4.466000000000008ms
-2018-06-10T11:08:53.686Z - normal: Simulator: D/jswrapper (125): JS: AutoRelease: 0.10800000000000409ms
-2018-06-10T11:08:53.686Z - normal: Simulator: D/jswrapper (125): JS: Destroy: 0.05900000000002592ms
-2018-06-10T11:08:53.686Z - normal: Simulator: D/jswrapper (125): JS: AttachPersist: 0.006000000000028649ms
-2018-06-10T11:08:57.501Z - normal: Simulator: SCREEN DPI = 96, SCREEN SCALE = 1.00
-2018-06-10T11:08:57.502Z - normal: Simulator: WORKAREA WIDTH 1912.00, HEIGHT 990.00
-2018-06-10T11:08:57.503Z - normal: Simulator: FRAME SCALE = 1.00
-2018-06-10T11:08:58.120Z - normal: Simulator: Ready for GLSL
-2018-06-10T11:08:58.120Z - normal: Simulator: Ready for OpenGL 2.0
-2018-06-10T11:08:58.121Z - normal: Simulator: 
-2018-06-10T11:08:58.121Z - normal: Simulator: {
-2018-06-10T11:08:58.121Z - normal: Simulator: 	gl.version: 4.5.0 NVIDIA 381.65
-2018-06-10T11:08:58.121Z - normal: Simulator: 	gl.supports_NPOT: true
-2018-06-10T11:08:58.121Z - normal: Simulator: 	cocos2d.x.version: Cocos2d-x-lite v1.8.2
-2018-06-10T11:08:58.121Z - normal: Simulator: 	cocos2d.x.compiled_with_profiler: false
-2018-06-10T11:08:58.121Z - normal: Simulator: 	cocos2d.x.build_type: DEBUG
-2018-06-10T11:08:58.122Z - normal: Simulator: 	cocos2d.x.compiled_with_gl_state_cache: true
-2018-06-10T11:08:58.122Z - normal: Simulator: 	gl.max_texture_size: 32768
-2018-06-10T11:08:58.122Z - normal: Simulator: 	gl.supports_OES_packed_depth_stencil: false
-2018-06-10T11:08:58.122Z - normal: Simulator: 	gl.vendor: NVIDIA Corporation
-2018-06-10T11:08:58.122Z - normal: Simulator: 	gl.renderer: GeForce GTX 1060 6GB/PCIe/SSE2
-2018-06-10T11:08:58.122Z - normal: Simulator: 	gl.max_texture_units: 192
-2018-06-10T11:08:58.122Z - normal: Simulator: 	gl.supports_ETC1: false
-2018-06-10T11:08:58.122Z - normal: Simulator: 	gl.supports_PVRTC: false
-2018-06-10T11:08:58.123Z - normal: Simulator: 	gl.supports_BGRA8888: false
-2018-06-10T11:08:58.123Z - normal: Simulator: 	gl.supports_discard_framebuffer: false
-2018-06-10T11:08:58.123Z - normal: Simulator: 	gl.supports_vertex_array_object: true
-2018-06-10T11:08:58.124Z - normal: Simulator: 	gl.supports_OES_map_buffer: false
-2018-06-10T11:08:58.124Z - normal: Simulator: 	gl.supports_OES_depth24: false
-2018-06-10T11:08:58.124Z - normal: Simulator: }
-2018-06-10T11:08:58.124Z - normal: Simulator: 
-2018-06-10T11:08:58.124Z - normal: Simulator: 
-2018-06-10T11:08:58.124Z - normal: Simulator: cocos2d: warning, Director::setProjection() failed because size is 0
-2018-06-10T11:08:58.124Z - normal: Simulator: Project Config:
-2018-06-10T11:08:58.124Z - normal: Simulator:     project dir: E:\CocosCreator\resources\cocos2d-x\simulator\win32\
-2018-06-10T11:08:58.124Z - normal: Simulator:     writable path: $(PROJDIR)\
-2018-06-10T11:08:58.124Z - normal: Simulator:     script file: $(PROJDIR)\main.js
-2018-06-10T11:08:58.124Z - normal: Simulator:     frame size: 960 x 640
-2018-06-10T11:08:58.124Z - normal: Simulator:     frame scale: 1.00
-2018-06-10T11:08:58.125Z - normal: Simulator:     show console: NO
-2018-06-10T11:08:58.125Z - normal: Simulator:     write debug log: NO ()
-2018-06-10T11:08:58.125Z - normal: Simulator:     listen: 
-2018-06-10T11:08:58.125Z - normal: Simulator:     debugger: none
-2018-06-10T11:08:58.125Z - normal: Simulator:     add searching path:
-2018-06-10T11:08:58.125Z - normal: Simulator: 
-2018-06-10T11:08:58.125Z - normal: Simulator: 
-2018-06-10T11:08:58.125Z - normal: Simulator: 
-2018-06-10T11:08:58.125Z - normal: Simulator: ------------------------------------------------
-2018-06-10T11:08:58.125Z - normal: Simulator: LOAD Js FILE: main.js
-2018-06-10T11:08:58.125Z - normal: Simulator: ------------------------------------------------
-2018-06-10T11:08:58.125Z - normal: Simulator: D/jswrapper (364): Initializing V8, version: 6.0.286.52
-2018-06-10T11:08:58.352Z - normal: Simulator: D/jswrapper (813): libuv version: 1.13.1
-2018-06-10T11:08:58.353Z - normal: Simulator: D/jswrapper (112): Debugger listening..., visit [ chrome-devtools://devtools/bundled/inspector.html?v8only=true&ws=0.0.0.0:5086/00010002-0003-4004-8005-000600070008 ] in chrome browser to debug!
-2018-06-10T11:08:58.353Z - normal: Simulator: D/jswrapper (115): For help see https://nodejs.org/en/docs/inspector
-2018-06-10T11:08:58.404Z - normal: Simulator: D/jswrapper (125): JS: Cocos2d-x-lite v1.8.2
-2018-06-10T11:08:58.542Z - normal: Simulator: iShow!
-2018-06-10T11:08:58.553Z - normal: Simulator: D/jswrapper (144): JS: [WARN]: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
-2018-06-10T11:08:58.653Z - normal: Simulator: D/jswrapper (125): JS: InitScene: 4.889999999999986ms
-2018-06-10T11:08:58.653Z - normal: Simulator: D/jswrapper (125): JS: AutoRelease: 0.13999999999998636ms
-2018-06-10T11:08:58.653Z - normal: Simulator: D/jswrapper (125): JS: Destroy: 0.09600000000000364ms
-2018-06-10T11:08:58.653Z - normal: Simulator: D/jswrapper (125): JS: AttachPersist: 0.0049999999999954525ms
+2018-06-11T11:57:08.238Z - normal: Load ~/.CocosCreator/settings.json
+2018-06-11T11:57:08.241Z - normal: checking language setting...
+2018-06-11T11:57:08.241Z - normal: Language: zh
+2018-06-11T11:57:08.838Z - success: protocol editor-framework registered
+2018-06-11T11:57:08.838Z - success: protocol app registered
+2018-06-11T11:57:08.838Z - success: protocol theme registered
+2018-06-11T11:57:08.838Z - success: protocol packages registered
+2018-06-11T11:57:08.838Z - success: protocol unpack registerred
+2018-06-11T11:57:08.838Z - success: protocol disable-commonjs registerred
+2018-06-11T11:57:08.974Z - normal: connected!
+2018-06-11T11:57:08.975Z - normal: Check project /Users/bolex1/work/game/box/box
+2018-06-11T11:57:08.976Z - normal: Initializing Cocos2d
+2018-06-11T11:57:09.135Z - normal: Initializing Asset Database
+2018-06-11T11:57:09.159Z - success: protocol uuid registerred
+2018-06-11T11:57:09.159Z - success: protocol db registerred
+2018-06-11T11:57:09.159Z - success: protocol thumbnail registerred
+2018-06-11T11:57:09.160Z - normal: Loading editor/builtin packages
+2018-06-11T11:57:09.173Z - success: anysdk loaded
+2018-06-11T11:57:09.260Z - success: assets loaded
+2018-06-11T11:57:09.263Z - success: builder loaded
+2018-06-11T11:57:09.265Z - success: cocos-analytics loaded
+2018-06-11T11:57:09.268Z - success: console loaded
+2018-06-11T11:57:09.292Z - success: fb-instant-games loaded
+2018-06-11T11:57:09.296Z - success: hierarchy loaded
+2018-06-11T11:57:09.299Z - success: inspector loaded
+2018-06-11T11:57:09.300Z - success: keystore loaded
+2018-06-11T11:57:09.307Z - success: node-library loaded
+2018-06-11T11:57:09.309Z - success: package-asset loaded
+2018-06-11T11:57:09.310Z - success: preferences loaded
+2018-06-11T11:57:09.312Z - success: project-exporter loaded
+2018-06-11T11:57:09.324Z - success: project-importer loaded
+2018-06-11T11:57:09.326Z - success: project-settings loaded
+2018-06-11T11:57:09.329Z - success: ui-kit loaded
+2018-06-11T11:57:09.333Z - success: ui-grid loaded
+2018-06-11T11:57:09.336Z - success: scene loaded
+2018-06-11T11:57:09.337Z - success: sprite-editor loaded
+2018-06-11T11:57:09.340Z - success: store loaded
+2018-06-11T11:57:09.344Z - success: timeline loaded
+2018-06-11T11:57:09.344Z - normal: Loading builtin packages
+2018-06-11T11:57:09.347Z - success: asset-db-debugger loaded
+2018-06-11T11:57:09.348Z - success: color-picker loaded
+2018-06-11T11:57:09.351Z - success: package-manager loaded
+2018-06-11T11:57:09.355Z - success: sdkbox loaded
+2018-06-11T11:57:09.359Z - success: tester loaded
+2018-06-11T11:57:09.362Z - success: ui-kit-preview-extra loaded
+2018-06-11T11:57:09.364Z - success: ui-kit-preview loaded
+2018-06-11T11:57:09.367Z - success: ui-tree loaded
+2018-06-11T11:57:10.056Z - normal: Initializing project /Users/bolex1/work/game/box/box
+2018-06-11T11:57:10.058Z - normal: Loading packages
+2018-06-11T11:57:10.062Z - normal: Watching packages
+2018-06-11T11:57:10.071Z - normal: Run Application
+2018-06-11T11:57:11.051Z - success: preview server running at http://localhost:7456
+2018-06-11T11:57:14.461Z - normal: 1.9.1
+2018-06-11T11:57:14.937Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
+2018-06-11T12:03:53.316Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
+2018-06-11T12:05:33.479Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
+2018-06-11T12:10:05.065Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
+2018-06-11T12:11:07.669Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
+2018-06-11T12:12:28.203Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
+2018-06-11T12:13:26.078Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
+2018-06-11T12:16:06.452Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
+2018-06-11T12:19:27.002Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
+2018-06-11T12:20:07.352Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
+2018-06-11T12:24:58.438Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
+2018-06-11T12:26:39.967Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
+2018-06-11T12:27:51.764Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.

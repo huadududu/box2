@@ -9,6 +9,7 @@ let EfficiencyConfig = require("EfficiencyConfig");
 let LevelConfig = require("LevelConfig");
 let ParticleSystemCenter = require("ParticleSystemCenter");
 let SkeletonDataCenter = require("SkeletonDataCenter");
+let Global = require('Global');
 
 cc.Class({
     extends:cc.Component,
@@ -20,7 +21,6 @@ cc.Class({
         gold:cc.Label,
         gem:cc.Label,
         TopProgressBar:cc.ProgressBar,
-
         radioButton:{
             default:[],
             type:cc.Toggle
@@ -35,7 +35,6 @@ cc.Class({
 
     },
     onLoad:function(){
-        // this.BoxController = cc.find("Canvas").getComponent("BoxController");
 
         this.config=[AcceleratorConfig,ToolConfig,EfficiencyConfig];
         this.itemList=[];
@@ -51,7 +50,7 @@ cc.Class({
         let startpos = -this.bottomlist.width/2;
         for(var i = 0;i < this.config.length;i++){
             for(var j = 1; this.config[i][j] != undefined;j++){
-                let node = UIBottomFactory.create(i,this.config[i][j],"English",this.eventcallback.bind(this));
+                let node = UIBottomFactory.create(i,this.config[i][j],this.eventcallback.bind(this));
                 node.position = cc.p(startpos+75,0);
                 this.bottomlist.addChild(node);
                 this.itemList.push(node);
@@ -59,23 +58,15 @@ cc.Class({
             }
         }
     },
-    initInfo:function(info) {
-        this.myinfo = info;
-        this.setGoldNum(info.gold);
-        this.setLevel(info.level);
-        this.setGem(info.gem);
-        let hard = info.hard;
+    initInfo:function() {
+        this.setGoldNum(Global.gold);
+        this.setLevel(Global.level);
+        this.setGem(Global.gem);
+        let hard = Global.hard;
 
-        let exp = LevelConfig[info.hard].exp;
+        let exp = LevelConfig[Global.level].exp;
+        this.setProgress(Global.exp/exp);
 
-        this.setProgress(info.exp/exp);
-        // this.ToggleContainer(info.gold);
-
-    },
-    getPositionInView: function (item) { // get item position in scrollview's node space
-        let worldPos = item.parent.convertToWorldSpaceAR(item.position);
-        let viewPos = this.scrollView.node.convertToNodeSpaceAR(worldPos);
-        return viewPos;
     },
     //设置金币
     setGoldNum: function (num) {
@@ -93,20 +84,14 @@ cc.Class({
             return;
         this.TopProgressBar.progress = value;
     },
-    toolChange:function(id) {
-        let info = ToolConfig[id];
-        let animation = info.animation;
-        // this.BoxController.changeHammerSpine(animation);
-        let node = this.BoxController.hammers[id-1];
-        // SkeletonDataCenter.addSkeletonData(animation,node);
-    },
+
     changeHammerSpine:function(data){
         this.BoxController.changeHammerSpine(data);
     },
     updateDate:function (data){
         for( var name in data) {
             if (name == 'exp') {
-                let exp = LevelConfig[this.myinfo.level].exp;
+                let exp = LevelConfig[Global.level].exp;
                 let pro = data.exp / exp;
                 if (pro > 1)
                     pro = 1;
@@ -181,40 +166,30 @@ cc.Class({
             }
         }
     },
-    eventcallback: function(type, id) {
-        // let node= this.itemList.indexOf(sender);
-        switch (type) {
-            case 0:
-                break;
-            case 1:
-                // let info = ToolConfig[id];
-                // let animation = info.animation;
-                // // BoxController.changeHammerSpine(animation);
-                // SkeletonDataCenter.addSkeletonData(animation, BoxController.changeHammerSpine);
-                this.toolChange(id);
-                break;
-            case 2:
-                break;
-        }
-    },
+
 
     //点击升级按钮
     onClickLevel:function(){
         if(this.TopProgressBar.progress >=1){
             this.addlevel();
-
         }
-
     },
     addlevel:function(){
-        let level =this.myinfo.level+1;
-        let needexp = LevelConfig[ this.myinfo.level].exp;
+        let myinfo ={};
+        let level =Global.level+1;
+        let needexp = LevelConfig[ level].exp;
+        let needgold = LevelConfig[ level].rewardcoin;
+        myinfo.level = level;
+        Global.saveLevel( level);
+        myinfo.exp =Global.exp-needexp;
+        Global.saveExp( myinfo.exp);
+        myinfo.gold = Global.gold-needgold;
+        Global.saveGold(myinfo.gold);
+        this.updateDate(myinfo);
 
-        let needgold = LevelConfig[ this.myinfo.level].rewardcoin;
-        this.myinfo.level = level;
-        this.myinfo.exp -=needexp;
-        this.myinfo.gold -= needgold;
-        this.updateDate(this.myinfo);
-
-    }
+    },
+    eventcallback: function(type, id) {
+        // let node= this.itemList.indexOf(sender);
+       this.BoxController.eventcallback(type,id);
+    },
 });

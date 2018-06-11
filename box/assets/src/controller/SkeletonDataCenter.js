@@ -29,7 +29,12 @@ let SC= cc.Class({
         this.addSkeletonData(fileName,node);
 
 
-    }
+    },
+    addSkeletonDataWait:function (fileName,node) {
+        cc.loader.loadRes('effect/'+fileName,sp.SkeletonData, function(err,data){
+            node.skeletonData = data;
+        });
+    },
 
 
 

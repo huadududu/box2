@@ -53,19 +53,19 @@ cc.Class({
     // called every frame, uncomment this function to activate update callback
     /*lateUpdate: function (dt) {
         let targetPos;
-          if (this.overview){
+         if (this.overview){
             targetPos = this.target.parent.convertToWorldSpaceAR(this.getOverviewTargetsMidpoint());
         } else {
             targetPos = this.target.parent.convertToWorldSpaceAR(this.target.position);
         }
-          if (this.pointerPan && this.pointerPos) {
+         if (this.pointerPan && this.pointerPos) {
             let xDelta = this.pointerPos.x / (this.visibleSize.width/2) - 1;
             let yDelta = this.pointerPos.y / (this.visibleSize.height/2) - 1;
             xDelta *= this.pointerXMult;
             yDelta *= this.pointerYMult;
             targetPos = cc.pAdd(targetPos, cc.p(xDelta, yDelta));
         }
-          //smooth follow
+         //smooth follow
         if (this.smoothFollow) {
             if (Math.abs(targetPos.x - this.node.x) >= this.followX ||
                 Math.abs(targetPos.y - this.node.y) >= this.followY) {//when camera and target distance is larger than max distance
@@ -80,7 +80,7 @@ cc.Class({
         } else {
             this.node.position = this.node.parent.convertToNodeSpaceAR(targetPos);
         }
-          //speed zoom
+         //speed zoom
         if (this.speedZoom) {
             let curSpeed = Math.abs(this.previousPos.x - targetPos.x) / dt;
             let ratio = 0;
@@ -91,14 +91,14 @@ cc.Class({
                 this.camera.zoomRatio = cc.lerp(this.camera.zoomRatio, this.initZoomRatio, 0.02);
             }
         }
-          this.previousPos = targetPos;
-          //jump zoom
+         this.previousPos = targetPos;
+         //jump zoom
         if (this.jumpZoom) {
             let ratio = targetPos.y / cc.winSize.height;
             this.camera.zoomRatio = 1 + (0.6 - ratio) * 0.35;
         }
-          //boundaries
-          if (this.useBoundaries) {
+         //boundaries
+         if (this.useBoundaries) {
             let width = (this.visibleSize.width/2) / this.camera.zoomRatio;
             let height = (this.visibleSize.height/2) / this.camera.zoomRatio;
             let minX = this.node.x - width;

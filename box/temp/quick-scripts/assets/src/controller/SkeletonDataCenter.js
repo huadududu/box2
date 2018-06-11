@@ -2,7 +2,7 @@
 cc._RF.push(module, '08ee1dfvs9GP6ytIs1eghY2', 'SkeletonDataCenter', __filename);
 // src/controller/SkeletonDataCenter.js
 
-"use strict";
+'use strict';
 
 /**
  * Created by bing on 09/05/2018.
@@ -30,6 +30,11 @@ var SC = cc.Class({
     addSkeletonDataForNode: function addSkeletonDataForNode(fileName, hammer) {
         var node = hammer.addComponent(sp.Skeleton);
         this.addSkeletonData(fileName, node);
+    },
+    addSkeletonDataWait: function addSkeletonDataWait(fileName, node) {
+        cc.loader.loadRes('effect/' + fileName, sp.SkeletonData, function (err, data) {
+            node.skeletonData = data;
+        });
     }
 
 });

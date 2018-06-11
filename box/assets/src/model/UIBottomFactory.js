@@ -10,7 +10,7 @@ let FC = cc.Class({
         this.pool = new cc.NodePool();
     },
 
-    init:function (type,info,language,eventcallback) {
+    init:function (type,info,eventcallback) {
 
         let newNode = this.pool.get();
         if(!newNode){
@@ -18,7 +18,7 @@ let FC = cc.Class({
             newNode= cc.instantiate(prefab);
         }
         let com = newNode.getComponent("UIBottom");
-        com.setConfigInfo(type,info,language,eventcallback);
+        com.setConfigInfo(type,info,eventcallback);
         return newNode;
     },
 
@@ -32,8 +32,8 @@ let FC = cc.Class({
     },
 
     //
-    create:function (type,info,language,eventcallback) {
-        let obj= Factory.init(type,info,language,eventcallback);
+    create:function (type,info,eventcallback) {
+        let obj= Factory.init(type,info,eventcallback);
         return obj;
     }
 
