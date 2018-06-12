@@ -36,7 +36,10 @@ cc.Class({
             visible: false,
             default: 0
         },
-
+        radiotext: {
+            default: [],
+            type: cc.Label
+        },
         BoxController: require("BoxController")
 
     },
@@ -44,6 +47,7 @@ cc.Class({
 
         this.config = [AcceleratorConfig, ToolConfig, EfficiencyConfig];
         this.itemList = [];
+        this.btnColor = ['#ffa30f', '#f9f9f9'];
     },
     addUIBottom: function addUIBottom() {
         if (this.config == undefined) {
@@ -113,6 +117,7 @@ cc.Class({
     },
     scrollEvent: function scrollEvent(sender, event) {
         var thispos = sender.getScrollOffset();
+        var movex = -thispos.x;
         // switch(event) {
         //     case 2: //left
         //        // this.lblScrollEvent.string = "Scroll to Left";
@@ -121,11 +126,11 @@ cc.Class({
         //        // this.lblScrollEvent.string = "Scroll to Right"; 
         //        break;
         //    }
-        var num1 = 2 * 156;
-        var num2 = 8 * 156;
-        if (-thispos.x < num1) {
+        var num1 = 310;
+        var num2 = 1240;
+        if (movex < num1) {
             this.setCheckToggle(0);
-        } else if (-thispos.x < num2) {
+        } else if (movex < num2) {
             this.setCheckToggle(1);
         } else {
             this.setCheckToggle(2);
@@ -153,6 +158,7 @@ cc.Class({
             default:
                 break;
         }
+        this.setCheckToggle(index);
     },
 
     setCheckToggle: function setCheckToggle(num) {
@@ -160,9 +166,11 @@ cc.Class({
         this.thisCheck = num;
         for (var i = 0; i < this.radioButton.length; i++) {
             if (i == num) {
-                this.radioButton[i].isChecked = true;
+                // this.radioButton[i].isChecked = true;
+                this.radiotext[i].node.color = new cc.color(this.btnColor[0]);
             } else {
-                this.radioButton[i].isChecked = false;
+                // this.radioButton[i].isChecked = false;
+                this.radiotext[i].node.color = new cc.color(this.btnColor[1]);
             }
         }
     },

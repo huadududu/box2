@@ -30,7 +30,10 @@ cc.Class({
             visible:false,
             default:0
         },
-
+        radiotext:{
+            default:[],
+            type:cc.Label
+        },
         BoxController: require("BoxController")
 
     },
@@ -38,7 +41,8 @@ cc.Class({
 
         this.config=[AcceleratorConfig,ToolConfig,EfficiencyConfig];
         this.itemList=[];
-    },
+        this.btnColor=['#ffa30f','#f9f9f9'];
+        },
     addUIBottom:function(){
         if(this.config == undefined)
         {
@@ -111,6 +115,7 @@ cc.Class({
     },
     scrollEvent: function(sender, event) {
         let thispos= sender.getScrollOffset();
+        let movex = -thispos.x;
         // switch(event) {
         //     case 2: //left
         //        // this.lblScrollEvent.string = "Scroll to Left";
@@ -119,11 +124,11 @@ cc.Class({
         //        // this.lblScrollEvent.string = "Scroll to Right"; 
         //        break;
         //    }
-        let num1= 2*156;
-        let num2 = 8*156;
-        if(-thispos.x <num1){
+        let num1= 310;
+        let num2 = 1240;
+        if(movex <num1){
             this.setCheckToggle(0);
-        }else if(-thispos.x < num2){
+        }else if(movex <num2){
             this.setCheckToggle(1);
 
         }else{
@@ -152,6 +157,7 @@ cc.Class({
             default:
                 break;
         }
+        this.setCheckToggle(index);
     },
 
     setCheckToggle: function(num) {
@@ -161,10 +167,12 @@ cc.Class({
         for( let i=0;i < this.radioButton.length;i++)
         {
             if(i == num){
-                this.radioButton[i].isChecked = true;
+                // this.radioButton[i].isChecked = true;
+                this.radiotext[i].node.color = new cc.color(this.btnColor[0]);
             }
             else{
-                this.radioButton[i].isChecked = false;
+                // this.radioButton[i].isChecked = false;
+                this.radiotext[i].node.color =new cc.color(this.btnColor[1]);
             }
         }
     },
