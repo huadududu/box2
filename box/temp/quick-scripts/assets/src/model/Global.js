@@ -26,9 +26,14 @@ module.exports = function () {
             gold: 1,
             gem: 1,
             exp: 1,
+            openAdTimes: 0,
+            inviteFriends: 0,
             hammer: {
                 default: {}
-            }
+            },
+            addgold: 0,
+            addgem: 0,
+            freindsInfo: []
 
         },
 
@@ -61,6 +66,7 @@ module.exports = function () {
                     this.hammer = {};
                 }
             }.bind(this));
+
             lc.get('exp', 0, function (v) {
                 if (typeof v == "string") {
                     this.exp = parseInt(v);
@@ -70,6 +76,7 @@ module.exports = function () {
                     this.exp = 0;
                 }
             }.bind(this));
+
             lc.get('gem', 0, function (v) {
                 if (typeof v == "string") {
                     this.gem = parseInt(v);
@@ -79,31 +86,63 @@ module.exports = function () {
                     this.gem = 0;
                 }
             }.bind(this));
+            lc.get('openAdTimes', 0, function (v) {
+                if (typeof v == "string") {
+                    this.openAdTimes = parseInt(v);
+                } else if (typeof v == "number") {
+                    this.openAdTimes = v;
+                } else {
+                    this.openAdTimes = 0;
+                }
+            }.bind(this));
+            lc.get('inviteFriends', 0, function (v) {
+                if (typeof v == "string") {
+                    this.inviteFriends = parseInt(v);
+                } else if (typeof v == "number") {
+                    this.inviteFriends = v;
+                } else {
+                    this.inviteFriends = 0;
+                }
+            }.bind(this));
         },
+
         saveLevel: function saveLevel(h) {
 
             lc.set('level', h);
             this.level = h;
         },
-        saveHard: function saveHard(h) {
-            lc.set('hard', h);
-            this.hard = h;
-        },
+
+        // saveHard: function saveHard(h) {
+        //     lc.set('hard', h);
+        //     this.hard = h;
+        // },
+
         saveExp: function saveExp(h) {
             lc.set('exp', h);
             this.exp = h;
         },
+
         saveHammer: function saveHammer(hammer) {
             lc.set('hammer', JSON.stringify(hammer));
             this.hammer = hammer;
         },
+
         saveGold: function saveGold(gold) {
             lc.set('gold', gold);
             this.gold = gold;
         },
+
         saveGem: function saveGem(gem) {
             lc.set('gem', gem);
             this.gem = gem;
+        },
+        saveOpenAdTimes: function saveInviteFriends(openAdTimes) {
+            lc.set('openAdTimes', openAdTimes);
+            this.openAdTimes = openAdTimes;
+        },
+        saveInviteFriends: function saveInviteFriends(inviteFriends) {
+            lc.set('inviteFriends', inviteFriends);
+            this.inviteFriends = inviteFriends;
         }
     });
     var instance = new cls();

@@ -25,9 +25,9 @@
     "orientation": "portrait"
   },
   "renderMode": "0",
-  "startScene": "0849e0cd-7511-4872-b402-29f180287bcf",
-  "title": "tank",
-  "webOrientation": "auto",
+  "startScene": "893fda5b-9a68-4ae0-9a30-cbc1a4d8c332",
+  "title": "box",
+  "webOrientation": "landscape",
   "wechatgame": {
     "appid": "wx6ac3f5090a6b99c5",
     "orientation": "portrait"

@@ -56,7 +56,6 @@ var FC = cc.Class({
         var obj = Factory.initmargins(pngname);
         return obj;
     }
-
 });
 
 var Factory = new FC();

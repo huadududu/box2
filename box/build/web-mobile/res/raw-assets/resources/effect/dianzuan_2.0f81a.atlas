@@ -1,0 +1,27 @@
+
+dianzuan_2.png
+size: 100,99
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+dianzuan_3
+  rotate: false
+  xy: 41, 68
+  size: 38, 29
+  orig: 38, 29
+  offset: 0, 0
+  index: -1
+dianzuan_4
+  rotate: false
+  xy: 1, 68
+  size: 38, 29
+  orig: 38, 29
+  offset: 0, 0
+  index: -1
+dianzuan_5
+  rotate: false
+  xy: 1, 1
+  size: 97, 65
+  orig: 97, 65
+  offset: 0, 0
+  index: -1

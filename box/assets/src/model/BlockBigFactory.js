@@ -48,13 +48,10 @@ let FC = cc.Class({
         return newNode;
 
     },
-    createMargins:function(pngname){
-        let obj= Factory.initmargins(pngname);
+    createMargins:function(pngname) {
+        let obj = Factory.initmargins(pngname);
         return obj;
     }
-
-
-
 });
 
 let Factory = new FC();

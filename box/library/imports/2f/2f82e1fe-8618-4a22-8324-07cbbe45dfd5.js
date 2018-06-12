@@ -14,7 +14,8 @@ module.exports = {
         BlockSmall: 1, //小方格
         UIBottom: 2, //底部控件
         MarginsBig: 3,
-        MarginsSmall: 4
+        MarginsSmall: 4,
+        RewardItem: 5
     }),
     bottomRadio: cc.Enum({
         Accelerator: 0, //加速

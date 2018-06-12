@@ -660,19 +660,19 @@
       "__uuid__": "019dd701-372f-4cc5-a739-bd0a8190f9ac"
     },
     "_N$pressedSprite": {
-      "__uuid__": "e9ec654c-97a2-4787-9325-e6a10375219a"
+      "__uuid__": "89d91f5f-ace3-43f8-8d5d-962e3a337275"
     },
     "pressedSprite": {
-      "__uuid__": "e9ec654c-97a2-4787-9325-e6a10375219a"
+      "__uuid__": "89d91f5f-ace3-43f8-8d5d-962e3a337275"
     },
     "_N$hoverSprite": {
-      "__uuid__": "e9ec654c-97a2-4787-9325-e6a10375219a"
+      "__uuid__": "89d91f5f-ace3-43f8-8d5d-962e3a337275"
     },
     "hoverSprite": {
-      "__uuid__": "e9ec654c-97a2-4787-9325-e6a10375219a"
+      "__uuid__": "89d91f5f-ace3-43f8-8d5d-962e3a337275"
     },
     "_N$disabledSprite": {
-      "__uuid__": "29158224-f8dd-4661-a796-1ffab537140e"
+      "__uuid__": "ebb5c33e-ff2c-4dad-936b-fad65edc5ddc"
     },
     "_N$target": {
       "__id__": 14
@@ -754,7 +754,8 @@
     },
     "type": 2,
     "language": "English",
-    "ID": 1
+    "ID": 1,
+    "eventcallback": null
   },
   {
     "__type__": "cc.PrefabInfo",

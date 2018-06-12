@@ -61,7 +61,7 @@ module.exports = function () {
             FBInstant.context.chooseAsync().then(function () {
                 console.log(FBInstant.context.getID());
                 if (callback) {
-                    callback();
+                    callback(FBInstant.context.getID());
                 }
             });
         },
@@ -116,7 +116,68 @@ module.exports = function () {
                     });
                 }
             });
+        },
+
+        InterstitialAdAsync: function InterstitialAdAsync(callback) {
+            var GameConfig = require("GameConfig");
+            var ad = null;
+
+            FBInstant.getInterstitialAdAsync(GameConfig.InterstitialAdId).then(function (interstitial) {
+                console.log("ad loadAsync:");
+                // showlb.string = "ad loadAsync:";
+                ad = interstitial;
+                return interstitial.loadAsync();
+            }).then(function () {
+                // Ad loaded
+                // showlb.string = "ad loadAsync:";
+                console.log("Ad loaded");
+                return ad.showAsync();
+            }).then(function () {
+                // showlb.string = "I don't know what happened";
+                console.log("I don't know what happened");
+                if (callback) {
+                    callback();
+                }
+            });
+        },
+
+        RewardedVideoAsync: function RewardedVideoAsync(callback) {
+            var GameConfig = require("GameConfig");
+            var ad = null;
+            FBInstant.getRewardedVideoAsync(GameConfig.RewardedVideoId).then(function (rewardedVideo) {
+                ad = rewardedVideo;
+                return ad.loadAsync();
+            }).then(function () {
+                // Ad loaded
+                console.log("Ad loaded");
+                return ad.showAsync();
+            }).then(function () {
+                console.log("I don't know what happened");
+                if (callback) {
+                    callback();
+                }
+            });
+
+            // try {
+
+            // FBInstant.getRewardedVideoAsync(
+            //     GameConfig.RewardedVideoId,
+            // ).then(function (rewardedVideo) {
+            //     console.log("rewardedVideo ad id:", rewardedVideo.getPlacementID());
+            //     ; // 'my_placement_id'
+            //
+            //     if (callback) {
+            //         callback();
+            //     }
+            // }).catch(function(e){
+            //     console.log(e,e.message, e.name);
+            // });
+            // }
+            // catch(e){
+            //     console.log(e,e.message, e.name); // 传递异常对象到错误处理
+            // }
         }
+
     });
 
     var p = new plugin();

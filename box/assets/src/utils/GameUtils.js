@@ -12,5 +12,14 @@ module.exports = {
     //随机的 [0 ～ number]
     random: function (number) {
         return this.randomInt(0, number);
+    },
+    formatNum:function(num){
+        let str;
+        if(num> 1000){
+            str = parseInt(num/1000)+"k";
+        }else{
+            str = ""+num;
+        }
+        return str;
     }
 };

@@ -31,7 +31,7 @@ cc.Class({
             default: [],
             type: cc.Toggle
         },
-
+        levelupBtn: cc.Button,
         thisCheck: {
             visible: false,
             default: 0
@@ -83,6 +83,7 @@ cc.Class({
     setProgress: function setProgress(value) {
         var pro = this.TopProgressBar.progress;
         if (pro == 1.0 && value == 1) return;
+        this.levelupBtn.interactable = value >= 1;
         this.TopProgressBar.progress = value;
     },
 
@@ -106,6 +107,9 @@ cc.Class({
                 this.setGoldNum(data.gold);
             }
         }
+        if (name == "level" || name == "gold") {
+            this.updateButtom();
+        }
     },
     scrollEvent: function scrollEvent(sender, event) {
         var thispos = sender.getScrollOffset();
@@ -118,7 +122,7 @@ cc.Class({
         //        break;
         //    }
         var num1 = 2 * 156;
-        var num2 = 3 * 156;
+        var num2 = 8 * 156;
         if (-thispos.x < num1) {
             this.setCheckToggle(0);
         } else if (-thispos.x < num2) {
@@ -142,7 +146,7 @@ cc.Class({
                 // title += "2";
                 break;
             case 2:
-                var num2 = 4 * 156;
+                var num2 = 8 * 156;
                 this.scrollView.scrollToOffset(cc.p(num2, 0), 0.2);
                 // title += "3";
                 break;
@@ -166,7 +170,7 @@ cc.Class({
     //点击升级按钮
     onClickLevel: function onClickLevel() {
         if (this.TopProgressBar.progress >= 1) {
-            this.addlevel();
+            this.BoxController.upgradView.active = true;
         }
     },
     addlevel: function addlevel() {
@@ -178,13 +182,19 @@ cc.Class({
         Global.saveLevel(level);
         myinfo.exp = Global.exp - needexp;
         Global.saveExp(myinfo.exp);
-        myinfo.gold = Global.gold - needgold;
+        myinfo.gold = Global.gold + needgold;
         Global.saveGold(myinfo.gold);
         this.updateDate(myinfo);
     },
     eventcallback: function eventcallback(type, id) {
-        // let node= this.itemList.indexOf(sender);
+
         this.BoxController.eventcallback(type, id);
+    },
+    updateButtom: function updateButtom() {
+        for (var i = 0; i < this.itemList.length; i++) {
+            var node = this.itemList[i].getComponent("UIBottom");
+            node.setBtnState();
+        }
     }
 });
 

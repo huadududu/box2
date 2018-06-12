@@ -20,12 +20,15 @@ var RewardConfig = require("RewardConfig");
 
 var GameType = require("GameType");
 var GameUtils = require("GameUtils");
+var GameState = require("GameState");
 var BlockBigFactory = require("BlockBigFactory");
 var BlockSmallFactory = require("BlockSmallFactory");
+var RewardItemFactory = require("RewardItemFactory");
 var SpriteFrameCenter = require("SpriteFrameCenter");
 var ParticleSystemCenter = require("ParticleSystemCenter");
 var SkeletonDataCenter = require("SkeletonDataCenter");
 // let GameMenuController = require('GameMenuController');
+
 var Global = require('Global');
 
 var winsize = cc.winSize;
@@ -45,6 +48,7 @@ cc.Class({
         BlockSmall: cc.Prefab,
         MarginsBig: cc.Prefab,
         MarginsSmall: cc.Prefab,
+        RewardItem: cc.Prefab,
         UIBottom: cc.Prefab,
         Sky: cc.Node,
         Bgbz: cc.Node,
@@ -55,6 +59,7 @@ cc.Class({
         btnbox: cc.Button,
         GameMenu: cc.Node,
         treasure: cc.Button,
+        upgradView: cc.Node,
         // GameMenuController: GameMenuController,
         language: {
             visible: false,
@@ -112,7 +117,8 @@ cc.Class({
         HattingPos: {
             visible: false,
             default: null
-        }
+        },
+        gameState: GameState.init //0 init 1 playing 2 rolling 3 end
     },
 
     onLoad: function onLoad() {
@@ -124,13 +130,15 @@ cc.Class({
         this.blocks = [];
         this.marginlist = [];
         this.hammers = {};
+        this.rewardItem = [];
         this.startPos = -GameHeight / 2;
         this.boxSpine.setCompleteListener(function (trackEntry) {
             var animationName1 = trackEntry.animation ? trackEntry.animation.name : "";
             cc.log("recordSpine [track %s][animation %s] end.", trackEntry.trackIndex, animationName1);
-            _this.restart();
-            _this.boxSpine.node.active = false;
+            // this.restart();
+            _this.addItems();
         });
+        this.firstOpen = true;
     },
     playBoxSpine: function playBoxSpine() {
         this.boxSpine.node.active = true;
@@ -145,7 +153,7 @@ cc.Class({
         this.hammers[hammerpos].setAnimation(0, "newAnimation", true);
     },
     playHammers: function playHammers() {
-        for (var i = 1; i < 5; i++) {
+        for (var i = 3; i < 7; i++) {
             if (this.hammers[i] != undefined) {
                 this.setSmPosition(i);
             }
@@ -179,19 +187,11 @@ cc.Class({
         hammer.timeScale = timescale;
     },
     changeHammerSpine: function changeHammerSpine(data) {
-        // this.hammer.node.active = false;
         this.hammer.skeletonData = data;
     },
     start: function start() {
         var _this3 = this;
 
-        // this.initdata();
-        // this.myinfo = JSON.parse(cc.sys.localStorage.getItem('myinfo'));
-        // if(this.myinfo == null){
-        //     this.myinfo ={hard:1,level:1,gold:1,gem:1,exp:1,hammer:[]};
-        // }
-        // this.myinfo ={hard:1,level:1,gold:1,gem:1,exp:1,hammer:[{"id":1,"attribute":-1},{"id":2,"attribute":-1},{"id":3,"attribute":-1},{"id":4,"attribute":-1}]};
-        // cc.sys.localStorage.setItem('myinfo',JSON.stringify(this.myinfo));
         this.hard = Global.hard;
         this.GameMenuController.initInfo();
         this.hammers = {};
@@ -200,6 +200,7 @@ cc.Class({
 
         var _loop = function _loop(i) {
             if (hammer[i] == undefined) return "continue";
+            if (ToolConfig[i].id == 1 || ToolConfig[i].id == 2) return "continue";
             var node = new cc.Node();
             var nodehammer = node.addComponent(sp.Skeleton);
             var info = ToolConfig[i];
@@ -221,7 +222,7 @@ cc.Class({
             hammer.timeScale = 0.17 * conf1.att / parseFloat(conf1.time);
         };
 
-        for (var i = 1; i < 5; i++) {
+        for (var i = 1; i < 7; i++) {
             var _ret = _loop(i);
 
             if (_ret === "continue") continue;
@@ -229,65 +230,20 @@ cc.Class({
     },
     restart: function restart() {
         this.hard++;
-        this.addItems();
+        Global.hard++;
+        this.boxSpine.node.active = false;
+        for (var i = 1; i < 4; i++) {
+            // let node = this.rewardItem[i];
+            this.rewardItem[i].destroy();
+            // if(cc.isValid( node)){
+            //     node.destroy();
+            // }
+        }
+        this.rewardItem = [];
+        // this.addItems();
         this.initdata();
+        this.gameState = GameState.hatting;
     },
-    addItems: function addItems() {
-
-        var boxID = StageConfig[this.hard].box;
-        var rewardID = BoxConfig[boxID].reward;
-        var conf = RewardConfig[rewardID];
-        var num = conf.num;
-        var itemdata = {};
-        var totoal = 0;
-        var reward = {};
-        var max = 0;
-        for (var i = 1; i < 7; i++) {
-            if (conf['rate' + i] != 0) {
-                totoal = conf['rate' + i];
-                if (i == 1) {
-                    itemdata[i] = totoal;
-                    max = itemdata[i];
-                } else {
-                    itemdata[i] = itemdata[i - 1] + totoal;
-                    max = itemdata[i];
-                }
-            }
-        }
-        for (var j = 1; j <= num; j++) {
-            var random = GameUtils.random(max);
-            for (var z = 1; itemdata[z] != undefined; z++) {
-                if (itemdata[z] < random) {
-                    continue;
-                }
-                reward[j] = conf['item' + z];
-                break;
-            }
-        }
-        var gold = 0;
-        var gem = 0;
-        for (var _i = 1; _i <= num; _i++) {
-            if (reward[_i] != undefined) {
-                if (reward[_i].indexOf(";") != -1) {
-                    var rewardarry = reward[_i].split(";");
-                    if (rewardarry[0] == 1001) {
-                        gold += parseInt(rewardarry[1]);
-                    } else if (rewardarry[0] == 1002) {
-                        gem += parseInt(rewardarry[1]);
-                    }
-                }
-            }
-        }
-        Global.saveHard(++this.hard);
-        var golds = Global.gold + gold;
-        var gems = Global.gem + gem;
-        if (gold > 0 || gem > 0) {
-            this.GameMenuController.updateDate({ gold: golds, gem: gems });
-            Global.saveGold(golds);
-            Global.saveGem(gems);
-        }
-    },
-
     initdata: function initdata() {
         this.floorNum = StageConfig[this.hard].layer;
         for (var i = 0; i < BlockConfig.length; i++) {
@@ -303,14 +259,13 @@ cc.Class({
 
         this.addBlocks();
         this.cameraStartPosY();
-        // this.setSmPosition(this.hammer);
-        this.GameMenuController.addUIBottom();
-
-        // this.playHammers(this.hammer);
         this.btnbox.node.active = true;
         this.playHammers();
-        //
         this.initTreasure();
+        if (this.firstOpen) {
+            this.GameMenuController.addUIBottom();
+            this.firstOpen = false;
+        }
     },
     checkCanHammer: function checkCanHammer(id) {
         var hammer = Global.hammer;
@@ -417,7 +372,10 @@ cc.Class({
 
         if (!this.blocks[line]) return;
         var node = this.blocks[line][row];
+        var location = this.hammerpos(line, row);
+        var texiao = this.getEffByBlock(line, row);
         if (cc.isValid(node)) {
+            ParticleSystemCenter.addParticleForNode(texiao + ".plist", this.GameMenuController.node, location);
             node.destroy();
             this.destroyUpdate();
         }
@@ -605,7 +563,7 @@ cc.Class({
 
         var location = this.hammerpos(line, row);
         var texiao = this.getEffByBlock(line, row);
-        ParticleSystemCenter.addParticleForNode(texiao + ".plist", this.GameMenuController.node, location);
+        // ParticleSystemCenter.addParticleForNode(texiao+".plist",this.GameMenuController.node,location);
         if (this.HattingPos == null) {
             this.HattingPos = {};
         }
@@ -642,7 +600,7 @@ cc.Class({
         var realwidth = this.blockWidth + this.blockBlank;
         var realx = row * realwidth + this.margins + this.blockBlank;
         var realy = line * realwidth + gameY - cameraY - BaseGame;
-        var hamX = realx - BaseWidth + 42 + this.blockWidth;
+        var hamX = realx - BaseWidth - 42 + this.blockWidth;
         var hamY = realy - 42;
         return cc.p(hamX, hamY);
     },
@@ -669,13 +627,16 @@ cc.Class({
         if (this.checkCanDestroy(line, row)) {
             var location = this.hammerpos(line, row);
             var texiao = this.getEffByBlock(line, row);
-            ParticleSystemCenter.addParticleForNode(texiao + ".plist", this.GameMenuController.node, location);
+            // ParticleSystemCenter.addParticleForNode(texiao+".plist",this.GameMenuController.node,location);
             this.destroyBlock(line, row);
         }
     },
     touchStartCallBack: function touchStartCallBack(location) {
         if (!this.canTouch) {
             return;
+        }
+        if (this.gameState == GameState.end) {
+            this.restart();
         }
         if (location.x < this.margins || location.x > 2 * BaseWidth - this.margins) {
             this.motionStreak.reset();
@@ -723,6 +684,7 @@ cc.Class({
             return;
         }
         this.btnbox.node.active = false;
+        this.gameState = GameState.end;
         this.playBoxSpine();
     },
     update: function update() {
@@ -750,17 +712,31 @@ cc.Class({
         // this.BoxController.changeHammerSpine(animation);
         // let node = this.BoxController.hammers[id-1];
         // SkeletonDataCenter.addSkeletonData(animation,node);
+
         if (Global.hammer[id] == undefined) {
-            Global.hammer[id] = { id: id, attribute: info.attribute };
-            Global.saveHammer(Global.hammer);
-            this.addHammer(id);
-            this.setSmPosition(id);
+            var bool = this.checkCanAdd(id);
+            if (bool) {
+                Global.hammer[id] = { id: id, attribute: info.attribute };
+                Global.saveHammer(Global.hammer);
+                if (id != 1 && id != 2) {
+                    this.addHammer(id);
+                    this.setSmPosition(id);
+                }
+            } else {
+                this.addAdTime(id);
+            }
+            this.GameMenuController.updateButtom();
         } else {
+
             var conf = AttributeConfig[Global.hammer[id].attribute];
+            var mess = {};
+
             if (conf.costtype = 1001) {
                 Global.gold -= conf.cost;
+                mess['gold'] = Global.gold;
             } else if (conf.costtype = 1002) {
                 Global.gem -= conf.cost;
+                mess['gem'] = Global.gem;
             }
             if (conf.next != -1) {
                 Global.hammer[id].attribute = conf.next;
@@ -768,6 +744,122 @@ cc.Class({
                 Global.saveHammer(Global.hammer);
                 this.hammers[id].timeScale = 0.17 * (conf1.att / parseFloat(conf1.time));
             }
+            this.GameMenuController.updateDate(mess);
+        }
+    },
+    checkCanAdd: function checkCanAdd(id) {
+        var conf = ToolConfig[id];
+        var thisID = void 0;
+        var confArry = void 0;
+        if (id == 1 || id == 2) return false;
+        if ("unlock" in conf) {
+            if (conf.unlock.indexOf(";") != -1) {
+                confArry = conf.unlock.split(";");
+                thisID = confArry[0];
+            } else {
+                thisID = parseInt(conf.unlock);
+            }
+            if (thisID == -1) {
+                return true;
+            }
+            if (thisID == 0) {
+                //点击激活
+                return true;
+            } else if (thisID == 1) {
+                //视频激励
+                return Global.openAdTimes > 0;
+            } else if (thisID == 2) {
+                //等级激活
+                var needlvl = confArry[1];
+                if (Global.level < needlvl) {
+                    return false;
+                } else {
+                    return true;
+                }
+            } else if (thisID == 3) {
+                //邀请好友
+                if (Global.inviteFriends < confArry[1]) return false;else return true;
+            }
+        }
+        return true;
+    },
+    addAdTime: function addAdTime(id) {
+        var conf = ToolConfig[id];
+        var thisID = void 0;
+        var confArry = void 0;
+        if (id == 1 || id == 2) return;
+        if ("unlock" in conf) {
+            if (conf.unlock.indexOf(";") != -1) {
+                confArry = conf.unlock.split(";");
+                thisID = confArry[0];
+            } else {
+                thisID = parseInt(conf.unlock);
+            }
+            if (thisID == 1) {
+                //视频激励
+                return Global.openAdTimes++;
+            } else if (thisID == 3) {
+                //邀请好友
+                Global.inviteFriends++;
+            }
+        }
+    },
+    addItems: function addItems() {
+
+        var hard = Global.hard;
+        var boxID = StageConfig[hard].box;
+        var rewardID = BoxConfig[boxID].reward;
+        var conf = RewardConfig[rewardID];
+        var num = conf.num;
+        var itemdata = {};
+        var totoal = 0;
+        var reward = {};
+        var max = 0;
+        for (var i = 1; i < 7; i++) {
+            if (conf['rate' + i] != 0) {
+                totoal = conf['rate' + i];
+                if (i == 1) {
+                    itemdata[i] = totoal;
+                    max = itemdata[i];
+                } else {
+                    itemdata[i] = itemdata[i - 1] + totoal;
+                    max = itemdata[i];
+                }
+            }
+        }
+        for (var j = 1; j <= num; j++) {
+            var random = GameUtils.random(max);
+            for (var z = 1; itemdata[z] != undefined; z++) {
+                if (itemdata[z] < random) {
+                    continue;
+                }
+                reward[j] = conf['item' + z];
+                break;
+            }
+        }
+        var gold = 0;
+        var gem = 0;
+        var str = "";
+        for (var _i = 1; _i <= num; _i++) {
+            if (reward[_i] != undefined) {
+                str += reward[_i] + "--";
+                if (reward[_i].indexOf(";") != -1) {
+                    var rewardarry = reward[_i].split(";");
+                    if (rewardarry[0] == 1001) {
+                        gold += parseInt(rewardarry[1]);
+                    } else if (rewardarry[0] == 1002) {
+                        gem += parseInt(rewardarry[1]);
+                    }
+                }
+            }
+            this.createRewardItem(reward[_i], _i);
+        }
+        if (gold > 0 || gem > 0) {
+            var golds = Global.gold + gold;
+            var gems = Global.gem + gem;
+            this.GameMenuController.updateDate({ gold: golds, gem: gems });
+            Global.saveGold(golds);
+            Global.saveGem(gems);
         }
     },
     initTreasure: function initTreasure() {
@@ -780,7 +872,28 @@ cc.Class({
         var animation = BoxConf.animation + ".json";
         SkeletonDataCenter.addSkeletonDataWait(animation, this.boxSpine);
         this.treasure.node.y = -GameHeight / 2 + this.blockWidth + 35 - 20;
+        this.boxSpine.node.y = -GameHeight / 2 + this.blockWidth + 35 - 20;
+    },
+    createRewardItem: function createRewardItem(reward, i) {
+        if (this.rewardItem[i]) {
+            this.rewardItem[i].destroy();
+            this.rewardItem[i] = null;
+        }
+        var start = -400 + i * 200;
+
+        var node = RewardItemFactory.create(reward);
+        var location = this.treasure.node.position;
+        this.rewardItem[i] = node;
+        node.position = location;
+        var action = cc.moveTo(0.5, cc.p(start, -20));
+        var action2 = cc.callFunc(function () {
+            node.getComponent("RewardItem").setFinish();
+        }, this);
+        // node.runAction(cc. moveTo(0.5,cc.p(start,-20)));
+        this.gameNode.addChild(node);
+        node.runAction(cc.sequence(action, action2));
     }
 });
+//
 
 cc._RF.pop();

@@ -17,6 +17,7 @@ var LanguageConfig = require("LanguageConfig");
 var config = [AcceleratorConfig, ToolConfig, EfficiencyConfig];
 var btnPng = ["btn_juhuang", "btn_lanse", "btn_heise"];
 var Global = require("Global");
+var GameUtils = require("GameUtils");
 
 cc.Class({
     extends: cc.Component,
@@ -115,86 +116,58 @@ cc.Class({
                 } else {
                     thisID = parseInt(conf.unlock);
                 }
-
-                if (thisID == 0) {
-                    if (Global.hammer[this.ID] == null || Global.hammer[this.ID] == undefined) {
-                        //没有激活
+                if (thisID == -1) {
+                    return;
+                }
+                var active = false;
+                if (Global.hammer[this.ID] == null || Global.hammer[this.ID] == undefined) {
+                    //没有激活
+                    if (thisID == 0) {
+                        //点击激活
                         this.ButtonState(1);
-                        return;
+                        this.btntext.string = "touch active";
+                    } else if (thisID == 1) {
+                        //视频激励
+                        this.btntext.string = "n:" + thisID + "c:" + Global.openAdTimes;
+                    } else if (thisID == 2) {
+                        //等级激活
+                        var needlvl = confArry[1];
+                        if (level < needlvl) {
+                            this.ButtonState(0);
+                            this.btntext.string = needlvl + "级解锁";
+                        } else {
+                            this.ButtonState(1);
+                            this.btntext.string = "touchactive";
+                        }
+                    } else if (thisID == 3) {
+                        //邀请好友
+                        this.btntext.string = "n:" + confArry[1] + "c:" + Global.inviteFriends;
                     }
-                    var attribute = Global.hammer[this.ID].attribute;
-                    if (AttributeConfig[attribute].next == -1) {
-                        //达到最大
-                        this.ButtonState(0);
-                        this.btntext.string = "max";
-                    } else {
-                        this.ButtonState(1);
-                    }
-                } else if (thisID == 1) {
-                    if (Global.hammer[this.ID] == null || Global.hammer[this.ID] == undefined) {
-                        //没有激活(没有判断 type =1)
-                        this.ButtonState(1);
-                        return;
-                    }
-                    var _attribute = Global.hammer[this.ID].attribute;
-                    if (AttributeConfig[_attribute].next == -1) {
-                        //达到最大
-                        this.ButtonState(0);
-                        this.btntext.string = "max";
-                        return;
-                    } else {
-                        this.ButtonState(1);
-                        return;
-                    }
-                } else if (thisID == 2) {
-                    var needlvl = confArry[1];
-                    if (level < needlvl) {
-                        this.ButtonState(0);
-                        return;
-                    }
-                    if (Global.hammer[this.ID] == null || Global.hammer[this.ID] == undefined) {
-                        //没有激活(没有判断 type =1)
-                        this.ButtonState(1);
-                        this.btntext.string = "max";
-                        return;
-                    }
-                    var _attribute2 = Global.hammer[this.ID].attribute;
-                    if (AttributeConfig[_attribute2].next == -1) {
-                        //达到最大
-                        this.ButtonState(0);
-                        this.btntext.string = "max";
-                        return;
-                    } else {
-                        this.ButtonState(1);
-                        return;
-                    }
-                } else if (thisID == 3) {
-                    if (Global.hammer[this.ID] == null || Global.hammer[this.ID] == undefined) {
-                        //没有激活(没有判断 type =1)
-                        this.ButtonState(1);
-                        return;
-                    }
-                    var _attribute3 = Global.hammer[this.ID].attribute;
-                    if (AttributeConfig[_attribute3].next == -1) {
-                        //达到最大
-                        this.ButtonState(0);
-                        this.btntext.string = "max";
-                        return;
-                    } else {
-                        this.ButtonState(1);
-                        return;
+                } else if (AttributeConfig[Global.hammer[this.ID].attribute].next == -1) {
+                    //达到最大
+                    this.ButtonState(0);
+                    this.btntext.string = "max";
+                } else {
+                    //升级条件
+                    var conf1 = AttributeConfig[Global.hammer[this.ID].attribute];
+                    if (conf1.costtype = 1001) {
+                        if (Global.gold > conf1.cost) {
+                            this.ButtonState(1);
+                        } else {
+                            this.ButtonState(0);
+                        }
+                        this.btntext.string = GameUtils.formatNum(conf1.cost);
                     }
                 }
             }
         }
     },
+    //1 可以点击  0 不可以点击
     ButtonState: function ButtonState(v) {
         if (v == 1) {
-            this.btn.enabled = true;
-            this.btn.enableAutoGrayEffect = true;
+            this.btn.interactable = true;
         } else {
-            this.btn.enabled = false;
-            this.btn.enableAutoGrayEffect = false;
+            this.btn.interactable = false;
         }
     },
     onClickButton: function onClickButton() {
