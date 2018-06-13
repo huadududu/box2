@@ -20,7 +20,6 @@ var Global = require('Global');
 cc.Class({
     extends: cc.Component,
     properties: {
-        node: cc.Node,
         bottomlist: cc.Node,
         scrollView: cc.ScrollView,
         level: cc.Label,
@@ -110,6 +109,9 @@ cc.Class({
             if (name == "gold") {
                 this.setGoldNum(data.gold);
             }
+            if (name == 'gem') {
+                this.setGem(data.gem);
+            }
         }
         if (name == "level" || name == "gold") {
             this.updateButtom();
@@ -195,8 +197,10 @@ cc.Class({
         this.updateDate(myinfo);
     },
     eventcallback: function eventcallback(type, id) {
+        var string = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
 
-        this.BoxController.eventcallback(type, id);
+
+        this.BoxController.eventcallback(type, id, string);
     },
     updateButtom: function updateButtom() {
         for (var i = 0; i < this.itemList.length; i++) {

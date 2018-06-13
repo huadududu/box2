@@ -736,7 +736,7 @@
       }
     }
   },
-  "_atlasText": "\r\ndianzuan_2.png\r\nsize: 100,99\r\nformat: RGBA8888\r\nfilter: Linear,Linear\r\nrepeat: none\r\ndianzuan_3\r\n  rotate: false\r\n  xy: 41, 68\r\n  size: 38, 29\r\n  orig: 38, 29\r\n  offset: 0, 0\r\n  index: -1\r\ndianzuan_4\r\n  rotate: false\r\n  xy: 1, 68\r\n  size: 38, 29\r\n  orig: 38, 29\r\n  offset: 0, 0\r\n  index: -1\r\ndianzuan_5\r\n  rotate: false\r\n  xy: 1, 1\r\n  size: 97, 65\r\n  orig: 97, 65\r\n  offset: 0, 0\r\n  index: -1\r\n",
+  "_atlasText": "\ndianzuan_2.png\nsize: 100,99\nformat: RGBA8888\nfilter: Linear,Linear\nrepeat: none\ndianzuan_3\n  rotate: false\n  xy: 41, 68\n  size: 38, 29\n  orig: 38, 29\n  offset: 0, 0\n  index: -1\ndianzuan_4\n  rotate: false\n  xy: 1, 68\n  size: 38, 29\n  orig: 38, 29\n  offset: 0, 0\n  index: -1\ndianzuan_5\n  rotate: false\n  xy: 1, 1\n  size: 97, 65\n  orig: 97, 65\n  offset: 0, 0\n  index: -1\n",
   "atlasUrl": {
     "__uuid__": "eb413b24-3c2c-4f3d-afbb-48a336ed00dc"
   },

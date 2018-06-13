@@ -18,10 +18,13 @@ let SC= cc.Class({
 
 
     //
-    addSkeletonData:function (fileName,hammer) {
+    addSkeletonData:function (fileName,hammer,eventcallback) {
         cc.loader.loadRes('effect/'+fileName,sp.SkeletonData, function(err,data){
             hammer.skeletonData = data;
             hammer.setAnimation(0, "newAnimation", true);
+            if(eventcallback){
+                eventcallback();
+            }
         });
     },
     addSkeletonDataForNode:function (fileName,hammer){

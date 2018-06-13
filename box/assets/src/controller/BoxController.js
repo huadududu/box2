@@ -9,6 +9,7 @@ let BlockConfig = require("BoxConfig1");
 let CycleConfig = require("CycleConfig");
 let ToolConfig = require("ToolConfig");
 let AttributeConfig = require("AttributeConfig");
+let AcceleratorConfig = require("AcceleratorConfig");
 let BoxConfig = require("BoxConfig");
 let RewardConfig = require("RewardConfig");
 
@@ -56,26 +57,15 @@ cc.Class({
         GameMenu:cc.Node,
         treasure:cc.Button,
         upgradView:cc.Node,
+        bgopenbox:cc.Sprite,
         // GameMenuController: GameMenuController,
         language:{
             visible: false,
             default:"English"
         },
-        hard:{
-            visible : true,
-            default:5
-        },
-        myinfo:{
-            visible : true,
-            default:null
-        },
         type:{
             visible : false,
             default:0
-        },
-        floorNum:{
-            visible:false,
-            default:5
         },
         rowNum:{
             visible:false,
@@ -114,6 +104,14 @@ cc.Class({
             visible: false,
             default:null
         },
+        accelerHammer:{
+            visible:false,
+            default:1
+        },
+        accelerGold:{
+            visible:false,
+            default:1
+        },
         gameState:GameState.init ,//0 init 1 playing 2 rolling 3 end
     },
 
@@ -126,6 +124,8 @@ cc.Class({
         this.marginlist=[];
         this.hammers={};
         this.rewardItem =[];
+        this.accelerHammer=1;
+        this.accelerGold = 1;
         this.startPos = -GameHeight/2;
         this.boxSpine.setCompleteListener(trackEntry => {
             var animationName1 = trackEntry.animation ? trackEntry.animation.name : "";
@@ -163,6 +163,8 @@ cc.Class({
         let hammer = node.addComponent(sp.Skeleton);
         let info = ToolConfig[id];
         let animation = info.animation;
+        let conf = AttributeConfig[info.attribute];
+
         SkeletonDataCenter.addSkeletonData(animation,hammer) ;
         this.GameMenu.addChild(node);
         this.hammers[id]=hammer;
@@ -175,16 +177,13 @@ cc.Class({
                 this.smCallback(id);
             }
         });
-        let conf = AttributeConfig[info.attribute];
-
-        let  timescale = 0.17*conf.att/parseFloat(conf.time);
+        let  timescale = 0.17*conf.att/parseFloat(conf.time)*this.accelerHammer;
         hammer.timeScale = timescale;
     },
     changeHammerSpine:function(data){
         this.hammer.skeletonData = data;
     },
     start:function(){
-        this.hard = Global.hard;
         this.GameMenuController.initInfo();
         this.hammers={};
         let timescale=1;
@@ -212,13 +211,14 @@ cc.Class({
             });
             let attribute = Global.hammer[i].attribute;
             let conf1 = AttributeConfig[attribute];
-            hammer.timeScale = 0.17 * conf1.att/parseFloat(conf1.time);
+            nodehammer.timeScale = 0.17 * conf1.att/parseFloat(conf1.time) *this.accelerHammer;
         }
 
     },
     restart:function(){
-        this.hard++;
-        Global.hard++;
+        if(Global.hard<10){
+            Global.hard++;
+        }
         this.boxSpine.node.active = false;
         for(let i=1;i<4;i++){
             // let node = this.rewardItem[i];
@@ -234,9 +234,9 @@ cc.Class({
 
     },
     initdata:function(){
-        this.floorNum=StageConfig[this.hard].layer;
+        let floorNum=StageConfig[Global.hard].layer;
         for (var i = 0;i<BlockConfig.length;i++){
-            if(BlockConfig[i].blockwidth == StageConfig[this.hard].size){
+            if(BlockConfig[i].blockwidth == StageConfig[Global.hard].size){
                 this.type = BlockConfig[i].type;
                 break;
             }
@@ -292,14 +292,15 @@ cc.Class({
 
         this.resetBlockList();
         this.resetMarginList();
-        for (var i =0;i< this.floorNum-1;i++){
+        let floorNum=StageConfig[Global.hard].layer;
+        for (var i =0;i< floorNum-1;i++){
 
-            var lineinfo=this.addLines(this.getPngName(StageConfig[this.hard].cycleID,i),i);
+            var lineinfo=this.addLines(this.getPngName(StageConfig[Global.hard].cycleID,i),i);
 
             this.blocks.push(lineinfo);
             lineinfo=[];
         }
-        let topline = this.addLines(StageConfig[this.hard].top,i);
+        let topline = this.addLines(StageConfig[Global.hard].top,i);
         this.blocks.push(topline);
     },
     addLines:function (pngname,thisNum) {
@@ -367,8 +368,10 @@ cc.Class({
         let location = this.hammerpos(line,row);
         let texiao=this.getEffByBlock(line,row);
         if(cc.isValid(node) ) {
+            console.log("destroylog:",line,":",row,location);
             ParticleSystemCenter.addParticleForNode(texiao+".plist",this.GameMenuController.node,location);
-            node.destroy();
+            node.removeFromParent(true);
+            this.blocks[line][row]=null;
             this.destroyUpdate();
         }
 
@@ -376,7 +379,8 @@ cc.Class({
     checkCanDestroy :function(line,row){
         if(!cc.isValid(this.blocks[line]) || !cc.isValid(this.blocks[line][row]) )
             return false;
-        if(line >= this.floorNum-1)
+        let floorNum=StageConfig[Global.hard].layer;
+        if(line >= floorNum-1)
             return true;
         let node;
         node = this.blocks[line+1][row];
@@ -414,20 +418,26 @@ cc.Class({
     destroyUpdate:function(){
         // this.myinfo.exp++;
         Global.exp++;
+        Global.gold = Global.gold+ 1*(this.accelerGold);
         // cc.sys.localStorage.setItem('myinfo',JSON.stringify(this.myinfo));
         Global.saveExp(Global.exp);
-        this.GameMenuController.updateDate({exp: Global.exp});
-
+        Global.saveGold(Global.gold);
+        let myinfo = {};
+        myinfo.exp = Global.exp+1;
+        myinfo.gold = Global.gold+1*(this.accelerGold);
+        this.GameMenuController.updateDate(myinfo);
     },
     //--------- block -----------------------
     maxLineNum:function(){
         var max=0;
-        for(var i=0;i<this.floorNum;i++){
+        let floorNum=StageConfig[Global.hard].layer;
+        for(var i=0;i<floorNum;i++){
             for(var j= 0;j<this.rowNum;j++) {
                 if (this.blocks && this.blocks[i] && this.blocks[i][j]) {
                     var node = this.blocks[i][j];
                     if (!cc.isValid(node))
                         continue;
+                     // sss
                     if (i > max) {
                         max = i;
                     }
@@ -463,16 +473,23 @@ cc.Class({
             return;
         }
         let newY= oldY-this.blockWidth*move;
+        let moveY=0 ;
         if(newY>=GameCenterY){
-            this.camera.node.setPositionY(newY);
+            moveY = newY;
         }else {
-            this.camera.node.setPositionY(GameCenterY);
+            moveY = GameCenterY;
         }
+       let  location = cc.p(BaseWidth,moveY);
+        let action1 = cc.moveTo(0.1,location);
+        this.camera.node.runAction(action1);
+         // this.camera.node.setPositionY(moveY);
+
 
     },
 
     cameraStartPosY:function(){
-        let height = this.floorNum*(this.blockWidth+this.blockBlank);
+        let floorNum=StageConfig[Global.hard].layer;
+        let height = floorNum*(this.blockWidth+this.blockBlank);
         //地下
         this.Underground.height=height;
         let posbottom= (height-GameHeight)/2;
@@ -495,7 +512,7 @@ cc.Class({
             this.camera.node.setPositionY(GameCenterY - other);
 
         }
-        this.curMaxLine = this.floorNum -1;
+        this.curMaxLine = floorNum -1;
     },
 
 
@@ -521,7 +538,7 @@ cc.Class({
         for(var i = 0;i<this.rowNum;i++){//当前行可以删除的
             if(this.blocks[line]&&this.checkCanDestroy(line,i) ){
                 let find = false;
-                for(let j=1;j<=4;j++){
+                for(let j=3;j<=6;j++){
                     if( this.HattingPos && this.HattingPos[j]){
                         if(this.HattingPos[j].x == line && i ==this.HattingPos[j].y){
                             find= true;
@@ -543,7 +560,7 @@ cc.Class({
             for(var i = 0;i<this.rowNum;i++){//当前行可以删除的
                 if(this.blocks[line]&&this.checkCanDestroy(line,i) ){
                     let find = false;
-                    for(let j=1;j<=4;j++){
+                    for(let j=3;j<=6;j++){
                         if( this.HattingPos && this.HattingPos[j]){
                             if(this.HattingPos[j].x == line && i ==this.HattingPos[j].y){
                                 find= true;
@@ -562,7 +579,6 @@ cc.Class({
 
         let location = this.hammerpos(line,row);
         let texiao=this.getEffByBlock(line,row);
-        // ParticleSystemCenter.addParticleForNode(texiao+".plist",this.GameMenuController.node,location);
         if(this.HattingPos == null){
             this.HattingPos= {};
         }
@@ -608,7 +624,6 @@ cc.Class({
             let y= this.HattingPos[hammerpos].y;
             let x= this.HattingPos[hammerpos].x;
             if(cc.isValid(this.blocks[x][y])){
-                // this.blocks[x][y].destroy();
                 this.destroyBlock(x,y);
             }
             this.cameraCentPosY();
@@ -623,11 +638,21 @@ cc.Class({
         let realwidth=this.blockWidth+this.blockBlank;
         var line = Math.floor((point.y-(gameY-cameraY+BaseHeight - BaseGame))/realwidth);
         var row = Math.floor((point.x-this.margins - this.blockBlank)/realwidth);
+        let find = false;
         if(this.checkCanDestroy(line,row)){
-            let location = this.hammerpos(line,row);
-            let texiao=this.getEffByBlock(line,row);
-            // ParticleSystemCenter.addParticleForNode(texiao+".plist",this.GameMenuController.node,location);
-            this.destroyBlock(line,row);
+            for(var i=3;i<7;i++){
+                if(this.HattingPos != null && this.HattingPos[i] != null && this.HattingPos[i] != undefined){
+                    if(this.HattingPos[i].x == line && this.HattingPos[i].y == row ){
+                        this.hammers[i].node.active = false;
+                        this.smCallback(i);
+                        find =true;
+                        break;
+                    }
+                }
+            }
+            if(!find){
+                this.destroyBlock(line,row);
+            }
         }
     },
     touchStartCallBack:function (location) {
@@ -635,6 +660,7 @@ cc.Class({
             return;
         }
         if(this.gameState == GameState.end){
+            this.bgopenbox.node.active = false;
             this.restart();
         }
         if(location.x<this.margins || location.x >(2*BaseWidth-this.margins)){
@@ -646,6 +672,7 @@ cc.Class({
         this.motionStreak.node.setPositionX(location.x);
         this.motionStreak.node.setPositionY(location.y);
         this.motionStreak.reset();
+
         // this.isTouching = false;
     },
 
@@ -690,10 +717,17 @@ cc.Class({
     update:function(){
         this.cameraCentPosY();
     },
-    eventcallback: function(type, id) {
+    eventcallback: function(type, id, string = null) {
         // let node= this.itemList.indexOf(sender);
         switch (type) {
             case 0:
+                if(string == null)
+                    this.accleleratorChange(id);
+                else{
+                    if(string == 'finish'){
+                        this.accleleratorrRecover(id);
+                    }
+                }
                 break;
             case 1:
                 // let info = ToolConfig[id];
@@ -705,6 +739,47 @@ cc.Class({
             case 2:
                 break;
         }
+    },
+    accleleratorChange:function(id){
+        let conf = AcceleratorConfig[id];
+        Global['bar'+id]= conf.time;
+        this.changeHammerSpeed();
+        this.GameMenuController.updateButtom();
+
+    },
+    accleleratorrRecover:function(id){
+        this.changeHammerSpeed();
+        this.GameMenuController.updateButtom();
+    },
+
+    changeHammerSpeed:function(){
+        let speedHammer = 0;
+        let speedGold = 0;
+        for (let i = 1 ;i<=2;i++){
+            if(Global['bar'+i]>0){
+                speedHammer +=AcceleratorConfig[i].speed;
+                speedGold+=AcceleratorConfig[i].coin;
+            }
+        }
+
+
+        if(speedHammer ==0){
+            speedHammer = 1;
+        }
+        if(speedGold == 0){
+            speedGold = 1;
+        }
+        this.accelerHammer = speedHammer;
+        this.accelerGold = speedGold;
+        for(let i = 3;i<=6; i++ ){
+            if( this.hammers[i] != undefined){
+                let conf1=AttributeConfig[Global.hammer[i].attribute];
+                this.hammers[i].timeScale = 0.17*(conf1.att/parseFloat(conf1.time))* this.accelerHammer;
+            }
+        }
+    },
+    changeGoldSpeed:function(){
+
     },
     toolChange:function(id) {
         let info = ToolConfig[id];
@@ -742,7 +817,7 @@ cc.Class({
                 Global.hammer[id].attribute = conf.next;
                 let conf1=AttributeConfig[conf.next];
                 Global.saveHammer(Global.hammer);
-                this.hammers[id].timeScale = 0.17*(conf1.att/parseFloat(conf1.time));
+                this.hammers[id].timeScale = 0.17*(conf1.att/parseFloat(conf1.time)) * this.accelerHammer;
             }
             this.GameMenuController.updateDate(mess);
         }
@@ -854,6 +929,7 @@ cc.Class({
                 }
             }
             this.createRewardItem(reward[i],i);
+            this.bgopenbox.node.active = true;
         }
         if(gold>0 || gem >0){
             let golds = Global.gold+gold;
@@ -865,13 +941,13 @@ cc.Class({
 
     },
     initTreasure:function(){
-        let BoxID = StageConfig[this.hard].box;
+        let BoxID = StageConfig[Global.hard].box;
         let BoxConf = BoxConfig[BoxID];
         this.treasure.normalSprite = SpriteFrameCenter.getFrameFromAtlas("png/box",BoxConf.icon+".png");
         this.treasure.pressedSprite = SpriteFrameCenter.getFrameFromAtlas("png/box",BoxConf.icon+".png");
         this.treasure.hoverSprite = SpriteFrameCenter.getFrameFromAtlas("png/box",BoxConf.icon+".png");
         this.treasure.disabledSprite = SpriteFrameCenter.getFrameFromAtlas("png/box",BoxConf.icon+".png");
-        let animation = BoxConf.animation+".json";
+        let animation = BoxConf.animation;
         SkeletonDataCenter.addSkeletonDataWait(animation,  this.boxSpine);
         this.treasure.node.y = - GameHeight/2+ this.blockWidth+35 -20;
         this.boxSpine.node.y = - GameHeight/2+ this.blockWidth+35 -20;
@@ -888,13 +964,22 @@ cc.Class({
         let location = this.treasure.node.position;
         this.rewardItem[i]=(node);
         node.position = location;
-        let action =cc. moveTo(0.5,cc.p(start,-20));
+        let action =cc.moveTo(0.5,cc.p(start,10));
         let action2 = cc.callFunc(()=> {
             node.getComponent("RewardItem").setFinish();
         },this);
         // node.runAction(cc. moveTo(0.5,cc.p(start,-20)));
         this.gameNode.addChild(node);
         node.runAction(cc.sequence(action, action2));
+    },
+    onclickOtherBtn:function(){
+        let line = 2;
+        for(let row = 9; row>=0;row-- ) {
+            let location = this.hammerpos(line, row);
+            let texiao = this.getEffByBlock(line, row);
+            console.log("line:",line,"row:",row,location);
+            ParticleSystemCenter.addParticleForNode(texiao, this.GameMenuController.node, location);
+        }
     }
 });
 //

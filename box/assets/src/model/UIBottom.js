@@ -9,7 +9,6 @@ let GameType = require("GameType");
 let SpriteFrameCenter = require("SpriteFrameCenter");
 let LanguageConfig = require("LanguageConfig");
 const config=[AcceleratorConfig,ToolConfig,EfficiencyConfig];
-const btnPng=["btn_juhuang","btn_lanse","btn_heise"];
 let Global = require("Global");
 let GameUtils = require("GameUtils");
 
@@ -22,6 +21,7 @@ cc.Class({
         desc_1:cc.Label,
         desc_2:cc.Label,
         btn:cc.Button,
+        progressBar:cc.ProgressBar,
         btntext:cc.Label,
 
 
@@ -40,12 +40,18 @@ cc.Class({
         eventcallback:{
             visible: false,
             default: null
+        },
+        checkisrun:{
+            visible:false,
+            default:false
         }
 
     },
     onLoad:function(){
-
     },
+    init: function(){
+    },
+
     setIcon:function(){
         let pngname;
         if(GameType.bottomRadio.Efficiency == this.type){
@@ -55,6 +61,13 @@ cc.Class({
             pngname = config[this.type][this.ID].icon;
             this.icon.spriteFrame = SpriteFrameCenter.getFrameFromAtlas("png/box",pngname+".png");
         }
+    },
+    setBtnIcon:function(num){
+        this.btnname=['btn_heise','btn_juhuang','btn_lanse'];
+        // this.btn.sp.spriteFrame =SpriteFrameCenter.getFrameFromAtlas("png/box",this.btnname[num]+".png");
+        this.btn.normalSprite =SpriteFrameCenter.getFrameFromAtlas("png/box",this.btnname[num]+".png");
+        this.btn.pressedSprite =SpriteFrameCenter.getFrameFromAtlas("png/box",this.btnname[num]+".png");
+        this.btn.hoverSprite =SpriteFrameCenter.getFrameFromAtlas("png/box",this.btnname[num]+".png");
     },
     setDesc_1:function() {
         let desc  = config[this.type][this.ID].desc;
@@ -87,10 +100,6 @@ cc.Class({
     setBtnVisible:function(bool){
         this.btn.node.active= bool;
     },
-    setBtnPng:function(type){
-        this.btn.node.spriteFrame = SpriteFrameCenter.getFrameFromAtlas("png/box",btnPng[type]+".png");
-
-    },
     setConfigInfo:function (type,info,callback){
         this.type = type;
         this.ID = info.id;
@@ -99,65 +108,120 @@ cc.Class({
         this.setDesc_1();
         this.setBtnDesc();
         this.setBtnVisible(true);
-        this.setBtnPng(1);
         this.eventcallback = callback;
         this.setBtnState();
+        if(this.type ==1){
+            this.setBtnIcon(2);
+        }else if(this.type == 1){
+            this.setBtnIcon(1);
+
+        }
     },
     setBtnState:function(){
-        let level = Global.level;
-        if(this.type == 1){
-            let conf = ToolConfig[this.ID];
-            let thisID;
-            let confArry;
-            if("unlock" in conf){
-                if(conf.unlock.indexOf(";") != -1){
-                    confArry = conf.unlock.split(";");
-                    thisID=confArry[0];
-                }else{
-                    thisID=parseInt(conf.unlock);
-                }
-                if(thisID == -1) {
-                   return;
-                }
-                let active = false;
-                if(Global.hammer[this.ID] == null || Global.hammer[this.ID]  == undefined){//没有激活
-                    if(thisID == 0){//点击激活
-                        this.ButtonState(1);
-                        this.btntext.string="touch active";
-                    }else if(thisID == 1){//视频激励
-                        this.btntext.string = "n:"+thisID+"c:"+Global.openAdTimes;
-                    }else if(thisID == 2){//等级激活
-                        let needlvl = confArry[1];
-                        if(level<needlvl){
-                            this.ButtonState(0);
-                            this.btntext.string=needlvl+"级解锁";
-                        }else{
-                            this.ButtonState(1);
-                            this.btntext.string="touchactive";
-                        }
-
-                    }else if(thisID == 3){//邀请好友
-                        this.btntext.string = "n:"+confArry[1]+"c:"+Global.inviteFriends;
-
-                    }
-                } else if(  AttributeConfig[Global.hammer[this.ID].attribute].next == -1){//达到最大
-                    this.ButtonState(0);
-                    this.btntext.string = "max";
-                }
-                else{//升级条件
-                    let conf1= AttributeConfig[Global.hammer[this.ID].attribute];
-                    if(conf1.costtype = 1001){
-                        if(Global.gold>conf1.cost){
-                            this.ButtonState(1);
-                        }else{
-                            this.ButtonState(0);
-                        }
-                        this.btntext.string = GameUtils.formatNum(conf1.cost);
-                    }
-                }
-
-            }
+        switch(this.type){
+            case 0:
+                this.setType0BtnState();
+                break;
+            case 1:
+                this.setType1BtnState();
+                break;
+            case 2:
+                this.setType2BtnState();
+                break;
         }
+
+    },
+    setType0BtnState:function(){
+        if(this.checkisrun)
+            return;
+        let btntextColor=['#000000','#ffffff',];
+        let conf = AcceleratorConfig[this.ID];
+        let bool = Global['bar'+this.ID] <= 0;
+        if(bool){
+            this.btntext.string =GameUtils.formatTime(conf.time);
+            this.btntext.node.color = new cc.Color(btntextColor[1]);
+        }else{
+            this.btntext.string =GameUtils.formatTime(Global['bar'+this.ID]);
+            this.btntext.node.color = new cc.Color(btntextColor[0]);
+        }
+        this.btn.node.active = bool;
+        this.progressBar.node.active = !bool;
+        this.progressBar.progress = Global['bar'+this.ID]/conf.time;
+        let self = this;
+        this.callback = function(){
+            self.btntext.string = GameUtils.formatTime(Global['bar'+self.ID]);
+
+            self.progressBar.progress = Global['bar'+this.ID]/conf.time;
+            if(Global['bar'+self.ID] <=0){
+
+                this.unschedule(this.callback);
+                this.checkisrun= false;
+                self.eventcallback(this.type,self.ID,'finish');
+            }
+            Global['bar'+self.ID]--;
+        }
+        if(!bool){
+            this.checkisrun= true;
+            this.schedule(this.callback,1)
+        }
+    },
+    setType1BtnState:function(){
+        let level = Global.level;
+        let conf = ToolConfig[this.ID];
+        let thisID;
+        let confArry;
+        if("unlock" in conf){
+            if(conf.unlock.indexOf(";") != -1){
+                confArry = conf.unlock.split(";");
+                thisID=confArry[0];
+            }else{
+                thisID=parseInt(conf.unlock);
+            }
+            if(thisID == -1) {
+                return;
+            }
+            let active = false;
+            if(Global.hammer[this.ID] == null || Global.hammer[this.ID]  == undefined){//没有激活
+                if(thisID == 0){//点击激活
+                    this.ButtonState(1);
+                    this.btntext.string="touch active";
+                }else if(thisID == 1){//视频激励
+                    this.btntext.string = "n:"+thisID+"c:"+Global.openAdTimes;
+                }else if(thisID == 2){//等级激活
+                    let needlvl = confArry[1];
+                    if(level<needlvl){
+                        this.ButtonState(0);
+                        this.btntext.string=needlvl+"级解锁";
+                    }else{
+                        this.ButtonState(1);
+                        this.btntext.string="touchactive";
+                    }
+
+                }else if(thisID == 3){//邀请好友
+                    this.btntext.string = "n:"+confArry[1]+"c:"+Global.inviteFriends;
+
+                }
+            } else if(  AttributeConfig[Global.hammer[this.ID].attribute].next == -1){//达到最大
+                this.ButtonState(0);
+                this.btntext.string = "max";
+            }
+            else{//升级条件
+                let conf1= AttributeConfig[Global.hammer[this.ID].attribute];
+                if(conf1.costtype = 1001){
+                    if(Global.gold>conf1.cost){
+                        this.ButtonState(1);
+                    }else{
+                        this.ButtonState(0);
+                    }
+                    this.btntext.string = GameUtils.formatNum(conf1.cost);
+                }
+            }
+
+        }
+    },
+    setType2BtnState:function(){
+        let conf = EfficiencyConfig[this.ID];
+
     },
     //1 可以点击  0 不可以点击
     ButtonState:function(v){

@@ -33,7 +33,10 @@ module.exports = function () {
             },
             addgold: 0,
             addgem: 0,
-            freindsInfo: []
+            freindsInfo: [],
+            bar1: 0, //加速1加速buff1
+            bar2: 0 //加速1加速buff2,
+
 
         },
 

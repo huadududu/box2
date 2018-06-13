@@ -1,88 +1,71 @@
-2018-06-12T15:20:54.277Z - normal: Load ~/.CocosCreator/settings.json
-2018-06-12T15:20:54.283Z - normal: checking language setting...
-2018-06-12T15:20:54.283Z - normal: Language: zh
-2018-06-12T15:20:56.736Z - success: protocol editor-framework registered
-2018-06-12T15:20:56.736Z - success: protocol app registered
-2018-06-12T15:20:56.736Z - success: protocol theme registered
-2018-06-12T15:20:56.736Z - success: protocol packages registered
-2018-06-12T15:20:56.737Z - success: protocol unpack registerred
-2018-06-12T15:20:56.737Z - success: protocol disable-commonjs registerred
-2018-06-12T15:20:56.984Z - normal: connected!
-2018-06-12T15:20:56.986Z - normal: Check project E:\gittest\box2\box
-2018-06-12T15:20:56.991Z - normal: Initializing Cocos2d
-2018-06-12T15:20:57.447Z - normal: Initializing Asset Database
-2018-06-12T15:20:57.477Z - success: protocol uuid registerred
-2018-06-12T15:20:57.477Z - success: protocol db registerred
-2018-06-12T15:20:57.477Z - success: protocol thumbnail registerred
-2018-06-12T15:20:57.477Z - normal: Loading editor/builtin packages
-2018-06-12T15:20:57.550Z - success: anysdk loaded
-2018-06-12T15:20:57.668Z - success: assets loaded
-2018-06-12T15:20:57.669Z - success: builder loaded
-2018-06-12T15:20:57.671Z - success: cocos-analytics loaded
-2018-06-12T15:20:57.673Z - success: console loaded
-2018-06-12T15:20:57.702Z - success: fb-instant-games loaded
-2018-06-12T15:20:57.705Z - success: hierarchy loaded
-2018-06-12T15:20:57.708Z - success: inspector loaded
-2018-06-12T15:20:57.727Z - success: keystore loaded
-2018-06-12T15:20:57.735Z - success: node-library loaded
-2018-06-12T15:20:57.737Z - success: package-asset loaded
-2018-06-12T15:20:57.738Z - success: preferences loaded
-2018-06-12T15:20:57.739Z - success: project-exporter loaded
-2018-06-12T15:20:57.751Z - success: project-importer loaded
-2018-06-12T15:20:57.753Z - success: project-settings loaded
-2018-06-12T15:20:57.754Z - success: ui-kit loaded
-2018-06-12T15:20:57.760Z - success: ui-grid loaded
-2018-06-12T15:20:57.762Z - success: scene loaded
-2018-06-12T15:20:57.764Z - success: sprite-editor loaded
-2018-06-12T15:20:57.766Z - success: store loaded
-2018-06-12T15:20:57.769Z - success: timeline loaded
-2018-06-12T15:20:57.770Z - normal: Loading builtin packages
-2018-06-12T15:20:57.780Z - success: asset-db-debugger loaded
-2018-06-12T15:20:57.782Z - success: code-editor loaded
-2018-06-12T15:20:57.786Z - success: color-picker loaded
-2018-06-12T15:20:57.788Z - success: package-manager loaded
-2018-06-12T15:20:57.792Z - success: sdkbox loaded
-2018-06-12T15:20:57.794Z - success: tester loaded
-2018-06-12T15:20:57.795Z - success: ui-kit-preview-extra loaded
-2018-06-12T15:20:57.796Z - success: ui-kit-preview loaded
-2018-06-12T15:20:57.798Z - success: ui-tree loaded
-2018-06-12T15:20:59.071Z - normal: Initializing project E:\gittest\box2\box
-2018-06-12T15:20:59.073Z - normal: Loading packages
-2018-06-12T15:20:59.077Z - normal: Watching packages
-2018-06-12T15:20:59.096Z - normal: Run Application
-2018-06-12T15:21:03.541Z - success: preview server running at http://localhost:7456
-2018-06-12T15:21:07.432Z - normal: 1.9.0
-2018-06-12T15:21:07.817Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
-2018-06-12T16:02:32.459Z - failed: [db-task][sync-changes] Failed to import asset E:\gittest\box2\box\assets\src\controller\GameMenuController.js, message: Compile error: SyntaxError: E:/gittest/box2/box/assets/src/controller/GameMenuController.js: Unexpected token (42:4)
-  40 |         this.itemList=[];
-  41 |         this.btnColor=['#ffa30f','#f0f0f0'];
-> 42 |     ,
-     |     ^
-  43 |     addUIBottom:function(){
-  44 |         if(this.config == undefined)
-  45 |         {
-    at Parser.pp$5.raise (E:\CocosCreator\resources\app.asar\node_modules\babylon\lib\index.js:4454:13)
-    at Parser.pp.unexpected (E:\CocosCreator\resources\app.asar\node_modules\babylon\lib\index.js:1761:8)
-    at Parser.pp$3.parseExprAtom (E:\CocosCreator\resources\app.asar\node_modules\babylon\lib\index.js:3750:12)
-    at Parser.pp$3.parseExprSubscripts (E:\CocosCreator\resources\app.asar\node_modules\babylon\lib\index.js:3494:19)
-    at Parser.pp$3.parseMaybeUnary (E:\CocosCreator\resources\app.asar\node_modules\babylon\lib\index.js:3474:19)
-    at Parser.pp$3.parseExprOps (E:\CocosCreator\resources\app.asar\node_modules\babylon\lib\index.js:3404:19)
-    at Parser.pp$3.parseMaybeConditional (E:\CocosCreator\resources\app.asar\node_modules\babylon\lib\index.js:3381:19)
-    at Parser.pp$3.parseMaybeAssign (E:\CocosCreator\resources\app.asar\node_modules\babylon\lib\index.js:3344:19)
-    at Parser.pp$3.parseExpression (E:\CocosCreator\resources\app.asar\node_modules\babylon\lib\index.js:3306:19)
-    at Parser.pp$1.parseStatement (E:\CocosCreator\resources\app.asar\node_modules\babylon\lib\index.js:1906:19)
-2018-06-12T16:07:21.917Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
-2018-06-12T16:18:40.088Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
-2018-06-12T16:22:37.700Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
-2018-06-12T16:24:35.736Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
-2018-06-12T16:29:29.744Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
-2018-06-12T16:29:56.945Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
-2018-06-12T16:31:46.727Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
-2018-06-12T16:32:57.255Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
-2018-06-12T16:35:10.036Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
-2018-06-12T16:40:00.748Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
-2018-06-12T16:40:37.219Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
-2018-06-12T16:43:30.219Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
-2018-06-12T16:45:10.032Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
-2018-06-12T16:46:23.398Z - warn: 'GameMenuController.node' hides inherited property 'cc.Component.node'. To make the current property overwrite that implementation, add the `override: true` attribute please.
-2018-06-12T16:51:57.564Z - info: shutdown preview server
+2018-06-13T11:39:10.406Z - normal: Load ~/.CocosCreator/settings.json
+2018-06-13T11:39:10.409Z - normal: checking language setting...
+2018-06-13T11:39:10.409Z - normal: Language: zh
+2018-06-13T11:39:10.930Z - success: protocol editor-framework registered
+2018-06-13T11:39:10.930Z - success: protocol app registered
+2018-06-13T11:39:10.930Z - success: protocol theme registered
+2018-06-13T11:39:10.930Z - success: protocol packages registered
+2018-06-13T11:39:10.931Z - success: protocol unpack registerred
+2018-06-13T11:39:10.931Z - success: protocol disable-commonjs registerred
+2018-06-13T11:39:11.079Z - normal: connected!
+2018-06-13T11:39:11.081Z - normal: Check project /Users/bolex1/work/game/box/box
+2018-06-13T11:39:11.082Z - normal: Initializing Cocos2d
+2018-06-13T11:39:11.249Z - normal: Initializing Asset Database
+2018-06-13T11:39:11.270Z - success: protocol uuid registerred
+2018-06-13T11:39:11.270Z - success: protocol db registerred
+2018-06-13T11:39:11.270Z - success: protocol thumbnail registerred
+2018-06-13T11:39:11.270Z - normal: Loading editor/builtin packages
+2018-06-13T11:39:11.283Z - success: anysdk loaded
+2018-06-13T11:39:11.368Z - success: assets loaded
+2018-06-13T11:39:11.371Z - success: builder loaded
+2018-06-13T11:39:11.372Z - success: cocos-analytics loaded
+2018-06-13T11:39:11.375Z - success: console loaded
+2018-06-13T11:39:11.400Z - success: fb-instant-games loaded
+2018-06-13T11:39:11.403Z - success: hierarchy loaded
+2018-06-13T11:39:11.406Z - success: inspector loaded
+2018-06-13T11:39:11.407Z - success: keystore loaded
+2018-06-13T11:39:11.413Z - success: node-library loaded
+2018-06-13T11:39:11.416Z - success: package-asset loaded
+2018-06-13T11:39:11.417Z - success: preferences loaded
+2018-06-13T11:39:11.419Z - success: project-exporter loaded
+2018-06-13T11:39:11.429Z - success: project-importer loaded
+2018-06-13T11:39:11.432Z - success: project-settings loaded
+2018-06-13T11:39:11.434Z - success: ui-kit loaded
+2018-06-13T11:39:11.438Z - success: ui-grid loaded
+2018-06-13T11:39:11.441Z - success: scene loaded
+2018-06-13T11:39:11.441Z - success: sprite-editor loaded
+2018-06-13T11:39:11.445Z - success: store loaded
+2018-06-13T11:39:11.449Z - success: timeline loaded
+2018-06-13T11:39:11.449Z - normal: Loading builtin packages
+2018-06-13T11:39:11.452Z - success: asset-db-debugger loaded
+2018-06-13T11:39:11.453Z - success: color-picker loaded
+2018-06-13T11:39:11.455Z - success: package-manager loaded
+2018-06-13T11:39:11.459Z - success: sdkbox loaded
+2018-06-13T11:39:11.463Z - success: tester loaded
+2018-06-13T11:39:11.466Z - success: ui-kit-preview-extra loaded
+2018-06-13T11:39:11.469Z - success: ui-kit-preview loaded
+2018-06-13T11:39:11.471Z - success: ui-tree loaded
+2018-06-13T11:39:12.168Z - normal: Initializing project /Users/bolex1/work/game/box/box
+2018-06-13T11:39:12.170Z - normal: Loading packages
+2018-06-13T11:39:12.175Z - normal: Watching packages
+2018-06-13T11:39:12.184Z - normal: Run Application
+2018-06-13T11:39:12.645Z - success: preview server running at http://localhost:7456
+2018-06-13T11:39:16.174Z - normal: 1.9.1
+2018-06-13T12:52:18.023Z - failed: [db-task][sync-changes] Failed to import asset /Users/bolex1/work/game/box/box/assets/src/controller/BoxController.js, message: Compile error: SyntaxError: /Users/bolex1/work/game/box/box/assets/src/controller/BoxController.js: Unexpected token, expected ) (644:73)
+  642 |         if(this.checkCanDestroy(line,row)){
+  643 |             for(var i=3;i<7;i++){
+> 644 |                 if(this.HattingPos != null && this.HattingPos[i] != null this.HattingPos[i] != undefined){
+      |                                                                          ^
+  645 |                     if(this.HattingPos[i].x == line && this.HattingPos[i].y == row ){
+  646 |                         this.hammers[i].node.active = false;
+  647 |                         this.setSmPosition(i);
+    at Parser.pp$5.raise (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:4454:13)
+    at Parser.pp.unexpected (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:1761:8)
+    at Parser.pp.expect (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:1749:33)
+    at Parser.pp$3.parseParenExpression (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:3790:8)
+    at Parser.pp$1.parseIfStatement (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:2058:20)
+    at Parser.pp$1.parseStatement (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:1846:19)
+    at Parser.pp$1.parseBlockBody (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:2268:21)
+    at Parser.pp$1.parseBlock (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:2247:8)
+    at Parser.pp$1.parseStatement (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:1868:19)
+    at Parser.pp$1.parseFor (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:2306:20)

@@ -21,5 +21,20 @@ module.exports = {
             str = ""+num;
         }
         return str;
-    }
+    },
+    formatTime(num){
+        let str="";
+        if(num>=3600){
+            str+=Math.floor(num/3600)+"h";
+            num%=3600;
+        }
+        if(num >= 60){
+            str+=Math.floor(num/60)+"min";
+            num%=60;
+        }
+        if(num>0){
+           str+= Math.floor(num)+"s";
+        }
+        return str;
+     }
 };

@@ -36,18 +36,34 @@ var SC = cc.Class({
 
 
         var node = new cc.Node();
-        // let newpt = parentNode.convertToNodeSpaceAR(nodePt);
         node.setPosition(nodePt.x, nodePt.y);
         parentNode.addChild(node);
         node.name = this.index.toString();
         this.index++;
-
+        fileName = fileName.replace(/\s+/g, "");
         // ParticleSystemCenter.addParticleForNode("jk_lz.plist",cc.p(360,360));
-
+        console.log(fileName);
         var particleSystem = node.addComponent(cc.ParticleSystem);
         particleSystem.file = cc.url.raw("resources/particle/" + fileName);
         particleSystem.autoRemoveOnFinish = true;
-        particleSystem.resetSystem();
+        // particleSystem.resetSystem();
+        // console.log(nodePt);
+
+        // cc.loader.loadRes('particle/'+fileName, cc.ParticleAsset, function (err, atlas) {
+        //     if(err){
+        //         console.log("preLoadAtlas fail when load " + fileName);
+        //     }else{
+        //         console.log("preLoadAtlas OK -> " + fileName);
+        //         particleSystem= atlas;
+        //         particleSystem.autoRemoveOnFinish = true;
+        //         // particleSystem.resetSystem();
+        //     }
+        // });
+        // particleSystem.onDestroy(trackEntry =>{
+        //     console.log("particleSystem end.", trackEntry.trackIndex, node.name);
+        //     }
+        //
+        // );
     }
 
 });
