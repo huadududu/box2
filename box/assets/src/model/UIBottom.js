@@ -71,6 +71,28 @@ cc.Class({
     },
     setDesc_1:function() {
         let desc  = config[this.type][this.ID].desc;
+        if(!desc){
+            this.desc_1.string = "config fault";
+            return;
+        }
+        if(LanguageConfig[desc] && LanguageConfig[desc][this.language]){
+            desc=  LanguageConfig[desc][this.language];
+        }
+        if(this.type == 0 ){
+            if(config[this.type][this.ID].speed>0)
+                desc= this.formatPrint(desc,config[this.type][this.ID].speed,config[this.type][this.ID].coin);
+            else
+                desc= this.formatPrint(desc,config[this.type][this.ID].coin);
+        }else if(this.type == 1){
+            desc= this.formatPrint(desc,config[this.type][this.ID].att,config[this.type][this.ID].time);
+
+        }else{
+            if(config[this.type][this.ID].time>0){
+                desc= this.formatPrint(desc,config[this.type][this.ID].time);
+            }else{
+                desc= this.formatPrint(desc,config[this.type][this.ID].jumptime);
+            }
+        }
         this.desc_1.string = desc;
     },
     setTitle:function (){
@@ -80,6 +102,10 @@ cc.Class({
         }else if(LanguageConfig[title] && LanguageConfig[title][this.language]){
 
             title = LanguageConfig[title][this.language];
+        }
+        if(this.type == 2 &&config[this.type][this.ID].coin>0){
+
+            title=this.formatPrint(title,config[this.type][this.ID].coin);
         }
         this.title.string = title;
     },
@@ -248,5 +274,16 @@ cc.Class({
     },
     onClickButton:function(){
         this.eventcallback(this.type,this.ID);
+    },
+    formatPrint:function() {
+        var num = arguments.length;
+
+        var oStr = arguments[0];
+
+        for (var i = 1; i < num; i++) {
+            oStr = oStr.replace(/s%/, arguments[i]);
+        }
+
+        return oStr;
     }
 })

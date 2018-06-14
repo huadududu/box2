@@ -13,13 +13,13 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.6993348">
+    <splitter split-orientation="horizontal" split-proportion="0.3948655">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file leaf-file-name="SkeletonDataCenter.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/assets/src/controller/SkeletonDataCenter.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="355">
+                <state relative-caret-position="360">
                   <caret line="20" column="4" selection-start-line="20" selection-start-column="4" selection-end-line="20" selection-end-column="4" />
                 </state>
               </provider>
@@ -28,7 +28,7 @@
           <file leaf-file-name="LocalStorage.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/assets/src/utils/LocalStorage.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="616">
+                <state relative-caret-position="504">
                   <caret line="28" column="16" selection-start-line="28" selection-start-column="16" selection-end-line="28" selection-end-column="16" />
                 </state>
               </provider>
@@ -37,17 +37,26 @@
           <file leaf-file-name="ParticleSystemCenter.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/assets/src/controller/ParticleSystemCenter.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="604">
-                  <caret line="49" column="23" selection-start-line="49" selection-start-column="23" selection-end-line="49" selection-end-column="23" />
+                <state relative-caret-position="882">
+                  <caret line="65" selection-start-line="65" selection-end-line="65" />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="BoxController.js" pinned="false" current-in-tab="true">
+          <file leaf-file-name="BoxController.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/assets/src/controller/BoxController.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="328">
-                  <caret line="557" column="78" selection-start-line="557" selection-start-column="78" selection-end-line="557" selection-end-column="78" />
+                <state relative-caret-position="76">
+                  <caret line="696" column="38" selection-start-line="696" selection-start-column="38" selection-end-line="696" selection-end-column="38" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="GameUtils.js" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/assets/src/utils/GameUtils.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="679">
+                  <caret line="50" column="45" selection-start-line="50" selection-start-column="36" selection-end-line="50" selection-end-column="45" />
                 </state>
               </provider>
             </entry>
@@ -55,8 +64,26 @@
           <file leaf-file-name="EfficiencyConfig.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/assets/src/model/EfficiencyConfig.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="66">
-                  <caret line="3" column="55" selection-start-line="3" selection-start-column="55" selection-end-line="3" selection-end-column="55" />
+                <state relative-caret-position="54">
+                  <caret line="3" column="124" selection-start-line="3" selection-start-column="116" selection-end-line="3" selection-end-column="124" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="ToolConfig.js" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/assets/src/model/ToolConfig.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="54">
+                  <caret line="3" column="398" selection-start-line="3" selection-start-column="398" selection-end-line="3" selection-end-column="398" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="LanguageConfig.js" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/assets/src/model/LanguageConfig.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="54">
+                  <caret line="3" column="2101" lean-forward="true" selection-start-line="3" selection-start-column="2093" selection-end-line="3" selection-end-column="2101" />
                 </state>
               </provider>
             </entry>
@@ -64,7 +91,7 @@
           <file leaf-file-name="BlockSmallFactory.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/assets/src/model/BlockSmallFactory.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1012">
+                <state relative-caret-position="828">
                   <caret line="46" column="53" selection-start-line="46" selection-start-column="53" selection-end-line="46" selection-end-column="53" />
                 </state>
               </provider>
@@ -73,8 +100,8 @@
           <file leaf-file-name="AcceleratorConfig.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/assets/src/model/AcceleratorConfig.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="66">
-                  <caret line="3" column="126" selection-start-line="3" selection-start-column="126" selection-end-line="3" selection-end-column="126" />
+                <state relative-caret-position="54">
+                  <caret line="3" column="69" lean-forward="true" selection-start-line="3" selection-start-column="69" selection-end-line="3" selection-end-column="69" />
                 </state>
               </provider>
             </entry>
@@ -86,8 +113,8 @@
           <file leaf-file-name="UIBottom.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/assets/src/model/UIBottom.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="519">
-                  <caret line="225" column="18" selection-start-line="225" selection-start-column="18" selection-end-line="225" selection-end-column="18" />
+                <state relative-caret-position="397">
+                  <caret line="75" column="19" selection-start-line="75" selection-start-column="19" selection-end-line="75" selection-end-column="19" />
                   <folding>
                     <element signature="n#!!doc" expanded="true" />
                   </folding>
@@ -95,11 +122,16 @@
               </provider>
             </entry>
           </file>
+          <file leaf-file-name="EfficiencyConfig.js.meta" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/assets/src/model/EfficiencyConfig.js.meta">
+              <provider selected="true" editor-type-id="text-editor" />
+            </entry>
+          </file>
           <file leaf-file-name="Global.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/assets/src/model/Global.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="2134">
-                  <caret line="97" column="26" selection-start-line="97" selection-start-column="26" selection-end-line="97" selection-end-column="26" />
+                <state relative-caret-position="1818">
+                  <caret line="101" column="24" selection-start-line="101" selection-start-column="24" selection-end-line="101" selection-end-column="24" />
                 </state>
               </provider>
             </entry>
@@ -117,9 +149,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>BaseGame</find>
-      <find>reset</find>
-      <find>efficiency</find>
       <find>camera</find>
       <find>this.bgopenbox.node.</find>
       <find>rewarditem</find>
@@ -147,6 +176,9 @@
       <find>this.hammerEnd</find>
       <find>this.HattingPos =</find>
       <find>ssss</find>
+      <find>formatPrint</find>
+      <find>format</find>
+      <find>%s</find>
     </findStrings>
     <replaceStrings>
       <replace>openbox</replace>
@@ -169,7 +201,6 @@
         <option value="$PROJECT_DIR$/assets/src/model/BoxConfig1.js" />
         <option value="$PROJECT_DIR$/assets/src/model/BlockConfig.js" />
         <option value="$PROJECT_DIR$/assets/src/controller/GameMenuView.js" />
-        <option value="$PROJECT_DIR$/assets/src/model/LanguageConfig.js" />
         <option value="$PROJECT_DIR$/assets/src/model/AttributeConfig.js" />
         <option value="$PROJECT_DIR$/assets/src/model/uiBottom.js" />
         <option value="$PROJECT_DIR$/assets/src/view/GameMenuView.js" />
@@ -191,13 +222,15 @@
         <option value="$PROJECT_DIR$/assets/src/model/RewardItem.js" />
         <option value="$PROJECT_DIR$/assets/src/model/GameState.js" />
         <option value="$PROJECT_DIR$/assets/src/model/AcceleratorConfig.js" />
-        <option value="$PROJECT_DIR$/assets/src/utils/GameUtils.js" />
         <option value="$PROJECT_DIR$/assets/src/controller/GameMenuController.js" />
         <option value="$PROJECT_DIR$/assets/src/controller/SkeletonDataCenter.js" />
         <option value="$PROJECT_DIR$/assets/src/model/Global.js" />
-        <option value="$PROJECT_DIR$/assets/src/model/UIBottom.js" />
         <option value="$PROJECT_DIR$/assets/src/controller/ParticleSystemCenter.js" />
         <option value="$PROJECT_DIR$/assets/src/controller/BoxController.js" />
+        <option value="$PROJECT_DIR$/assets/src/utils/GameUtils.js" />
+        <option value="$PROJECT_DIR$/assets/src/model/EfficiencyConfig.js" />
+        <option value="$PROJECT_DIR$/assets/src/model/LanguageConfig.js" />
+        <option value="$PROJECT_DIR$/assets/src/model/UIBottom.js" />
       </list>
     </option>
   </component>
@@ -211,7 +244,8 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="104" />
+    <option name="x" value="-1024" />
+    <option name="y" value="306" />
     <option name="width" value="2560" />
     <option name="height" value="1251" />
   </component>
@@ -220,6 +254,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -270,7 +305,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -329,31 +363,31 @@
       <workItem from="1528855413006" duration="24607000" />
       <workItem from="1528940203620" duration="17475000" />
       <workItem from="1528974452505" duration="3351000" />
+      <workItem from="1528987226277" duration="5794000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="220362000" />
+    <option name="totallyTimeSpent" value="226156000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="104" width="2560" height="1251" extended-state="0" />
-    <editor active="true" />
+    <frame x="-1024" y="306" width="2560" height="1251" extended-state="0" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.11185506" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.11163522" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
-      <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Version Control" order="10" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Run" order="2" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="8" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="TypeScript" order="9" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="TypeScript" order="9" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info active="true" anchor="bottom" id="Find" order="1" visible="true" weight="0.17948718" />
@@ -375,8 +409,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/assets/src/controller/BoxController.js</url>
-          <line>218</line>
-          <properties lambdaOrdinal="-1" />
+          <line>228</line>
           <option name="timeStamp" value="17" />
         </line-breakpoint>
       </breakpoints>
@@ -384,13 +417,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/assets/src/model/Global.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2134">
-          <caret line="97" column="26" selection-start-line="97" selection-start-column="26" selection-end-line="97" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/assets/src/utils/JSExtends.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="604">
@@ -428,13 +454,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/src/controller/GameMenuView.js" />
-    <entry file="file://$PROJECT_DIR$/assets/src/model/LanguageConfig.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="3" column="5" selection-start-line="3" selection-start-column="5" selection-end-line="3" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/assets/src/model/LevelConfig.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="308">
@@ -484,13 +503,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="462">
           <caret line="21" column="5" selection-start-line="19" selection-start-column="4" selection-end-line="21" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/src/model/ToolConfig.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="3" column="398" selection-start-line="3" selection-start-column="398" selection-end-line="3" selection-end-column="398" />
         </state>
       </provider>
     </entry>
@@ -618,13 +630,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assets/src/utils/GameUtils.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="770">
-          <caret line="35" column="37" selection-start-line="35" selection-start-column="37" selection-end-line="35" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/assets/src/model/GameState.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="176">
@@ -648,67 +653,91 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/src/utils/LocalStorage.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="616">
+        <state relative-caret-position="504">
           <caret line="28" column="16" selection-start-line="28" selection-start-column="16" selection-end-line="28" selection-end-column="16" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/src/model/BlockSmallFactory.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1012">
+        <state relative-caret-position="828">
           <caret line="46" column="53" selection-start-line="46" selection-start-column="53" selection-end-line="46" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/src/model/EfficiencyConfig.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="3" column="55" selection-start-line="3" selection-start-column="55" selection-end-line="3" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/src/model/AcceleratorConfig.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="3" column="126" selection-start-line="3" selection-start-column="126" selection-end-line="3" selection-end-column="126" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/src/model/Global.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2134">
-          <caret line="97" column="26" selection-start-line="97" selection-start-column="26" selection-end-line="97" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/src/model/UIBottom.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="519">
-          <caret line="225" column="18" selection-start-line="225" selection-start-column="18" selection-end-line="225" selection-end-column="18" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
+        <state relative-caret-position="1818">
+          <caret line="101" column="24" selection-start-line="101" selection-start-column="24" selection-end-line="101" selection-end-column="24" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/src/controller/SkeletonDataCenter.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="355">
+        <state relative-caret-position="360">
           <caret line="20" column="4" selection-start-line="20" selection-start-column="4" selection-end-line="20" selection-end-column="4" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/src/controller/ParticleSystemCenter.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="604">
-          <caret line="49" column="23" selection-start-line="49" selection-start-column="23" selection-end-line="49" selection-end-column="23" />
+        <state relative-caret-position="882">
+          <caret line="65" selection-start-line="65" selection-end-line="65" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/src/controller/BoxController.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="328">
-          <caret line="557" column="78" selection-start-line="557" selection-start-column="78" selection-end-line="557" selection-end-column="78" />
+        <state relative-caret-position="76">
+          <caret line="696" column="38" selection-start-line="696" selection-start-column="38" selection-end-line="696" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/src/utils/GameUtils.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="679">
+          <caret line="50" column="45" selection-start-line="50" selection-start-column="36" selection-end-line="50" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/src/model/EfficiencyConfig.js.meta">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/src/model/LanguageConfig.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="3" column="2101" lean-forward="true" selection-start-line="3" selection-start-column="2093" selection-end-line="3" selection-end-column="2101" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/src/model/AcceleratorConfig.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="3" column="69" lean-forward="true" selection-start-line="3" selection-start-column="69" selection-end-line="3" selection-end-column="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/src/model/EfficiencyConfig.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="3" column="124" selection-start-line="3" selection-start-column="116" selection-end-line="3" selection-end-column="124" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/src/model/ToolConfig.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="3" column="398" selection-start-line="3" selection-start-column="398" selection-end-line="3" selection-end-column="398" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/src/model/UIBottom.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="397">
+          <caret line="75" column="19" selection-start-line="75" selection-start-column="19" selection-end-line="75" selection-end-column="19" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

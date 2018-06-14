@@ -1,0 +1,21 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "chutou_3",
+    "texture": "29aM+95wdIxIeKd3FagXUL",
+    "rect": [
+      1,
+      1,
+      87,
+      66
+    ],
+    "offset": [
+      -0.5,
+      0.5
+    ],
+    "originalSize": [
+      90,
+      69
+    ]
+  }
+}
