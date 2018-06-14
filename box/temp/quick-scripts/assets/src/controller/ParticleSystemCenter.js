@@ -42,7 +42,7 @@ var SC = cc.Class({
         this.index++;
         fileName = fileName.replace(/\s+/g, "");
         // ParticleSystemCenter.addParticleForNode("jk_lz.plist",cc.p(360,360));
-        console.log(fileName);
+        // console.log(fileName);
         var particleSystem = node.addComponent(cc.ParticleSystem);
         particleSystem.file = cc.url.raw("resources/particle/" + fileName);
         particleSystem.autoRemoveOnFinish = true;

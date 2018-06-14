@@ -1,71 +1,365 @@
-2018-06-13T11:39:10.406Z - normal: Load ~/.CocosCreator/settings.json
-2018-06-13T11:39:10.409Z - normal: checking language setting...
-2018-06-13T11:39:10.409Z - normal: Language: zh
-2018-06-13T11:39:10.930Z - success: protocol editor-framework registered
-2018-06-13T11:39:10.930Z - success: protocol app registered
-2018-06-13T11:39:10.930Z - success: protocol theme registered
-2018-06-13T11:39:10.930Z - success: protocol packages registered
-2018-06-13T11:39:10.931Z - success: protocol unpack registerred
-2018-06-13T11:39:10.931Z - success: protocol disable-commonjs registerred
-2018-06-13T11:39:11.079Z - normal: connected!
-2018-06-13T11:39:11.081Z - normal: Check project /Users/bolex1/work/game/box/box
-2018-06-13T11:39:11.082Z - normal: Initializing Cocos2d
-2018-06-13T11:39:11.249Z - normal: Initializing Asset Database
-2018-06-13T11:39:11.270Z - success: protocol uuid registerred
-2018-06-13T11:39:11.270Z - success: protocol db registerred
-2018-06-13T11:39:11.270Z - success: protocol thumbnail registerred
-2018-06-13T11:39:11.270Z - normal: Loading editor/builtin packages
-2018-06-13T11:39:11.283Z - success: anysdk loaded
-2018-06-13T11:39:11.368Z - success: assets loaded
-2018-06-13T11:39:11.371Z - success: builder loaded
-2018-06-13T11:39:11.372Z - success: cocos-analytics loaded
-2018-06-13T11:39:11.375Z - success: console loaded
-2018-06-13T11:39:11.400Z - success: fb-instant-games loaded
-2018-06-13T11:39:11.403Z - success: hierarchy loaded
-2018-06-13T11:39:11.406Z - success: inspector loaded
-2018-06-13T11:39:11.407Z - success: keystore loaded
-2018-06-13T11:39:11.413Z - success: node-library loaded
-2018-06-13T11:39:11.416Z - success: package-asset loaded
-2018-06-13T11:39:11.417Z - success: preferences loaded
-2018-06-13T11:39:11.419Z - success: project-exporter loaded
-2018-06-13T11:39:11.429Z - success: project-importer loaded
-2018-06-13T11:39:11.432Z - success: project-settings loaded
-2018-06-13T11:39:11.434Z - success: ui-kit loaded
-2018-06-13T11:39:11.438Z - success: ui-grid loaded
-2018-06-13T11:39:11.441Z - success: scene loaded
-2018-06-13T11:39:11.441Z - success: sprite-editor loaded
-2018-06-13T11:39:11.445Z - success: store loaded
-2018-06-13T11:39:11.449Z - success: timeline loaded
-2018-06-13T11:39:11.449Z - normal: Loading builtin packages
-2018-06-13T11:39:11.452Z - success: asset-db-debugger loaded
-2018-06-13T11:39:11.453Z - success: color-picker loaded
-2018-06-13T11:39:11.455Z - success: package-manager loaded
-2018-06-13T11:39:11.459Z - success: sdkbox loaded
-2018-06-13T11:39:11.463Z - success: tester loaded
-2018-06-13T11:39:11.466Z - success: ui-kit-preview-extra loaded
-2018-06-13T11:39:11.469Z - success: ui-kit-preview loaded
-2018-06-13T11:39:11.471Z - success: ui-tree loaded
-2018-06-13T11:39:12.168Z - normal: Initializing project /Users/bolex1/work/game/box/box
-2018-06-13T11:39:12.170Z - normal: Loading packages
-2018-06-13T11:39:12.175Z - normal: Watching packages
-2018-06-13T11:39:12.184Z - normal: Run Application
-2018-06-13T11:39:12.645Z - success: preview server running at http://localhost:7456
-2018-06-13T11:39:16.174Z - normal: 1.9.1
-2018-06-13T12:52:18.023Z - failed: [db-task][sync-changes] Failed to import asset /Users/bolex1/work/game/box/box/assets/src/controller/BoxController.js, message: Compile error: SyntaxError: /Users/bolex1/work/game/box/box/assets/src/controller/BoxController.js: Unexpected token, expected ) (644:73)
-  642 |         if(this.checkCanDestroy(line,row)){
-  643 |             for(var i=3;i<7;i++){
-> 644 |                 if(this.HattingPos != null && this.HattingPos[i] != null this.HattingPos[i] != undefined){
-      |                                                                          ^
-  645 |                     if(this.HattingPos[i].x == line && this.HattingPos[i].y == row ){
-  646 |                         this.hammers[i].node.active = false;
-  647 |                         this.setSmPosition(i);
-    at Parser.pp$5.raise (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:4454:13)
-    at Parser.pp.unexpected (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:1761:8)
-    at Parser.pp.expect (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:1749:33)
-    at Parser.pp$3.parseParenExpression (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:3790:8)
-    at Parser.pp$1.parseIfStatement (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:2058:20)
-    at Parser.pp$1.parseStatement (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:1846:19)
-    at Parser.pp$1.parseBlockBody (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:2268:21)
-    at Parser.pp$1.parseBlock (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:2247:8)
-    at Parser.pp$1.parseStatement (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:1868:19)
-    at Parser.pp$1.parseFor (/Applications/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:2306:20)
+2018-06-14T07:15:54.925Z - normal: Load ~/.CocosCreator/settings.json
+2018-06-14T07:15:54.927Z - normal: checking language setting...
+2018-06-14T07:15:54.928Z - normal: Language: zh
+2018-06-14T07:15:55.518Z - success: protocol editor-framework registered
+2018-06-14T07:15:55.518Z - success: protocol app registered
+2018-06-14T07:15:55.518Z - success: protocol theme registered
+2018-06-14T07:15:55.518Z - success: protocol packages registered
+2018-06-14T07:15:55.518Z - success: protocol unpack registerred
+2018-06-14T07:15:55.518Z - success: protocol disable-commonjs registerred
+2018-06-14T07:15:55.626Z - normal: connected!
+2018-06-14T07:15:55.628Z - normal: Check project /Users/bolex1/work/game/box/box
+2018-06-14T07:15:55.629Z - normal: Initializing Cocos2d
+2018-06-14T07:15:55.792Z - normal: Initializing Asset Database
+2018-06-14T07:15:55.816Z - success: protocol uuid registerred
+2018-06-14T07:15:55.816Z - success: protocol db registerred
+2018-06-14T07:15:55.816Z - success: protocol thumbnail registerred
+2018-06-14T07:15:55.816Z - normal: Loading editor/builtin packages
+2018-06-14T07:15:55.830Z - success: anysdk loaded
+2018-06-14T07:15:55.910Z - success: assets loaded
+2018-06-14T07:15:55.914Z - success: builder loaded
+2018-06-14T07:15:55.915Z - success: cocos-analytics loaded
+2018-06-14T07:15:55.918Z - success: console loaded
+2018-06-14T07:15:55.943Z - success: fb-instant-games loaded
+2018-06-14T07:15:55.946Z - success: hierarchy loaded
+2018-06-14T07:15:55.949Z - success: inspector loaded
+2018-06-14T07:15:55.950Z - success: keystore loaded
+2018-06-14T07:15:55.956Z - success: node-library loaded
+2018-06-14T07:15:55.958Z - success: package-asset loaded
+2018-06-14T07:15:55.959Z - success: preferences loaded
+2018-06-14T07:15:55.962Z - success: project-exporter loaded
+2018-06-14T07:15:55.973Z - success: project-importer loaded
+2018-06-14T07:15:55.976Z - success: project-settings loaded
+2018-06-14T07:15:55.979Z - success: ui-kit loaded
+2018-06-14T07:15:55.983Z - success: ui-grid loaded
+2018-06-14T07:15:55.986Z - success: scene loaded
+2018-06-14T07:15:55.987Z - success: sprite-editor loaded
+2018-06-14T07:15:55.990Z - success: store loaded
+2018-06-14T07:15:55.995Z - success: timeline loaded
+2018-06-14T07:15:55.995Z - normal: Loading builtin packages
+2018-06-14T07:15:55.999Z - success: asset-db-debugger loaded
+2018-06-14T07:15:55.999Z - success: color-picker loaded
+2018-06-14T07:15:56.003Z - success: package-manager loaded
+2018-06-14T07:15:56.007Z - success: sdkbox loaded
+2018-06-14T07:15:56.011Z - success: tester loaded
+2018-06-14T07:15:56.014Z - success: ui-kit-preview-extra loaded
+2018-06-14T07:15:56.017Z - success: ui-kit-preview loaded
+2018-06-14T07:15:56.019Z - success: ui-tree loaded
+2018-06-14T07:15:56.721Z - normal: Initializing project /Users/bolex1/work/game/box/box
+2018-06-14T07:15:56.723Z - normal: Loading packages
+2018-06-14T07:15:56.727Z - normal: Watching packages
+2018-06-14T07:15:56.737Z - normal: Run Application
+2018-06-14T07:15:57.248Z - success: preview server running at http://localhost:7456
+2018-06-14T07:16:00.786Z - normal: 1.9.1
+2018-06-14T07:19:24.186Z - normal: Start building with options : {
+  "androidStudio": true,
+  "apiLevel": "",
+  "appABIs": [],
+  "appKey": "",
+  "appSecret": "",
+  "buildPath": "/Users/bolex1/work/game/box/box/build",
+  "debug": true,
+  "dest": "/Users/bolex1/work/game/box/box/build/web-mobile",
+  "encryptJs": true,
+  "excludeScenes": [],
+  "excludedModules": [
+    "VideoPlayer",
+    "DragonBones",
+    "Physics",
+    "StudioComponent",
+    "Chipmunk",
+    "Native NetWork"
+  ],
+  "fb-instant-games": {},
+  "includeAnySDK": false,
+  "includeEruda": false,
+  "includeSDKBox": false,
+  "inlineSpriteFrames": true,
+  "inlineSpriteFrames_native": true,
+  "jailbreakPlatform": false,
+  "md5Cache": true,
+  "mergeStartScene": true,
+  "oauthLoginServer": "",
+  "optimizeHotUpdate": false,
+  "orientation": {
+    "landscapeLeft": true,
+    "landscapeRight": true,
+    "portrait": false,
+    "upsideDown": false
+  },
+  "packageName": "org.cocos2d.tank",
+  "platform": "web-mobile",
+  "previewHeight": "720",
+  "previewWidth": "1280",
+  "privateKey": "",
+  "qqplay": {
+    "orientation": "portrait"
+  },
+  "renderMode": "0",
+  "scenes": [
+    "893fda5b-9a68-4ae0-9a30-cbc1a4d8c332",
+    "0849e0cd-7511-4872-b402-29f180287bcf"
+  ],
+  "sourceMaps": false,
+  "startScene": "893fda5b-9a68-4ae0-9a30-cbc1a4d8c332",
+  "template": "link",
+  "title": "box",
+  "useDebugKeystore": true,
+  "vsVersion": "auto",
+  "webOrientation": "landscape",
+  "wechatgame": {
+    "appid": "wx6ac3f5090a6b99c5",
+    "orientation": "portrait"
+  },
+  "xxteaKey": "6f779aa9-c97a-43",
+  "zipCompressJs": true,
+  "project": "/Users/bolex1/work/game/box/box",
+  "projectName": "box",
+  "debugBuildWorker": false
+}
+2018-06-14T07:19:24.190Z - normal: Building /Users/bolex1/work/game/box/box
+2018-06-14T07:19:24.190Z - normal: Destination /Users/bolex1/work/game/box/box/build/web-mobile
+2018-06-14T07:19:24.454Z - normal: Delete /Users/bolex1/work/game/box/box/build/web-mobile/**/*
+2018-06-14T07:19:44.174Z - normal: Compiled project javascript file successfully
+2018-06-14T07:19:44.175Z - normal: Start building assets
+2018-06-14T07:19:44.175Z - normal: Start spawn build-worker
+2018-06-14T07:19:44.667Z - normal: Finish spawn build-worker
+2018-06-14T07:19:44.667Z - normal: Start init build-worker
+2018-06-14T07:19:46.020Z - normal: 1.9.1
+2018-06-14T07:19:46.114Z - normal: Finish init build-worker
+2018-06-14T07:19:46.114Z - normal: Start build-assets in worker
+2018-06-14T07:19:46.405Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/j_1_100.plist
+2018-06-14T07:19:46.418Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/j_1.plist
+2018-06-14T07:19:46.424Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/j_2.plist
+2018-06-14T07:19:46.428Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/s_1_100.plist
+2018-06-14T07:19:46.430Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/j_3.plist
+2018-06-14T07:19:46.435Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/s_1.plist
+2018-06-14T07:19:46.438Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/s_3.plist
+2018-06-14T07:19:46.440Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/s_2.plist
+2018-06-14T07:19:46.442Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/s_2_100.plist
+2018-06-14T07:19:46.447Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/t_0_100.plist
+2018-06-14T07:19:46.450Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/t_0.plist
+2018-06-14T07:19:46.452Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/t_1_100.plist
+2018-06-14T07:19:46.454Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/t_1.plist
+2018-06-14T07:19:46.459Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/t_2.plist
+2018-06-14T07:19:46.461Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/t_3.plist
+2018-06-14T07:19:46.463Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/t_4.plist
+2018-06-14T07:19:46.858Z - normal: Finish build-assets in worker
+2018-06-14T07:19:46.862Z - normal: Finish building assets
+2018-06-14T07:19:46.878Z - normal: Start building raw assets
+2018-06-14T07:19:46.880Z - normal: Start building plugin scripts
+2018-06-14T07:19:46.970Z - normal: Finish building raw assets
+2018-06-14T07:19:47.025Z - normal: Generating main.js from /Applications/CocosCreator.app/Contents/Resources/static/build-templates/shares/main.js
+2018-06-14T07:19:47.033Z - normal: Generating html from /Applications/CocosCreator.app/Contents/Resources/static/build-templates/web-mobile/template-dev/index.html
+2018-06-14T07:19:47.166Z - normal: Built to "/Users/bolex1/work/game/box/box/build/web-mobile" successfully
+2018-06-14T07:35:44.282Z - normal: Simulator: WORKAREA WIDTH 2560.00, HEIGHT 1307.00
+2018-06-14T07:35:44.291Z - normal: Simulator: FRAME SCALE = 1.00
+2018-06-14T07:35:44.295Z - normal: Simulator: GLFWError #65544 Happen, Cocoa: Failed to retrieve display name
+2018-06-14T07:35:44.393Z - normal: Simulator: 
+2018-06-14T07:35:44.394Z - normal: Simulator: {
+2018-06-14T07:35:44.394Z - normal: Simulator: 	gl.supports_OES_map_buffer: false
+2018-06-14T07:35:44.394Z - normal: Simulator: 	gl.supports_vertex_array_object: true
+2018-06-14T07:35:44.394Z - normal: Simulator: 	cocos2d.x.version: Cocos2d-x-lite v1.8.2
+2018-06-14T07:35:44.394Z - normal: Simulator: 	gl.vendor: ATI Technologies Inc.
+2018-06-14T07:35:44.394Z - normal: Simulator: 	gl.supports_PVRTC: false
+2018-06-14T07:35:44.394Z - normal: Simulator: 	gl.renderer: AMD Radeon R9 M395 OpenGL Engine
+2018-06-14T07:35:44.395Z - normal: Simulator: 	cocos2d.x.compiled_with_profiler: false
+2018-06-14T07:35:44.395Z - normal: Simulator: 	gl.max_texture_size: 16384
+2018-06-14T07:35:44.395Z - normal: Simulator: 	gl.supports_ETC1: false
+2018-06-14T07:35:44.395Z - normal: Simulator: 	gl.supports_BGRA8888: false
+2018-06-14T07:35:44.395Z - normal: Simulator: 	cocos2d.x.build_type: DEBUG
+2018-06-14T07:35:44.395Z - normal: Simulator: 	gl.max_texture_units: 16
+2018-06-14T07:35:44.395Z - normal: Simulator: 	gl.supports_OES_packed_depth_stencil: false
+2018-06-14T07:35:44.395Z - normal: Simulator: 	gl.supports_discard_framebuffer: false
+2018-06-14T07:35:44.396Z - normal: Simulator: 	gl.supports_NPOT: true
+2018-06-14T07:35:44.396Z - normal: Simulator: 	gl.version: 2.1 ATI-1.50.38
+2018-06-14T07:35:44.396Z - normal: Simulator: 	cocos2d.x.compiled_with_gl_state_cache: true
+2018-06-14T07:35:44.396Z - normal: Simulator: 	gl.supports_OES_depth24: false
+2018-06-14T07:35:44.396Z - normal: Simulator: }
+2018-06-14T07:35:44.396Z - normal: Simulator: 
+2018-06-14T07:35:44.396Z - normal: Simulator: 
+2018-06-14T07:35:44.396Z - normal: Simulator: cocos2d: warning, Director::setProjection() failed because size is 0
+2018-06-14T07:35:44.396Z - normal: Simulator: Project Config:
+2018-06-14T07:35:44.397Z - normal: Simulator:     project dir: /Applications/CocosCreator.app/Contents/Resources/cocos2d-x/simulator/mac/Simulator.app/Contents/Resources/
+2018-06-14T07:35:44.397Z - normal: Simulator:     writable path: $(PROJDIR)/
+2018-06-14T07:35:44.397Z - normal: Simulator:     script file: $(PROJDIR)/main.js
+2018-06-14T07:35:44.397Z - normal: Simulator:     frame size: 960 x 640
+2018-06-14T07:35:44.397Z - normal: Simulator:     frame scale: 1.00
+2018-06-14T07:35:44.398Z - normal: Simulator:     show console: NO
+2018-06-14T07:35:44.398Z - normal: Simulator:     write debug log: NO ()
+2018-06-14T07:35:44.399Z - normal: Simulator:     listen: 
+2018-06-14T07:35:44.399Z - normal: Simulator:     debugger: none
+2018-06-14T07:35:44.399Z - normal: Simulator:     add searching path:
+2018-06-14T07:35:44.400Z - normal: Simulator: ------------------------------------------------
+2018-06-14T07:35:44.401Z - normal: Simulator: LOAD Js FILE: main.js
+2018-06-14T07:35:44.401Z - normal: Simulator: ------------------------------------------------
+2018-06-14T07:35:44.401Z - normal: Simulator: Initializing JavaScriptCore 
+2018-06-14T07:35:44.459Z - normal: Simulator: JS: Cocos2d-x-lite v1.8.2
+2018-06-14T07:35:44.638Z - normal: Simulator: iShow!
+2018-06-14T07:35:44.826Z - normal: Simulator: JS: InitScene: 4.322000000000003ms
+2018-06-14T07:35:44.826Z - normal: Simulator: JS: AutoRelease: 0.11599999999998545ms
+2018-06-14T07:35:44.826Z - normal: Simulator: JS: Destroy: 0.03999999999996362ms
+2018-06-14T07:35:44.826Z - normal: Simulator: JS: AttachPersist: 0.0019999999999527063ms
+2018-06-14T07:35:50.463Z - normal: Simulator: WORKAREA WIDTH 2560.00, HEIGHT 1307.00
+2018-06-14T07:35:50.465Z - normal: Simulator: FRAME SCALE = 1.00
+2018-06-14T07:35:50.473Z - normal: Simulator: GLFWError #65544 Happen, Cocoa: Failed to retrieve display name
+2018-06-14T07:35:50.557Z - normal: Simulator: 
+2018-06-14T07:35:50.557Z - normal: Simulator: {
+2018-06-14T07:35:50.557Z - normal: Simulator: 	gl.supports_OES_map_buffer: false
+2018-06-14T07:35:50.557Z - normal: Simulator: 	gl.supports_vertex_array_object: true
+2018-06-14T07:35:50.558Z - normal: Simulator: 	cocos2d.x.version: Cocos2d-x-lite v1.8.2
+2018-06-14T07:35:50.558Z - normal: Simulator: 	gl.vendor: ATI Technologies Inc.
+2018-06-14T07:35:50.558Z - normal: Simulator: 	gl.supports_PVRTC: false
+2018-06-14T07:35:50.558Z - normal: Simulator: 	gl.renderer: AMD Radeon R9 M395 OpenGL Engine
+2018-06-14T07:35:50.559Z - normal: Simulator: 	cocos2d.x.compiled_with_profiler: false
+2018-06-14T07:35:50.559Z - normal: Simulator: 	gl.max_texture_size: 16384
+2018-06-14T07:35:50.559Z - normal: Simulator: 	gl.supports_ETC1: false
+2018-06-14T07:35:50.559Z - normal: Simulator: 	gl.supports_BGRA8888: false
+2018-06-14T07:35:50.559Z - normal: Simulator: 	cocos2d.x.build_type: DEBUG
+2018-06-14T07:35:50.559Z - normal: Simulator: 	gl.max_texture_units: 16
+2018-06-14T07:35:50.560Z - normal: Simulator: 	gl.supports_OES_packed_depth_stencil: false
+2018-06-14T07:35:50.561Z - normal: Simulator: 	gl.supports_discard_framebuffer: false
+2018-06-14T07:35:50.562Z - normal: Simulator: 	gl.supports_NPOT: true
+2018-06-14T07:35:50.562Z - normal: Simulator: 	gl.version: 2.1 ATI-1.50.38
+2018-06-14T07:35:50.562Z - normal: Simulator: 	cocos2d.x.compiled_with_gl_state_cache: true
+2018-06-14T07:35:50.562Z - normal: Simulator: 	gl.supports_OES_depth24: false
+2018-06-14T07:35:50.562Z - normal: Simulator: }
+2018-06-14T07:35:50.562Z - normal: Simulator: 
+2018-06-14T07:35:50.562Z - normal: Simulator: 
+2018-06-14T07:35:50.562Z - normal: Simulator: cocos2d: warning, Director::setProjection() failed because size is 0
+2018-06-14T07:35:50.564Z - normal: Simulator: Project Config:
+2018-06-14T07:35:50.564Z - normal: Simulator:     project dir: /Applications/CocosCreator.app/Contents/Resources/cocos2d-x/simulator/mac/Simulator.app/Contents/Resources/
+2018-06-14T07:35:50.564Z - normal: Simulator:     writable path: $(PROJDIR)/
+2018-06-14T07:35:50.564Z - normal: Simulator:     script file: $(PROJDIR)/main.js
+2018-06-14T07:35:50.564Z - normal: Simulator:     frame size: 960 x 640
+2018-06-14T07:35:50.564Z - normal: Simulator:     frame scale: 1.00
+2018-06-14T07:35:50.564Z - normal: Simulator:     show console: NO
+2018-06-14T07:35:50.564Z - normal: Simulator:     write debug log: NO ()
+2018-06-14T07:35:50.564Z - normal: Simulator:     listen: 
+2018-06-14T07:35:50.565Z - normal: Simulator:     debugger: none
+2018-06-14T07:35:50.565Z - normal: Simulator:     add searching path:
+2018-06-14T07:35:50.567Z - normal: Simulator: 
+2018-06-14T07:35:50.568Z - normal: Simulator: 
+2018-06-14T07:35:50.568Z - normal: Simulator: 
+2018-06-14T07:35:50.568Z - normal: Simulator: ------------------------------------------------
+2018-06-14T07:35:50.568Z - normal: Simulator: LOAD Js FILE: main.js
+2018-06-14T07:35:50.568Z - normal: Simulator: ------------------------------------------------
+2018-06-14T07:35:50.568Z - normal: Simulator: Initializing JavaScriptCore 
+2018-06-14T07:35:50.589Z - normal: Simulator: JS: Cocos2d-x-lite v1.8.2
+2018-06-14T07:35:50.745Z - normal: Simulator: iShow!
+2018-06-14T07:35:50.938Z - normal: Simulator: JS: InitScene: 3.649000000000001ms
+2018-06-14T07:35:50.938Z - normal: Simulator: JS: AutoRelease: 0.13900000000001ms
+2018-06-14T07:35:50.938Z - normal: Simulator: JS: Destroy: 0.04599999999999227ms
+2018-06-14T07:35:50.938Z - normal: Simulator: JS: AttachPersist: 0.0020000000000095497ms
+2018-06-14T07:36:03.602Z - normal: Simulator: WORKAREA WIDTH 2560.00, HEIGHT 1307.00
+2018-06-14T07:36:03.603Z - normal: Simulator: FRAME SCALE = 1.00
+2018-06-14T07:36:03.607Z - normal: Simulator: GLFWError #65544 Happen, Cocoa: Failed to retrieve display name
+2018-06-14T07:36:03.683Z - normal: Simulator: 
+2018-06-14T07:36:03.683Z - normal: Simulator: {
+2018-06-14T07:36:03.683Z - normal: Simulator: 	gl.supports_OES_map_buffer: false
+2018-06-14T07:36:03.683Z - normal: Simulator: 	gl.supports_vertex_array_object: true
+2018-06-14T07:36:03.683Z - normal: Simulator: 	cocos2d.x.version: Cocos2d-x-lite v1.8.2
+2018-06-14T07:36:03.683Z - normal: Simulator: 	gl.vendor: ATI Technologies Inc.
+2018-06-14T07:36:03.683Z - normal: Simulator: 	gl.supports_PVRTC: false
+2018-06-14T07:36:03.683Z - normal: Simulator: 	gl.renderer: AMD Radeon R9 M395 OpenGL Engine
+2018-06-14T07:36:03.684Z - normal: Simulator: 	cocos2d.x.compiled_with_profiler: false
+2018-06-14T07:36:03.684Z - normal: Simulator: 	gl.max_texture_size: 16384
+2018-06-14T07:36:03.684Z - normal: Simulator: 	gl.supports_ETC1: false
+2018-06-14T07:36:03.684Z - normal: Simulator: 	gl.supports_BGRA8888: false
+2018-06-14T07:36:03.684Z - normal: Simulator: 	cocos2d.x.build_type: DEBUG
+2018-06-14T07:36:03.684Z - normal: Simulator: 	gl.max_texture_units: 16
+2018-06-14T07:36:03.684Z - normal: Simulator: 	gl.supports_OES_packed_depth_stencil: false
+2018-06-14T07:36:03.684Z - normal: Simulator: 	gl.supports_discard_framebuffer: false
+2018-06-14T07:36:03.684Z - normal: Simulator: 	gl.supports_NPOT: true
+2018-06-14T07:36:03.684Z - normal: Simulator: 	gl.version: 2.1 ATI-1.50.38
+2018-06-14T07:36:03.685Z - normal: Simulator: 	cocos2d.x.compiled_with_gl_state_cache: true
+2018-06-14T07:36:03.685Z - normal: Simulator: 	gl.supports_OES_depth24: false
+2018-06-14T07:36:03.685Z - normal: Simulator: }
+2018-06-14T07:36:03.685Z - normal: Simulator: 
+2018-06-14T07:36:03.685Z - normal: Simulator: 
+2018-06-14T07:36:03.685Z - normal: Simulator: cocos2d: warning, Director::setProjection() failed because size is 0
+2018-06-14T07:36:03.687Z - normal: Simulator: Project Config:
+2018-06-14T07:36:03.687Z - normal: Simulator:     project dir: /Applications/CocosCreator.app/Contents/Resources/cocos2d-x/simulator/mac/Simulator.app/Contents/Resources/
+2018-06-14T07:36:03.687Z - normal: Simulator:     writable path: $(PROJDIR)/
+2018-06-14T07:36:03.687Z - normal: Simulator:     script file: $(PROJDIR)/main.js
+2018-06-14T07:36:03.687Z - normal: Simulator:     frame size: 960 x 640
+2018-06-14T07:36:03.688Z - normal: Simulator:     frame scale: 1.00
+2018-06-14T07:36:03.689Z - normal: Simulator:     show console: NO
+2018-06-14T07:36:03.689Z - normal: Simulator:     write debug log: NO ()
+2018-06-14T07:36:03.690Z - normal: Simulator:     listen: 
+2018-06-14T07:36:03.691Z - normal: Simulator:     debugger: none
+2018-06-14T07:36:03.691Z - normal: Simulator:     add searching path:
+2018-06-14T07:36:03.691Z - normal: Simulator: 
+2018-06-14T07:36:03.691Z - normal: Simulator: 
+2018-06-14T07:36:03.691Z - normal: Simulator: 
+2018-06-14T07:36:03.691Z - normal: Simulator: ------------------------------------------------
+2018-06-14T07:36:03.691Z - normal: Simulator: LOAD Js FILE: main.js
+2018-06-14T07:36:03.691Z - normal: Simulator: ------------------------------------------------
+2018-06-14T07:36:03.691Z - normal: Simulator: Initializing JavaScriptCore 
+2018-06-14T07:36:03.713Z - normal: Simulator: JS: Cocos2d-x-lite v1.8.2
+2018-06-14T07:36:03.869Z - normal: Simulator: iShow!
+2018-06-14T07:36:04.035Z - normal: Simulator: JS: InitScene: 3.383000000000038ms
+2018-06-14T07:36:04.035Z - normal: Simulator: JS: AutoRelease: 0.14100000000001955ms
+2018-06-14T07:36:04.036Z - normal: Simulator: JS: Destroy: 0.03900000000004411ms
+2018-06-14T07:36:04.036Z - normal: Simulator: JS: AttachPersist: 0.0020000000000095497ms
+2018-06-14T07:36:19.123Z - normal: Simulator: WORKAREA WIDTH 2560.00, HEIGHT 1307.00
+2018-06-14T07:36:19.125Z - normal: Simulator: FRAME SCALE = 1.00
+2018-06-14T07:36:19.128Z - normal: Simulator: GLFWError #65544 Happen, Cocoa: Failed to retrieve display name
+2018-06-14T07:36:19.206Z - normal: Simulator: 
+2018-06-14T07:36:19.207Z - normal: Simulator: {
+2018-06-14T07:36:19.207Z - normal: Simulator: 	gl.supports_OES_map_buffer: false
+2018-06-14T07:36:19.207Z - normal: Simulator: 	gl.supports_vertex_array_object: true
+2018-06-14T07:36:19.207Z - normal: Simulator: 	cocos2d.x.version: Cocos2d-x-lite v1.8.2
+2018-06-14T07:36:19.207Z - normal: Simulator: 	gl.vendor: ATI Technologies Inc.
+2018-06-14T07:36:19.207Z - normal: Simulator: 	gl.supports_PVRTC: false
+2018-06-14T07:36:19.207Z - normal: Simulator: 	gl.renderer: AMD Radeon R9 M395 OpenGL Engine
+2018-06-14T07:36:19.207Z - normal: Simulator: 	cocos2d.x.compiled_with_profiler: false
+2018-06-14T07:36:19.207Z - normal: Simulator: 	gl.max_texture_size: 16384
+2018-06-14T07:36:19.207Z - normal: Simulator: 	gl.supports_ETC1: false
+2018-06-14T07:36:19.208Z - normal: Simulator: 	gl.supports_BGRA8888: false
+2018-06-14T07:36:19.209Z - normal: Simulator: 	cocos2d.x.build_type: DEBUG
+2018-06-14T07:36:19.209Z - normal: Simulator: 	gl.max_texture_units: 16
+2018-06-14T07:36:19.209Z - normal: Simulator: 	gl.supports_OES_packed_depth_stencil: false
+2018-06-14T07:36:19.209Z - normal: Simulator: 	gl.supports_discard_framebuffer: false
+2018-06-14T07:36:19.209Z - normal: Simulator: 	gl.supports_NPOT: true
+2018-06-14T07:36:19.210Z - normal: Simulator: 	gl.version: 2.1 ATI-1.50.38
+2018-06-14T07:36:19.210Z - normal: Simulator: 	cocos2d.x.compiled_with_gl_state_cache: true
+2018-06-14T07:36:19.210Z - normal: Simulator: 	gl.supports_OES_depth24: false
+2018-06-14T07:36:19.210Z - normal: Simulator: }
+2018-06-14T07:36:19.210Z - normal: Simulator: 
+2018-06-14T07:36:19.210Z - normal: Simulator: 
+2018-06-14T07:36:19.211Z - normal: Simulator: cocos2d: warning, Director::setProjection() failed because size is 0
+2018-06-14T07:36:19.212Z - normal: Simulator: Project Config:
+2018-06-14T07:36:19.213Z - normal: Simulator:     project dir: /Applications/CocosCreator.app/Contents/Resources/cocos2d-x/simulator/mac/Simulator.app/Contents/Resources/
+2018-06-14T07:36:19.213Z - normal: Simulator:     writable path: $(PROJDIR)/
+2018-06-14T07:36:19.213Z - normal: Simulator:     script file: $(PROJDIR)/main.js
+2018-06-14T07:36:19.213Z - normal: Simulator:     frame size: 960 x 640
+2018-06-14T07:36:19.213Z - normal: Simulator:     frame scale: 1.00
+2018-06-14T07:36:19.213Z - normal: Simulator:     show console: NO
+2018-06-14T07:36:19.213Z - normal: Simulator:     write debug log: NO ()
+2018-06-14T07:36:19.213Z - normal: Simulator:     listen: 
+2018-06-14T07:36:19.213Z - normal: Simulator:     debugger: none
+2018-06-14T07:36:19.214Z - normal: Simulator:     add searching path:
+2018-06-14T07:36:19.214Z - normal: Simulator: 
+2018-06-14T07:36:19.214Z - normal: Simulator: 
+2018-06-14T07:36:19.214Z - normal: Simulator: 
+2018-06-14T07:36:19.214Z - normal: Simulator: ------------------------------------------------
+2018-06-14T07:36:19.214Z - normal: Simulator: LOAD Js FILE: main.js
+2018-06-14T07:36:19.214Z - normal: Simulator: ------------------------------------------------
+2018-06-14T07:36:19.214Z - normal: Simulator: Initializing JavaScriptCore 
+2018-06-14T07:36:19.239Z - normal: Simulator: JS: Cocos2d-x-lite v1.8.2
+2018-06-14T07:36:19.396Z - normal: Simulator: iShow!
+2018-06-14T07:36:19.572Z - normal: Simulator: JS: InitScene: 3.812000000000012ms
+2018-06-14T07:36:19.572Z - normal: Simulator: JS: AutoRelease: 0.1239999999999668ms
+2018-06-14T07:36:19.572Z - normal: Simulator: JS: Destroy: 0.05500000000000682ms
+2018-06-14T07:36:19.572Z - normal: Simulator: JS: AttachPersist: 0.0019999999999527063ms
+2018-06-14T08:11:37.995Z - normal: Introduced global variable while editing: i
+2018-06-14T08:11:37.997Z - normal: Introduced global variable while editing: l
+2018-06-14T09:36:04.578Z - warn: Error: ipc timeout. message: scene:query-node, session: scene@renderer:166093
+2018-06-14T09:38:15.048Z - warn: The sp.Skeleton referenced by component "BoxController" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-06-14T09:41:32.005Z - normal: Introduced global variable while editing: i
+2018-06-14T09:41:32.007Z - normal: Introduced global variable while editing: l
+2018-06-14T11:08:39.173Z - normal: Introduced global variable while editing: i
+2018-06-14T11:08:39.174Z - normal: Introduced global variable while editing: l

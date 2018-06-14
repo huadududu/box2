@@ -31,6 +31,9 @@ module.exports = function () {
             hammer: {
                 default: {}
             },
+            efficiency: {
+                default: {}
+            },
             addgold: 0,
             addgem: 0,
             freindsInfo: [],
@@ -98,13 +101,18 @@ module.exports = function () {
                     this.openAdTimes = 0;
                 }
             }.bind(this));
-            lc.get('inviteFriends', 0, function (v) {
-                if (typeof v == "string") {
-                    this.inviteFriends = parseInt(v);
-                } else if (typeof v == "number") {
+            lc.get('inviteFriends', [], function (v) {
+                if (typeof v == 'array') {
                     this.inviteFriends = v;
                 } else {
-                    this.inviteFriends = 0;
+                    this.inviteFriends = [];
+                }
+            }.bind(this));
+            lc.get('efficiency', null, function (v) {
+                if (v != null) {
+                    this.efficiency = JSON.parse(v);
+                } else {
+                    this.efficiency = {};
                 }
             }.bind(this));
         },
@@ -146,6 +154,10 @@ module.exports = function () {
         saveInviteFriends: function saveInviteFriends(inviteFriends) {
             lc.set('inviteFriends', inviteFriends);
             this.inviteFriends = inviteFriends;
+        },
+        saveEfficiency: function saveEfficiency(efficiency) {
+            lc.set('efficiency', JSON.stringify(efficiency));
+            this.efficiency = efficiency;
         }
     });
     var instance = new cls();

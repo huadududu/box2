@@ -149,6 +149,7 @@ cc.Class({
         this.progressBar.progress = Global['bar'+this.ID]/conf.time;
         let self = this;
         this.callback = function(){
+            Global['bar'+self.ID]--;
             self.btntext.string = GameUtils.formatTime(Global['bar'+self.ID]);
 
             self.progressBar.progress = Global['bar'+this.ID]/conf.time;
@@ -158,7 +159,7 @@ cc.Class({
                 this.checkisrun= false;
                 self.eventcallback(this.type,self.ID,'finish');
             }
-            Global['bar'+self.ID]--;
+
         }
         if(!bool){
             this.checkisrun= true;
@@ -220,8 +221,22 @@ cc.Class({
         }
     },
     setType2BtnState:function(){
-        let conf = EfficiencyConfig[this.ID];
-
+        let find = false;
+        if(Global.efficiency[this.ID]){
+            this.ButtonState(0);
+            this.btntext.string ="max";
+        }else{
+            let conf = EfficiencyConfig[this.ID];
+            if(conf.costtype == 1002){
+                if(Global.gem>= conf.cost){
+                    this.ButtonState(1);
+                }
+                else{
+                    this.ButtonState(0);
+                }
+                this.btntext.string = GameUtils.formatNum(conf.cost)+"^";
+            }
+        }
     },
     //1 可以点击  0 不可以点击
     ButtonState:function(v){

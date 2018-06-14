@@ -21,16 +21,19 @@ module.exports = function () {
             gold: 1,
             gem: 1,
             exp: 1,
-            openAdTimes:0,
-            inviteFriends:0,
+            openAdTimes: 0,
+            inviteFriends: 0,
             hammer: {
                 default: {}
             },
-            addgold:0,
-            addgem:0,
-            freindsInfo:[],
-            bar1:0,//加速1加速buff1
-            bar2:0,//加速1加速buff2,
+            efficiency: {
+                default: {}
+            },
+            addgold: 0,
+            addgem: 0,
+            freindsInfo: [],
+            bar1: 0,//加速1加速buff1
+            bar2: 0,//加速1加速buff2,
 
 
         },
@@ -93,15 +96,21 @@ module.exports = function () {
                     this.openAdTimes = 0;
                 }
             }.bind(this));
-            lc.get('inviteFriends', 0, function (v) {
-                if (typeof v == "string") {
-                    this.inviteFriends = parseInt(v);
-                } else if (typeof v == "number") {
+            lc.get('inviteFriends', [], function (v) {
+                if (typeof v == 'array') {
                     this.inviteFriends = v;
                 } else {
-                    this.inviteFriends = 0;
+                    this.inviteFriends = [];
                 }
             }.bind(this));
+            lc.get('efficiency', null, function (v) {
+                if (v != null) {
+                    this.efficiency = JSON.parse(v);
+                } else {
+                    this.efficiency = {};
+                }
+            }.bind(this));
+
         },
 
         saveLevel: function saveLevel(h) {
@@ -141,6 +150,10 @@ module.exports = function () {
         saveInviteFriends: function saveInviteFriends(inviteFriends) {
             lc.set('inviteFriends', inviteFriends);
             this.inviteFriends = inviteFriends;
+        },
+        saveEfficiency: function saveEfficiency(efficiency) {
+            lc.set('efficiency', JSON.stringify(efficiency));
+            this.efficiency = efficiency;
         }
     });
     var instance = new cls();
