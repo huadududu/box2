@@ -19,7 +19,7 @@ reload(sys)
 sys.setdefaultencoding('utf-8')
 
 
-# keyindex 作为 key
+# keyindex 作为 keyf
 def generageLua(rowsContent,rowMap,keyindex):
 
     rowTotalStr = ""
@@ -265,16 +265,6 @@ def parseSpeedConfig(content):
     v = str2f(content[1])
     return score,v
 
-def parseBlockConfig(content):
-
-    ret = {}
-    ret['id'] = str2i(content[0])
-    ret['min'] = str2i(content[1])
-    ret['max'] = str2i(content[2])
-    ret['icon'] = str2str(content[3])
-    ret['texiao'] = str2str(content[4])
-    return ret
-
 def parsePositionConfig(content):
 
     ret = {}
@@ -283,26 +273,333 @@ def parsePositionConfig(content):
     ret['max'] = str2i(content[2])
     return key,ret
 
-#
-#
-#
-#
+def parseLevelConfig(content):
+    ret = {}
+    key = str2i(content[0])
+    ret['id'] = str(key)
+    ret['exp'] = str2i(content[1])
+    ret['rewardcoin'] = str2i(content[2])
+    return ret['id'], ret
 
-def converTankConfig(excelPath,savepath):
+def parseStageConfig(content):
+    ret = {}
+    key = str2i(content[0])
+    ret['id'] = str(key)
+    ret['box'] = str2i(content[1])
+    ret['layer'] = str2i(content[2])
+    ret['size'] = str2i(content[3])
+    ret['top'] = str2i(content[4])
+    ret['cycleID'] = str2str(content[5])
+
+    return ret['id'], ret
+
+def parseCycleConfig(content):
+    ret = {}
+    key = str2i(content[0])
+    ret['id'] = str(key)
+    ret['size'] = str2i(content[1])
+    ret['block1'] = str2i(content[2])
+    ret['num1'] = str2i(content[3])
+    ret['block2'] = str2i(content[4])
+    ret['num2'] = str2i(content[5])
+    ret['block3'] = str2i(content[6])
+    ret['num3'] = str2i(content[7])
+    ret['block4'] = str2i(content[8])
+    ret['num4'] = str2i(content[9])
+    ret['block5'] = str2i(content[10])
+    ret['num5'] = str2i(content[11])
+    ret['block6'] = str2i(content[12])
+    ret['num6'] = str2i(content[13])
+    ret['block7'] = str2i(content[14])
+    ret['num7'] = str2i(content[15])
+    ret['block8'] = str2i(content[16])
+    ret['num8'] = str2i(content[17])
+    ret['block9'] = str2i(content[18])
+    ret['num9'] = str2i(content[19])
+    ret['block10'] = str2i(content[20])
+    ret['num10'] = str2i(content[21])
+
+    return ret['id'], ret
+
+def parseBlockConfig(content):
+    ret = {}
+    key = str2i(content[0])
+    ret['id'] = str(key)
+    ret['size'] = str2i(content[1])
+    ret['resources'] = str2str(content[2])
+    ret['texiao'] = str2str(content[3])
+
+    return ret['id'], ret
+
+def parseAcceleratorConfig(content):
+    ret = {}
+    key = str2i(content[0])
+    ret['id'] = str(key)
+    ret['name'] = str2str(content[1])
+    ret['title'] = str2i(content[2])
+    ret['icon'] = str2str(content[3])
+    ret['speed'] = str2i(content[4])
+    ret['coin'] = str2i(content[5])
+    ret['time'] = str2i(content[6])
+    ret['desc'] = str2i(content[7])
+    ret['checkdes'] = str2str(content[8])
+
+    return ret['id'], ret
+
+def parseToolConfig(content):
+    ret = {}
+    key = str2i(content[0])
+    ret['id'] = str(key)
+    ret['name'] = str2str(content[1])
+    ret['title'] = str2i(content[2])
+    ret['icon'] = str2str(content[3])
+    ret['animation'] = str2str(content[4])
+    ret['attribute'] = str2i(content[5])
+    ret['unlock'] = str2str(content[6])
+
+    return ret['id'], ret
+
+def parseAttributeConfig(content):
+    ret = {}
+    key = str2i(content[0])
+    ret['id'] = str(key)
+    ret['relate'] = str2str(content[1])
+    ret['next'] = str2i(content[2])
+    ret['att'] = str2i(content[3])
+    ret['time'] = str2str(content[4])
+    ret['cost'] = str2i(content[5])
+    ret['costtype'] = str2i(content[6])
+    ret['desc'] = str2i(content[7])
+    ret['checkdes'] = str2str(content[8])
+    return ret['id'], ret
+
+def parseEfficiencyConfig(content):
+    ret = {}
+    key = str2i(content[0])
+    ret['id'] = str(key)
+    ret['name'] = str2str(content[1])
+    ret['title'] = str2i(content[2])
+    ret['type'] = str2i(content[3])
+    ret['coin'] = str2i(content[4])
+    ret['jumptime'] = str2i(content[5])
+    ret['time'] = str2i(content[6])
+    ret['cost'] = str2i(content[7])
+    ret['costtype'] = str2i(content[8])
+    ret['desc'] = str2i(content[9])
+    ret['checkdes'] = str2str(content[10])
+    return ret['id'], ret
+
+
+def parseBoxConfig(content):
+    ret = {}
+    key = str2i(content[0])
+    ret['id'] = str(key)
+    ret['icon'] = str2str(content[1])
+    ret['animation'] = str2str(content[2])
+    ret['reward'] = str2i(content[3])
+
+    return ret['id'], ret
+
+
+def parseRewardConfig(content):
+    ret = {}
+    key = str2i(content[0])
+    ret['id'] = str(key)
+    ret['name'] = str2str(content[1])
+    ret['num'] = str2i(content[2])
+    ret['item1'] = str2str(content[3])
+    ret['rate1'] = str2i(content[4])
+
+    ret['item2'] = str2str(content[5])
+    ret['rate2'] = str2i(content[6])
+
+    ret['item3'] = str2str(content[7])
+    ret['rate3'] = str2i(content[8])
+
+    ret['item4'] = str2str(content[9])
+    ret['rate4'] = str2i(content[10])
+
+    ret['item5'] = str2str(content[11])
+    ret['rate5'] = str2i(content[12])
+
+    ret['item6'] = str2str(content[13])
+    ret['rate6'] = str2i(content[14])
+
+    return ret['id'], ret
+
+
+def parseItemConfig(content):
+    ret = {}
+    key = str2i(content[0])
+    ret['id'] = str(key)
+    ret['name'] = str2str(content[1])
+    ret['icon'] = str2str(content[2])
+
+    return ret['id'], ret
+
+def parseLanguageConfig(content):
+    ret = {}
+    key = str2i(content[0])
+    ret['id'] = str(key)
+    ret['Chinese'] = str2str(content[1])
+    ret['English'] = str2str(content[2])
+    ret['Japanese'] = str2str(content[3])
+
+    return ret['id'], ret
+
+
+
+#
+#
+#
+#
+def converLevelConfig(excelPath,savepath):
     rowstartindex = 1
     rowendindex = 0
-    sheetName = 'tank'
+    sheetName = 'level'
     rowscontent, err = readExcel(excelPath, sheetName, rowstartindex, rowendindex)
 
     config = {}
     for item in rowscontent:
-        index,c = parseTankConfig(item)
+        index, c = parseLevelConfig(item)
         config[index] = c
 
-    print 'config',config
+    print 'config', config
     convertoJs(config, savepath)
 
-def converItemConfig(excelPath,savepath):
+
+def converStageConfig(excelPath,savepath):
+    rowstartindex = 1
+    rowendindex = 0
+    sheetName = 'stage'
+    rowscontent, err = readExcel(excelPath, sheetName, rowstartindex, rowendindex)
+
+    config = {}
+    for item in rowscontent:
+        index, c = parseStageConfig(item)
+        config[index] = c
+
+    print 'config', config
+    convertoJs(config, savepath)
+
+
+def converCycleConfig(excelPath, savepath):
+    rowstartindex = 1
+    rowendindex = 0
+    sheetName = 'cycle'
+    rowscontent, err = readExcel(excelPath, sheetName, rowstartindex, rowendindex)
+
+    config = {}
+    for item in rowscontent:
+        index, c = parseCycleConfig(item)
+        config[index] = c
+
+    print 'config', config
+    convertoJs(config, savepath)
+
+def converBlockConfig(excelPath, savepath):
+    rowstartindex = 1
+    rowendindex = 0
+    sheetName = 'block'
+    rowscontent, err = readExcel(excelPath, sheetName, rowstartindex, rowendindex)
+
+    config = {}
+    for item in rowscontent:
+        index, c = parseBlockConfig(item)
+        config[index] = c
+
+    print 'config', config
+    convertoJs(config, savepath)
+
+def converAcceleratorConfig(excelPath, savepath):
+    rowstartindex = 1
+    rowendindex = 0
+    sheetName = 'accelerator'
+    rowscontent, err = readExcel(excelPath, sheetName, rowstartindex, rowendindex)
+
+    config = {}
+    for item in rowscontent:
+        index, c = parseAcceleratorConfig(item)
+        config[index] = c
+
+    print 'config', config
+    convertoJs(config, savepath)
+
+def converToolConfig(excelPath, savepath):
+        rowstartindex = 1
+        rowendindex = 0
+        sheetName = 'tool'
+        rowscontent, err = readExcel(excelPath, sheetName, rowstartindex, rowendindex)
+
+        config = {}
+        for item in rowscontent:
+            index, c = parseToolConfig(item)
+            config[index] = c
+
+        print 'config', config
+        convertoJs(config, savepath)
+
+def converAttributeConfig(excelPath, savepath):
+        rowstartindex = 1
+        rowendindex = 0
+        sheetName = 'attribute'
+        rowscontent, err = readExcel(excelPath, sheetName, rowstartindex, rowendindex)
+
+        config = {}
+        for item in rowscontent:
+            index, c = parseAttributeConfig(item)
+            config[index] = c
+
+        print 'config', config
+        convertoJs(config, savepath)
+
+
+
+def converEfficiencyConfig(excelPath, savepath):
+        rowstartindex = 1
+        rowendindex = 0
+        sheetName = 'efficiency'
+        rowscontent, err = readExcel(excelPath, sheetName, rowstartindex, rowendindex)
+
+        config = {}
+        for item in rowscontent:
+            index, c = parseEfficiencyConfig(item)
+            config[index] = c
+
+        print 'config', config
+        convertoJs(config, savepath)
+        
+
+
+def converBoxConfig(excelPath, savepath):
+    rowstartindex = 1
+    rowendindex = 0
+    sheetName = 'box'
+    rowscontent, err = readExcel(excelPath, sheetName, rowstartindex, rowendindex)
+
+    config = {}
+    for item in rowscontent:
+        index, c = parseBoxConfig(item)
+        config[index] = c
+
+    print 'config', config
+    convertoJs(config, savepath)
+
+def converRewardConfig(excelPath, savepath):
+    rowstartindex = 1
+    rowendindex = 0
+    sheetName = 'reward'
+    rowscontent, err = readExcel(excelPath, sheetName, rowstartindex, rowendindex)
+
+    config = {}
+    for item in rowscontent:
+        index, c = parseRewardConfig(item)
+        config[index] = c
+
+    print 'config', config
+    convertoJs(config, savepath)
+
+def converItemConfig(excelPath, savepath):
     rowstartindex = 1
     rowendindex = 0
     sheetName = 'item'
@@ -310,55 +607,25 @@ def converItemConfig(excelPath,savepath):
 
     config = {}
     for item in rowscontent:
-        key,c = parseItemConfig(item)
-        config[key] = c
+        index, c = parseItemConfig(item)
+        config[index] = c
 
-    print 'config',config
+    print 'config', config
     convertoJs(config, savepath)
-
-def converSpeedConfig(excelPath,savepath):
+def converLanguageConfig(excelPath, savepath):
     rowstartindex = 1
     rowendindex = 0
-    sheetName = 'speed'
+    sheetName = 'language'
     rowscontent, err = readExcel(excelPath, sheetName, rowstartindex, rowendindex)
-    config = {}
-    config['score'] =[]
-    config['speed'] = []
-    for item in rowscontent:
-        score,v = parseSpeedConfig(item)
-        config['score'].append(score)
-        config['speed'].append(v)
 
-    print 'config',config
-    convertoJs(config, savepath)
-
-
-def converBlockConfig(excelPath,savepath):
-    rowstartindex = 1
-    rowendindex = 0
-    sheetName = 'block'
-    rowscontent, err = readExcel(excelPath, sheetName, rowstartindex, rowendindex)
-    config = {}
-    config['blocks'] =[]
-    for item in rowscontent:
-        c = parseBlockConfig(item)
-        config['blocks'].append(c)
-
-    print 'config',config
-    convertoJs(config, savepath)
-
-
-def converPositionConfig(excelPath,savepath):
-    rowstartindex = 1
-    rowendindex = 0
-    sheetName = 'position'
-    rowscontent, err = readExcel(excelPath, sheetName, rowstartindex, rowendindex)
     config = {}
     for item in rowscontent:
-        k,c = parsePositionConfig(item)
-        config[k] = c
-    print 'config',config
+        index, c = parseLanguageConfig(item)
+        config[index] = c
+
+    print 'config', config
     convertoJs(config, savepath)
+
 
 def convertoJs(content,savefile='test.js'):
     json_string = json.dumps(content)
@@ -378,20 +645,58 @@ def converTank():
     # print str2i("")
     # return
 
-    excelPath = "/Users/bing/works/minigame/game/doc/tile/gameconfig-tile.xlsx"
+    excelPath = """/Users/bolex1/work/game/doc/daddy's treasure/gameconfig.xlsx"""
 
-    # line config
-    savepath = "/Users/bing/works/minigame/game/block/block/assets/src/model/LineConfig.js"
-    converLineConfig(excelPath,savepath)
+   
+    basePath = "/Users//bolex1/work/game/box/box/assets/src/model/"
+     # level
+    savepath = "LevelConfig.js"
+    converLevelConfig(excelPath,basePath + savepath)
 
+
+     # stage
+    savepath = "StageConfig.js"
+    converStageConfig(excelPath,basePath + savepath)
+
+    # cycle config
+    savepath = "CycleConfig.js"
+    converCycleConfig(excelPath, basePath+savepath)
+
+    # block config
+    savepath = "BlockConfig.js"
+    converBlockConfig(excelPath, basePath+savepath)
+
+    # accelerator
+    savepath = "AcceleratorConfig.js"
+    converAcceleratorConfig(excelPath, basePath+savepath)
+
+    # tool config
+    savepath = "ToolConfig.js"
+    converToolConfig(excelPath, basePath + savepath)
+
+    # attribute config
+    savepath = "AttributeConfig.js"
+    converAttributeConfig(excelPath, basePath + savepath)
+
+    # efficiency config
+    savepath = "EfficiencyConfig.js"
+    converEfficiencyConfig(excelPath, basePath + savepath)
+
+    # box config
+    savepath = "BoxConfig.js"
+    converBoxConfig(excelPath, basePath + savepath)
+
+    # box config
+    savepath = "RewardConfig.js"
+    converRewardConfig(excelPath, basePath + savepath)
 
     # item config
-    # savepath = "/Users/bing/works/minigame/game/tank/tank/assets/src/model/ItemConfig.js"
-    # converItemConfig(excelPath, savepath)
+    savepath = "ItemConfig.js"
+    converItemConfig(excelPath, basePath + savepath)
 
-    # speed config
-    savepath = "/Users/bing/works/minigame/game/block/block/assets/src/model/SpeedConfig.js"
-    converSpeedConfig(excelPath, savepath)
+     # language config
+    savepath = "LanguageConfig.js"
+    converLanguageConfig(excelPath, basePath + savepath)
 
 
 if __name__ == "__main__":

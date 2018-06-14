@@ -148,8 +148,12 @@
         </struct>
         <key>fileList</key>
         <array>
-            <filename>../../doc/daddy's treasure/ui/bg</filename>
             <filename>../../doc/daddy's treasure/ui/img</filename>
+            <filename>../../doc/daddy's treasure/ui/icon</filename>
+            <filename>../../doc/daddy's treasure/ui/btn</filename>
+            <filename>../../doc/daddy's treasure/ui/bg/bg_1.png</filename>
+            <filename>../../doc/daddy's treasure/ui/bg/bg_2.png</filename>
+            <filename>../../doc/daddy's treasure/ui/bg/bg_tk.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
