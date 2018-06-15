@@ -25,6 +25,9 @@
     "btn_claimx3": {
       "__uuid__": "90e6d0e1-4aaa-423f-a8c9-e85e4dec6a89"
     },
+    "btn_green": {
+      "__uuid__": "a8d95501-ea28-47b3-9f92-4005a958ce8d"
+    },
     "btn_heise": {
       "__uuid__": "ebb5c33e-ff2c-4dad-936b-fad65edc5ddc"
     },

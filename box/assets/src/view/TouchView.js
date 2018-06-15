@@ -51,7 +51,8 @@ cc.Class({
         if (cc.rectContainsPoint(this.touchRect, locationInNode)) {
             let callback = this.eventMap[event.type];
             if (callback) {
-                callback(locationInNode);
+                let locationInNode1 = event.currentTarget.convertToWorldSpace(locationInNode);
+                callback(locationInNode1);
             }
             // cc.log(" touch in");
         }else {

@@ -13,6 +13,7 @@ var BoxConfig = require("BoxConfig");
 var RewardConfig = require("RewardConfig");
 var GameUtils = require("GameUtils");
 var LevelConfig = require("LevelConfig");
+var EfficiencyConfig = require("EfficiencyConfig");
 cc.Class({
 
     extends: cc.Component,
@@ -24,14 +25,23 @@ cc.Class({
         BoxController: require('BoxController')
     },
 
-    onLoad: function onLoad() {},
+    onLoad: function onLoad() {
+        this.type;
+        this.uplevel = { 'uplevel': 3, 'skip': 2, 'outline': 2 };
+    },
     onEnable: function onEnable() {
-        this.addlevel();
+        this.type = this.uplevel[Global.typebtn];
+        if (Global.typebtn == 'uplevel') {
+            this.addlevel();
+        } else if (Global.typebtn == 'skip') {
+            this.skipReward();
+        } else {
+            this.outlineReward();
+        }
     },
     addlevel: function addlevel() {
         var myinfo = {};
         var level = Global.level;
-
         var needexp = LevelConfig[level].exp;
         var needgold = LevelConfig[level].rewardcoin;
         Global.addgold = needgold;
@@ -44,9 +54,16 @@ cc.Class({
         Global.addgold = needgold;
         this.BoxController.GameMenuController.updateDate(myinfo);
     },
+    skipReward: function skipReward() {
+        if (Global.skipID <= 0) return;else {
+            var myinfo = {};
+            // let conf = EfficiencyConfig[Global.skipID];
+            this.RewardLable.string = "x" + Global.addgold;
+        }
+    },
+    outlineReward: function outlineReward() {},
     onVedioSureBtn: function onVedioSureBtn() {
         var golds = Global.gold + Global.addgold * 3;
-
         if (Global.addgold > 0) {
             this.BoxController.GameMenuController.updateDate({ gold: golds });
             Global.saveGold(golds);

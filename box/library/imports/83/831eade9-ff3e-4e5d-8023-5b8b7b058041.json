@@ -98,7 +98,7 @@
       }
     }
   },
-  "_atlasText": "\r\nchanzi_3.png\r\nsize: 81,80\r\nformat: RGBA8888\r\nfilter: Linear,Linear\r\nrepeat: none\r\nchanzi_3\r\n  rotate: false\r\n  xy: 1, 1\r\n  size: 78, 77\r\n  orig: 78, 77\r\n  offset: 0, 0\r\n  index: -1\r\n",
+  "_atlasText": "\nchanzi_3.png\nsize: 81,80\nformat: RGBA8888\nfilter: Linear,Linear\nrepeat: none\nchanzi_3\n  rotate: false\n  xy: 1, 1\n  size: 78, 77\n  orig: 78, 77\n  offset: 0, 0\n  index: -1\n",
   "atlasUrl": {
     "__uuid__": "5205bd84-6846-4a35-b850-6f8a40aca13c"
   },

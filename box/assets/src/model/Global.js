@@ -34,6 +34,8 @@ module.exports = function () {
             freindsInfo: [],
             bar1: 0,//加速1加速buff1
             bar2: 0,//加速1加速buff2,
+            typebtn:null,
+            skipID:0
 
 
         },
@@ -96,12 +98,13 @@ module.exports = function () {
                     this.openAdTimes = 0;
                 }
             }.bind(this));
-            lc.get('inviteFriends', [], function (v) {
+            lc.get('freindsInfo', [], function (v) {
                 if (typeof v == 'array') {
-                    this.inviteFriends = v;
+                    this.freindsInfo = v;
                 } else {
-                    this.inviteFriends = [];
+                    this.freindsInfo = [];
                 }
+                this.inviteFriends = this.freindsInfo.length;
             }.bind(this));
             lc.get('efficiency', null, function (v) {
                 if (v != null) {
@@ -110,7 +113,6 @@ module.exports = function () {
                     this.efficiency = {};
                 }
             }.bind(this));
-
         },
 
         saveLevel: function saveLevel(h) {

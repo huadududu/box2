@@ -21,7 +21,7 @@ module.exports = {
     formatNum: function formatNum(num) {
         var str = void 0;
         if (num > 1000) {
-            str = parseInt(num / 1000) + "k";
+            str = parseInt(num / 1000) + "K";
         } else {
             str = "" + num;
         }

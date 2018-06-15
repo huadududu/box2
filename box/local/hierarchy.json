@@ -1,7 +1,7 @@
 {
   "item-states": [
     {
-      "folded": false,
+      "folded": true,
       "id": "febhuGTTFJybsr1A6sjyjK"
     },
     {
@@ -33,7 +33,7 @@
       "id": "f28I0fsfNPG4obOTCjcpyF"
     },
     {
-      "folded": false,
+      "folded": true,
       "id": "8aXxyweJBHF5+StDX6+Kl9"
     },
     {
@@ -45,7 +45,7 @@
       "id": "24gMLerOZOCIzgxc1+VUtD"
     },
     {
-      "folded": false,
+      "folded": true,
       "id": "7885ougj1KuI8Pn4eOychq"
     },
     {
@@ -69,7 +69,7 @@
       "id": "aeb4iTe6NOIIjsmWOBjhuO"
     },
     {
-      "folded": false,
+      "folded": true,
       "id": "f2CXZIGchAx6hHrmOPBEDH"
     }
   ]

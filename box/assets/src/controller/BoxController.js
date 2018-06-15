@@ -3,7 +3,6 @@
  */
 
 //负责head展现和变换。
-const CameraController = require('CameraController');
 let StageConfig = require("StageConfig");
 let BlockConfig = require("BoxConfig1");
 let CycleConfig = require("CycleConfig");
@@ -376,7 +375,7 @@ cc.Class({
             return;
         let node = this.blocks[line][row];
 
-        if (cc.isValid(node)) {
+        if (node != null) {
             let location = this.hammerpos(line, row);
             let texiao = this.getEffByBlock(line, row);
              console.log("destroylog:", line, ":", row, location);
@@ -545,7 +544,6 @@ cc.Class({
             this.hammers[hammerpos].node.active = false;
             return;
         }
-        this.hammers[hammerpos].node.active = true;
         let range = this.geScreenRange();
         let line = this.curMaxLine;
         let find = false;
@@ -577,12 +575,14 @@ cc.Class({
         }
         let num = GameUtils.randomInt(0, canclick.length - 1);
         let row = canclick[num];
-        let location = this.hammerpos(line, row);
+        let location = this.hammerpos(curline, row);
         if (this.HattingPos == null) {
             this.HattingPos = {};
         }
-        this.HattingPos[hammerpos] = {x: line, y: row};
+        this.HattingPos[hammerpos] = {x: curline, y: row};
+        console.log("choose:",this.HattingPos[hammerpos]);
         this.hammers[hammerpos].node.position = location;
+        this.hammers[hammerpos].node.active = true;
         this.playHammerSpine(hammerpos);
     },
     //根据小块的位置 过的特效文件
@@ -638,7 +638,7 @@ cc.Class({
         let cameraY = this.camera.node.getPositionY();
         let gameY = this.gameNode.y;
         let realwidth = this.blockWidth + this.blockBlank;
-        var line = Math.floor((point.y +cameraY  -205) / realwidth);
+        var line = Math.floor((point.y + cameraY) / realwidth);
         var row = Math.floor((point.x - this.margins - this.blockBlank) / realwidth);
         let find = false;
         if (this.checkCanDestroy(line, row)) {
@@ -673,28 +673,32 @@ cc.Class({
             return;
         }
         console.log("touchStartCallBack");
-        this.previousPt = location;
-        this.motionStreak.node.setPositionX(location.x - this.BaseWidth);
-        this.motionStreak.node.setPositionY(location.y - this.BaseHeight);
+        // this.previousPt = location;
+        // let motionpos = this.motionStreak.node.convertToNodeSpace(location);
+        // this.motionStreak.node.setPositionX(motionpos);
+        // this.motionStreak.node.setPositionY(motionpos);
          this.motionStreak.reset();
 
         // this.isTouching = false;
     },
 
-    touchCancelCallBack: function (location) {
+    touchCancelCallBack: function (location1) {
+        let location= this.gameNode.convertToNodeSpace(location1);
         this.updateTouch(location);
         this.isTouching = false;
          this.motionStreak.reset();
     },
 
-    touchEndCallBack: function (location) {
+    touchEndCallBack: function (location1) {
         // this.touchPosition(location);
+        let location= this.gameNode.convertToNodeSpace(location1);
         this.updateTouch(location);
         this.isTouching = false;
         console.log("touchEndCallBack");
         this.motionStreak.reset();
     },
-    touchMoveCallBack: function (location) {
+    touchMoveCallBack: function (location1) {
+        let location= this.gameNode.convertToNodeSpace(location1);
         if (!this.canTouch) {
             return;
         }
@@ -704,9 +708,11 @@ cc.Class({
             return;
         }
         this.updateTouch(location);
-        this.previousPt = location;
-        this.motionStreak.node.setPositionX(location.x - this.BaseWidth);
-        this.motionStreak.node.setPositionY(location.y - this.BaseHeight);
+        // this.previousPt = location;
+        this.motionStreak.node.setPositionX(location1.x - this.BaseWidth);
+        this.motionStreak.node.setPositionY(location1.y - this.BaseHeight);
+        // let motionpos = this.node.convertToNodeSpace(location1);
+        // this.motionStreak.node.position=motionpos;
     },
 
     onClickTreasure: function (event) {
@@ -973,19 +979,34 @@ cc.Class({
     efficiencyAdd: function (id) {
         let conf = EfficiencyConfig[id];
         let gem = 0;
-        if (conf.costtype == 1002) {
-            if (Global.gem >= conf.cost) {
-                gem = Global.gem - conf.cost;
-                if (conf.coin > 0) {
-                    Global.efficiency[id] = {'id': id, 'coin': conf.coin};
-                    this.efficeGold += conf.coin - 1;
-                }
-                if (conf.jumptime > 0) {
-
-                }
-
+        let addgold=0;
+        if (conf.costtype == 1002 && Global.gem >= conf.cost) {//enough gem
+            gem = Global.gem - conf.cost;
+            if (conf.coin > 0) {
+                this.efficeGold += conf.coin - 1;
+                let timestamp1 = Date.parse( new Date())/1000;// 以秒为单位
+                Global.efficiency[id] = {'id':id,'timeleft':timestamp1,'starttime':timestamp1};
+                Global.saveEfficiency(Global.efficiency);
             }
-            else {
+            if (conf.jumptime > 0) {//jump time
+
+                for(let i=this.hammerStart;i<=this.hammerEnd; i++){
+                    if(Global.hammer[i] != undefined){
+                        let attr = AttributeConfig[Global.hammer[i].attribute];
+                        addgold+=conf.jumptime*60*50/attr.time* attr.att;
+                    }
+                }
+                let myinfo = {};
+                if(gem>=0){
+                    myinfo.gem = gem;
+                    Global.saveGem(myinfo.gem);
+                }
+                Global.addgold = addgold;
+
+                 // this.GameMenuController.updateDate(myinfo);
+                Global.btnType = 'skip';
+                Global.skipID = id;
+                this.upgradView.active= true;
             }
         }
         this.GameMenuController.updateDate({'gem': gem});

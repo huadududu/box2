@@ -13,8 +13,7 @@ var AcceleratorConfig = require("AcceleratorConfig");
 var ToolConfig = require("ToolConfig");
 var EfficiencyConfig = require("EfficiencyConfig");
 var LevelConfig = require("LevelConfig");
-var ParticleSystemCenter = require("ParticleSystemCenter");
-var SkeletonDataCenter = require("SkeletonDataCenter");
+var GameUtils = require("GameUtils");
 var Global = require('Global');
 
 cc.Class({
@@ -47,22 +46,35 @@ cc.Class({
         this.config = [AcceleratorConfig, ToolConfig, EfficiencyConfig];
         this.itemList = [];
         this.btnColor = ['#ffa30f', '#f9f9f9'];
+        this.itemlistNum = [];
     },
     addUIBottom: function addUIBottom() {
         if (this.config == undefined) {
             this.config = [AcceleratorConfig, ToolConfig, EfficiencyConfig];
         }
         this.itemList = [];
-        var startpos = -this.bottomlist.width / 2;
+        // let startpos = -this.bottomlist.width/2;
+        var startpos = 0;
+
         for (var i = 0; i < this.config.length; i++) {
-            for (var j = 1; this.config[i][j] != undefined; j++) {
+            var j = 1;
+            for (; this.config[i][j] != undefined; j++) {
                 var node = UIBottomFactory.create(i, this.config[i][j], this.eventcallback.bind(this));
                 node.position = cc.p(startpos + 75, 0);
                 this.bottomlist.addChild(node);
                 this.itemList.push(node);
                 startpos += 156;
             }
+            this.itemlistNum[i] = j - 1;
         }
+        var single = this.itemlistNum[this.itemlistNum.length - 1];
+        if (single < 7) {
+            startpos += (7 - single) * 156;
+        }
+        var needlength = startpos + 156;
+        this.bottomlist.width = needlength;
+        // this.bottomlist.x = needlength/2;
+
     },
     initInfo: function initInfo() {
         this.setGoldNum(Global.gold);
@@ -75,10 +87,11 @@ cc.Class({
     },
     //设置金币
     setGoldNum: function setGoldNum(num) {
-        this.gold.string = num;
+        var strnum = GameUtils.formatNum(num);
+        this.gold.string = strnum;
     },
     setLevel: function setLevel(level) {
-        this.level.string = "level:" + level;
+        this.level.string = "LEVEL" + level;
     },
     setGem: function setGem(value) {
         this.gem.string = value;
@@ -94,6 +107,7 @@ cc.Class({
         this.BoxController.changeHammerSpine(data);
     },
     updateDate: function updateDate(data) {
+        if (data == null) return;
         for (var name in data) {
             if (name == 'exp') {
                 var exp = LevelConfig[Global.level].exp;
@@ -113,7 +127,7 @@ cc.Class({
                 this.setGem(data.gem);
             }
         }
-        if (name == "level" || name == "gold") {
+        if (name == "level" || name == "gold" || name == 'gem') {
             this.updateButtom();
         }
     },
@@ -128,8 +142,8 @@ cc.Class({
         //        // this.lblScrollEvent.string = "Scroll to Right"; 
         //        break;
         //    }
-        var num1 = 310;
-        var num2 = 1240;
+        var num1 = this.itemlistNum[0] * 156 - 6;
+        var num2 = num1 + this.itemlistNum[1] * 156 - 6;
         if (movex < num1) {
             this.setCheckToggle(0);
         } else if (movex < num2) {
@@ -148,19 +162,19 @@ cc.Class({
                 this.scrollView.scrollToOffset(cc.p(0, 0), 0.2);
                 break;
             case 1:
-                var num1 = 2 * 156;
-                this.scrollView.scrollToOffset(cc.p(num1, 0), 0.2);
+                var num0 = this.itemlistNum[0] * 156;
+                this.scrollView.scrollToOffset(cc.p(num0, 0), 0.2);
                 // title += "2";
                 break;
             case 2:
-                var num2 = 8 * 156;
-                this.scrollView.scrollToOffset(cc.p(num2, 0), 0.2);
+                var num1 = (this.itemlistNum[0] + this.itemlistNum[1]) * 156;
+                this.scrollView.scrollToOffset(cc.p(num1, 0), 0.2);
                 // title += "3";
                 break;
             default:
                 break;
         }
-        this.setCheckToggle(index);
+        // this.setCheckToggle(index);
     },
 
     setCheckToggle: function setCheckToggle(num) {
@@ -180,21 +194,9 @@ cc.Class({
     //点击升级按钮
     onClickLevel: function onClickLevel() {
         if (this.TopProgressBar.progress >= 1) {
+            Global.typebtn = 'uplevel';
             this.BoxController.upgradView.active = true;
         }
-    },
-    addlevel: function addlevel() {
-        var myinfo = {};
-        var level = Global.level + 1;
-        var needexp = LevelConfig[level].exp;
-        var needgold = LevelConfig[level].rewardcoin;
-        myinfo.level = level;
-        Global.saveLevel(level);
-        myinfo.exp = Global.exp - needexp;
-        Global.saveExp(myinfo.exp);
-        myinfo.gold = Global.gold + needgold;
-        Global.saveGold(myinfo.gold);
-        this.updateDate(myinfo);
     },
     eventcallback: function eventcallback(type, id) {
         var string = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;

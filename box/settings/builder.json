@@ -9,7 +9,7 @@
   "inlineSpriteFrames": true,
   "inlineSpriteFrames_native": true,
   "jailbreakPlatform": false,
-  "md5Cache": true,
+  "md5Cache": false,
   "mergeStartScene": true,
   "oauthLoginServer": "",
   "optimizeHotUpdate": false,
@@ -30,7 +30,7 @@
   "webOrientation": "landscape",
   "wechatgame": {
     "appid": "wx6ac3f5090a6b99c5",
-    "orientation": "landscape"
+    "orientation": "portrait"
   },
   "xxteaKey": "6f779aa9-c97a-43",
   "zipCompressJs": true

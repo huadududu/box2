@@ -16,7 +16,7 @@ module.exports = {
     formatNum:function(num){
         let str;
         if(num> 1000){
-            str = parseInt(num/1000)+"k";
+            str = parseInt(num/1000)+"K";
         }else{
             str = ""+num;
         }

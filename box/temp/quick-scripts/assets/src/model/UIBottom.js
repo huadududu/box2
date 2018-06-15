@@ -24,11 +24,12 @@ cc.Class({
     properties: {
         title: cc.Label,
         icon: cc.Sprite,
+        iconLabel: cc.Label,
         desc_1: cc.Label,
-        desc_2: cc.Label,
         btn: cc.Button,
         progressBar: cc.ProgressBar,
         btntext: cc.Label,
+        iconGem: cc.Sprite,
 
         type: {
             visible: false,
@@ -56,11 +57,32 @@ cc.Class({
     init: function init() {},
 
     setIcon: function setIcon() {
+        var pngicon = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
         var pngname = void 0;
-        if (GameType.bottomRadio.Efficiency == this.type) {
-            pngname = config[this.type][this.ID].coin;
+        var bool = GameType.bottomRadio.Efficiency == this.type;
+        this.icon.node.active = !bool;
+        this.iconLabel.node.active = bool;
+        if (bool) {
+            if (pngicon != null) {
+                pngname = pngicon;
+            } else {
+                var time = config[this.type][this.ID].time;
+                if (time > 0) {
+                    pngname = "X" + time;
+                } else {
+                    var jumptime = config[this.type][this.ID].jumptime;
+                    pngname = this.formatDayTest(jumptime);
+                    // pngname = "x"+config[this.type][this.ID].jumptime;
+                }
+            }
+            this.iconLabel.string = pngname;
         } else {
-            pngname = config[this.type][this.ID].icon;
+            if (pngicon != null) {
+                pngname = pngicon;
+            } else {
+                pngname = config[this.type][this.ID].icon;
+            }
             this.icon.spriteFrame = SpriteFrameCenter.getFrameFromAtlas("png/box", pngname + ".png");
         }
     },
@@ -72,7 +94,19 @@ cc.Class({
         this.btn.hoverSprite = SpriteFrameCenter.getFrameFromAtlas("png/box", this.btnname[num] + ".png");
     },
     setDesc_1: function setDesc_1() {
-        var desc = config[this.type][this.ID].desc;
+        var desc = void 0;
+        var attnum = void 0;
+        if (this.type != 1) {
+            desc = config[this.type][this.ID].desc;
+        } else {
+
+            if (Global.hammer[this.ID] != null) {
+                attnum = Global.hammer[this.ID].attribute;
+            } else {
+                attnum = config[this.type][this.ID].attribute;
+            }
+            desc = AttributeConfig[attnum].desc;
+        }
         if (!desc) {
             this.desc_1.string = "config fault";
             return;
@@ -83,7 +117,7 @@ cc.Class({
         if (this.type == 0) {
             if (config[this.type][this.ID].speed > 0) desc = this.formatPrint(desc, config[this.type][this.ID].speed, config[this.type][this.ID].coin);else desc = this.formatPrint(desc, config[this.type][this.ID].coin);
         } else if (this.type == 1) {
-            desc = this.formatPrint(desc, config[this.type][this.ID].att, config[this.type][this.ID].time);
+            desc = this.formatPrint(desc, AttributeConfig[attnum].att, AttributeConfig[attnum].time);
         } else {
             if (config[this.type][this.ID].time > 0) {
                 desc = this.formatPrint(desc, config[this.type][this.ID].time);
@@ -107,19 +141,6 @@ cc.Class({
         }
         this.title.string = title;
     },
-    setDesc: function setDesc() {
-        var desc = config[this.type][this.ID].desc;
-        if (desc == null || title == undefined) {
-            desc = "unknow";
-        } else if (LanguageConfig[desc] && LanguageConfig[desc][this.language]) {
-
-            desc = LanguageConfig[desc][this.language];
-        }
-        this.desc_1.string = desc;
-    },
-    setBtnDesc: function setBtnDesc(str) {
-        this.btntext.string = str;
-    },
     setBtnVisible: function setBtnVisible(bool) {
         this.btn.node.active = bool;
     },
@@ -127,10 +148,9 @@ cc.Class({
         this.type = type;
         this.ID = info.id;
         this.setTitle();
-        this.setIcon();
         this.setDesc_1();
-        this.setBtnDesc();
-        this.setBtnVisible(true);
+        this.setIcon();
+        // this.setBtnVisible(true);
         this.eventcallback = callback;
         this.setBtnState();
         if (this.type == 1) {
@@ -140,6 +160,7 @@ cc.Class({
         }
     },
     setBtnState: function setBtnState() {
+
         switch (this.type) {
             case 0:
                 this.setType0BtnState();
@@ -148,7 +169,9 @@ cc.Class({
                 this.setType1BtnState();
                 break;
             case 2:
+
                 this.setType2BtnState();
+
                 break;
         }
     },
@@ -203,33 +226,55 @@ cc.Class({
             var active = false;
             if (Global.hammer[this.ID] == null || Global.hammer[this.ID] == undefined) {
                 //没有激活
+                var iconpng = config[this.type][this.ID].locked;
+                this.setIcon(iconpng);
                 if (thisID == 0) {
                     //点击激活
                     this.ButtonState(1);
-                    this.btntext.string = "touch active";
+                    // this.btntext.string="touch active";
+                    this.btntext.string = LanguageConfig['10020'][this.language];
                 } else if (thisID == 1) {
                     //视频激励
-                    this.btntext.string = "n:" + thisID + "c:" + Global.openAdTimes;
+                    // this.btntext.string = "n:"+thisID+"c:"+Global.openAdTimes;
+                    this.btntext.string = LanguageConfig['10022'][this.language];
+                    this.title.node.active = false;
                 } else if (thisID == 2) {
                     //等级激活
                     var needlvl = confArry[1];
                     if (level < needlvl) {
                         this.ButtonState(0);
-                        this.btntext.string = needlvl + "级解锁";
+                        var str = LanguageConfig['10021'][this.language];
+                        // this.btntext.string='Lv'+needlvl;
+                        this.btntext.string = this.formatPrint(str, needlvl);
+                        this.title.node.active = false;
                     } else {
                         this.ButtonState(1);
-                        this.btntext.string = "touchactive";
+                        // this.btntext.string="touchactive";
+                        this.btntext.string = LanguageConfig['10020'][this.language];
                     }
+                    this.title.node.active = false;
                 } else if (thisID == 3) {
                     //邀请好友
-                    this.btntext.string = "n:" + confArry[1] + "c:" + Global.inviteFriends;
+                    // this.btntext.string = "n:"+confArry[1]+"c:"+Global.inviteFriends;
+                    if (Global.inviteFriends == 0) {
+                        this.btntext.string = LanguageConfig['10023'][this.language];
+                    } else if (confArry[1] > Global.inviteFriends) {
+                        this.btntext.string = Global.inviteFriends + '／' + confArry[1];
+                    } else {
+                        //邀请的数量够
+                        this.btntext.string = LanguageConfig['10020'][this.language];
+                    }
+                    this.title.node.active = false;
                 }
             } else if (AttributeConfig[Global.hammer[this.ID].attribute].next == -1) {
                 //达到最大
                 this.ButtonState(0);
-                this.btntext.string = "max";
+                // this.btntext.string = "max";
+                this.btntext.string = LanguageConfig['10024'][this.language];
+                this.setIcon();
             } else {
                 //升级条件
+                this.title.node.active = true;
                 var conf1 = AttributeConfig[Global.hammer[this.ID].attribute];
                 if (conf1.costtype = 1001) {
                     if (Global.gold > conf1.cost) {
@@ -239,8 +284,10 @@ cc.Class({
                     }
                     this.btntext.string = GameUtils.formatNum(conf1.cost);
                 }
+                this.setIcon();
             }
         }
+        this.setDesc_1();
     },
     setType2BtnState: function setType2BtnState() {
         var find = false;
@@ -255,7 +302,8 @@ cc.Class({
                 } else {
                     this.ButtonState(0);
                 }
-                this.btntext.string = GameUtils.formatNum(conf.cost) + "^";
+                this.btntext.string = GameUtils.formatNum(conf.cost);
+                this.iconGem.node.active = true;
             }
         }
     },
@@ -280,7 +328,24 @@ cc.Class({
         }
 
         return oStr;
+    },
+    formatDayTest: function formatDayTest(jumptime) {
+        var str = "";
+        var jumpstr = "";
+        if (jumptime >= 24) {
+            str = LanguageConfig['10025'][this.language];
+            str = this.formatPrint(str, Math.floor(jumptime / 24));
+            jumpstr += str;
+            jumptime %= 24;
+        }
+        if (jumptime > 0) {
+            str = LanguageConfig['10019'][this.language];
+            str = this.formatPrint(str, jumptime);
+            jumpstr += str;
+        }
+        return jumpstr;
     }
+
 });
 
 cc._RF.pop();

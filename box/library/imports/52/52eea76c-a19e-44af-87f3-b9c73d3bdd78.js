@@ -9,7 +9,6 @@ cc._RF.push(module, '52eeadsoZ5Er4fzucc9O914', 'BoxController');
  */
 
 //负责head展现和变换。
-var CameraController = require('CameraController');
 var StageConfig = require("StageConfig");
 var BlockConfig = require("BoxConfig1");
 var CycleConfig = require("CycleConfig");
@@ -385,7 +384,7 @@ cc.Class({
         if (!this.blocks[line]) return;
         var node = this.blocks[line][row];
 
-        if (cc.isValid(node)) {
+        if (node != null) {
             var location = this.hammerpos(line, row);
             var texiao = this.getEffByBlock(line, row);
             console.log("destroylog:", line, ":", row, location);
@@ -547,7 +546,6 @@ cc.Class({
             this.hammers[hammerpos].node.active = false;
             return;
         }
-        this.hammers[hammerpos].node.active = true;
         var range = this.geScreenRange();
         var line = this.curMaxLine;
         var find = false;
@@ -579,12 +577,14 @@ cc.Class({
         }
         var num = GameUtils.randomInt(0, canclick.length - 1);
         var row = canclick[num];
-        var location = this.hammerpos(line, row);
+        var location = this.hammerpos(curline, row);
         if (this.HattingPos == null) {
             this.HattingPos = {};
         }
-        this.HattingPos[hammerpos] = { x: line, y: row };
+        this.HattingPos[hammerpos] = { x: curline, y: row };
+        console.log("choose:", this.HattingPos[hammerpos]);
         this.hammers[hammerpos].node.position = location;
+        this.hammers[hammerpos].node.active = true;
         this.playHammerSpine(hammerpos);
     },
     //根据小块的位置 过的特效文件
@@ -639,7 +639,7 @@ cc.Class({
         var cameraY = this.camera.node.getPositionY();
         var gameY = this.gameNode.y;
         var realwidth = this.blockWidth + this.blockBlank;
-        var line = Math.floor((point.y + cameraY - 205) / realwidth);
+        var line = Math.floor((point.y + cameraY) / realwidth);
         var row = Math.floor((point.x - this.margins - this.blockBlank) / realwidth);
         var find = false;
         if (this.checkCanDestroy(line, row)) {
@@ -674,28 +674,32 @@ cc.Class({
             return;
         }
         console.log("touchStartCallBack");
-        this.previousPt = location;
-        this.motionStreak.node.setPositionX(location.x - this.BaseWidth);
-        this.motionStreak.node.setPositionY(location.y - this.BaseHeight);
+        // this.previousPt = location;
+        // let motionpos = this.motionStreak.node.convertToNodeSpace(location);
+        // this.motionStreak.node.setPositionX(motionpos);
+        // this.motionStreak.node.setPositionY(motionpos);
         this.motionStreak.reset();
 
         // this.isTouching = false;
     },
 
-    touchCancelCallBack: function touchCancelCallBack(location) {
+    touchCancelCallBack: function touchCancelCallBack(location1) {
+        var location = this.gameNode.convertToNodeSpace(location1);
         this.updateTouch(location);
         this.isTouching = false;
         this.motionStreak.reset();
     },
 
-    touchEndCallBack: function touchEndCallBack(location) {
+    touchEndCallBack: function touchEndCallBack(location1) {
         // this.touchPosition(location);
+        var location = this.gameNode.convertToNodeSpace(location1);
         this.updateTouch(location);
         this.isTouching = false;
         console.log("touchEndCallBack");
         this.motionStreak.reset();
     },
-    touchMoveCallBack: function touchMoveCallBack(location) {
+    touchMoveCallBack: function touchMoveCallBack(location1) {
+        var location = this.gameNode.convertToNodeSpace(location1);
         if (!this.canTouch) {
             return;
         }
@@ -704,9 +708,11 @@ cc.Class({
             return;
         }
         this.updateTouch(location);
-        this.previousPt = location;
-        this.motionStreak.node.setPositionX(location.x - this.BaseWidth);
-        this.motionStreak.node.setPositionY(location.y - this.BaseHeight);
+        // this.previousPt = location;
+        this.motionStreak.node.setPositionX(location1.x - this.BaseWidth);
+        this.motionStreak.node.setPositionY(location1.y - this.BaseHeight);
+        // let motionpos = this.node.convertToNodeSpace(location1);
+        // this.motionStreak.node.position=motionpos;
     },
 
     onClickTreasure: function onClickTreasure(event) {
@@ -970,15 +976,37 @@ cc.Class({
     efficiencyAdd: function efficiencyAdd(id) {
         var conf = EfficiencyConfig[id];
         var gem = 0;
-        if (conf.costtype == 1002) {
-            if (Global.gem >= conf.cost) {
-                gem = Global.gem - conf.cost;
-                if (conf.coin > 0) {
-                    Global.efficiency[id] = { 'id': id, 'coin': conf.coin };
-                    this.efficeGold += conf.coin - 1;
+        var addgold = 0;
+        if (conf.costtype == 1002 && Global.gem >= conf.cost) {
+            //enough gem
+            gem = Global.gem - conf.cost;
+            if (conf.coin > 0) {
+                this.efficeGold += conf.coin - 1;
+                var timestamp1 = Date.parse(new Date()) / 1000; // 以秒为单位
+                Global.efficiency[id] = { 'id': id, 'timeleft': timestamp1, 'starttime': timestamp1 };
+                Global.saveEfficiency(Global.efficiency);
+            }
+            if (conf.jumptime > 0) {
+                //jump time
+
+                for (var i = this.hammerStart; i <= this.hammerEnd; i++) {
+                    if (Global.hammer[i] != undefined) {
+                        var attr = AttributeConfig[Global.hammer[i].attribute];
+                        addgold += conf.jumptime * 60 * 50 / attr.time * attr.att;
+                    }
                 }
-                if (conf.jumptime > 0) {}
-            } else {}
+                var myinfo = {};
+                if (gem >= 0) {
+                    myinfo.gem = gem;
+                    Global.saveGem(myinfo.gem);
+                }
+                Global.addgold = addgold;
+
+                // this.GameMenuController.updateDate(myinfo);
+                Global.btnType = 'skip';
+                Global.skipID = id;
+                this.upgradView.active = true;
+            }
         }
         this.GameMenuController.updateDate({ 'gem': gem });
         Global.saveGem(gem);

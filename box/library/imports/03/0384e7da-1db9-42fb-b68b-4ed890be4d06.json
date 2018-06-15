@@ -98,7 +98,7 @@
       }
     }
   },
-  "_atlasText": "\r\nchutou_3.png\r\nsize: 90,69\r\nformat: RGBA8888\r\nfilter: Linear,Linear\r\nrepeat: none\r\nchutou_3\r\n  rotate: false\r\n  xy: 1, 1\r\n  size: 87, 66\r\n  orig: 87, 66\r\n  offset: 0, 0\r\n  index: -1\r\n",
+  "_atlasText": "\nchutou_3.png\nsize: 90,69\nformat: RGBA8888\nfilter: Linear,Linear\nrepeat: none\nchutou_3\n  rotate: false\n  xy: 1, 1\n  size: 87, 66\n  orig: 87, 66\n  offset: 0, 0\n  index: -1\n",
   "atlasUrl": {
     "__uuid__": "343b9610-315d-4ebf-b94f-5a45bcc3441d"
   },

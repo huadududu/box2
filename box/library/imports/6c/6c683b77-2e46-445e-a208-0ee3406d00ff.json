@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "wb_time_fnt_0",
+    "texture": "d444d4e4-94d3-485a-af5c-64ae042f9bd7",
+    "atlas": "",
+    "rect": [
+      1,
+      0,
+      251,
+      55
+    ],
+    "offset": [
+      -1.5,
+      7.5
+    ],
+    "originalSize": [
+      256,
+      70
+    ]
+  }
+}
