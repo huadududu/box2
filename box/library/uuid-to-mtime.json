@@ -185,8 +185,8 @@
     "relativePath": "resources\\particle"
   },
   "893fda5b-9a68-4ae0-9a30-cbc1a4d8c332": {
-    "asset": 1529327713641,
-    "meta": 1529327713654,
+    "asset": 1529342374762,
+    "meta": 1529342374770,
     "relativePath": "sc\\boxa.fire"
   },
   "2d5b0dc1-0269-4233-b295-3014b8e2ce13": {
@@ -749,11 +749,6 @@
     "meta": 1529260588166,
     "relativePath": "src\\model\\CycleConfig.js"
   },
-  "7c6357d1-9702-4b99-8165-12a93c47d3b4": {
-    "asset": 1529260560824,
-    "meta": 1529260588187,
-    "relativePath": "src\\model\\EfficiencyConfig.js"
-  },
   "2dd09606-b434-4154-890e-eefc5ae91f10": {
     "asset": 1528628651841,
     "meta": 1529260588241,
@@ -814,20 +809,10 @@
     "meta": 1529260587114,
     "relativePath": "resources\\png\\box.png"
   },
-  "6dad3a70-169b-4b03-9861-ce70429d5995": {
-    "asset": 1529260560828,
-    "meta": 1529260588546,
-    "relativePath": "src\\model\\UIBottom.js"
-  },
   "4d84c1df-7a92-4c9b-985d-3904219ae1bc": {
     "asset": 1529260560825,
     "meta": 1529260588232,
     "relativePath": "src\\model\\Global.js"
-  },
-  "9e7b41dd-ea09-4542-9769-aa3e9fd07809": {
-    "asset": 1529260560831,
-    "meta": 1529260588740,
-    "relativePath": "src\\view\\UpgradView.js"
   },
   "e82d1bfc-8011-4ef7-b369-88e4ea6c79af": {
     "asset": 1529260560829,
@@ -839,14 +824,29 @@
     "meta": 1529260588739,
     "relativePath": "src\\view\\TouchView.js"
   },
-  "52eea76c-a19e-44af-87f3-b9c73d3bdd78": {
-    "asset": 1529260560822,
-    "meta": 1529260587843,
-    "relativePath": "src\\controller\\BoxController.js"
-  },
   "1fc470d0-d784-4c49-b45b-75b1c9cc11a9": {
     "asset": 1529260560823,
     "meta": 1529260587871,
     "relativePath": "src\\controller\\GameMenuController.js"
+  },
+  "9e7b41dd-ea09-4542-9769-aa3e9fd07809": {
+    "asset": 1529332373540,
+    "meta": 1529332378346,
+    "relativePath": "src\\view\\UpgradView.js"
+  },
+  "7c6357d1-9702-4b99-8165-12a93c47d3b4": {
+    "asset": 1529335450778,
+    "meta": 1529335451290,
+    "relativePath": "src\\model\\EfficiencyConfig.js"
+  },
+  "52eea76c-a19e-44af-87f3-b9c73d3bdd78": {
+    "asset": 1529340941996,
+    "meta": 1529340963171,
+    "relativePath": "src\\controller\\BoxController.js"
+  },
+  "6dad3a70-169b-4b03-9861-ce70429d5995": {
+    "asset": 1529342335419,
+    "meta": 1529342354739,
+    "relativePath": "src\\model\\UIBottom.js"
   }
 }

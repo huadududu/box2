@@ -4673,6 +4673,9 @@
     "DescLable": {
       "__id__": 112
     },
+    "vediodesc": {
+      "__id__": 114
+    },
     "BoxController": {
       "__id__": 87
     }

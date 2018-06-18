@@ -290,12 +290,42 @@ cc.Class({
         this.setDesc_1();
     },
     setType2BtnState:function(){
-        let find = false;
-        if(Global.efficiency[this.ID]){
-            this.ButtonState(0);
-            this.btntext.string ="max";
+        let bool = Global.efficiency[this.ID] != undefined && Global.efficiency[this.ID] != null;
+        let conf = EfficiencyConfig[this.ID];
+        if(bool){
+            let timeleft = Global.efficiency[this.ID].timeleft;
+            let bool= timeleft>0;
+            if( timeleft>0){
+                let self = this;
+                this.callback = function(){
+                    if(Global.efficiency[this.ID] != null){
+                        timeleft = Global.efficiency[this.ID].timeleft;
+                        timeleft=parseInt(timeleft-1);
+                        self.btntext.string = GameUtils.formatTime(timeleft*60);
+                        self.progressBar.progress =  timeleft/conf.time;
+                        this.btn.node.active = !bool;
+                        this.progressBar.node.active = bool;
+                        if(timeleft >0){
+                            Global.efficiency[this.ID].timeleft-=1;
+                            Global.saveEfficiency(Global.efficiency);
+                        }else {
+                            Global.efficiency[this.ID] = null;
+                            Global.saveEfficiency(Global.efficiency);
+                            this.checkisrun= false;
+                            this.unschedule(this.callback);
+                            self.eventcallback(this.type,self.ID,'finish');
+
+                        }
+                    }
+                }
+                if(!this.checkisrun && bool){
+                    this.checkisrun = true;
+                    this.schedule(this.callback,60);
+                }
+            }
         }else{
-            let conf = EfficiencyConfig[this.ID];
+            this.btn.node.active = !bool;
+            this.progressBar.node.active = bool;
             if(conf.costtype == 1002){
                 if(Global.gem>= conf.cost){
                     this.ButtonState(1);

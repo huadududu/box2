@@ -201,11 +201,7 @@ cc.Class({
         this.hammers = {};
         var timescale = 1;
         var hammer = Global.hammer;
-        for (var eff in Global.efficiency) {
-            if ('coin' in Global.efficiency[eff]) {
-                this.efficeGold += Global.efficiency[eff].coin - 1;
-            }
-        }
+        this.initEfficienyInfo();
 
         var _loop = function _loop() {
             if (hammer[i] == undefined) return "continue";
@@ -753,12 +749,14 @@ cc.Class({
                 break;
         }
     },
+    //广告加速开始
     accleleratorChange: function accleleratorChange(id) {
         var conf = AcceleratorConfig[id];
         Global['bar' + id] = conf.time;
         this.changeHammerSpeed();
         this.GameMenuController.updateButtom();
     },
+    //广告加速结束
     accleleratorrRecover: function accleleratorrRecover(id) {
         this.changeHammerSpeed();
         this.GameMenuController.updateButtom();
@@ -773,7 +771,6 @@ cc.Class({
                 speedGold += AcceleratorConfig[_i].coin;
             }
         }
-
         if (speedHammer == 0) {
             speedHammer = 1;
         }
@@ -974,6 +971,12 @@ cc.Class({
         node.runAction(cc.sequence(action, action2));
     },
     efficiencyAdd: function efficiencyAdd(id) {
+        var str = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+
+        if (str != null) {
+            this.efficiencyChange();
+            return;
+        }
         var conf = EfficiencyConfig[id];
         var gem = 0;
         var addgold = 0;
@@ -981,28 +984,22 @@ cc.Class({
             //enough gem
             gem = Global.gem - conf.cost;
             if (conf.coin > 0) {
-                this.efficeGold += conf.coin - 1;
-                var timestamp1 = Date.parse(new Date()) / 1000; // 以秒为单位
-                Global.efficiency[id] = { 'id': id, 'timeleft': timestamp1, 'starttime': timestamp1 };
-                Global.saveEfficiency(Global.efficiency);
+                // this.efficeGold += conf.coin - 1;
+                var timestamp = Date.parse(new Date()) / 1000; // 以秒为单位
+                Global.efficiency[id] = { 'id': id, 'timeleft': conf.time, 'timestart': timestamp };
+                this.efficiencyChange();
             }
+            var myinfo = {};
             if (conf.jumptime > 0) {
                 //jump time
 
                 for (var i = this.hammerStart; i <= this.hammerEnd; i++) {
                     if (Global.hammer[i] != undefined) {
                         var attr = AttributeConfig[Global.hammer[i].attribute];
-                        addgold += conf.jumptime * 60 * 50 / attr.time * attr.att;
+                        addgold += conf.jumptime * 60 * 60 / attr.time * attr.att;
                     }
                 }
-                var myinfo = {};
-                if (gem >= 0) {
-                    myinfo.gem = gem;
-                    Global.saveGem(myinfo.gem);
-                }
                 Global.addgold = addgold;
-
-                // this.GameMenuController.updateDate(myinfo);
                 Global.btnType = 'skip';
                 Global.skipID = id;
                 this.upgradView.active = true;
@@ -1013,9 +1010,56 @@ cc.Class({
         Global.saveEfficiency(Global.efficiency);
         this.GameMenuController.updateButtom();
     },
+    //进入游戏计算离线时间 并计算收益
+    initEfficienyInfo: function initEfficienyInfo() {
+        var nowtime = Date.parse(new Date()) / 1000; // 以秒为单位;
+        var addgold = 0;
+        for (var id in Global.efficiency) {
+            if (Global.efficiency[id] == null) {
+                continue;
+            }
+            var paseTime = nowtime - Global.efficiency[id].timestart;
+            var conf = EfficiencyConfig[id];
+            var useTime = conf.time - Global.efficiency[id].timeleft;
+            if (paseTime > conf.time) {
+                paseTime = conf.time;
+            }
+            var outlineTime = paseTime - useTime;
+            var timeleft = conf.time - outlineTime - useTime;
+            if (timeleft <= 0) {
+                Global.efficiency[id] = null;
+            } else {
+                Global.efficiency[id].timeleft = timeleft;
+                this.efficeGold += conf.coin - 1;
+            }
+            for (var i = this.hammerStart; i <= this.hammerEnd; i++) {
+                if (Global.hammer[i] != undefined) {
+                    var attr = AttributeConfig[Global.hammer[i].attribute];
+                    addgold += conf.coin * outlineTime * attr.att / attr.time;
+                }
+            }
+        }
+        if (addgold > 0) {
+            Global.addgold = addgold;
+            Global.btnType = 'outline';
+            this.upgradView.active = true;
+        }
+    },
+    //收益加速开始/结束
+    efficiencyChange: function efficiencyChange() {
+        var addeff = 0;
+
+        for (var id in Global.efficiency) {
+            if (Global.efficiency[id] == null) continue;
+            var conf = EfficiencyConfig[id];
+            addeff += conf.coin - 1;
+        }
+        this.efficeGold = addeff;
+        this.GameMenuController.updateButtom();
+    },
     onClickBtnaddGem: function onClickBtnaddGem() {
 
-        var gem = Global.gem + 10;
+        var gem = Global.gem + 100;
         this.GameMenuController.updateDate({ 'gem': gem });
         Global.saveGem(gem);
         this.GameMenuController.updateButtom();

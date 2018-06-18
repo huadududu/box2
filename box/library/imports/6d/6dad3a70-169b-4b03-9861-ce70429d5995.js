@@ -290,12 +290,41 @@ cc.Class({
         this.setDesc_1();
     },
     setType2BtnState: function setType2BtnState() {
-        var find = false;
-        if (Global.efficiency[this.ID]) {
-            this.ButtonState(0);
-            this.btntext.string = "max";
+        var bool = Global.efficiency[this.ID] != undefined && Global.efficiency[this.ID] != null;
+        var conf = EfficiencyConfig[this.ID];
+        if (bool) {
+            var timeleft = Global.efficiency[this.ID].timeleft;
+            var _bool = timeleft > 0;
+            if (timeleft > 0) {
+                var self = this;
+                this.callback = function () {
+                    if (Global.efficiency[this.ID] != null) {
+                        timeleft = Global.efficiency[this.ID].timeleft;
+                        timeleft = parseInt(timeleft - 1);
+                        self.btntext.string = GameUtils.formatTime(timeleft * 60);
+                        self.progressBar.progress = timeleft / conf.time;
+                        this.btn.node.active = !_bool;
+                        this.progressBar.node.active = _bool;
+                        if (timeleft > 0) {
+                            Global.efficiency[this.ID].timeleft -= 1;
+                            Global.saveEfficiency(Global.efficiency);
+                        } else {
+                            Global.efficiency[this.ID] = null;
+                            Global.saveEfficiency(Global.efficiency);
+                            this.checkisrun = false;
+                            this.unschedule(this.callback);
+                            self.eventcallback(this.type, self.ID, 'finish');
+                        }
+                    }
+                };
+                if (!this.checkisrun && _bool) {
+                    this.checkisrun = true;
+                    this.schedule(this.callback, 60);
+                }
+            }
         } else {
-            var conf = EfficiencyConfig[this.ID];
+            this.btn.node.active = !bool;
+            this.progressBar.node.active = bool;
             if (conf.costtype == 1002) {
                 if (Global.gem >= conf.cost) {
                     this.ButtonState(1);
