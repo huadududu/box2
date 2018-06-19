@@ -23,6 +23,7 @@ let RewardItemFactory = require("RewardItemFactory");
 let SpriteFrameCenter = require("SpriteFrameCenter");
 let ParticleSystemCenter = require("ParticleSystemCenter");
 let SkeletonDataCenter = require("SkeletonDataCenter");
+let GameConfig = require("GameConfig");
 // let GameMenuController = require('GameMenuController');
 
 let Global = require('Global');
@@ -55,10 +56,6 @@ cc.Class({
         upgradView: cc.Node,
         openbox: cc.Node,
         // GameMenuController: GameMenuController,
-        language: {
-            visible: false,
-            default: "English"
-        },
         type: {
             visible: false,
             default: 0
@@ -622,7 +619,6 @@ cc.Class({
             if (cc.isValid(this.blocks[x][y])) {
                 this.destroyBlock(x, y);
             }
-
             this.setSmPosition(hammerpos);
 
         }
@@ -691,8 +687,11 @@ cc.Class({
         this.isTouching = false;
         console.log("touchEndCallBack");
         this.motionStreak.reset();
+        this.previousPt=null;
     },
     touchMoveCallBack: function (location1) {
+        // this.multMoveCallBack(location1);
+        // return;
         let location= this.gameNode.convertToNodeSpace(location1);
         if (!this.canTouch) {
             return;
@@ -709,7 +708,50 @@ cc.Class({
         // let motionpos = this.node.convertToNodeSpace(location1);
         // this.motionStreak.node.position=motionpos;
     },
+    //多点触控
+    multMoveCallBack:function(location01,location02 = null){
 
+        let location1 = this.gameNode.convertToNodeSpace(location01);
+        // let location2 = this.gameNode.convertToNodeSpace(location02);
+        console.log("1",location1);
+        // console.log("2",location2);
+        if(this.previousPt == null){
+            this.previousPt={};
+            this.previousPt[0]= location1;
+            // this.previousPt[1]= location2;
+            return;
+        }
+        var distance = cc.pSub( this.previousPt[0],location1);
+        console.log("distance",distance);
+        if(distance.y != 0){
+            let origin = this.camera.node.getPositionY();
+            // if(origin == 0) {
+            //     return;
+            // }
+            let endpos =( origin+distance.y)*0.5;
+            if(endpos <0 ){
+                endpos =0;
+            }
+            if(endpos >300){
+                endpos = 300;
+            }
+            let move = origin - endpos;
+            this.camera.node.setPositionY(endpos);
+            for (var i = this.hammerStart; i < this.hammerEnd; i++) {
+                if(this.hammers[i] != undefined){
+                    let location=this.hammers[i].node.position;
+                    // let action2 = cc.moveTo(0.1,{x:location.x,y:location.y+move})
+                     // this.hammers[i].node.runAction(action2);
+                    this.hammers[i].node.setPositionY(location.y+move);
+                }
+            }
+        }
+
+
+
+
+
+    },
     onClickTreasure: function (event) {
         var maxlinenum = this.maxLineNum();
         var totoalRowNum = this.totoalRowNum(0);
@@ -732,8 +774,22 @@ cc.Class({
         // let node= this.itemList.indexOf(sender);
         switch (type) {
             case 0:
-                if (string == null)
-                    this.accleleratorChange(id);
+                if (string == null){
+                    if (thisID == 1) {//视频激励
+                        if(GameConfig.isFBInstantGame()){
+                            let FBP = require("FBPlugin");
+                            self = this;
+                            FBP.RewardedVideoAsync(function(){
+                                    self.accleleratorChange(id);
+                                    self.GameMenuController.updateButtom();
+                                }
+                            );
+                        }else{
+                            this.accleleratorChange(id);
+                        }
+
+                    }
+                }
                 else {
                     if (string == 'finish') {
                         this.accleleratorrRecover(id);
@@ -744,7 +800,7 @@ cc.Class({
                 this.toolChange(id);
                 break;
             case 2:
-                this.efficiencyAdd(id);
+                this.efficiencyAdd(id,string);
                 break;
         }
     },
@@ -792,7 +848,7 @@ cc.Class({
     toolChange: function (id) {
         let info = ToolConfig[id];
 
-        if (Global.hammer[id] == undefined) {
+        if (Global.hammer[id] == undefined) {//激活
             let bool = this.checkCanAdd(id);
             if (bool) {
                 Global.hammer[id] = {id: id, attribute: info.attribute};
@@ -803,8 +859,8 @@ cc.Class({
                 this.addAdTime(id);
             }
             this.GameMenuController.updateButtom();
-        } else {
 
+        } else {//升级
             let conf = AttributeConfig[Global.hammer[id].attribute];
             let mess = {};
 
@@ -851,19 +907,31 @@ cc.Class({
                 }
 
             } else if (thisID == 3) {//邀请好友
-                if (Global.inviteFriends < confArry[1])
+                // if(Global.freindsInfo[id]&&Global.freindsInfo[id].length){
+                //     Global.inviteFriends = Global.freindsInfo[id].length;
+                // }else{
+                //     Global.inviteFriends=0;
+                // }
+                if(Global.inviteFriends<confArry[1]){
                     return false;
-                else
+                }else{
                     return true;
+                }
             }
         }
-        return true;
+        return false;
+    },
+    addFriendCallBack:function(friendId){
+        if(Global.freindsInfo== null){
+            Global.freindsInfo = {};
+        }
 
     },
     addAdTime: function (id) {
         let conf = ToolConfig[id];
         let thisID;
         let confArry;
+        let self = this;
         if ("unlock" in conf) {
             if (conf.unlock.indexOf(";") != -1) {
                 confArry = conf.unlock.split(";");
@@ -872,9 +940,44 @@ cc.Class({
                 thisID = parseInt(conf.unlock);
             }
             if (thisID == 1) {//视频激励
-                return Global.openAdTimes++;
+                if(GameConfig.isFBInstantGame()){
+                    let FBP = require("FBPlugin");
+                    FBP.RewardedVideoAsync(function(){
+                            Global.openAdTimes++;
+                            self.GameMenuController.updateButtom();
+                        }
+                    );
+                }else{
+                    Global.openAdTimes++;
+                }
             } else if (thisID == 3) {//邀请好友
-                Global.inviteFriends++;
+                let FBP1 = require("FBPlugin");
+                let self = this;
+                if(GameConfig.isFBInstantGame()){
+                    FBP1.chooseAsync(function(friendID){
+                        if(Global.freindsInfo== null){
+                            Global.freindsInfo = {};
+                        }
+                        if( Global.freindsInfo[id] == null){
+                            Global.freindsInfo[id] =[];
+                        }
+                        var find = false;
+                        for(var i = 0;i<Global.freindsInfo[id].length;i++){
+                            let oldFriend = Global.freindsInfo[id];
+                            if(oldFriend ==friendID ){
+                                find= true;
+                                break;
+                            }
+                        }
+                        if(!find){
+                            Global.freindsInfo[id].push(friendID);
+                            Global.inviteFriends = Global.freindsInfo[id].length;
+                        }
+                        self.GameMenuController.updateButtom();
+                    });
+                }else{
+                    Global.inviteFriends++;
+                }
             }
         }
     },
@@ -1015,7 +1118,7 @@ cc.Class({
             if ( Global.efficiency[id] == null){
                 continue;
             }
-            let paseTime = (nowtime - Global.efficiency[id].timestart);
+            let paseTime = (nowtime - Global.efficiency[id].timestart)/60;//以min
             let conf = EfficiencyConfig[id];
             let useTime = conf.time - Global.efficiency[id].timeleft;
             if(paseTime > conf.time) {
@@ -1026,18 +1129,23 @@ cc.Class({
             if(timeleft <=0){
                 Global.efficiency[id] = null;
             }else{
-                Global.efficiency[id].timeleft = timeleft;
+                Global.efficiency[id].timeleft = parseInt(timeleft);
                 this.efficeGold += conf.coin - 1;
             }
             for(let i=this.hammerStart;i<=this.hammerEnd; i++){
                 if(Global.hammer[i] != undefined){
                     let attr = AttributeConfig[Global.hammer[i].attribute];
-                    addgold+=conf.coin*outlineTime* attr.att/attr.time;
+                    addgold+=conf.coin*outlineTime*60* attr.att/attr.time;
                 }
             }
+            if(Global.offlinetime<outlineTime){
+                Global.offlinetime = outlineTime;
+            }
         }
+        Global.saveEfficiency(Global.efficiency);
+        addgold  = parseInt(addgold);
         if(addgold >0) {
-            Global.addgold = addgold;
+            Global.addgold = parseInt(addgold);
             Global.btnType = 'outline';
             this.upgradView.active = true;
         }
@@ -1082,6 +1190,14 @@ cc.Class({
         this.GameMenuController.updateDate({'gold': gold});
         Global.saveGold(gold);
         this.GameMenuController.updateButtom();
+    },
+    onClickBtnaddExp() {
+
+        let exp = Global.exp +1000;
+        this.GameMenuController.updateDate({'exp': exp});
+        Global.saveExp(exp);
+        // this.GameMenuController.updateButtom();
     }
+
 });
 //

@@ -2,13 +2,17 @@
 cc._RF.push(module, 'e82d1v8gBFO97NpiOTqbHmv', 'GameUtils');
 // src/utils/GameUtils.js
 
-"use strict";
+'use strict';
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 /**
  * Created by bing on 18/04/2018.
  */
 
-module.exports = {
+var LanguageConfig = require('LanguageConfig');
+var Global = require('Global');
+module.exports = _defineProperty({
 
     //[min,max]
     randomInt: function randomInt(min, max) {
@@ -56,9 +60,32 @@ module.exports = {
 
             oStr = oStr.replace(re, arguments[i]);
         }
-
         return oStr;
+    },
+    formatHour: function formatHour(desc, num) {
+        var str = "";
+        if (num >= 24) {
+            var strday = LanguageConfig['10025'][Global.language];
+            str += this.formatPrint(strday, Math.floor(num / 24));
+            num %= 24;
+        }
+        if (num > 0) {
+            var strhour = LanguageConfig['10019'][Global.language];
+            str += this.formatPrint(strhour, num);
+        }
+        str = this.formatPrint(desc, str);
+        return str;
     }
-};
+}, 'formatPrint', function formatPrint() {
+    var num = arguments.length;
+
+    var oStr = arguments[0];
+
+    for (var i = 1; i < num; i++) {
+        oStr = oStr.replace(/s%/, arguments[i]);
+    }
+
+    return oStr;
+});
 
 cc._RF.pop();

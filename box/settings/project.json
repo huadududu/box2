@@ -14,7 +14,12 @@
   "design-resolution-height": 640,
   "design-resolution-width": 960,
   "excluded-modules": [
+    "TiledMap",
     "VideoPlayer",
+    "WebView",
+    "RichText",
+    "Collider",
+    "Graphics",
     "DragonBones",
     "Physics",
     "StudioComponent",

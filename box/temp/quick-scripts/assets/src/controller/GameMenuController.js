@@ -13,6 +13,7 @@ var AcceleratorConfig = require("AcceleratorConfig");
 var ToolConfig = require("ToolConfig");
 var EfficiencyConfig = require("EfficiencyConfig");
 var LevelConfig = require("LevelConfig");
+var LanguageConfig = require("LanguageConfig");
 var GameUtils = require("GameUtils");
 var Global = require('Global');
 
@@ -47,6 +48,9 @@ cc.Class({
         this.itemList = [];
         this.btnColor = ['#ffa30f', '#f9f9f9'];
         this.itemlistNum = [];
+        this.radiotext[0].string = LanguageConfig['10035'][Global.language];
+        this.radiotext[1].string = LanguageConfig['10036'][Global.language];
+        this.radiotext[2].string = LanguageConfig['10037'][Global.language];
     },
     addUIBottom: function addUIBottom() {
         if (this.config == undefined) {
@@ -194,7 +198,7 @@ cc.Class({
     //点击升级按钮
     onClickLevel: function onClickLevel() {
         if (this.TopProgressBar.progress >= 1) {
-            Global.typebtn = 'uplevel';
+            Global.btnType = 'uplevel';
             this.BoxController.upgradView.active = true;
         }
     },

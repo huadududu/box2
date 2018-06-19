@@ -17,6 +17,10 @@ cc.Class({
         touchMoveCallBack: {
             default:null,
             visible:false
+        },
+        multMoveCallBack:{
+            default:null,
+            visible:false
         }
     },
 
@@ -40,13 +44,25 @@ cc.Class({
     },
 
     touchEvent: function (event) {
+        let touches = event.getTouches();
+        console.log("touches:"+touches.length );
+        if( touches.length >=2){
+            var touch1 = touches[0];
+            var touch2 = touches[1];
+            var delta1 = touch1.getDelta(), delta2 = touch2.getDelta();
+            var touchPoint1 = event.currentTarget.convertToNodeSpaceAR(touch1.getLocation());
+            var touchPoint2 = event.currentTarget.convertToNodeSpaceAR(touch2.getLocation());
+            // var touchPoint2 = null;
+            if(this.multMoveCallBack){
+                this.multMoveCallBack(touchPoint1,touchPoint2);
+            }
+           // console.log("multMoveCallBack",this.multMoveCallBack);
+            return;
+        }
+        // console.log('touches:'+touches.length);
         let location = event.getLocation();
-        // cc.log(event.type, event.type == cc.Node.EventType.TOUCH_END, event.eventPhase, location.x, location.y, event.getID());
-
-        //相对于锚点的位置。
-        // let locationInNode = event.currentTarget.convertToNodeSpaceAR(event.getLocation());
+        // console.log('location:'+location.length);
         let locationInNode = event.currentTarget.convertToNodeSpace(event.getLocation());
-        // cc.log("locationInNode", locationInNode.x, locationInNode.y);
 
         if (cc.rectContainsPoint(this.touchRect, locationInNode)) {
             let callback = this.eventMap[event.type];

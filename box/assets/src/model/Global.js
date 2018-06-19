@@ -18,9 +18,9 @@ module.exports = function () {
         properties: {
             hard: 1,
             level: 1,
-            gold: 1,
-            gem: 1,
-            exp: 1,
+            gold: 0,
+            gem: 0,
+            exp: 0,
             openAdTimes: 0,
             inviteFriends: 0,
             hammer: {
@@ -31,11 +31,13 @@ module.exports = function () {
             },
             addgold: 0,
             addgem: 0,
-            freindsInfo: [],
+            freindsInfo: {},
             bar1: 0,//加速1加速buff1
             bar2: 0,//加速1加速buff2,
             typebtn:null,
-            skipID:0
+            skipID:0,
+            offlinetime:0,
+            language:'English'
 
 
         },
@@ -49,10 +51,10 @@ module.exports = function () {
                 } else if (typeof v == "number") {
                     this.level = v;
                 } else {
-                    this.level = 0;
+                    this.level = 1;
                 }
             }.bind(this));
-            lc.get('gold', 1, function (v) {
+            lc.get('gold', 0, function (v) {
                 if (typeof v == "string") {
                     this.gold = parseInt(v);
                 } else if (typeof v == "number") {
@@ -98,13 +100,12 @@ module.exports = function () {
                     this.openAdTimes = 0;
                 }
             }.bind(this));
-            lc.get('freindsInfo', [], function (v) {
-                if (typeof v == 'array') {
+            lc.get('freindsInfo', {}, function (v) {
+                if (v != null) {
                     this.freindsInfo = v;
                 } else {
-                    this.freindsInfo = [];
+                    this.freindsInfo = {};
                 }
-                this.inviteFriends = this.freindsInfo.length;
             }.bind(this));
             lc.get('efficiency', null, function (v) {
                 if (v != null) {

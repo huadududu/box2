@@ -34,6 +34,9 @@ cc.Class({
             if (this.controller.touchMoveCallBack) {
                 this.touchCancelCallBack = this.controller.touchCancelCallBack.bind(this.controller);
             }
+            if (this.controller.multMoveCallBack) {
+                this.multMoveCallBack = this.controller.multMoveCallBack.bind(this.controller);
+            }
         }
         this._super();
     }

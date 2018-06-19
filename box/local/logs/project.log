@@ -1,76 +1,84 @@
-2018-06-17T21:43:22.487Z - normal: Load ~/.CocosCreator/settings.json
-2018-06-17T21:43:22.492Z - normal: checking language setting...
-2018-06-17T21:43:22.492Z - normal: Language: zh
-2018-06-17T21:43:24.085Z - success: protocol editor-framework registered
-2018-06-17T21:43:24.085Z - success: protocol app registered
-2018-06-17T21:43:24.086Z - success: protocol theme registered
-2018-06-17T21:43:24.086Z - success: protocol packages registered
-2018-06-17T21:43:24.086Z - success: protocol unpack registerred
-2018-06-17T21:43:24.086Z - success: protocol disable-commonjs registerred
-2018-06-17T21:43:24.278Z - normal: connected!
-2018-06-17T21:43:24.280Z - normal: Check project E:\gittest\box2\box
-2018-06-17T21:43:24.282Z - normal: Initializing Cocos2d
-2018-06-17T21:43:24.458Z - normal: Initializing Asset Database
-2018-06-17T21:43:24.484Z - success: protocol uuid registerred
-2018-06-17T21:43:24.484Z - success: protocol db registerred
-2018-06-17T21:43:24.484Z - success: protocol thumbnail registerred
-2018-06-17T21:43:24.485Z - normal: Loading editor/builtin packages
-2018-06-17T21:43:24.500Z - success: anysdk loaded
-2018-06-17T21:43:24.597Z - success: assets loaded
-2018-06-17T21:43:24.598Z - success: builder loaded
-2018-06-17T21:43:24.599Z - success: cocos-analytics loaded
-2018-06-17T21:43:24.601Z - success: console loaded
-2018-06-17T21:43:24.628Z - success: fb-instant-games loaded
-2018-06-17T21:43:24.630Z - success: hierarchy loaded
-2018-06-17T21:43:24.632Z - success: inspector loaded
-2018-06-17T21:43:24.632Z - success: keystore loaded
-2018-06-17T21:43:24.634Z - success: node-library loaded
-2018-06-17T21:43:24.635Z - success: package-asset loaded
-2018-06-17T21:43:24.636Z - success: preferences loaded
-2018-06-17T21:43:24.637Z - success: project-exporter loaded
-2018-06-17T21:43:24.652Z - success: project-importer loaded
-2018-06-17T21:43:24.653Z - success: project-settings loaded
-2018-06-17T21:43:24.654Z - success: ui-kit loaded
-2018-06-17T21:43:24.655Z - success: ui-grid loaded
-2018-06-17T21:43:24.657Z - success: scene loaded
-2018-06-17T21:43:24.658Z - success: sprite-editor loaded
-2018-06-17T21:43:24.660Z - success: store loaded
-2018-06-17T21:43:24.663Z - success: timeline loaded
-2018-06-17T21:43:24.663Z - normal: Loading builtin packages
-2018-06-17T21:43:24.664Z - success: asset-db-debugger loaded
-2018-06-17T21:43:24.665Z - success: code-editor loaded
-2018-06-17T21:43:24.665Z - success: color-picker loaded
-2018-06-17T21:43:24.667Z - success: package-manager loaded
-2018-06-17T21:43:24.670Z - success: sdkbox loaded
-2018-06-17T21:43:24.672Z - success: tester loaded
-2018-06-17T21:43:24.673Z - success: ui-kit-preview-extra loaded
-2018-06-17T21:43:24.673Z - success: ui-kit-preview loaded
-2018-06-17T21:43:24.674Z - success: ui-tree loaded
-2018-06-17T21:43:25.563Z - normal: Initializing project E:\gittest\box2\box
-2018-06-17T21:43:25.566Z - normal: Loading packages
-2018-06-17T21:43:25.569Z - normal: Watching packages
-2018-06-17T21:43:25.579Z - normal: Run Application
-2018-06-17T21:43:26.074Z - success: preview server running at http://localhost:7456
-2018-06-17T21:43:29.703Z - normal: 1.9.0
-2018-06-17T21:43:30.278Z - warn: Script attached to "Canvas" in scene "boxa.fire" is missing or invalid. Detailed information:
-Node path: "Canvas"
-Asset url: "db://assets/sc/boxa.fire"
-Script UUID: "093f8fff-0a4d-44ea-b4cb-6219e31b9503"
-Class ID: "093f8//Ck1E6rTLYhnjG5UD"
-
-2018-06-17T21:43:53.948Z - normal: Start building with options : {
+2018-06-19T12:28:34.463Z - normal: Load ~/.CocosCreator/settings.json
+2018-06-19T12:28:34.466Z - normal: checking language setting...
+2018-06-19T12:28:34.466Z - normal: Language: zh
+2018-06-19T12:28:35.006Z - success: protocol editor-framework registered
+2018-06-19T12:28:35.007Z - success: protocol app registered
+2018-06-19T12:28:35.007Z - success: protocol theme registered
+2018-06-19T12:28:35.007Z - success: protocol packages registered
+2018-06-19T12:28:35.007Z - success: protocol unpack registerred
+2018-06-19T12:28:35.007Z - success: protocol disable-commonjs registerred
+2018-06-19T12:28:35.288Z - normal: connected!
+2018-06-19T12:28:35.288Z - normal: Check project /Users/bolex1/work/game/box/box
+2018-06-19T12:28:35.289Z - normal: Initializing Cocos2d
+2018-06-19T12:28:35.456Z - normal: Initializing Asset Database
+2018-06-19T12:28:35.477Z - success: protocol uuid registerred
+2018-06-19T12:28:35.477Z - success: protocol db registerred
+2018-06-19T12:28:35.478Z - success: protocol thumbnail registerred
+2018-06-19T12:28:35.478Z - normal: Loading editor/builtin packages
+2018-06-19T12:28:35.491Z - success: anysdk loaded
+2018-06-19T12:28:35.573Z - success: assets loaded
+2018-06-19T12:28:35.575Z - success: builder loaded
+2018-06-19T12:28:35.577Z - success: cocos-analytics loaded
+2018-06-19T12:28:35.584Z - success: console loaded
+2018-06-19T12:28:35.610Z - success: fb-instant-games loaded
+2018-06-19T12:28:35.613Z - success: hierarchy loaded
+2018-06-19T12:28:35.616Z - success: inspector loaded
+2018-06-19T12:28:35.617Z - success: keystore loaded
+2018-06-19T12:28:35.622Z - success: node-library loaded
+2018-06-19T12:28:35.624Z - success: package-asset loaded
+2018-06-19T12:28:35.626Z - success: preferences loaded
+2018-06-19T12:28:35.628Z - success: project-exporter loaded
+2018-06-19T12:28:35.639Z - success: project-importer loaded
+2018-06-19T12:28:35.641Z - success: project-settings loaded
+2018-06-19T12:28:35.645Z - success: ui-kit loaded
+2018-06-19T12:28:35.648Z - success: ui-grid loaded
+2018-06-19T12:28:35.651Z - success: scene loaded
+2018-06-19T12:28:35.652Z - success: sprite-editor loaded
+2018-06-19T12:28:35.655Z - success: store loaded
+2018-06-19T12:28:35.659Z - success: timeline loaded
+2018-06-19T12:28:35.660Z - normal: Loading builtin packages
+2018-06-19T12:28:35.663Z - success: asset-db-debugger loaded
+2018-06-19T12:28:35.664Z - success: color-picker loaded
+2018-06-19T12:28:35.666Z - success: package-manager loaded
+2018-06-19T12:28:35.670Z - success: sdkbox loaded
+2018-06-19T12:28:35.674Z - success: tester loaded
+2018-06-19T12:28:35.677Z - success: ui-kit-preview-extra loaded
+2018-06-19T12:28:35.680Z - success: ui-kit-preview loaded
+2018-06-19T12:28:35.682Z - success: ui-tree loaded
+2018-06-19T12:28:36.405Z - normal: Initializing project /Users/bolex1/work/game/box/box
+2018-06-19T12:28:36.407Z - normal: Loading packages
+2018-06-19T12:28:36.411Z - normal: Watching packages
+2018-06-19T12:28:36.422Z - normal: Run Application
+2018-06-19T12:28:37.030Z - success: preview server running at http://localhost:7456
+2018-06-19T12:28:40.792Z - normal: 1.9.1
+2018-06-19T12:28:41.178Z - error: Property 'CCClass.freindsInfo' must define at least one of 'default', 'get' or 'set'.
+    at Object.errorID (/Applications/CocosCreator.app/Contents/Resources/engine/CCDebugger.js:343:18)
+    at Object.exports.preprocessAttrs (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/preprocess-class.js:232:28)
+    at declareProperties (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/CCClass.js:807:20)
+    at Object.CCClass [as Class] (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/CCClass.js:947:9)
+    at /Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/model/Global.js:22:18
+    at __define (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/model/Global.js:168:2)
+    at /Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/model/Global.js:175:13
+    at Object.<anonymous> (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/model/Global.js:182:11)
+    at Object.<anonymous> (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/model/Global.js:185:3)
+2018-06-19T12:28:58.815Z - normal: Start building with options : {
   "androidStudio": true,
   "apiLevel": "",
   "appABIs": [],
   "appKey": "",
   "appSecret": "",
-  "buildPath": "E:\\gittest\\box2\\box\\build",
+  "buildPath": "/Users/bolex1/work/game/box/box/build",
   "debug": false,
-  "dest": "E:\\gittest\\box2\\box\\build\\fb-instant-games",
+  "dest": "/Users/bolex1/work/game/box/box/build/fb-instant-games",
   "encryptJs": true,
   "excludeScenes": [],
   "excludedModules": [
+    "TiledMap",
     "VideoPlayer",
+    "WebView",
+    "RichText",
+    "Collider",
+    "Graphics",
     "DragonBones",
     "Physics",
     "StudioComponent",
@@ -119,65 +127,74 @@ Class ID: "093f8//Ck1E6rTLYhnjG5UD"
   },
   "xxteaKey": "6f779aa9-c97a-43",
   "zipCompressJs": true,
-  "project": "E:\\gittest\\box2\\box",
+  "project": "/Users/bolex1/work/game/box/box",
   "projectName": "box",
   "debugBuildWorker": false
 }
-2018-06-17T21:43:53.949Z - normal: Building E:\gittest\box2\box
-2018-06-17T21:43:53.950Z - normal: Destination E:\gittest\box2\box\build\fb-instant-games
-2018-06-17T21:43:54.350Z - normal: Delete E:\gittest\box2\box\build\fb-instant-games\**\*
-2018-06-17T21:44:20.896Z - normal: Compiled project javascript file successfully
-2018-06-17T21:44:20.897Z - normal: Start building assets
-2018-06-17T21:44:20.897Z - normal: Start spawn build-worker
-2018-06-17T21:44:21.457Z - normal: Finish spawn build-worker
-2018-06-17T21:44:21.457Z - normal: Start init build-worker
-2018-06-17T21:44:23.982Z - normal: 1.9.0
-2018-06-17T21:44:24.439Z - normal: Finish init build-worker
-2018-06-17T21:44:24.439Z - normal: Start build-assets in worker
-2018-06-17T21:44:24.834Z - warn: Script attached to "Canvas" in scene "boxa.fire" is missing or invalid. Detailed information:
-Node path: "Canvas"
-Asset url: "db://assets/sc/boxa.fire"
-Script UUID: "093f8fff-0a4d-44ea-b4cb-6219e31b9503"
-Class ID: "093f8//Ck1E6rTLYhnjG5UD"
-
-2018-06-17T21:44:24.979Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\j_1_100.plist
-2018-06-17T21:44:24.983Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\j_1.plist
-2018-06-17T21:44:24.988Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\j_2.plist
-2018-06-17T21:44:25.009Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\j_3.plist
-2018-06-17T21:44:25.011Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\s_1.plist
-2018-06-17T21:44:25.013Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\s_1_100.plist
-2018-06-17T21:44:25.024Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\s_2_100.plist
-2018-06-17T21:44:25.026Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\s_3.plist
-2018-06-17T21:44:25.027Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_0_100.plist
-2018-06-17T21:44:25.032Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\s_2.plist
-2018-06-17T21:44:25.053Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_1_100.plist
-2018-06-17T21:44:25.054Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_2.plist
-2018-06-17T21:44:25.056Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_0.plist
-2018-06-17T21:44:25.059Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_1.plist
-2018-06-17T21:44:25.062Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_3.plist
-2018-06-17T21:44:25.063Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_4.plist
-2018-06-17T21:44:25.458Z - normal: Finish build-assets in worker
-2018-06-17T21:44:25.464Z - normal: Finish building assets
-2018-06-17T21:44:25.490Z - normal: Start building raw assets
-2018-06-17T21:44:25.491Z - normal: Start building plugin scripts
-2018-06-17T21:44:25.645Z - normal: Finish building raw assets
-2018-06-17T21:44:25.672Z - normal: Generating main.js from E:\CocosCreator\resources\static\build-templates\shares\main.js
-2018-06-17T21:44:25.732Z - normal: Generating html from E:\CocosCreator\resources\static\fb-instant-games\index.html
-2018-06-17T21:44:25.733Z - normal: Generating main.js from E:\CocosCreator\resources\static\fb-instant-games\main.js
-2018-06-17T21:44:25.873Z - normal: Built to "E:\gittest\box2\box\build\fb-instant-games" successfully
-2018-06-17T21:48:27.226Z - normal: Start building with options : {
+2018-06-19T12:28:58.818Z - normal: Building /Users/bolex1/work/game/box/box
+2018-06-19T12:28:58.818Z - normal: Destination /Users/bolex1/work/game/box/box/build/fb-instant-games
+2018-06-19T12:28:59.038Z - normal: Delete /Users/bolex1/work/game/box/box/build/fb-instant-games/**/*
+2018-06-19T12:29:01.517Z - normal: Compiled project javascript file successfully
+2018-06-19T12:29:01.517Z - normal: Start building assets
+2018-06-19T12:29:01.517Z - normal: Start spawn build-worker
+2018-06-19T12:29:02.052Z - normal: Finish spawn build-worker
+2018-06-19T12:29:02.052Z - normal: Start init build-worker
+2018-06-19T12:29:03.501Z - normal: 1.9.1
+2018-06-19T12:29:03.574Z - error: Error 5516, please go to https://github.com/cocos-creator/engine/blob/master/EngineErrorMap.md#5516 to see details. Arguments: CCClass, freindsInfo
+    at Object.errorID (/Applications/CocosCreator.app/Contents/Resources/engine/CCDebugger.js:351:13)
+    at Object.exports.preprocessAttrs (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/preprocess-class.js:232:28)
+    at declareProperties (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/CCClass.js:807:20)
+    at Object.CCClass [as Class] (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/CCClass.js:947:9)
+    at /Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/model/Global.js:22:18
+    at __define (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/model/Global.js:168:2)
+    at /Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/model/Global.js:175:13
+    at Object.<anonymous> (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/model/Global.js:182:11)
+    at Object.<anonymous> (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/model/Global.js:185:3)
+2018-06-19T12:29:03.600Z - normal: Finish init build-worker
+2018-06-19T12:29:03.600Z - normal: Start build-assets in worker
+2018-06-19T12:29:03.833Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/j_1_100.plist
+2018-06-19T12:29:03.841Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/j_1.plist
+2018-06-19T12:29:03.844Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/j_2.plist
+2018-06-19T12:29:03.847Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/j_3.plist
+2018-06-19T12:29:03.851Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/s_1_100.plist
+2018-06-19T12:29:03.858Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/s_1.plist
+2018-06-19T12:29:03.862Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/s_2_100.plist
+2018-06-19T12:29:03.866Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/s_2.plist
+2018-06-19T12:29:03.876Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/s_3.plist
+2018-06-19T12:29:03.879Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/t_0_100.plist
+2018-06-19T12:29:03.881Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/t_0.plist
+2018-06-19T12:29:03.883Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/t_1_100.plist
+2018-06-19T12:29:03.893Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/t_1.plist
+2018-06-19T12:29:03.896Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/t_2.plist
+2018-06-19T12:29:03.898Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/t_3.plist
+2018-06-19T12:29:03.900Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/t_4.plist
+2018-06-19T12:29:04.320Z - normal: Finish build-assets in worker
+2018-06-19T12:29:04.324Z - normal: Finish building assets
+2018-06-19T12:29:04.336Z - normal: Start building raw assets
+2018-06-19T12:29:04.337Z - normal: Start building plugin scripts
+2018-06-19T12:29:04.394Z - normal: Finish building raw assets
+2018-06-19T12:29:04.400Z - normal: Generating main.js from /Applications/CocosCreator.app/Contents/Resources/static/build-templates/shares/main.js
+2018-06-19T12:29:04.408Z - normal: Generating html from /Applications/CocosCreator.app/Contents/Resources/static/build-templates/fb-instant-games/index.html
+2018-06-19T12:29:04.409Z - normal: Generating main.js from /Applications/CocosCreator.app/Contents/Resources/static/build-templates/fb-instant-games/main.js
+2018-06-19T12:29:04.497Z - normal: Built to "/Users/bolex1/work/game/box/box/build/fb-instant-games" successfully
+2018-06-19T12:32:14.453Z - normal: Start building with options : {
   "androidStudio": true,
   "apiLevel": "",
   "appABIs": [],
   "appKey": "",
   "appSecret": "",
-  "buildPath": "E:\\gittest\\box2\\box\\build",
+  "buildPath": "/Users/bolex1/work/game/testservice",
   "debug": false,
-  "dest": "E:\\gittest\\box2\\box\\build\\fb-instant-games",
+  "dest": "/Users/bolex1/work/game/testservice/fb-instant-games",
   "encryptJs": true,
   "excludeScenes": [],
   "excludedModules": [
+    "TiledMap",
     "VideoPlayer",
+    "WebView",
+    "RichText",
+    "Collider",
+    "Graphics",
     "DragonBones",
     "Physics",
     "StudioComponent",
@@ -226,65 +243,74 @@ Class ID: "093f8//Ck1E6rTLYhnjG5UD"
   },
   "xxteaKey": "6f779aa9-c97a-43",
   "zipCompressJs": true,
-  "project": "E:\\gittest\\box2\\box",
+  "project": "/Users/bolex1/work/game/box/box",
   "projectName": "box",
   "debugBuildWorker": false
 }
-2018-06-17T21:48:27.228Z - normal: Building E:\gittest\box2\box
-2018-06-17T21:48:27.228Z - normal: Destination E:\gittest\box2\box\build\fb-instant-games
-2018-06-17T21:48:27.230Z - normal: Delete E:\gittest\box2\box\build\fb-instant-games\**\*
-2018-06-17T21:48:29.802Z - normal: Compiled project javascript file successfully
-2018-06-17T21:48:29.802Z - normal: Start building assets
-2018-06-17T21:48:29.802Z - normal: Start spawn build-worker
-2018-06-17T21:48:30.379Z - normal: Finish spawn build-worker
-2018-06-17T21:48:30.379Z - normal: Start init build-worker
-2018-06-17T21:48:31.983Z - normal: 1.9.0
-2018-06-17T21:48:32.076Z - normal: Finish init build-worker
-2018-06-17T21:48:32.076Z - normal: Start build-assets in worker
-2018-06-17T21:48:32.243Z - warn: Script attached to "Canvas" in scene "boxa.fire" is missing or invalid. Detailed information:
-Node path: "Canvas"
-Asset url: "db://assets/sc/boxa.fire"
-Script UUID: "093f8fff-0a4d-44ea-b4cb-6219e31b9503"
-Class ID: "093f8//Ck1E6rTLYhnjG5UD"
-
-2018-06-17T21:48:32.322Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\j_1_100.plist
-2018-06-17T21:48:32.324Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\j_1.plist
-2018-06-17T21:48:32.327Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\j_2.plist
-2018-06-17T21:48:32.329Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\j_3.plist
-2018-06-17T21:48:32.334Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\s_1.plist
-2018-06-17T21:48:32.337Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\s_1_100.plist
-2018-06-17T21:48:32.340Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\s_2_100.plist
-2018-06-17T21:48:32.342Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\s_2.plist
-2018-06-17T21:48:32.344Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_0_100.plist
-2018-06-17T21:48:32.346Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\s_3.plist
-2018-06-17T21:48:32.351Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_0.plist
-2018-06-17T21:48:32.354Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_1_100.plist
-2018-06-17T21:48:32.357Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_1.plist
-2018-06-17T21:48:32.358Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_2.plist
-2018-06-17T21:48:32.359Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_3.plist
-2018-06-17T21:48:32.360Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_4.plist
-2018-06-17T21:48:32.701Z - normal: Finish build-assets in worker
-2018-06-17T21:48:32.706Z - normal: Finish building assets
-2018-06-17T21:48:32.731Z - normal: Start building raw assets
-2018-06-17T21:48:32.732Z - normal: Start building plugin scripts
-2018-06-17T21:48:32.768Z - normal: Finish building raw assets
-2018-06-17T21:48:32.777Z - normal: Generating main.js from E:\CocosCreator\resources\static\build-templates\shares\main.js
-2018-06-17T21:48:32.797Z - normal: Generating html from E:\CocosCreator\resources\static\fb-instant-games\index.html
-2018-06-17T21:48:32.797Z - normal: Generating main.js from E:\CocosCreator\resources\static\fb-instant-games\main.js
-2018-06-17T21:48:32.897Z - normal: Built to "E:\gittest\box2\box\build\fb-instant-games" successfully
-2018-06-17T21:49:38.613Z - normal: Start building with options : {
+2018-06-19T12:32:14.456Z - normal: Building /Users/bolex1/work/game/box/box
+2018-06-19T12:32:14.456Z - normal: Destination /Users/bolex1/work/game/testservice/fb-instant-games
+2018-06-19T12:32:14.457Z - normal: Delete /Users/bolex1/work/game/testservice/fb-instant-games/**/*
+2018-06-19T12:32:16.919Z - normal: Compiled project javascript file successfully
+2018-06-19T12:32:16.920Z - normal: Start building assets
+2018-06-19T12:32:16.920Z - normal: Start spawn build-worker
+2018-06-19T12:32:17.453Z - normal: Finish spawn build-worker
+2018-06-19T12:32:17.453Z - normal: Start init build-worker
+2018-06-19T12:32:18.875Z - normal: 1.9.1
+2018-06-19T12:32:18.952Z - error: Error 5516, please go to https://github.com/cocos-creator/engine/blob/master/EngineErrorMap.md#5516 to see details. Arguments: CCClass, freindsInfo
+    at Object.errorID (/Applications/CocosCreator.app/Contents/Resources/engine/CCDebugger.js:351:13)
+    at Object.exports.preprocessAttrs (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/preprocess-class.js:232:28)
+    at declareProperties (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/CCClass.js:807:20)
+    at Object.CCClass [as Class] (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/CCClass.js:947:9)
+    at /Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/model/Global.js:22:18
+    at __define (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/model/Global.js:168:2)
+    at /Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/model/Global.js:175:13
+    at Object.<anonymous> (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/model/Global.js:182:11)
+    at Object.<anonymous> (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/model/Global.js:185:3)
+2018-06-19T12:32:18.978Z - normal: Finish init build-worker
+2018-06-19T12:32:18.979Z - normal: Start build-assets in worker
+2018-06-19T12:32:19.209Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/j_1_100.plist
+2018-06-19T12:32:19.211Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/j_1.plist
+2018-06-19T12:32:19.219Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/j_2.plist
+2018-06-19T12:32:19.222Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/j_3.plist
+2018-06-19T12:32:19.227Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/s_1_100.plist
+2018-06-19T12:32:19.229Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/s_1.plist
+2018-06-19T12:32:19.236Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/s_2_100.plist
+2018-06-19T12:32:19.241Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/s_2.plist
+2018-06-19T12:32:19.244Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/s_3.plist
+2018-06-19T12:32:19.246Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/t_0_100.plist
+2018-06-19T12:32:19.256Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/t_0.plist
+2018-06-19T12:32:19.259Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/t_1_100.plist
+2018-06-19T12:32:19.262Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/t_1.plist
+2018-06-19T12:32:19.266Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/t_2.plist
+2018-06-19T12:32:19.274Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/t_3.plist
+2018-06-19T12:32:19.278Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/t_4.plist
+2018-06-19T12:32:19.692Z - normal: Finish build-assets in worker
+2018-06-19T12:32:19.695Z - normal: Finish building assets
+2018-06-19T12:32:19.707Z - normal: Start building raw assets
+2018-06-19T12:32:19.708Z - normal: Start building plugin scripts
+2018-06-19T12:32:19.811Z - normal: Finish building raw assets
+2018-06-19T12:32:19.820Z - normal: Generating main.js from /Applications/CocosCreator.app/Contents/Resources/static/build-templates/shares/main.js
+2018-06-19T12:32:19.826Z - normal: Generating html from /Applications/CocosCreator.app/Contents/Resources/static/build-templates/fb-instant-games/index.html
+2018-06-19T12:32:19.827Z - normal: Generating main.js from /Applications/CocosCreator.app/Contents/Resources/static/build-templates/fb-instant-games/main.js
+2018-06-19T12:32:19.912Z - normal: Built to "/Users/bolex1/work/game/testservice/fb-instant-games" successfully
+2018-06-19T12:37:38.162Z - normal: Start building with options : {
   "androidStudio": true,
   "apiLevel": "",
   "appABIs": [],
   "appKey": "",
   "appSecret": "",
-  "buildPath": "E:\\gittest\\box2\\box\\build",
+  "buildPath": "/Users/bolex1/work/game/testservice",
   "debug": false,
-  "dest": "E:\\gittest\\box2\\box\\build\\fb-instant-games",
+  "dest": "/Users/bolex1/work/game/testservice/fb-instant-games",
   "encryptJs": true,
   "excludeScenes": [],
   "excludedModules": [
+    "TiledMap",
     "VideoPlayer",
+    "WebView",
+    "RichText",
+    "Collider",
+    "Graphics",
     "DragonBones",
     "Physics",
     "StudioComponent",
@@ -333,858 +359,53 @@ Class ID: "093f8//Ck1E6rTLYhnjG5UD"
   },
   "xxteaKey": "6f779aa9-c97a-43",
   "zipCompressJs": true,
-  "project": "E:\\gittest\\box2\\box",
+  "project": "/Users/bolex1/work/game/box/box",
   "projectName": "box",
   "debugBuildWorker": false
 }
-2018-06-17T21:49:38.613Z - normal: Building E:\gittest\box2\box
-2018-06-17T21:49:38.613Z - normal: Destination E:\gittest\box2\box\build\fb-instant-games
-2018-06-17T21:49:38.614Z - normal: Delete E:\gittest\box2\box\build\fb-instant-games\**\*
-2018-06-17T21:49:40.963Z - normal: Compiled project javascript file successfully
-2018-06-17T21:49:40.963Z - normal: Start building assets
-2018-06-17T21:49:40.963Z - normal: Start spawn build-worker
-2018-06-17T21:49:41.548Z - normal: Finish spawn build-worker
-2018-06-17T21:49:41.548Z - normal: Start init build-worker
-2018-06-17T21:49:43.134Z - normal: 1.9.0
-2018-06-17T21:49:43.233Z - normal: Finish init build-worker
-2018-06-17T21:49:43.234Z - normal: Start build-assets in worker
-2018-06-17T21:49:43.404Z - warn: Script attached to "Canvas" in scene "boxa.fire" is missing or invalid. Detailed information:
-Node path: "Canvas"
-Asset url: "db://assets/sc/boxa.fire"
-Script UUID: "093f8fff-0a4d-44ea-b4cb-6219e31b9503"
-Class ID: "093f8//Ck1E6rTLYhnjG5UD"
-
-2018-06-17T21:49:43.485Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\j_1.plist
-2018-06-17T21:49:43.486Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\j_1_100.plist
-2018-06-17T21:49:43.491Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\j_2.plist
-2018-06-17T21:49:43.492Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\j_3.plist
-2018-06-17T21:49:43.493Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\s_1_100.plist
-2018-06-17T21:49:43.495Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\s_1.plist
-2018-06-17T21:49:43.500Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\s_2_100.plist
-2018-06-17T21:49:43.502Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\s_3.plist
-2018-06-17T21:49:43.504Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\s_2.plist
-2018-06-17T21:49:43.506Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_0_100.plist
-2018-06-17T21:49:43.509Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_0.plist
-2018-06-17T21:49:43.510Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_1_100.plist
-2018-06-17T21:49:43.511Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_1.plist
-2018-06-17T21:49:43.512Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_2.plist
-2018-06-17T21:49:43.514Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_3.plist
-2018-06-17T21:49:43.516Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_4.plist
-2018-06-17T21:49:43.820Z - normal: Finish build-assets in worker
-2018-06-17T21:49:43.827Z - normal: Finish building assets
-2018-06-17T21:49:43.850Z - normal: Start building raw assets
-2018-06-17T21:49:43.850Z - normal: Start building plugin scripts
-2018-06-17T21:49:43.888Z - normal: Finish building raw assets
-2018-06-17T21:49:43.891Z - normal: Generating main.js from E:\CocosCreator\resources\static\build-templates\shares\main.js
-2018-06-17T21:49:43.905Z - normal: Generating html from E:\CocosCreator\resources\static\fb-instant-games\index.html
-2018-06-17T21:49:43.907Z - normal: Generating main.js from E:\CocosCreator\resources\static\fb-instant-games\main.js
-2018-06-17T21:49:43.997Z - normal: Built to "E:\gittest\box2\box\build\fb-instant-games" successfully
-2018-06-17T21:56:49.986Z - error: scene 没有保存，请先保存相关信息再进行构建。
-    at Editor.Ipc.sendToPanel (E:\CocosCreator\resources\app.asar\editor\builtin\builder\panel\builder.js:1:14935)
-    at EventEmitter.ipcRenderer.on.n (E:\CocosCreator\resources\app.asar\editor-framework\lib\renderer\ipc.js:1:4493)
-    at emitMany (events.js:127:13)
-    at EventEmitter.emit (events.js:204:7)
-2018-06-17T21:57:18.172Z - normal: Start building with options : {
-  "androidStudio": true,
-  "apiLevel": "",
-  "appABIs": [],
-  "appKey": "",
-  "appSecret": "",
-  "buildPath": "E:\\gittest\\box2\\box\\build",
-  "debug": true,
-  "dest": "E:\\gittest\\box2\\box\\build\\fb-instant-games",
-  "encryptJs": true,
-  "excludeScenes": [],
-  "excludedModules": [
-    "VideoPlayer",
-    "DragonBones",
-    "Physics",
-    "StudioComponent",
-    "Chipmunk",
-    "Native NetWork"
-  ],
-  "fb-instant-games": {},
-  "includeAnySDK": false,
-  "includeEruda": false,
-  "includeSDKBox": false,
-  "inlineSpriteFrames": true,
-  "inlineSpriteFrames_native": true,
-  "jailbreakPlatform": false,
-  "md5Cache": false,
-  "mergeStartScene": true,
-  "oauthLoginServer": "",
-  "optimizeHotUpdate": false,
-  "orientation": {
-    "landscapeLeft": true,
-    "landscapeRight": true,
-    "portrait": false,
-    "upsideDown": false
-  },
-  "packageName": "org.cocos2d.tank",
-  "platform": "fb-instant-games",
-  "previewHeight": "720",
-  "previewWidth": "1280",
-  "privateKey": "",
-  "qqplay": {
-    "orientation": "portrait"
-  },
-  "renderMode": "0",
-  "scenes": [
-    "893fda5b-9a68-4ae0-9a30-cbc1a4d8c332"
-  ],
-  "sourceMaps": true,
-  "startScene": "893fda5b-9a68-4ae0-9a30-cbc1a4d8c332",
-  "template": "link",
-  "title": "box",
-  "useDebugKeystore": true,
-  "vsVersion": "auto",
-  "webOrientation": "landscape",
-  "wechatgame": {
-    "appid": "wx6ac3f5090a6b99c5",
-    "orientation": "portrait"
-  },
-  "xxteaKey": "6f779aa9-c97a-43",
-  "zipCompressJs": true,
-  "project": "E:\\gittest\\box2\\box",
-  "projectName": "box",
-  "debugBuildWorker": false
-}
-2018-06-17T21:57:18.173Z - normal: Building E:\gittest\box2\box
-2018-06-17T21:57:18.173Z - normal: Destination E:\gittest\box2\box\build\fb-instant-games
-2018-06-17T21:57:18.174Z - normal: Delete E:\gittest\box2\box\build\fb-instant-games\**\*
-2018-06-17T21:57:42.799Z - normal: Compiled project javascript file successfully
-2018-06-17T21:57:42.800Z - normal: Start building assets
-2018-06-17T21:57:42.800Z - normal: Start spawn build-worker
-2018-06-17T21:57:43.579Z - normal: Finish spawn build-worker
-2018-06-17T21:57:43.579Z - normal: Start init build-worker
-2018-06-17T21:57:45.879Z - normal: 1.9.0
-2018-06-17T21:57:46.374Z - normal: Finish init build-worker
-2018-06-17T21:57:46.374Z - normal: Start build-assets in worker
-2018-06-17T21:57:47.038Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\j_1_100.plist
-2018-06-17T21:57:47.042Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\j_1.plist
-2018-06-17T21:57:47.057Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\j_2.plist
-2018-06-17T21:57:47.060Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\j_3.plist
-2018-06-17T21:57:47.072Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\s_1_100.plist
-2018-06-17T21:57:47.079Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\s_1.plist
-2018-06-17T21:57:47.083Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\s_2_100.plist
-2018-06-17T21:57:47.085Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\s_3.plist
-2018-06-17T21:57:47.092Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\s_2.plist
-2018-06-17T21:57:47.099Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_0.plist
-2018-06-17T21:57:47.102Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_0_100.plist
-2018-06-17T21:57:47.103Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_1_100.plist
-2018-06-17T21:57:47.104Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_2.plist
-2018-06-17T21:57:47.109Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_1.plist
-2018-06-17T21:57:47.113Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_3.plist
-2018-06-17T21:57:47.116Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_4.plist
-2018-06-17T21:57:47.530Z - normal: Finish build-assets in worker
-2018-06-17T21:57:47.535Z - normal: Finish building assets
-2018-06-17T21:57:47.559Z - normal: Start building raw assets
-2018-06-17T21:57:47.561Z - normal: Start building plugin scripts
-2018-06-17T21:57:47.718Z - normal: Finish building raw assets
-2018-06-17T21:57:47.736Z - normal: Generating main.js from E:\CocosCreator\resources\static\build-templates\shares\main.js
-2018-06-17T21:57:47.791Z - normal: Generating html from E:\CocosCreator\resources\static\fb-instant-games\index.html
-2018-06-17T21:57:47.792Z - normal: Generating main.js from E:\CocosCreator\resources\static\fb-instant-games\main.js
-2018-06-17T21:57:48.125Z - normal: Built to "E:\gittest\box2\box\build\fb-instant-games" successfully
-2018-06-17T22:21:57.924Z - normal: Start building with options : {
-  "androidStudio": true,
-  "apiLevel": "",
-  "appABIs": [],
-  "appKey": "",
-  "appSecret": "",
-  "buildPath": "E:\\gittest\\box2\\box\\build",
-  "debug": false,
-  "dest": "E:\\gittest\\box2\\box\\build\\fb-instant-games",
-  "encryptJs": true,
-  "excludeScenes": [],
-  "excludedModules": [
-    "VideoPlayer",
-    "DragonBones",
-    "Physics",
-    "StudioComponent",
-    "Chipmunk",
-    "Native NetWork"
-  ],
-  "fb-instant-games": {},
-  "includeAnySDK": false,
-  "includeEruda": false,
-  "includeSDKBox": false,
-  "inlineSpriteFrames": true,
-  "inlineSpriteFrames_native": true,
-  "jailbreakPlatform": false,
-  "md5Cache": false,
-  "mergeStartScene": true,
-  "oauthLoginServer": "",
-  "optimizeHotUpdate": false,
-  "orientation": {
-    "landscapeLeft": true,
-    "landscapeRight": true,
-    "portrait": false,
-    "upsideDown": false
-  },
-  "packageName": "org.cocos2d.tank",
-  "platform": "fb-instant-games",
-  "previewHeight": "720",
-  "previewWidth": "1280",
-  "privateKey": "",
-  "qqplay": {
-    "orientation": "portrait"
-  },
-  "renderMode": "0",
-  "scenes": [
-    "893fda5b-9a68-4ae0-9a30-cbc1a4d8c332"
-  ],
-  "sourceMaps": false,
-  "startScene": "893fda5b-9a68-4ae0-9a30-cbc1a4d8c332",
-  "template": "link",
-  "title": "box",
-  "useDebugKeystore": true,
-  "vsVersion": "auto",
-  "webOrientation": "landscape",
-  "wechatgame": {
-    "appid": "wx6ac3f5090a6b99c5",
-    "orientation": "portrait"
-  },
-  "xxteaKey": "6f779aa9-c97a-43",
-  "zipCompressJs": true,
-  "project": "E:\\gittest\\box2\\box",
-  "projectName": "box",
-  "debugBuildWorker": false
-}
-2018-06-17T22:21:57.926Z - normal: Building E:\gittest\box2\box
-2018-06-17T22:21:57.926Z - normal: Destination E:\gittest\box2\box\build\fb-instant-games
-2018-06-17T22:21:57.926Z - normal: Delete E:\gittest\box2\box\build\fb-instant-games\**\*
-2018-06-17T22:22:01.099Z - normal: Compiled project javascript file successfully
-2018-06-17T22:22:01.099Z - normal: Start building assets
-2018-06-17T22:22:01.099Z - normal: Start spawn build-worker
-2018-06-17T22:22:01.688Z - normal: Finish spawn build-worker
-2018-06-17T22:22:01.688Z - normal: Start init build-worker
-2018-06-17T22:22:03.278Z - normal: 1.9.0
-2018-06-17T22:22:03.766Z - normal: Finish init build-worker
-2018-06-17T22:22:03.766Z - normal: Start build-assets in worker
-2018-06-17T22:22:04.313Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\j_1_100.plist
-2018-06-17T22:22:04.317Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\j_1.plist
-2018-06-17T22:22:04.322Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\j_2.plist
-2018-06-17T22:22:04.344Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\j_3.plist
-2018-06-17T22:22:04.345Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\s_1.plist
-2018-06-17T22:22:04.348Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\s_1_100.plist
-2018-06-17T22:22:04.358Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\s_2_100.plist
-2018-06-17T22:22:04.359Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\s_3.plist
-2018-06-17T22:22:04.361Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_0_100.plist
-2018-06-17T22:22:04.367Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\s_2.plist
-2018-06-17T22:22:04.371Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_1_100.plist
-2018-06-17T22:22:04.376Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_0.plist
-2018-06-17T22:22:04.379Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_1.plist
-2018-06-17T22:22:04.383Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_2.plist
-2018-06-17T22:22:04.388Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_3.plist
-2018-06-17T22:22:04.390Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_4.plist
-2018-06-17T22:22:04.754Z - normal: Finish build-assets in worker
-2018-06-17T22:22:04.758Z - normal: Finish building assets
-2018-06-17T22:22:04.783Z - normal: Start building raw assets
-2018-06-17T22:22:04.785Z - normal: Start building plugin scripts
-2018-06-17T22:22:04.930Z - normal: Finish building raw assets
-2018-06-17T22:22:04.951Z - normal: Generating main.js from E:\CocosCreator\resources\static\build-templates\shares\main.js
-2018-06-17T22:22:04.991Z - normal: Generating html from E:\CocosCreator\resources\static\fb-instant-games\index.html
-2018-06-17T22:22:04.993Z - normal: Generating main.js from E:\CocosCreator\resources\static\fb-instant-games\main.js
-2018-06-17T22:22:05.080Z - normal: Built to "E:\gittest\box2\box\build\fb-instant-games" successfully
-2018-06-18T11:34:47.508Z - normal: Start building with options : {
-  "androidStudio": true,
-  "apiLevel": "",
-  "appABIs": [],
-  "appKey": "",
-  "appSecret": "",
-  "buildPath": "E:\\gittest\\box2\\box\\build",
-  "debug": false,
-  "dest": "E:\\gittest\\box2\\box\\build\\web-mobile",
-  "encryptJs": true,
-  "excludeScenes": [],
-  "excludedModules": [
-    "VideoPlayer",
-    "DragonBones",
-    "Physics",
-    "StudioComponent",
-    "Chipmunk",
-    "Native NetWork"
-  ],
-  "fb-instant-games": {},
-  "includeAnySDK": false,
-  "includeEruda": false,
-  "includeSDKBox": false,
-  "inlineSpriteFrames": true,
-  "inlineSpriteFrames_native": true,
-  "jailbreakPlatform": false,
-  "md5Cache": false,
-  "mergeStartScene": true,
-  "oauthLoginServer": "",
-  "optimizeHotUpdate": false,
-  "orientation": {
-    "landscapeLeft": true,
-    "landscapeRight": true,
-    "portrait": false,
-    "upsideDown": false
-  },
-  "packageName": "org.cocos2d.tank",
-  "platform": "web-mobile",
-  "previewHeight": "720",
-  "previewWidth": "1280",
-  "privateKey": "",
-  "qqplay": {
-    "orientation": "portrait"
-  },
-  "renderMode": "0",
-  "scenes": [
-    "893fda5b-9a68-4ae0-9a30-cbc1a4d8c332"
-  ],
-  "sourceMaps": false,
-  "startScene": "893fda5b-9a68-4ae0-9a30-cbc1a4d8c332",
-  "template": "link",
-  "title": "box",
-  "useDebugKeystore": true,
-  "vsVersion": "auto",
-  "webOrientation": "landscape",
-  "wechatgame": {
-    "appid": "wx6ac3f5090a6b99c5",
-    "orientation": "portrait"
-  },
-  "xxteaKey": "6f779aa9-c97a-43",
-  "zipCompressJs": true,
-  "project": "E:\\gittest\\box2\\box",
-  "projectName": "box",
-  "debugBuildWorker": false
-}
-2018-06-18T11:34:47.509Z - normal: Building E:\gittest\box2\box
-2018-06-18T11:34:47.509Z - normal: Destination E:\gittest\box2\box\build\web-mobile
-2018-06-18T11:34:47.510Z - normal: Delete E:\gittest\box2\box\build\web-mobile\**\*
-2018-06-18T11:35:25.637Z - normal: Compiled project javascript file successfully
-2018-06-18T11:35:25.638Z - normal: Start building assets
-2018-06-18T11:35:25.638Z - normal: Start spawn build-worker
-2018-06-18T11:35:26.245Z - normal: Finish spawn build-worker
-2018-06-18T11:35:26.245Z - normal: Start init build-worker
-2018-06-18T11:35:28.174Z - normal: 1.9.0
-2018-06-18T11:35:28.631Z - normal: Finish init build-worker
-2018-06-18T11:35:28.631Z - normal: Start build-assets in worker
-2018-06-18T11:35:29.170Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\j_1_100.plist
-2018-06-18T11:35:29.174Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\j_1.plist
-2018-06-18T11:35:29.179Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\j_2.plist
-2018-06-18T11:35:29.201Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\j_3.plist
-2018-06-18T11:35:29.202Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\s_1.plist
-2018-06-18T11:35:29.205Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\s_1_100.plist
-2018-06-18T11:35:29.215Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\s_2_100.plist
-2018-06-18T11:35:29.216Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\s_3.plist
-2018-06-18T11:35:29.217Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_0_100.plist
-2018-06-18T11:35:29.223Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\s_2.plist
-2018-06-18T11:35:29.229Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_1_100.plist
-2018-06-18T11:35:29.231Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_2.plist
-2018-06-18T11:35:29.232Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_0.plist
-2018-06-18T11:35:29.234Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_1.plist
-2018-06-18T11:35:29.245Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_3.plist
-2018-06-18T11:35:29.246Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_4.plist
-2018-06-18T11:35:29.577Z - normal: Finish build-assets in worker
-2018-06-18T11:35:29.584Z - normal: Finish building assets
-2018-06-18T11:35:29.606Z - normal: Start building raw assets
-2018-06-18T11:35:29.607Z - normal: Start building plugin scripts
-2018-06-18T11:35:29.745Z - normal: Finish building raw assets
-2018-06-18T11:35:29.774Z - normal: Generating main.js from E:\CocosCreator\resources\static\build-templates\shares\main.js
-2018-06-18T11:35:29.779Z - normal: Generating html from E:\CocosCreator\resources\static\build-templates\web-mobile\template\index.html
-2018-06-18T11:35:29.794Z - normal: Built to "E:\gittest\box2\box\build\web-mobile" successfully
-2018-06-18T13:13:58.294Z - normal: Start building with options : {
-  "androidStudio": true,
-  "apiLevel": "",
-  "appABIs": [],
-  "appKey": "",
-  "appSecret": "",
-  "buildPath": "E:\\gittest\\box2\\box\\build",
-  "debug": false,
-  "dest": "E:\\gittest\\box2\\box\\build\\web-mobile",
-  "encryptJs": true,
-  "excludeScenes": [],
-  "excludedModules": [
-    "VideoPlayer",
-    "DragonBones",
-    "Physics",
-    "StudioComponent",
-    "Chipmunk",
-    "Native NetWork"
-  ],
-  "fb-instant-games": {},
-  "includeAnySDK": false,
-  "includeEruda": false,
-  "includeSDKBox": false,
-  "inlineSpriteFrames": true,
-  "inlineSpriteFrames_native": true,
-  "jailbreakPlatform": false,
-  "md5Cache": false,
-  "mergeStartScene": true,
-  "oauthLoginServer": "",
-  "optimizeHotUpdate": false,
-  "orientation": {
-    "landscapeLeft": true,
-    "landscapeRight": true,
-    "portrait": false,
-    "upsideDown": false
-  },
-  "packageName": "org.cocos2d.tank",
-  "platform": "web-mobile",
-  "previewHeight": "720",
-  "previewWidth": "1280",
-  "privateKey": "",
-  "qqplay": {
-    "orientation": "portrait"
-  },
-  "renderMode": "0",
-  "scenes": [
-    "893fda5b-9a68-4ae0-9a30-cbc1a4d8c332"
-  ],
-  "sourceMaps": false,
-  "startScene": "893fda5b-9a68-4ae0-9a30-cbc1a4d8c332",
-  "template": "link",
-  "title": "box",
-  "useDebugKeystore": true,
-  "vsVersion": "auto",
-  "webOrientation": "landscape",
-  "wechatgame": {
-    "appid": "wx6ac3f5090a6b99c5",
-    "orientation": "portrait"
-  },
-  "xxteaKey": "6f779aa9-c97a-43",
-  "zipCompressJs": true,
-  "project": "E:\\gittest\\box2\\box",
-  "projectName": "box",
-  "debugBuildWorker": false
-}
-2018-06-18T13:13:58.296Z - normal: Building E:\gittest\box2\box
-2018-06-18T13:13:58.296Z - normal: Destination E:\gittest\box2\box\build\web-mobile
-2018-06-18T13:13:58.296Z - normal: Delete E:\gittest\box2\box\build\web-mobile\**\*
-2018-06-18T13:14:02.100Z - normal: Compiled project javascript file successfully
-2018-06-18T13:14:02.100Z - normal: Start building assets
-2018-06-18T13:14:02.100Z - normal: Start spawn build-worker
-2018-06-18T13:14:02.834Z - normal: Finish spawn build-worker
-2018-06-18T13:14:02.834Z - normal: Start init build-worker
-2018-06-18T13:14:05.407Z - normal: 1.9.0
-2018-06-18T13:14:05.927Z - normal: Finish init build-worker
-2018-06-18T13:14:05.927Z - normal: Start build-assets in worker
-2018-06-18T13:14:07.006Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\j_1_100.plist
-2018-06-18T13:14:07.030Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\j_3.plist
-2018-06-18T13:14:07.034Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\j_2.plist
-2018-06-18T13:14:07.043Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\s_1_100.plist
-2018-06-18T13:14:07.049Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\s_1.plist
-2018-06-18T13:14:07.055Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\s_2_100.plist
-2018-06-18T13:14:07.062Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\j_1.plist
-2018-06-18T13:14:07.063Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\s_3.plist
-2018-06-18T13:14:07.097Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\s_2.plist
-2018-06-18T13:14:07.099Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_1_100.plist
-2018-06-18T13:14:07.103Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_0.plist
-2018-06-18T13:14:07.106Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_0_100.plist
-2018-06-18T13:14:07.125Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_2.plist
-2018-06-18T13:14:07.171Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_3.plist
-2018-06-18T13:14:07.174Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_4.plist
-2018-06-18T13:14:07.178Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_1.plist
-2018-06-18T13:14:07.658Z - normal: Finish build-assets in worker
-2018-06-18T13:14:07.664Z - normal: Finish building assets
-2018-06-18T13:14:07.691Z - normal: Start building raw assets
-2018-06-18T13:14:07.692Z - normal: Start building plugin scripts
-2018-06-18T13:14:07.830Z - normal: Finish building raw assets
-2018-06-18T13:14:07.861Z - normal: Generating main.js from E:\CocosCreator\resources\static\build-templates\shares\main.js
-2018-06-18T13:14:07.867Z - normal: Generating html from E:\CocosCreator\resources\static\build-templates\web-mobile\template\index.html
-2018-06-18T13:14:07.881Z - normal: Built to "E:\gittest\box2\box\build\web-mobile" successfully
-2018-06-18T13:15:25.167Z - normal: Start building with options : {
-  "androidStudio": true,
-  "apiLevel": "",
-  "appABIs": [],
-  "appKey": "",
-  "appSecret": "",
-  "buildPath": "E:\\gittest\\box2\\box\\build",
-  "debug": false,
-  "dest": "E:\\gittest\\box2\\box\\build\\web-mobile",
-  "encryptJs": true,
-  "excludeScenes": [],
-  "excludedModules": [
-    "VideoPlayer",
-    "DragonBones",
-    "Physics",
-    "StudioComponent",
-    "Chipmunk",
-    "Native NetWork"
-  ],
-  "fb-instant-games": {},
-  "includeAnySDK": false,
-  "includeEruda": false,
-  "includeSDKBox": false,
-  "inlineSpriteFrames": true,
-  "inlineSpriteFrames_native": true,
-  "jailbreakPlatform": false,
-  "md5Cache": false,
-  "mergeStartScene": true,
-  "oauthLoginServer": "",
-  "optimizeHotUpdate": false,
-  "orientation": {
-    "landscapeLeft": true,
-    "landscapeRight": true,
-    "portrait": false,
-    "upsideDown": false
-  },
-  "packageName": "org.cocos2d.tank",
-  "platform": "web-mobile",
-  "previewHeight": "720",
-  "previewWidth": "1280",
-  "privateKey": "",
-  "qqplay": {
-    "orientation": "portrait"
-  },
-  "renderMode": "0",
-  "scenes": [
-    "893fda5b-9a68-4ae0-9a30-cbc1a4d8c332"
-  ],
-  "sourceMaps": false,
-  "startScene": "893fda5b-9a68-4ae0-9a30-cbc1a4d8c332",
-  "template": "link",
-  "title": "box",
-  "useDebugKeystore": true,
-  "vsVersion": "auto",
-  "webOrientation": "landscape",
-  "wechatgame": {
-    "appid": "wx6ac3f5090a6b99c5",
-    "orientation": "portrait"
-  },
-  "xxteaKey": "6f779aa9-c97a-43",
-  "zipCompressJs": true,
-  "project": "E:\\gittest\\box2\\box",
-  "projectName": "box",
-  "debugBuildWorker": false
-}
-2018-06-18T13:15:25.168Z - normal: Building E:\gittest\box2\box
-2018-06-18T13:15:25.168Z - normal: Destination E:\gittest\box2\box\build\web-mobile
-2018-06-18T13:15:25.168Z - normal: Delete E:\gittest\box2\box\build\web-mobile\**\*
-2018-06-18T13:15:27.964Z - normal: Compiled project javascript file successfully
-2018-06-18T13:15:27.964Z - normal: Start building assets
-2018-06-18T13:15:27.964Z - normal: Start spawn build-worker
-2018-06-18T13:15:28.556Z - normal: Finish spawn build-worker
-2018-06-18T13:15:28.556Z - normal: Start init build-worker
-2018-06-18T13:15:30.234Z - normal: 1.9.0
-2018-06-18T13:15:30.335Z - normal: Finish init build-worker
-2018-06-18T13:15:30.336Z - normal: Start build-assets in worker
-2018-06-18T13:15:30.583Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\j_1_100.plist
-2018-06-18T13:15:30.585Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\j_1.plist
-2018-06-18T13:15:30.587Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\j_2.plist
-2018-06-18T13:15:30.588Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\j_3.plist
-2018-06-18T13:15:30.590Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\s_1_100.plist
-2018-06-18T13:15:30.591Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\s_1.plist
-2018-06-18T13:15:30.593Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\s_2_100.plist
-2018-06-18T13:15:30.616Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\s_3.plist
-2018-06-18T13:15:30.617Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\s_2.plist
-2018-06-18T13:15:30.618Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_0_100.plist
-2018-06-18T13:15:30.625Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_0.plist
-2018-06-18T13:15:30.626Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_1_100.plist
-2018-06-18T13:15:30.627Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_1.plist
-2018-06-18T13:15:30.628Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_2.plist
-2018-06-18T13:15:30.632Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_3.plist
-2018-06-18T13:15:30.634Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_4.plist
-2018-06-18T13:15:30.967Z - normal: Finish build-assets in worker
-2018-06-18T13:15:30.971Z - normal: Finish building assets
-2018-06-18T13:15:30.993Z - normal: Start building raw assets
-2018-06-18T13:15:30.993Z - normal: Start building plugin scripts
-2018-06-18T13:15:31.031Z - normal: Finish building raw assets
-2018-06-18T13:15:31.043Z - normal: Generating main.js from E:\CocosCreator\resources\static\build-templates\shares\main.js
-2018-06-18T13:15:31.049Z - normal: Generating html from E:\CocosCreator\resources\static\build-templates\web-mobile\template\index.html
-2018-06-18T13:15:31.059Z - normal: Built to "E:\gittest\box2\box\build\web-mobile" successfully
-2018-06-18T13:22:09.386Z - normal: Start building with options : {
-  "androidStudio": true,
-  "apiLevel": "",
-  "appABIs": [],
-  "appKey": "",
-  "appSecret": "",
-  "buildPath": "E:\\gittest\\box2\\box\\build",
-  "debug": false,
-  "dest": "E:\\gittest\\box2\\box\\build\\web-mobile",
-  "encryptJs": true,
-  "excludeScenes": [],
-  "excludedModules": [
-    "VideoPlayer",
-    "DragonBones",
-    "Physics",
-    "StudioComponent",
-    "Chipmunk",
-    "Native NetWork"
-  ],
-  "fb-instant-games": {},
-  "includeAnySDK": false,
-  "includeEruda": false,
-  "includeSDKBox": false,
-  "inlineSpriteFrames": true,
-  "inlineSpriteFrames_native": true,
-  "jailbreakPlatform": false,
-  "md5Cache": false,
-  "mergeStartScene": true,
-  "oauthLoginServer": "",
-  "optimizeHotUpdate": false,
-  "orientation": {
-    "landscapeLeft": true,
-    "landscapeRight": true,
-    "portrait": false,
-    "upsideDown": false
-  },
-  "packageName": "org.cocos2d.tank",
-  "platform": "web-mobile",
-  "previewHeight": "720",
-  "previewWidth": "1280",
-  "privateKey": "",
-  "qqplay": {
-    "orientation": "portrait"
-  },
-  "renderMode": "0",
-  "scenes": [
-    "893fda5b-9a68-4ae0-9a30-cbc1a4d8c332"
-  ],
-  "sourceMaps": false,
-  "startScene": "893fda5b-9a68-4ae0-9a30-cbc1a4d8c332",
-  "template": "link",
-  "title": "box",
-  "useDebugKeystore": true,
-  "vsVersion": "auto",
-  "webOrientation": "landscape",
-  "wechatgame": {
-    "appid": "wx6ac3f5090a6b99c5",
-    "orientation": "portrait"
-  },
-  "xxteaKey": "6f779aa9-c97a-43",
-  "zipCompressJs": true,
-  "project": "E:\\gittest\\box2\\box",
-  "projectName": "box",
-  "debugBuildWorker": false
-}
-2018-06-18T13:22:09.387Z - normal: Building E:\gittest\box2\box
-2018-06-18T13:22:09.387Z - normal: Destination E:\gittest\box2\box\build\web-mobile
-2018-06-18T13:22:09.388Z - normal: Delete E:\gittest\box2\box\build\web-mobile\**\*
-2018-06-18T13:22:12.825Z - normal: Compiled project javascript file successfully
-2018-06-18T13:22:12.825Z - normal: Start building assets
-2018-06-18T13:22:12.825Z - normal: Start spawn build-worker
-2018-06-18T13:22:13.441Z - normal: Finish spawn build-worker
-2018-06-18T13:22:13.441Z - normal: Start init build-worker
-2018-06-18T13:22:15.203Z - normal: 1.9.0
-2018-06-18T13:22:15.953Z - normal: Finish init build-worker
-2018-06-18T13:22:15.953Z - normal: Start build-assets in worker
-2018-06-18T13:22:16.921Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\j_1.plist
-2018-06-18T13:22:16.924Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\j_1_100.plist
-2018-06-18T13:22:16.929Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\j_3.plist
-2018-06-18T13:22:16.934Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\j_2.plist
-2018-06-18T13:22:16.940Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\s_1.plist
-2018-06-18T13:22:16.943Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\s_1_100.plist
-2018-06-18T13:22:16.946Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\s_2.plist
-2018-06-18T13:22:16.952Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\s_2_100.plist
-2018-06-18T13:22:16.954Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\s_3.plist
-2018-06-18T13:22:16.956Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_0_100.plist
-2018-06-18T13:22:16.960Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_0.plist
-2018-06-18T13:22:16.989Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_1.plist
-2018-06-18T13:22:16.991Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_1_100.plist
-2018-06-18T13:22:16.993Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_2.plist
-2018-06-18T13:22:16.995Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_3.plist
-2018-06-18T13:22:17.009Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_4.plist
-2018-06-18T13:22:17.375Z - normal: Finish build-assets in worker
-2018-06-18T13:22:17.378Z - normal: Finish building assets
-2018-06-18T13:22:17.402Z - normal: Start building raw assets
-2018-06-18T13:22:17.403Z - normal: Start building plugin scripts
-2018-06-18T13:22:17.558Z - normal: Finish building raw assets
-2018-06-18T13:22:17.580Z - normal: Generating main.js from E:\CocosCreator\resources\static\build-templates\shares\main.js
-2018-06-18T13:22:17.586Z - normal: Generating html from E:\CocosCreator\resources\static\build-templates\web-mobile\template\index.html
-2018-06-18T13:22:17.597Z - normal: Built to "E:\gittest\box2\box\build\web-mobile" successfully
-2018-06-18T13:24:50.930Z - normal: Start building with options : {
-  "androidStudio": true,
-  "apiLevel": "",
-  "appABIs": [],
-  "appKey": "",
-  "appSecret": "",
-  "buildPath": "E:\\gittest\\box2\\box\\build",
-  "debug": false,
-  "dest": "E:\\gittest\\box2\\box\\build\\fb-instant-games",
-  "encryptJs": true,
-  "excludeScenes": [],
-  "excludedModules": [
-    "VideoPlayer",
-    "DragonBones",
-    "Physics",
-    "StudioComponent",
-    "Chipmunk",
-    "Native NetWork"
-  ],
-  "fb-instant-games": {},
-  "includeAnySDK": false,
-  "includeEruda": false,
-  "includeSDKBox": false,
-  "inlineSpriteFrames": true,
-  "inlineSpriteFrames_native": true,
-  "jailbreakPlatform": false,
-  "md5Cache": false,
-  "mergeStartScene": true,
-  "oauthLoginServer": "",
-  "optimizeHotUpdate": false,
-  "orientation": {
-    "landscapeLeft": true,
-    "landscapeRight": true,
-    "portrait": false,
-    "upsideDown": false
-  },
-  "packageName": "org.cocos2d.tank",
-  "platform": "fb-instant-games",
-  "previewHeight": "720",
-  "previewWidth": "1280",
-  "privateKey": "",
-  "qqplay": {
-    "orientation": "portrait"
-  },
-  "renderMode": "0",
-  "scenes": [
-    "893fda5b-9a68-4ae0-9a30-cbc1a4d8c332"
-  ],
-  "sourceMaps": false,
-  "startScene": "893fda5b-9a68-4ae0-9a30-cbc1a4d8c332",
-  "template": "link",
-  "title": "box",
-  "useDebugKeystore": true,
-  "vsVersion": "auto",
-  "webOrientation": "landscape",
-  "wechatgame": {
-    "appid": "wx6ac3f5090a6b99c5",
-    "orientation": "portrait"
-  },
-  "xxteaKey": "6f779aa9-c97a-43",
-  "zipCompressJs": true,
-  "project": "E:\\gittest\\box2\\box",
-  "projectName": "box",
-  "debugBuildWorker": false
-}
-2018-06-18T13:24:50.931Z - normal: Building E:\gittest\box2\box
-2018-06-18T13:24:50.932Z - normal: Destination E:\gittest\box2\box\build\fb-instant-games
-2018-06-18T13:24:50.932Z - normal: Delete E:\gittest\box2\box\build\fb-instant-games\**\*
-2018-06-18T13:24:53.609Z - normal: Compiled project javascript file successfully
-2018-06-18T13:24:53.609Z - normal: Start building assets
-2018-06-18T13:24:53.609Z - normal: Start spawn build-worker
-2018-06-18T13:24:54.184Z - normal: Finish spawn build-worker
-2018-06-18T13:24:54.184Z - normal: Start init build-worker
-2018-06-18T13:24:55.884Z - normal: 1.9.0
-2018-06-18T13:24:55.981Z - normal: Finish init build-worker
-2018-06-18T13:24:55.981Z - normal: Start build-assets in worker
-2018-06-18T13:24:56.217Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\j_1_100.plist
-2018-06-18T13:24:56.219Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\j_1.plist
-2018-06-18T13:24:56.224Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\j_2.plist
-2018-06-18T13:24:56.227Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\j_3.plist
-2018-06-18T13:24:56.245Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\s_1_100.plist
-2018-06-18T13:24:56.246Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\s_2_100.plist
-2018-06-18T13:24:56.247Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\s_1.plist
-2018-06-18T13:24:56.249Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\s_2.plist
-2018-06-18T13:24:56.258Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\s_3.plist
-2018-06-18T13:24:56.260Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_0_100.plist
-2018-06-18T13:24:56.261Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_1_100.plist
-2018-06-18T13:24:56.262Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_0.plist
-2018-06-18T13:24:56.265Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_1.plist
-2018-06-18T13:24:56.266Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_2.plist
-2018-06-18T13:24:56.267Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_3.plist
-2018-06-18T13:24:56.268Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_4.plist
-2018-06-18T13:24:56.567Z - normal: Finish build-assets in worker
-2018-06-18T13:24:56.573Z - normal: Finish building assets
-2018-06-18T13:24:56.598Z - normal: Start building raw assets
-2018-06-18T13:24:56.598Z - normal: Start building plugin scripts
-2018-06-18T13:24:56.646Z - normal: Finish building raw assets
-2018-06-18T13:24:56.650Z - normal: Generating main.js from E:\CocosCreator\resources\static\build-templates\shares\main.js
-2018-06-18T13:24:56.745Z - normal: Generating html from E:\CocosCreator\resources\static\fb-instant-games\index.html
-2018-06-18T13:24:56.746Z - normal: Generating main.js from E:\CocosCreator\resources\static\fb-instant-games\main.js
-2018-06-18T13:24:56.854Z - normal: Built to "E:\gittest\box2\box\build\fb-instant-games" successfully
-2018-06-18T13:37:42.771Z - normal: Start building with options : {
-  "androidStudio": true,
-  "apiLevel": "",
-  "appABIs": [],
-  "appKey": "",
-  "appSecret": "",
-  "buildPath": "E:\\gittest\\box2\\box\\build",
-  "debug": false,
-  "dest": "E:\\gittest\\box2\\box\\build\\fb-instant-games",
-  "encryptJs": true,
-  "excludeScenes": [],
-  "excludedModules": [
-    "VideoPlayer",
-    "DragonBones",
-    "Physics",
-    "StudioComponent",
-    "Chipmunk",
-    "Native NetWork"
-  ],
-  "fb-instant-games": {},
-  "includeAnySDK": false,
-  "includeEruda": false,
-  "includeSDKBox": false,
-  "inlineSpriteFrames": true,
-  "inlineSpriteFrames_native": true,
-  "jailbreakPlatform": false,
-  "md5Cache": false,
-  "mergeStartScene": true,
-  "oauthLoginServer": "",
-  "optimizeHotUpdate": false,
-  "orientation": {
-    "landscapeLeft": true,
-    "landscapeRight": true,
-    "portrait": false,
-    "upsideDown": false
-  },
-  "packageName": "org.cocos2d.tank",
-  "platform": "fb-instant-games",
-  "previewHeight": "720",
-  "previewWidth": "1280",
-  "privateKey": "",
-  "qqplay": {
-    "orientation": "portrait"
-  },
-  "renderMode": "0",
-  "scenes": [
-    "893fda5b-9a68-4ae0-9a30-cbc1a4d8c332"
-  ],
-  "sourceMaps": false,
-  "startScene": "893fda5b-9a68-4ae0-9a30-cbc1a4d8c332",
-  "template": "link",
-  "title": "box",
-  "useDebugKeystore": true,
-  "vsVersion": "auto",
-  "webOrientation": "landscape",
-  "wechatgame": {
-    "appid": "wx6ac3f5090a6b99c5",
-    "orientation": "portrait"
-  },
-  "xxteaKey": "6f779aa9-c97a-43",
-  "zipCompressJs": true,
-  "project": "E:\\gittest\\box2\\box",
-  "projectName": "box",
-  "debugBuildWorker": false
-}
-2018-06-18T13:37:42.772Z - normal: Building E:\gittest\box2\box
-2018-06-18T13:37:42.772Z - normal: Destination E:\gittest\box2\box\build\fb-instant-games
-2018-06-18T13:37:42.773Z - normal: Delete E:\gittest\box2\box\build\fb-instant-games\**\*
-2018-06-18T13:37:46.633Z - normal: Compiled project javascript file successfully
-2018-06-18T13:37:46.633Z - normal: Start building assets
-2018-06-18T13:37:46.633Z - normal: Start spawn build-worker
-2018-06-18T13:37:47.261Z - normal: Finish spawn build-worker
-2018-06-18T13:37:47.261Z - normal: Start init build-worker
-2018-06-18T13:37:48.939Z - normal: 1.9.0
-2018-06-18T13:37:49.640Z - normal: Finish init build-worker
-2018-06-18T13:37:49.640Z - normal: Start build-assets in worker
-2018-06-18T13:37:50.560Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\j_1_100.plist
-2018-06-18T13:37:50.564Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\j_1.plist
-2018-06-18T13:37:50.616Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\j_3.plist
-2018-06-18T13:37:50.619Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\j_2.plist
-2018-06-18T13:37:50.626Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\s_1.plist
-2018-06-18T13:37:50.628Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\s_1_100.plist
-2018-06-18T13:37:50.630Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\s_2.plist
-2018-06-18T13:37:50.639Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\s_2_100.plist
-2018-06-18T13:37:50.641Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\s_3.plist
-2018-06-18T13:37:50.646Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_0.plist
-2018-06-18T13:37:50.650Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_0_100.plist
-2018-06-18T13:37:50.652Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_1_100.plist
-2018-06-18T13:37:50.654Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_2.plist
-2018-06-18T13:37:50.658Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_1.plist
-2018-06-18T13:37:50.694Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_3.plist
-2018-06-18T13:37:50.695Z - warn: Can not find particle texture in E:\gittest\box2\box\assets\resources\particle\particle_texture.png, plist: E:\gittest\box2\box\assets\resources\particle\t_4.plist
-2018-06-18T13:37:51.079Z - normal: Finish build-assets in worker
-2018-06-18T13:37:51.083Z - normal: Finish building assets
-2018-06-18T13:37:51.106Z - normal: Start building raw assets
-2018-06-18T13:37:51.107Z - normal: Start building plugin scripts
-2018-06-18T13:37:51.252Z - normal: Finish building raw assets
-2018-06-18T13:37:51.286Z - normal: Generating main.js from E:\CocosCreator\resources\static\build-templates\shares\main.js
-2018-06-18T13:37:51.347Z - normal: Generating html from E:\CocosCreator\resources\static\fb-instant-games\index.html
-2018-06-18T13:37:51.348Z - normal: Generating main.js from E:\CocosCreator\resources\static\fb-instant-games\main.js
-2018-06-18T13:37:51.454Z - normal: Built to "E:\gittest\box2\box\build\fb-instant-games" successfully
+2018-06-19T12:37:38.171Z - normal: Building /Users/bolex1/work/game/box/box
+2018-06-19T12:37:38.171Z - normal: Destination /Users/bolex1/work/game/testservice/fb-instant-games
+2018-06-19T12:37:38.173Z - normal: Delete /Users/bolex1/work/game/testservice/fb-instant-games/**/*
+2018-06-19T12:37:40.629Z - normal: Compiled project javascript file successfully
+2018-06-19T12:37:40.629Z - normal: Start building assets
+2018-06-19T12:37:40.629Z - normal: Start spawn build-worker
+2018-06-19T12:37:41.169Z - normal: Finish spawn build-worker
+2018-06-19T12:37:41.169Z - normal: Start init build-worker
+2018-06-19T12:37:42.612Z - normal: 1.9.1
+2018-06-19T12:37:42.691Z - error: Error 5516, please go to https://github.com/cocos-creator/engine/blob/master/EngineErrorMap.md#5516 to see details. Arguments: CCClass, freindsInfo
+    at Object.errorID (/Applications/CocosCreator.app/Contents/Resources/engine/CCDebugger.js:351:13)
+    at Object.exports.preprocessAttrs (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/preprocess-class.js:232:28)
+    at declareProperties (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/CCClass.js:807:20)
+    at Object.CCClass [as Class] (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/CCClass.js:947:9)
+    at /Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/model/Global.js:22:18
+    at __define (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/model/Global.js:168:2)
+    at /Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/model/Global.js:175:13
+    at Object.<anonymous> (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/model/Global.js:182:11)
+    at Object.<anonymous> (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/model/Global.js:185:3)
+2018-06-19T12:37:42.720Z - normal: Finish init build-worker
+2018-06-19T12:37:42.720Z - normal: Start build-assets in worker
+2018-06-19T12:37:42.987Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/j_1_100.plist
+2018-06-19T12:37:42.991Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/j_1.plist
+2018-06-19T12:37:42.996Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/j_2.plist
+2018-06-19T12:37:42.998Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/j_3.plist
+2018-06-19T12:37:43.005Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/s_1_100.plist
+2018-06-19T12:37:43.011Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/s_1.plist
+2018-06-19T12:37:43.016Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/s_2_100.plist
+2018-06-19T12:37:43.019Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/s_2.plist
+2018-06-19T12:37:43.026Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/s_3.plist
+2018-06-19T12:37:43.028Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/t_0_100.plist
+2018-06-19T12:37:43.034Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/t_0.plist
+2018-06-19T12:37:43.036Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/t_1_100.plist
+2018-06-19T12:37:43.040Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/t_1.plist
+2018-06-19T12:37:43.044Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/t_2.plist
+2018-06-19T12:37:43.047Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/t_3.plist
+2018-06-19T12:37:43.050Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/t_4.plist
+2018-06-19T12:37:43.415Z - normal: Finish build-assets in worker
+2018-06-19T12:37:43.421Z - normal: Finish building assets
+2018-06-19T12:37:43.433Z - normal: Start building raw assets
+2018-06-19T12:37:43.433Z - normal: Start building plugin scripts
+2018-06-19T12:37:43.491Z - normal: Finish building raw assets
+2018-06-19T12:37:43.497Z - normal: Generating main.js from /Applications/CocosCreator.app/Contents/Resources/static/build-templates/shares/main.js
+2018-06-19T12:37:43.502Z - normal: Generating html from /Applications/CocosCreator.app/Contents/Resources/static/build-templates/fb-instant-games/index.html
+2018-06-19T12:37:43.502Z - normal: Generating main.js from /Applications/CocosCreator.app/Contents/Resources/static/build-templates/fb-instant-games/main.js
+2018-06-19T12:37:43.590Z - normal: Built to "/Users/bolex1/work/game/testservice/fb-instant-games" successfully

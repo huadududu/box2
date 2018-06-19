@@ -50,6 +50,10 @@ cc.Class({
         checkisrun: {
             visible: false,
             default: false
+        },
+        lockState: {
+            visible: false,
+            default: false
         }
 
     },
@@ -57,32 +61,27 @@ cc.Class({
     init: function init() {},
 
     setIcon: function setIcon() {
-        var pngicon = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-
         var pngname = void 0;
         var bool = GameType.bottomRadio.Efficiency == this.type;
         this.icon.node.active = !bool;
         this.iconLabel.node.active = bool;
+        if (this.lockState) {
+            var iconpng = config[this.type][this.ID].locked;
+            this.icon.spriteFrame = SpriteFrameCenter.getFrameFromAtlas("png/box", iconpng + ".png");
+            return;
+        }
         if (bool) {
-            if (pngicon != null) {
-                pngname = pngicon;
+            var time = config[this.type][this.ID].time;
+            if (time > 0) {
+                pngname = "X" + time;
             } else {
-                var time = config[this.type][this.ID].time;
-                if (time > 0) {
-                    pngname = "X" + time;
-                } else {
-                    var jumptime = config[this.type][this.ID].jumptime;
-                    pngname = this.formatDayTest(jumptime);
-                    // pngname = "x"+config[this.type][this.ID].jumptime;
-                }
+                var jumptime = config[this.type][this.ID].jumptime;
+                pngname = this.formatDayTest(jumptime);
+                // pngname = "x"+config[this.type][this.ID].jumptime;
             }
             this.iconLabel.string = pngname;
         } else {
-            if (pngicon != null) {
-                pngname = pngicon;
-            } else {
-                pngname = config[this.type][this.ID].icon;
-            }
+            pngname = config[this.type][this.ID].icon;
             this.icon.spriteFrame = SpriteFrameCenter.getFrameFromAtlas("png/box", pngname + ".png");
         }
     },
@@ -96,6 +95,7 @@ cc.Class({
     setDesc_1: function setDesc_1() {
         var desc = void 0;
         var attnum = void 0;
+        this.desc_1.node.active = !this.lockState;
         if (this.type != 1) {
             desc = config[this.type][this.ID].desc;
         } else {
@@ -111,8 +111,8 @@ cc.Class({
             this.desc_1.string = "config fault";
             return;
         }
-        if (LanguageConfig[desc] && LanguageConfig[desc][this.language]) {
-            desc = LanguageConfig[desc][this.language];
+        if (LanguageConfig[desc] && LanguageConfig[desc][Global.language]) {
+            desc = LanguageConfig[desc][Global.language];
         }
         if (this.type == 0) {
             if (config[this.type][this.ID].speed > 0) desc = this.formatPrint(desc, config[this.type][this.ID].speed, config[this.type][this.ID].coin);else desc = this.formatPrint(desc, config[this.type][this.ID].coin);
@@ -128,12 +128,13 @@ cc.Class({
         this.desc_1.string = desc;
     },
     setTitle: function setTitle() {
+        this.title.node.active = !this.lockState;
         var title = config[this.type][this.ID].title;
         if (title == null || title == undefined) {
             title = "unknow";
-        } else if (LanguageConfig[title] && LanguageConfig[title][this.language]) {
+        } else if (LanguageConfig[title] && LanguageConfig[title][Global.language]) {
 
-            title = LanguageConfig[title][this.language];
+            title = LanguageConfig[title][Global.language];
         }
         if (this.type == 2 && config[this.type][this.ID].coin > 0) {
 
@@ -147,9 +148,7 @@ cc.Class({
     setConfigInfo: function setConfigInfo(type, info, callback) {
         this.type = type;
         this.ID = info.id;
-        this.setTitle();
-        this.setDesc_1();
-        this.setIcon();
+
         // this.setBtnVisible(true);
         this.eventcallback = callback;
         this.setBtnState();
@@ -174,6 +173,9 @@ cc.Class({
 
                 break;
         }
+        this.setTitle();
+        this.setDesc_1();
+        this.setIcon();
     },
     setType0BtnState: function setType0BtnState() {
         if (this.checkisrun) return;
@@ -227,54 +229,80 @@ cc.Class({
             if (Global.hammer[this.ID] == null || Global.hammer[this.ID] == undefined) {
                 //没有激活
                 var iconpng = config[this.type][this.ID].locked;
-                this.setIcon(iconpng);
                 if (thisID == 0) {
                     //点击激活
-                    this.ButtonState(1);
+
                     // this.btntext.string="touch active";
-                    this.btntext.string = LanguageConfig['10020'][this.language];
+                    this.btntext.string = LanguageConfig['10020'][Global.language];
+                    if (this.ID == 1) {
+                        this.ButtonState(1);
+                    } else {
+                        if (Global.hammer[this.ID - 1]) {
+                            this.ButtonState(1);
+                            this.lockState = false;
+                        } else {
+                            this.ButtonState(0);
+                            this.lockState = true;
+                        }
+                    }
                 } else if (thisID == 1) {
                     //视频激励
                     // this.btntext.string = "n:"+thisID+"c:"+Global.openAdTimes;
-                    this.btntext.string = LanguageConfig['10022'][this.language];
-                    this.title.node.active = false;
+                    this.btntext.string = LanguageConfig['10022'][Global.language];
+                    if (Global.hammer[this.ID - 1]) {
+                        this.ButtonState(1);
+                        this.lockState = false;
+                    } else {
+                        this.ButtonState(0);
+                        this.lockState = true;
+                    }
                 } else if (thisID == 2) {
                     //等级激活
                     var needlvl = confArry[1];
                     if (level < needlvl) {
                         this.ButtonState(0);
-                        var str = LanguageConfig['10021'][this.language];
+                        this.lockState = true;
+                        var str = LanguageConfig['10021'][Global.language];
                         // this.btntext.string='Lv'+needlvl;
                         this.btntext.string = this.formatPrint(str, needlvl);
-                        this.title.node.active = false;
                     } else {
-                        this.ButtonState(1);
+                        if (Global.hammer[this.ID - 1]) {
+                            this.ButtonState(1);
+                            this.lockState = false;
+                        } else {
+                            this.ButtonState(0);
+                            this.lockState = true;
+                        }
                         // this.btntext.string="touchactive";
-                        this.btntext.string = LanguageConfig['10020'][this.language];
+                        this.btntext.string = LanguageConfig['10020'][Global.language];
                     }
-                    this.title.node.active = false;
                 } else if (thisID == 3) {
                     //邀请好友
                     // this.btntext.string = "n:"+confArry[1]+"c:"+Global.inviteFriends;
                     if (Global.inviteFriends == 0) {
-                        this.btntext.string = LanguageConfig['10023'][this.language];
+                        this.btntext.string = LanguageConfig['10023'][Global.language];
                     } else if (confArry[1] > Global.inviteFriends) {
                         this.btntext.string = Global.inviteFriends + '／' + confArry[1];
                     } else {
                         //邀请的数量够
-                        this.btntext.string = LanguageConfig['10020'][this.language];
+                        this.btntext.string = LanguageConfig['10020'][Global.language];
                     }
-                    this.title.node.active = false;
+                    if (Global.hammer[this.ID - 1]) {
+                        this.ButtonState(1);
+                        this.lockState = false;
+                    } else {
+                        this.ButtonState(0);
+                        this.lockState = true;
+                    }
                 }
             } else if (AttributeConfig[Global.hammer[this.ID].attribute].next == -1) {
                 //达到最大
                 this.ButtonState(0);
-                // this.btntext.string = "max";
-                this.btntext.string = LanguageConfig['10024'][this.language];
-                this.setIcon();
+                this.btntext.string = LanguageConfig['10024'][Global.language];
+                this.lockState = false;
             } else {
                 //升级条件
-                this.title.node.active = true;
+                this.lockState = false;
                 var conf1 = AttributeConfig[Global.hammer[this.ID].attribute];
                 if (conf1.costtype = 1001) {
                     if (Global.gold > conf1.cost) {
@@ -284,27 +312,28 @@ cc.Class({
                     }
                     this.btntext.string = GameUtils.formatNum(conf1.cost);
                 }
-                this.setIcon();
             }
         }
-        this.setDesc_1();
+        this.title.node.active = !this.lockState;
     },
     setType2BtnState: function setType2BtnState() {
         var bool = Global.efficiency[this.ID] != undefined && Global.efficiency[this.ID] != null;
         var conf = EfficiencyConfig[this.ID];
+        this.btn.node.active = !bool;
+        this.progressBar.node.active = bool;
         if (bool) {
             var timeleft = Global.efficiency[this.ID].timeleft;
             var _bool = timeleft > 0;
             if (timeleft > 0) {
                 var self = this;
+                self.btntext.string = GameUtils.formatTime(timeleft * 60);
+                self.progressBar.progress = timeleft / conf.time;
                 this.callback = function () {
                     if (Global.efficiency[this.ID] != null) {
                         timeleft = Global.efficiency[this.ID].timeleft;
                         timeleft = parseInt(timeleft - 1);
                         self.btntext.string = GameUtils.formatTime(timeleft * 60);
                         self.progressBar.progress = timeleft / conf.time;
-                        this.btn.node.active = !_bool;
-                        this.progressBar.node.active = _bool;
                         if (timeleft > 0) {
                             Global.efficiency[this.ID].timeleft -= 1;
                             Global.saveEfficiency(Global.efficiency);
@@ -322,9 +351,9 @@ cc.Class({
                     this.schedule(this.callback, 60);
                 }
             }
+            this.iconGem.node.active = false;
         } else {
-            this.btn.node.active = !bool;
-            this.progressBar.node.active = bool;
+
             if (conf.costtype == 1002) {
                 if (Global.gem >= conf.cost) {
                     this.ButtonState(1);
@@ -362,13 +391,13 @@ cc.Class({
         var str = "";
         var jumpstr = "";
         if (jumptime >= 24) {
-            str = LanguageConfig['10025'][this.language];
+            str = LanguageConfig['10025'][Global.language];
             str = this.formatPrint(str, Math.floor(jumptime / 24));
             jumpstr += str;
             jumptime %= 24;
         }
         if (jumptime > 0) {
-            str = LanguageConfig['10019'][this.language];
+            str = LanguageConfig['10019'][Global.language];
             str = this.formatPrint(str, jumptime);
             jumpstr += str;
         }

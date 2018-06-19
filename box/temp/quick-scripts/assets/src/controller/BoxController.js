@@ -28,6 +28,7 @@ var RewardItemFactory = require("RewardItemFactory");
 var SpriteFrameCenter = require("SpriteFrameCenter");
 var ParticleSystemCenter = require("ParticleSystemCenter");
 var SkeletonDataCenter = require("SkeletonDataCenter");
+var GameConfig = require("GameConfig");
 // let GameMenuController = require('GameMenuController');
 
 var Global = require('Global');
@@ -60,10 +61,6 @@ cc.Class({
         upgradView: cc.Node,
         openbox: cc.Node,
         // GameMenuController: GameMenuController,
-        language: {
-            visible: false,
-            default: "English"
-        },
         type: {
             visible: false,
             default: 0
@@ -625,7 +622,6 @@ cc.Class({
             if (cc.isValid(this.blocks[x][y])) {
                 this.destroyBlock(x, y);
             }
-
             this.setSmPosition(hammerpos);
         }
     },
@@ -693,8 +689,11 @@ cc.Class({
         this.isTouching = false;
         console.log("touchEndCallBack");
         this.motionStreak.reset();
+        this.previousPt = null;
     },
     touchMoveCallBack: function touchMoveCallBack(location1) {
+        // this.multMoveCallBack(location1);
+        // return;
         var location = this.gameNode.convertToNodeSpace(location1);
         if (!this.canTouch) {
             return;
@@ -710,7 +709,47 @@ cc.Class({
         // let motionpos = this.node.convertToNodeSpace(location1);
         // this.motionStreak.node.position=motionpos;
     },
+    //多点触控
+    multMoveCallBack: function multMoveCallBack(location01) {
+        var location02 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
 
+
+        var location1 = this.gameNode.convertToNodeSpace(location01);
+        // let location2 = this.gameNode.convertToNodeSpace(location02);
+        console.log("1", location1);
+        // console.log("2",location2);
+        if (this.previousPt == null) {
+            this.previousPt = {};
+            this.previousPt[0] = location1;
+            // this.previousPt[1]= location2;
+            return;
+        }
+        var distance = cc.pSub(this.previousPt[0], location1);
+        console.log("distance", distance);
+        if (distance.y != 0) {
+            var origin = this.camera.node.getPositionY();
+            // if(origin == 0) {
+            //     return;
+            // }
+            var endpos = (origin + distance.y) * 0.5;
+            if (endpos < 0) {
+                endpos = 0;
+            }
+            if (endpos > 300) {
+                endpos = 300;
+            }
+            var move = origin - endpos;
+            this.camera.node.setPositionY(endpos);
+            for (var i = this.hammerStart; i < this.hammerEnd; i++) {
+                if (this.hammers[i] != undefined) {
+                    var location = this.hammers[i].node.position;
+                    // let action2 = cc.moveTo(0.1,{x:location.x,y:location.y+move})
+                    // this.hammers[i].node.runAction(action2);
+                    this.hammers[i].node.setPositionY(location.y + move);
+                }
+            }
+        }
+    },
     onClickTreasure: function onClickTreasure(event) {
         var maxlinenum = this.maxLineNum();
         var totoalRowNum = this.totoalRowNum(0);
@@ -745,7 +784,7 @@ cc.Class({
                 this.toolChange(id);
                 break;
             case 2:
-                this.efficiencyAdd(id);
+                this.efficiencyAdd(id, string);
                 break;
         }
     },
@@ -791,6 +830,7 @@ cc.Class({
         var info = ToolConfig[id];
 
         if (Global.hammer[id] == undefined) {
+            //激活
             var bool = this.checkCanAdd(id);
             if (bool) {
                 Global.hammer[id] = { id: id, attribute: info.attribute };
@@ -802,7 +842,7 @@ cc.Class({
             }
             this.GameMenuController.updateButtom();
         } else {
-
+            //升级
             var conf = AttributeConfig[Global.hammer[id].attribute];
             var mess = {};
 
@@ -852,15 +892,30 @@ cc.Class({
                 }
             } else if (thisID == 3) {
                 //邀请好友
-                if (Global.inviteFriends < confArry[1]) return false;else return true;
+                // if(Global.freindsInfo[id]&&Global.freindsInfo[id].length){
+                //     Global.inviteFriends = Global.freindsInfo[id].length;
+                // }else{
+                //     Global.inviteFriends=0;
+                // }
+                if (Global.inviteFriends < confArry[1]) {
+                    return false;
+                } else {
+                    return true;
+                }
             }
         }
-        return true;
+        return false;
+    },
+    addFriendCallBack: function addFriendCallBack(friendId) {
+        if (Global.freindsInfo == null) {
+            Global.freindsInfo = {};
+        }
     },
     addAdTime: function addAdTime(id) {
         var conf = ToolConfig[id];
         var thisID = void 0;
         var confArry = void 0;
+        var self = this;
         if ("unlock" in conf) {
             if (conf.unlock.indexOf(";") != -1) {
                 confArry = conf.unlock.split(";");
@@ -870,10 +925,44 @@ cc.Class({
             }
             if (thisID == 1) {
                 //视频激励
-                return Global.openAdTimes++;
+                if (GameConfig.isFBInstantGame()) {
+                    var FBP = require("FBPlugin");
+                    FBP.RewardedVideoAsync(function () {
+                        Global.openAdTimes++;
+                        self.GameMenuController.updateButtom();
+                    });
+                } else {
+                    Global.openAdTimes++;
+                }
             } else if (thisID == 3) {
                 //邀请好友
-                Global.inviteFriends++;
+                var FBP1 = require("FBPlugin");
+                var _self = this;
+                if (GameConfig.isFBInstantGame()) {
+                    FBP1.chooseAsync(function (friendID) {
+                        if (Global.freindsInfo == null) {
+                            Global.freindsInfo = {};
+                        }
+                        if (Global.freindsInfo[id] == null) {
+                            Global.freindsInfo[id] = [];
+                        }
+                        var find = false;
+                        for (var i = 0; i < Global.freindsInfo[id].length; i++) {
+                            var oldFriend = Global.freindsInfo[id];
+                            if (oldFriend == friendID) {
+                                find = true;
+                                break;
+                            }
+                        }
+                        if (!find) {
+                            Global.freindsInfo[id].push(friendID);
+                            Global.inviteFriends = Global.freindsInfo[id].length;
+                        }
+                        _self.GameMenuController.updateButtom();
+                    });
+                } else {
+                    Global.inviteFriends++;
+                }
             }
         }
     },
@@ -1018,7 +1107,7 @@ cc.Class({
             if (Global.efficiency[id] == null) {
                 continue;
             }
-            var paseTime = nowtime - Global.efficiency[id].timestart;
+            var paseTime = (nowtime - Global.efficiency[id].timestart) / 60; //以min
             var conf = EfficiencyConfig[id];
             var useTime = conf.time - Global.efficiency[id].timeleft;
             if (paseTime > conf.time) {
@@ -1029,18 +1118,23 @@ cc.Class({
             if (timeleft <= 0) {
                 Global.efficiency[id] = null;
             } else {
-                Global.efficiency[id].timeleft = timeleft;
+                Global.efficiency[id].timeleft = parseInt(timeleft);
                 this.efficeGold += conf.coin - 1;
             }
             for (var i = this.hammerStart; i <= this.hammerEnd; i++) {
                 if (Global.hammer[i] != undefined) {
                     var attr = AttributeConfig[Global.hammer[i].attribute];
-                    addgold += conf.coin * outlineTime * attr.att / attr.time;
+                    addgold += conf.coin * outlineTime * 60 * attr.att / attr.time;
                 }
             }
+            if (Global.offlinetime < outlineTime) {
+                Global.offlinetime = outlineTime;
+            }
         }
+        Global.saveEfficiency(Global.efficiency);
+        addgold = parseInt(addgold);
         if (addgold > 0) {
-            Global.addgold = addgold;
+            Global.addgold = parseInt(addgold);
             Global.btnType = 'outline';
             this.upgradView.active = true;
         }
@@ -1084,6 +1178,13 @@ cc.Class({
         this.GameMenuController.updateDate({ 'gold': gold });
         Global.saveGold(gold);
         this.GameMenuController.updateButtom();
+    },
+    onClickBtnaddExp: function onClickBtnaddExp() {
+
+        var exp = Global.exp + 1000;
+        this.GameMenuController.updateDate({ 'exp': exp });
+        Global.saveExp(exp);
+        // this.GameMenuController.updateButtom();
     }
 });
 //

@@ -14,6 +14,7 @@ var RewardConfig = require("RewardConfig");
 var GameUtils = require("GameUtils");
 var LevelConfig = require("LevelConfig");
 var EfficiencyConfig = require("EfficiencyConfig");
+var LanguageConfig = require("LanguageConfig");
 cc.Class({
 
     extends: cc.Component,
@@ -23,7 +24,9 @@ cc.Class({
         TitleLable: cc.Label,
         DescLable: cc.Label,
         vediodesc: cc.Label,
-        BoxController: require('BoxController')
+        nextdesc: cc.Label,
+        BoxController: require('BoxController'),
+        language: 'English'
     },
 
     onLoad: function onLoad() {
@@ -32,9 +35,9 @@ cc.Class({
     },
     onEnable: function onEnable() {
         this.type = this.msg[Global.btnType];
-        if (Global.typebtn == 'uplevel') {
+        if (Global.btnType == 'uplevel') {
             this.addlevel();
-        } else if (Global.typebtn == 'skip') {
+        } else if (Global.btnType == 'skip') {
             this.jumpTimeReward();
         } else {
             this.outlineReward();
@@ -50,21 +53,36 @@ cc.Class({
         myinfo.level = Global.level + 1;
         Global.saveLevel(myinfo.level);
         Global.saveExp(myinfo.exp);
-        this.vediodesc.string = 'x' + this.type;
+        var claim = LanguageConfig['10028'][Global.language];
+        this.TitleLable.string = LanguageConfig['10026'][Global.language];
+        this.DescLable.string = LanguageConfig['10027'][Global.language];
         this.RewardLable.string = "x" + needgold;
+        this.nextdesc.string = claim;
+        this.vediodesc.string = claim + 'x' + this.type;
         Global.addgold = needgold;
         this.BoxController.GameMenuController.updateDate(myinfo);
     },
     //离线奖励
     outlineReward: function outlineReward() {
 
+        var claim = LanguageConfig['10028'][Global.language];
+        this.TitleLable.string = LanguageConfig['10033'][Global.language];
+        this.DescLable.string = LanguageConfig['10032'][Global.language];
         this.RewardLable.string = "x" + Global.addgold;
-        this.vediodesc.string = 'x' + this.type;
+        this.nextdesc.string = claim;
+        this.vediodesc.string = claim + 'x' + this.type;
     },
     //跳过时间
     jumpTimeReward: function jumpTimeReward() {
+        var claim = LanguageConfig['10028'][Global.language];
+        var desc = LanguageConfig['10031'][Global.language];
+        var time = EfficiencyConfig[Global.skipID].jumptime;
+        desc = GameUtils.formatHour(desc, time);
+        this.TitleLable.string = LanguageConfig['10017'][Global.language];
+        this.DescLable.string = desc;
         this.RewardLable.string = "x" + Global.addgold;
-        this.vediodesc.string = 'x' + this.type;
+        this.nextdesc.string = claim;
+        this.vediodesc.string = claim + 'x' + this.type;
     },
     onVedioSureBtn: function onVedioSureBtn() {
         var golds = Global.gold + Global.addgold * this.type;
@@ -72,7 +90,6 @@ cc.Class({
             this.BoxController.GameMenuController.updateDate({ gold: golds });
             Global.saveGold(golds);
         }
-
         Global.addgold = 0;
         this.node.active = false;
     },
