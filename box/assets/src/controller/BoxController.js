@@ -20,6 +20,8 @@ let GameState = require("GameState");
 let BlockBigFactory = require("BlockBigFactory");
 let BlockSmallFactory = require("BlockSmallFactory");
 let RewardItemFactory = require("RewardItemFactory");
+let UILeadFactory = require("UILeadFactory");
+
 let SpriteFrameCenter = require("SpriteFrameCenter");
 let ParticleSystemCenter = require("ParticleSystemCenter");
 let SkeletonDataCenter = require("SkeletonDataCenter");
@@ -44,6 +46,9 @@ cc.Class({
         MarginsSmall: cc.Prefab,
         RewardItem: cc.Prefab,
         UIBottom: cc.Prefab,
+        uilead: cc.Prefab,
+        inviteUI:cc.Prefab,
+        inviteItem:cc.Prefab,
         Sky: cc.Node,
         Bgbz: cc.Node,
         Underground: cc.Node,
@@ -55,14 +60,9 @@ cc.Class({
         treasure: cc.Button,
         upgradView: cc.Node,
         openbox: cc.Node,
-        // GameMenuController: GameMenuController,
         type: {
             visible: false,
             default: 0
-        },
-        rowNum: {
-            visible: false,
-            default: 5
         },
         blockWidth: 100,
         blockBlank: {
@@ -106,6 +106,7 @@ cc.Class({
             default: 1
         },
         efficeGold: 0,
+        startClock:3,
         gameState: GameState.init,//0 init 1 playing 2 rolling 3 end
     },
 
@@ -116,8 +117,11 @@ cc.Class({
         this.BaseWidth = this.winsize.width / 2;
         this.hammerStart = 1;//表示锤子的起始id
         this.hammerEnd = 10;//表示锤子的最后一个id
-
-
+        this.boxLeadNode = null;//box的引导节点
+        this.rowNum = 0;
+        this.startCameraY=0;
+        this.blockLeadNode = null;
+        this.blockPosNode = null;
 
         SpriteFrameCenter.preLoadAtlas("png/box", this.initdata.bind(this));
         this.GameMenuController = cc.find("Canvas/GameMenu").getComponent("GameMenuController");
@@ -136,15 +140,92 @@ cc.Class({
             this.addItems();
 
         });
+        this.firstblock= true;
         this.firstOpen = true;
     },
-    playBoxSpine: function () {
-        this.boxSpine.node.active = true;
-        this.boxSpine.setAnimation(0, "newAnimation", false);
+    start: function () {
+        this.GameMenuController.initInfo();
+        this.hammers = {};
+        let timescale = 1;
+        let hammer = Global.hammer;
+        this.initEfficienyInfo();//[改 延迟执行]
+        for (var i = this.hammerStart; i <= this.hammerEnd; i++) {
+            if (hammer[i] == undefined)
+                continue;
+            let node = new cc.Node();
+            let nodehammer = node.addComponent(sp.Skeleton);
+            let info = ToolConfig[i];
+            let animation = info.animation;
+            SkeletonDataCenter.addSkeletonData(animation, nodehammer);
+            this.GameMenu.addChild(node);
+            this.hammers[hammer[i].id] = nodehammer;
+            nodehammer.node.active = false;
+            let j=i;
+            nodehammer.setCompleteListener(trackEntry => {
+                var animationName = trackEntry.animation ? trackEntry.animation.name : "";
+                cc.log("HammerSpine [track %s][animation %s] end.", trackEntry.trackIndex, animationName);
+                nodehammer.node.active = false;
+                if (this.checkCanHammer(j)) {
+                    this.smCallback(j);
+                }
+            });
+            let attribute = Global.hammer[i].attribute;
+            let conf1 = AttributeConfig[attribute];
+            nodehammer.timeScale = 0.17 * conf1.att / parseFloat(conf1.time) * this.accelerHammer;
+        }
+
     },
-    stopBoxSpine: function () {
+    update: function () {
+        // this.cameraCentPosY();
+    },
+    restart: function () {
+
+        if (StageConfig[Global.hard+1] != null && StageConfig[Global.hard+1] != undefined) {
+            Global.hard++;
+            Global.saveHard(Global.hard);
+        }
+        this.deleteBoxLead();
         this.boxSpine.node.active = false;
+        for (let i = 1; i < 4; i++) {
+            // let node = this.rewardItem[i];
+            this.rewardItem[i].destroy();
+            // if(cc.isValid( node)){
+            //     node.destroy();
+            // }
+        }
+        this.rewardItem = [];
+        // this.addItems();
+        this.initdata();
+        this.gameState = GameState.hatting;
     },
+    initdata: function () {
+        let floorNum = StageConfig[Global.hard].layer;
+        for (var i = 0; i < BlockConfig.length; i++) {
+            if (BlockConfig[i].blockwidth == StageConfig[Global.hard].size) {
+                this.type = BlockConfig[i].type;
+                break;
+            }
+        }
+
+        this.rowNum = BlockConfig[this.type].count;
+        this.blockWidth = BlockConfig[this.type].blockwidth;
+        this.blockBlank = BlockConfig[this.type].blank;
+        this.margins = BlockConfig[this.type].margins;
+
+        this.addBlocks();
+        this.cameraStartPosY();
+        this.changeBlockLead();
+        this.btnbox.node.active = true;
+        this.playHammers();
+        this.initTreasure();
+        if (this.firstOpen) {
+            this.GameMenuController.addUIBottom();
+            this.firstOpen = false;
+        }
+
+
+    },
+    //-----------------------------锤子部分 start-------------------------
     playHammerSpine: function (hammerpos) {
 
         this.hammers[hammerpos].node.active = true;
@@ -176,7 +257,7 @@ cc.Class({
             cc.log("HammerSpine [track %s][animation %s] end.", trackEntry.trackIndex, animationName);
             hammer.node.active = false;
             if (this.checkCanHammer(id)) {
-                this.smCallback(id);
+                    this.smCallback(id);
             }
         });
         let timescale = 0.17 * conf.att / parseFloat(conf.time) * this.accelerHammer;
@@ -185,86 +266,131 @@ cc.Class({
     changeHammerSpine: function (data) {
         this.hammer.skeletonData = data;
     },
-    start: function () {
-        this.GameMenuController.initInfo();
-        this.hammers = {};
-        let timescale = 1;
-        let hammer = Global.hammer;
-        this.initEfficienyInfo();
-        for (var i = this.hammerStart; i <= this.hammerEnd; i++) {
-            if (hammer[i] == undefined)
-                continue;
-            let node = new cc.Node();
-            let nodehammer = node.addComponent(sp.Skeleton);
-            let info = ToolConfig[i];
-            let animation = info.animation;
-            SkeletonDataCenter.addSkeletonData(animation, nodehammer);
-            this.GameMenu.addChild(node);
-            this.hammers[hammer[i].id] = nodehammer;
-            nodehammer.node.active = false;
-            let j=i;
-            nodehammer.setCompleteListener(trackEntry => {
-                var animationName = trackEntry.animation ? trackEntry.animation.name : "";
-                cc.log("HammerSpine [track %s][animation %s] end.", trackEntry.trackIndex, animationName);
-                nodehammer.node.active = false;
-                if (this.checkCanHammer(j)) {
-                    this.smCallback(j);
-                }
-            });
-            let attribute = Global.hammer[i].attribute;
-            let conf1 = AttributeConfig[attribute];
-            nodehammer.timeScale = 0.17 * conf1.att / parseFloat(conf1.time) * this.accelerHammer;
-        }
 
-    },
-    restart: function () {
-        if (Global.hard < 10) {
-            Global.hard++;
-        }
-        this.boxSpine.node.active = false;
-        for (let i = 1; i < 4; i++) {
-            // let node = this.rewardItem[i];
-            this.rewardItem[i].destroy();
-            // if(cc.isValid( node)){
-            //     node.destroy();
-            // }
-        }
-        this.rewardItem = [];
-        // this.addItems();
-        this.initdata();
-        this.gameState = GameState.hatting;
 
-    },
-    initdata: function () {
-        let floorNum = StageConfig[Global.hard].layer;
-        for (var i = 0; i < BlockConfig.length; i++) {
-            if (BlockConfig[i].blockwidth == StageConfig[Global.hard].size) {
-                this.type = BlockConfig[i].type;
-                break;
-            }
-        }
-        this.rowNum = BlockConfig[this.type].count;
-        this.blockWidth = BlockConfig[this.type].blockwidth;
-        this.blockBlank = BlockConfig[this.type].blank;
-        this.margins = BlockConfig[this.type].margins;
-
-        this.addBlocks();
-        this.cameraStartPosY();
-        this.btnbox.node.active = true;
-        this.playHammers();
-        this.initTreasure();
-        if (this.firstOpen) {
-            this.GameMenuController.addUIBottom();
-            this.firstOpen = false;
-        }
-
-    },
     checkCanHammer: function (id) {
         var hammer = Global.hammer;
         if (hammer[id] != undefined && hammer[id].attribute != -1)
             return true;
         return false;
     },
+    setSmPosition: function (hammerpos) {
+        if(this.blockPosNode !=null){
+            if (this.HattingPos == null) {
+                this.HattingPos = {};
+            }
+            let startLine = this.blockPosNode.x;
+            let startRow = this.blockPosNode.y;
+            this.HattingPos[hammerpos] = this.blockPosNode;
+            let position = this.hammerpos(startLine,startRow);
+            console.log("choose:",this.HattingPos[hammerpos]);
+            this.hammers[hammerpos].node.position = position;
+            this.hammers[hammerpos].node.active = true;
+            this.playHammerSpine(hammerpos);
+            this.blockPosNode = null;
+            return;
+        }
+        let realwidth = this.blockWidth + this.blockBlank;
+        let maxline = this.curMaxLine;
+        let maxrow = this.totoalRowNum(0);
+        if (maxline == 0 && maxrow == 0) {
+            this.HattingPos = null;
+            // this.sm.node.visible = false;
+            this.hammers[hammerpos].node.active = false;
+            return;
+        }
+
+        let range = this.geScreenRange();
+        let line = this.curMaxLine;
+        let find = false;
+        let canclick = [];
+        let curline = line;
+        for (; curline >= 0; curline--) {
+            for (var i = 0; i < this.rowNum; i++) {//当前行可以删除的
+                if (this.blocks[curline] && this.checkCanDestroy(curline, i)) {
+                    let find = false;
+                    for (var j = this.hammerStart; j <= this.hammerEnd; j++) {
+                        if (this.HattingPos && this.HattingPos[j]) {
+                            if (this.HattingPos[j].x == curline && i == this.HattingPos[j].y) {
+                                find = true;
+                                break;
+                            }
+                        }
+                    }
+                    if (!find) {
+                        canclick.push(i);
+                    }
+                }
+            }
+            if (canclick.length > 0)
+                break;
+        }
+        if (canclick.length == 0) {
+            this.HattingPos[hammerpos] = null;
+            return;
+        }
+        let num = GameUtils.randomInt(0, canclick.length - 1);
+        let row = canclick[num];
+        let location = this.hammerpos(curline, row);
+        if (this.HattingPos == null) {
+            this.HattingPos = {};
+        }
+        this.HattingPos[hammerpos] = {x: curline, y: row};
+        console.log("choose:",this.HattingPos[hammerpos]);
+        this.hammers[hammerpos].node.position = location;
+        this.hammers[hammerpos].node.active = true;
+        this.playHammerSpine(hammerpos);
+    },
+    //根据小块的位置 过的特效文件
+    getEffByBlock(line, row) {
+
+        let type = this.type == 0 ? "BlockBig" : "BlockSmall";
+        let node = this.blocks[line][row].getComponent(type);
+        return node.getPngId();
+    },
+    geScreenRange: function () {
+        let max = this.curMaxLine;
+        let cameraPosY = this.camera.node.getPositionY();
+        let min = 0;
+        let realwidth = this.blockWidth + this.blockBlank;
+        if (cameraPosY <= this.BaseHeight) {
+            min = 0;
+        } else {
+            let maxPosY = max * realwidth;
+            let canshowy = (maxPosY - cameraPosY + this.BaseHeight) / realwidth;
+            min = Math.floor(max - canshowy);
+        }
+        return {max: max, min: min};
+    },
+    //根据块的位置计算锤子的位置
+    hammerpos: function (line, row) {
+        let cameraY = this.camera.node.getPositionY();
+        let gameY = this.gameNode.y;
+        let realwidth = this.blockWidth + this.blockBlank;
+        let realx = row * realwidth + this.margins + this.blockBlank;
+        let realy = line * realwidth - cameraY ;
+        let hamX = realx - this.BaseWidth - 42 + this.blockWidth;
+        let hamY = realy - 42;
+        return cc.p(hamX, hamY);
+
+    },
+    smCallback: function (hammerpos) {
+        if (this.HattingPos != null && this.HattingPos[hammerpos] != null) {
+
+            let y = this.HattingPos[hammerpos].y;
+            let x = this.HattingPos[hammerpos].x;
+            console.log("hammer:",x,y);
+            if (cc.isValid(this.blocks[x][y])) {
+                this.destroyBlock(x, y);
+            }
+            // this.changeBlockLead(true);
+            this.setSmPosition(hammerpos);
+
+
+        }
+    },
+    //-----------------------------锤子部分 end-------------------------
+    //-----------------------------block start-------------------------
     resetMarginList: function () {
         if (this.marginlist.length > 0) {
             for (let i = 0; i < this.marginlist.length; i++) {
@@ -289,7 +415,6 @@ cc.Class({
         }
         this.blocks = [];
     },
-    //--------- block -----------------------
     addBlocks: function () {
 
         this.resetBlockList();
@@ -377,6 +502,46 @@ cc.Class({
             this.destroyUpdate();
             this.cameraCentPosY();
         }
+        this.firstblock = false;
+        this.startClock--;
+        this.changeBlockLead();
+
+
+    },
+    changeBlockLead:function(){
+        let bool = this.startClock>0;
+        // if(this.startClock>0){
+        //     if(this.HattingPos && this.HattingPos[1]){
+        //         this.blockLead(bool,this.HattingPos[1].x,this.HattingPos[1].y);
+        //     }else{
+        //         this.blockLead(bool,2,2+this.startClock);
+        //     }
+        // }else{
+        //     this.blockLead(bool);
+        // }
+
+
+        if(Global.hard == 1 && bool){
+            if(!this.blockLeadNode){
+                var node = UILeadFactory.create();
+                this.blockLeadNode= node;
+                this.gameNode.addChild(node);
+            }
+            let row =3+this.startClock;
+            let line = 2;
+
+            let position = this.hammerpos(line,row);
+            position.y = position.y-216;
+            this.blockLeadNode.position = position;
+            this.blockPosNode = {x: line,y:row};
+        }else {
+            if (this.blockLeadNode) {
+                this.blockLeadNode.removeFromParent(true);
+                this.blockLeadNode = null;
+                this.blockPosNode = null;
+            }
+
+        }
 
     },
     checkCanDestroy: function (line, row) {
@@ -426,8 +591,8 @@ cc.Class({
         this.GameMenuController.updateDate(myinfo);
         Global.saveExp(myinfo.exp);
         Global.saveGold(myinfo.gold);
+
     },
-    //--------- block -----------------------
     maxLineNum: function () {
         var max = 0;
         let floorNum = StageConfig[Global.hard].layer;
@@ -437,7 +602,6 @@ cc.Class({
                     var node = this.blocks[i][j];
                     if (!cc.isValid(node))
                         continue;
-                    // sss
                     if (i > max) {
                         max = i;
                     }
@@ -458,8 +622,9 @@ cc.Class({
         }
         return max;
     },
+    //-----------------------------block   end-------------------------
+    //-----------------------------camera   start-------------------------
 
-    //************camera 相关设置 start **********************
     cameraCentPosY: function () {
 
         let maxline = this.maxLineNum();
@@ -490,9 +655,6 @@ cc.Class({
                 this.hammers[i].node.runAction(action2);
             }
         }
-        // this.camera.node.setPositionY(moveY);
-
-
     },
 
     cameraStartPosY: function () {
@@ -509,122 +671,166 @@ cc.Class({
         let other = GameHeight - totoal;
         bzYbottom = (totoal + height - GameHeight) / 2 - 25;
         this.Bgbz.y = bzYbottom;
+        let movePos = 0;
         if (other > 0) {
             this.Sky.active = true;
             this.Sky.height = other + 10;
             skyposy = (GameHeight - other) / 2;
             this.Sky.y = skyposy;
-            this.camera.node.setPositionY(0);
+            // this.camera.node.setPositionY(0);
+            movePos = 0;
         } else {
             this.Sky.active = false;
-            this.camera.node.setPositionY(-other);
-
+            // this.camera.node.setPositionY(-other);
+            movePos = -other;
         }
+        this.camera.node.setPositionY(movePos);
+        this.startCameraY = movePos;
         this.curMaxLine = floorNum - 1;
     },
+    //-----------------------------camera   end-------------------------
+    //----------------------------- treasure start----------------------
+    playBoxSpine: function () {
+        this.boxSpine.node.active = true;
+        this.boxSpine.setAnimation(0, "newAnimation", false);
+    },
+    stopBoxSpine: function () {
+        this.boxSpine.node.active = false;
+    },
+    initTreasure: function () {
+        let BoxID = StageConfig[Global.hard].box;
+        let BoxConf = BoxConfig[BoxID];
+        this.treasure.normalSprite = SpriteFrameCenter.getFrameFromAtlas("png/box", BoxConf.icon + ".png");
+        this.treasure.pressedSprite = SpriteFrameCenter.getFrameFromAtlas("png/box", BoxConf.icon + ".png");
+        this.treasure.hoverSprite = SpriteFrameCenter.getFrameFromAtlas("png/box", BoxConf.icon + ".png");
+        this.treasure.disabledSprite = SpriteFrameCenter.getFrameFromAtlas("png/box", BoxConf.icon + ".png");
+        let animation = BoxConf.animation;
+        SkeletonDataCenter.addSkeletonDataWait(animation, this.boxSpine);
+        this.treasure.node.y = -GameHeight / 2 + this.blockWidth + 35 - 20;
+        this.boxSpine.node.y = -GameHeight / 2 + this.blockWidth + 35 - 20+103;
+        // let loction  = this.gameNode.convertToWorldSpace(this.treasure.node.position);
+        // let loction1 = this.openbox.convertToNodeSpace(loction);
+        // this.boxSpine.node = loction1;
 
+    },
+    addItems: function () {
 
-    //************camera 相关设置 end **********************
-    //*********** 锤子 相关设置  start***************
-    setSmPosition: function (hammerpos) {
-        let realwidth = this.blockWidth + this.blockBlank;
-        let maxline = this.curMaxLine;
-        let maxrow = this.totoalRowNum(0);
-        if (maxline == 0 && maxrow == 0) {
-            this.HattingPos = null;
-            // this.sm.node.visible = false;
-            this.hammers[hammerpos].node.active = false;
-            return;
+        let hard = Global.hard;
+        let boxID = StageConfig[hard].box;
+        let rewardID = BoxConfig[boxID].reward;
+        let conf = RewardConfig[rewardID];
+        let num = conf.num;
+        let itemdata = {};
+        let totoal = 0;
+        let reward = {};
+        let max = 0;
+        for (let i = 1; i < 7; i++) {
+            if (conf['rate' + i] != 0) {
+                totoal = conf['rate' + i];
+                if (i == 1) {
+                    itemdata[i] = totoal;
+                    max = itemdata[i];
+                } else {
+                    itemdata[i] = itemdata[i - 1] + totoal;
+                    max = itemdata[i];
+                }
+            }
         }
-        let range = this.geScreenRange();
-        let line = this.curMaxLine;
-        let find = false;
-        let canclick = [];
-        let curline = line;
-        for (; curline >= 0; curline--) {
-            for (var i = 0; i < this.rowNum; i++) {//当前行可以删除的
-                if (this.blocks[curline] && this.checkCanDestroy(curline, i)) {
-                    let find = false;
-                    for (var j = this.hammerStart; j <= this.hammerEnd; j++) {
-                        if (this.HattingPos && this.HattingPos[j]) {
-                            if (this.HattingPos[j].x == curline && i == this.HattingPos[j].y) {
-                                find = true;
-                                break;
-                            }
-                        }
-                    }
-                    if (!find) {
-                        canclick.push(i);
+        for (let j = 1; j <= num; j++) {
+            let random = GameUtils.random(max);
+            for (let z = 1; itemdata[z] != undefined; z++) {
+                if (itemdata[z] < random) {
+                    continue;
+                }
+                reward[j] = conf['item' + z];
+                break;
+            }
+        }
+        let gold = 0;
+        let gem = 0;
+        let str = "";
+        for (let i = 1; i <= num; i++) {
+            if (reward[i] != undefined) {
+                str += reward[i] + "--";
+                if (reward[i].indexOf(";") != -1) {
+                    let rewardarry = reward[i].split(";");
+                    if (rewardarry[0] == 1001) {
+                        gold += parseInt(rewardarry[1]);
+                    } else if (rewardarry[0] == 1002) {
+                        gem += parseInt(rewardarry[1]);
                     }
                 }
             }
-            if (canclick.length > 0)
-                break;
+            this.createRewardItem(reward[i], i);
+            this.openbox.active = true;
         }
-        if (canclick.length == 0) {
-            this.HattingPos[hammerpos] = null;
+        if (gold > 0 || gem > 0) {
+            let golds = Global.gold + gold;
+            let gems = Global.gem + gem;
+            this.GameMenuController.updateDate({gold: golds, gem: gems});
+            Global.saveGold(golds);
+            Global.saveGem(gems);
+        }
+
+    },
+    createRewardItem: function (reward, i) {
+        if (this.rewardItem[i]) {
+            this.rewardItem[i].destroy();
+            this.rewardItem[i] = null;
+        }
+        let start = -400 + i * 200;
+
+        let node = RewardItemFactory.create(reward);
+        let locationX = this.treasure.node.position.x;
+        let locationY = this.treasure.node.position.y+103;
+
+        this.rewardItem[i] = (node);
+        node.position = cc.p(locationX,locationY);
+        let action = cc.moveTo(0.5, cc.p(start, 100));
+        let action2 = cc.callFunc(() => {
+            node.getComponent("RewardItem").setFinish();
+            this.canTouch = true;
+        }, this);
+        // node.runAction(cc. moveTo(0.5,cc.p(start,-20)));
+        this.openbox.addChild(node);
+        node.runAction(cc.sequence(action, action2));
+    },
+    onClickTreasure: function (event) {
+        var maxlinenum = this.maxLineNum();
+        var totoalRowNum = this.totoalRowNum(0);
+        if (maxlinenum != 0 || totoalRowNum != 0) {
+            this.touchEndPoint = event.getLocation();
+
+            this.updateTouch(this.touchEndPoint);
             return;
         }
-        let num = GameUtils.randomInt(0, canclick.length - 1);
-        let row = canclick[num];
-        let location = this.hammerpos(curline, row);
-        if (this.HattingPos == null) {
-            this.HattingPos = {};
-        }
-        this.HattingPos[hammerpos] = {x: curline, y: row};
-        console.log("choose:",this.HattingPos[hammerpos]);
-        this.hammers[hammerpos].node.position = location;
-        this.hammers[hammerpos].node.active = true;
-        this.playHammerSpine(hammerpos);
+        this.btnbox.node.active = false;
+        this.gameState = GameState.end;
+        this.canTouch = false;
+        this.openbox.active= true;
+        this.playBoxSpine();
     },
-    //根据小块的位置 过的特效文件
-    getEffByBlock(line, row) {
-
-        let type = this.type == 0 ? "BlockBig" : "BlockSmall";
-        let node = this.blocks[line][row].getComponent(type);
-        return node.getPngId();
-    },
-    geScreenRange: function () {
-        let max = this.curMaxLine;
-        let cameraPosY = this.camera.node.getPositionY();
-        let min = 0;
-        let realwidth = this.blockWidth + this.blockBlank;
-        if (cameraPosY <= this.BaseHeight) {
-            min = 0;
-        } else {
-            let maxPosY = max * realwidth;
-            let canshowy = (maxPosY - cameraPosY + this.BaseHeight) / realwidth;
-            min = Math.floor(max - canshowy);
-        }
-        return {max: max, min: min};
-    },
-    //根据块的位置计算锤子的位置
-    hammerpos: function (line, row) {
-        let cameraY = this.camera.node.getPositionY();
-        let gameY = this.gameNode.y;
-        let realwidth = this.blockWidth + this.blockBlank;
-        let realx = row * realwidth + this.margins + this.blockBlank;
-        let realy = line * realwidth - cameraY ;
-        let hamX = realx - this.BaseWidth - 42 + this.blockWidth;
-        let hamY = realy - 42;
-        return cc.p(hamX, hamY);
-
-    },
-    smCallback: function (hammerpos) {
-        if (this.HattingPos != null && this.HattingPos[hammerpos] != null) {
-
-            let y = this.HattingPos[hammerpos].y;
-            let x = this.HattingPos[hammerpos].x;
-            console.log("hammer:",x,y);
-            if (cc.isValid(this.blocks[x][y])) {
-                this.destroyBlock(x, y);
-            }
-            this.setSmPosition(hammerpos);
-
+    addBoxLead:function(){
+        if(Global.hard > 1)
+            return;
+        var maxlinenum = this.maxLineNum();
+        var totoalRowNum = this.totoalRowNum(0);
+        if (maxlinenum == 0 && totoalRowNum == 0) {
+            let node = UILeadFactory.create();
+            node.position= this.treasure.node.position;
+            node.ratation = 180;
+            this.boxLeadNode = node;
+            this.gameNode.addChild(node);
         }
     },
-    //*********** 锤子 相关设置  end*****************
-
+    deleteBoxLead:function(){
+        if(this.boxLeadNode){
+            this.boxLeadNode.removeFromParent(true);
+            this.boxLeadNode= null;
+        }
+    },
+    //-----------------------------treasure end--------------------------
+    //-----------------------------touch   start-------------------------
     updateTouch: function (point) {
         let cameraY = this.camera.node.getPositionY();
         let gameY = this.gameNode.y;
@@ -650,52 +856,63 @@ cc.Class({
                 this.destroyBlock(line, row);
             }
         }
+        // this.changeBlockLead(true);
     },
-    touchStartCallBack: function (location) {
+    touchStartCallBack: function (location1) {
+
         if (!this.canTouch) {
             return;
         }
+
+        console.log("touchStartCallBack");
+
         if (this.gameState == GameState.end) {
             this.openbox.active = false;
             this.restart();
         }
-        if (location.x < this.margins || location.x > (2 * this.BaseWidth - this.margins)) {
-            // this.motionStreak.reset();
-            return;
-        }
-        console.log("touchStartCallBack");
-        // this.previousPt = location;
-        // let motionpos = this.motionStreak.node.convertToNodeSpace(location);
-        // this.motionStreak.node.setPositionX(motionpos);
-        // this.motionStreak.node.setPositionY(motionpos);
-         this.motionStreak.reset();
 
-        // this.isTouching = false;
+        if(this.touchState == undefined ||( this.touchState != 'start'  && this.touchState != 'move')){
+            this.touchState = 'start';
+        }else{
+            this.touchState = 'mult';
+        }
+        if(this.touchState == 'mult'){
+            console.log("藏起来");
+            this.motionStreak.node.active = false;
+        }
+        let location= this.gameNode.convertToNodeSpace(location1);
+        this.motionStreak.node.setPositionX(location1.x - this.BaseWidth);
+        this.motionStreak.node.setPositionY(location1.y - this.BaseHeight);
+        this.motionStreak.reset();
+
     },
 
     touchCancelCallBack: function (location1) {
         let location= this.gameNode.convertToNodeSpace(location1);
         this.updateTouch(location);
         this.isTouching = false;
-         this.motionStreak.reset();
+        this.motionStreak.reset();
+        this.motionStreak.node.active = true;
     },
 
     touchEndCallBack: function (location1) {
-        // this.touchPosition(location);
         let location= this.gameNode.convertToNodeSpace(location1);
         this.updateTouch(location);
         this.isTouching = false;
         console.log("touchEndCallBack");
         this.motionStreak.reset();
         this.previousPt=null;
+        this.motionStreak.node.active = true;
     },
     touchMoveCallBack: function (location1) {
-        // this.multMoveCallBack(location1);
-        // return;
         let location= this.gameNode.convertToNodeSpace(location1);
         if (!this.canTouch) {
             return;
         }
+        this.touchState ="move";
+        console.log("touchMoveCallBack");
+        this.motionStreak.node.setPositionX(location1.x - this.BaseWidth);
+        this.motionStreak.node.setPositionY(location1.y - this.BaseHeight);
         if (location.x < this.margins || location.x > (2 * this.BaseWidth - this.margins
             || location.y < 216)) {
             this.motionStreak.reset();
@@ -703,17 +920,16 @@ cc.Class({
         }
         this.updateTouch(location);
         // this.previousPt = location;
-        this.motionStreak.node.setPositionX(location1.x - this.BaseWidth);
-        this.motionStreak.node.setPositionY(location1.y - this.BaseHeight);
         // let motionpos = this.node.convertToNodeSpace(location1);
         // this.motionStreak.node.position=motionpos;
     },
     //多点触控
     multMoveCallBack:function(location01,location02 = null){
-
+        this.touchState ="mult";
+        this.motionStreak.reset();
         let location1 = this.gameNode.convertToNodeSpace(location01);
         // let location2 = this.gameNode.convertToNodeSpace(location02);
-        console.log("1",location1);
+        // console.log("1",location1);
         // console.log("2",location2);
         if(this.previousPt == null){
             this.previousPt={};
@@ -722,19 +938,18 @@ cc.Class({
             return;
         }
         var distance = cc.pSub( this.previousPt[0],location1);
-        console.log("distance",distance);
+        // console.log("distance",distance);
         if(distance.y != 0){
             let origin = this.camera.node.getPositionY();
-            // if(origin == 0) {
-            //     return;
-            // }
             let endpos =( origin+distance.y)*0.5;
             if(endpos <0 ){
                 endpos =0;
             }
-            if(endpos >300){
-                endpos = 300;
+            if(endpos >this.startCameraY){
+                endpos = this.startCameraY;
             }
+            if(endpos== 0)
+                return;
             let move = origin - endpos;
             this.camera.node.setPositionY(endpos);
             for (var i = this.hammerStart; i < this.hammerEnd; i++) {
@@ -746,49 +961,30 @@ cc.Class({
                 }
             }
         }
-
-
-
-
-
     },
-    onClickTreasure: function (event) {
-        var maxlinenum = this.maxLineNum();
-        var totoalRowNum = this.totoalRowNum(0);
-        if (maxlinenum != 0 || totoalRowNum != 0) {
-            this.touchEndPoint = event.getLocation();
+    //-----------------------------touch   end-------------------------
+    //-----------------------------bottom   start-------------------------
 
-            this.updateTouch(this.touchEndPoint);
-            return;
-        }
-        this.btnbox.node.active = false;
-        this.gameState = GameState.end;
-        this.canTouch = false;
-        this.openbox.active= true;
-        this.playBoxSpine();
-    },
-    update: function () {
-        // this.cameraCentPosY();
-    },
+
+
     eventcallback: function (type, id, string = null) {
         // let node= this.itemList.indexOf(sender);
         switch (type) {
             case 0:
                 if (string == null){
-                    if (thisID == 1) {//视频激励
-                        if(GameConfig.isFBInstantGame()){
-                            let FBP = require("FBPlugin");
-                            self = this;
-                            FBP.RewardedVideoAsync(function(){
-                                    self.accleleratorChange(id);
-                                    self.GameMenuController.updateButtom();
-                                }
-                            );
-                        }else{
-                            this.accleleratorChange(id);
-                        }
-
+                    //视频激励
+                    if(GameConfig.isFBInstantGame()){
+                        let FBP = require("FBPlugin");
+                        self = this;
+                        FBP.RewardedVideoAsync(function(){
+                                self.accleleratorChange(id);
+                                self.GameMenuController.updateButtom();
+                            }
+                        );
+                    }else{
+                        this.accleleratorChange(id);
                     }
+
                 }
                 else {
                     if (string == 'finish') {
@@ -981,99 +1177,7 @@ cc.Class({
             }
         }
     },
-    addItems: function () {
 
-        let hard = Global.hard;
-        let boxID = StageConfig[hard].box;
-        let rewardID = BoxConfig[boxID].reward;
-        let conf = RewardConfig[rewardID];
-        let num = conf.num;
-        let itemdata = {};
-        let totoal = 0;
-        let reward = {};
-        let max = 0;
-        for (let i = 1; i < 7; i++) {
-            if (conf['rate' + i] != 0) {
-                totoal = conf['rate' + i];
-                if (i == 1) {
-                    itemdata[i] = totoal;
-                    max = itemdata[i];
-                } else {
-                    itemdata[i] = itemdata[i - 1] + totoal;
-                    max = itemdata[i];
-                }
-            }
-        }
-        for (let j = 1; j <= num; j++) {
-            let random = GameUtils.random(max);
-            for (let z = 1; itemdata[z] != undefined; z++) {
-                if (itemdata[z] < random) {
-                    continue;
-                }
-                reward[j] = conf['item' + z];
-                break;
-            }
-        }
-        let gold = 0;
-        let gem = 0;
-        let str = "";
-        for (let i = 1; i <= num; i++) {
-            if (reward[i] != undefined) {
-                str += reward[i] + "--";
-                if (reward[i].indexOf(";") != -1) {
-                    let rewardarry = reward[i].split(";");
-                    if (rewardarry[0] == 1001) {
-                        gold += parseInt(rewardarry[1]);
-                    } else if (rewardarry[0] == 1002) {
-                        gem += parseInt(rewardarry[1]);
-                    }
-                }
-            }
-            this.createRewardItem(reward[i], i);
-            this.openbox.active = true;
-        }
-        if (gold > 0 || gem > 0) {
-            let golds = Global.gold + gold;
-            let gems = Global.gem + gem;
-            this.GameMenuController.updateDate({gold: golds, gem: gems});
-            Global.saveGold(golds);
-            Global.saveGem(gems);
-        }
-
-    },
-    initTreasure: function () {
-        let BoxID = StageConfig[Global.hard].box;
-        let BoxConf = BoxConfig[BoxID];
-        this.treasure.normalSprite = SpriteFrameCenter.getFrameFromAtlas("png/box", BoxConf.icon + ".png");
-        this.treasure.pressedSprite = SpriteFrameCenter.getFrameFromAtlas("png/box", BoxConf.icon + ".png");
-        this.treasure.hoverSprite = SpriteFrameCenter.getFrameFromAtlas("png/box", BoxConf.icon + ".png");
-        this.treasure.disabledSprite = SpriteFrameCenter.getFrameFromAtlas("png/box", BoxConf.icon + ".png");
-        let animation = BoxConf.animation;
-        SkeletonDataCenter.addSkeletonDataWait(animation, this.boxSpine);
-        this.treasure.node.y = -GameHeight / 2 + this.blockWidth + 35 - 20;
-        this.boxSpine.node.y = -GameHeight / 2 + this.blockWidth + 35 - 20;
-
-    },
-    createRewardItem: function (reward, i) {
-        if (this.rewardItem[i]) {
-            this.rewardItem[i].destroy();
-            this.rewardItem[i] = null;
-        }
-        let start = -400 + i * 200;
-
-        let node = RewardItemFactory.create(reward);
-        let location = this.treasure.node.position;
-        this.rewardItem[i] = (node);
-        node.position = location;
-        let action = cc.moveTo(0.5, cc.p(start, 10));
-        let action2 = cc.callFunc(() => {
-            node.getComponent("RewardItem").setFinish();
-            this.canTouch = true;
-        }, this);
-        // node.runAction(cc. moveTo(0.5,cc.p(start,-20)));
-        this.openbox.addChild(node);
-        node.runAction(cc.sequence(action, action2));
-    },
     efficiencyAdd: function (id,str = null) {
         if(str != null){
             this.efficiencyChange();
@@ -1163,9 +1267,25 @@ cc.Class({
         this.efficeGold = addeff;
         this.GameMenuController.updateButtom();
     },
+    //-----------------------------bottom   end----------------------------
+    //-----------------------------引导   start----------------------------
+
+
+
+    //-----------------------------引导   end----------------------------
+    //-----------------------------GM   part start-------------------------
+
     onClickBtnaddGem() {
 
         let gem = Global.gem + 100;
+        this.GameMenuController.updateDate({'gem': gem});
+        Global.saveGem(gem);
+        this.GameMenuController.updateButtom();
+    },
+
+    onClickBtnsubGem() {
+
+        let gem = Global.gem - 10 > 0 ? Global.gem - 10 : 0;
         this.GameMenuController.updateDate({'gem': gem});
         Global.saveGem(gem);
         this.GameMenuController.updateButtom();
@@ -1175,13 +1295,6 @@ cc.Class({
         let gold = Global.gold + 10;
         this.GameMenuController.updateDate({'gold': gold});
         Global.saveGold(gold);
-        this.GameMenuController.updateButtom();
-    },
-    onClickBtnsubGem() {
-
-        let gem = Global.gem - 10 > 0 ? Global.gem - 10 : 0;
-        this.GameMenuController.updateDate({'gem': gem});
-        Global.saveGem(gem);
         this.GameMenuController.updateButtom();
     },
     onClickBtnsubGold() {
@@ -1198,6 +1311,6 @@ cc.Class({
         Global.saveExp(exp);
         // this.GameMenuController.updateButtom();
     }
-
+    //-----------------------------GM   part end-------------------------
 });
 //

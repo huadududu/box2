@@ -10,6 +10,7 @@ let LevelConfig = require("LevelConfig");
 let LanguageConfig = require("LanguageConfig");
 let GameUtils = require("GameUtils");
 let Global = require('Global');
+let UILeadFactory = require("UILeadFactory");
 
 cc.Class({
     extends:cc.Component,
@@ -19,6 +20,7 @@ cc.Class({
         level: cc.Label,
         gold:cc.Label,
         gem:cc.Label,
+        toplist:cc.Node,
         TopProgressBar:cc.ProgressBar,
         radioButton:{
             default:[],
@@ -36,6 +38,7 @@ cc.Class({
         BoxController: require("BoxController")
 
     },
+
     onLoad:function(){
 
         this.config=[AcceleratorConfig,ToolConfig,EfficiencyConfig];
@@ -43,8 +46,19 @@ cc.Class({
         this.btnColor=['#ffa30f','#f9f9f9'];
         this.itemlistNum=[];
         this.radiotext[0].string = LanguageConfig['10035'][Global.language];
-        this.radiotext[1].string =LanguageConfig['10036'][Global.language];
-        this.radiotext[2].string =LanguageConfig['10037'][Global.language];
+        this.radiotext[1].string = LanguageConfig['10036'][Global.language];
+        this.radiotext[2].string = LanguageConfig['10037'][Global.language];
+        this.levelLeadNode=null;//level的引导节点
+
+    },
+    initInfo:function() {
+        this.setGoldNum(Global.gold);
+        this.setLevel(Global.level);
+        this.setGem(Global.gem);
+        let hard = Global.hard;
+
+        let exp = LevelConfig[Global.level].exp;
+        this.setProgress(Global.exp/exp);
 
     },
     addUIBottom:function(){
@@ -53,7 +67,6 @@ cc.Class({
             this.config=[AcceleratorConfig,ToolConfig,EfficiencyConfig];
         }
         this.itemList=[];
-        // let startpos = -this.bottomlist.width/2;
         let startpos = 0;
 
         for(var i = 0;i < this.config.length;i++){
@@ -78,16 +91,7 @@ cc.Class({
 
 
     },
-    initInfo:function() {
-        this.setGoldNum(Global.gold);
-        this.setLevel(Global.level);
-        this.setGem(Global.gem);
-        let hard = Global.hard;
 
-        let exp = LevelConfig[Global.level].exp;
-        this.setProgress(Global.exp/exp);
-
-    },
     //设置金币
     setGoldNum: function (num) {
         let strnum = GameUtils.formatNum(num);
@@ -101,12 +105,30 @@ cc.Class({
     },
     setProgress: function (value){
         let pro = this.TopProgressBar.progress;
+        this.addLevelLead(value>=1);
         if (pro  == 1.0 && value ==1)
             return;
         this.levelupBtn.interactable = value>=1;
+
         this.TopProgressBar.progress = value;
     },
 
+    addLevelLead:function(bool){
+        if(Global.level ==1 && bool){
+            if(!this.levelLeadNode){
+                let node = UILeadFactory.create();
+                node.position= this.levelupBtn.node.position;
+                // node.ratation = 270;
+                this.levelLeadNode = node;
+                this.toplist.addChild(node);
+            }
+        }else{
+            if(this.levelLeadNode && cc.isValid(this.levelLeadNode)){
+                this.levelLeadNode.destroy();
+                // this.levelLeadNode= null;
+            }
+        }
+    },
     changeHammerSpine:function(data){
         this.BoxController.changeHammerSpine(data);
     },
@@ -140,14 +162,6 @@ cc.Class({
     scrollEvent: function(sender, event) {
         let thispos= sender.getScrollOffset();
         let movex = -thispos.x;
-        // switch(event) {
-        //     case 2: //left
-        //        // this.lblScrollEvent.string = "Scroll to Left";
-        //        break;
-        //     case 3: ////right
-        //        // this.lblScrollEvent.string = "Scroll to Right"; 
-        //        break;
-        //    }
         let num1= this.itemlistNum[0]*156 - 6;
         let num2 = num1+this.itemlistNum[1]*156 - 6;
         if(movex <num1){
@@ -220,5 +234,13 @@ cc.Class({
             let node = this.itemList[i].getComponent("UIBottom");
             node.setBtnState();
         }
-    }
+    },
+    onCallBackFriends:function () {
+
+        let prefab = cc.loader.getRes("prefab/inviteUI");
+        let newNode= cc.instantiate(prefab);
+        this.node.addChild(newNode);
+    },
+
+
 });

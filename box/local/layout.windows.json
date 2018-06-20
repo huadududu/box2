@@ -5,9 +5,9 @@
       "main": true,
       "url": "app://editor/index.html",
       "windowType": "dockable",
-      "x": 404,
-      "y": 147,
-      "width": 1583,
+      "x": 211,
+      "y": 121,
+      "width": 2100,
       "height": 1216,
       "layout": {
         "children": [
@@ -16,66 +16,59 @@
               {
                 "children": [
                   {
+                    "active": 0,
                     "children": [
-                      {
-                        "active": 0,
-                        "children": [
-                          "hierarchy"
-                        ],
-                        "height": 640.96875,
-                        "type": "panel",
-                        "width": 204
-                      },
-                      {
-                        "active": 0,
-                        "children": [
-                          "assets"
-                        ],
-                        "height": 640.96875,
-                        "type": "panel",
-                        "width": 204
-                      }
+                      "hierarchy"
                     ],
-                    "height": 640.96875,
-                    "type": "dock-h",
-                    "width": 411
+                    "height": 265,
+                    "type": "panel",
+                    "width": 361.15625
                   },
                   {
                     "active": 0,
                     "children": [
-                      "node-library"
+                      "assets"
                     ],
-                    "height": 226,
+                    "height": 628,
                     "type": "panel",
-                    "width": 411
+                    "width": 361.15625
                   }
                 ],
-                "height": 869.984375,
+                "height": 896,
                 "type": "dock-v",
-                "width": 411
+                "width": 361.15625
               },
               {
                 "active": 0,
                 "children": [
                   "scene"
                 ],
-                "height": 869.984375,
+                "height": 896,
                 "type": "panel",
-                "width": 756
+                "width": 1018.1875
+              },
+              {
+                "active": 0,
+                "children": [
+                  "node-library"
+                ],
+                "height": 896,
+                "type": "panel",
+                "width": 283.375
               },
               {
                 "active": 0,
                 "children": [
                   "inspector"
                 ],
-                "height": 869.984375,
+                "height": 896,
                 "type": "panel",
-                "width": 404
+                "width": 422.28125
               }
             ],
-            "height": 869.984375,
+            "height": 896,
             "type": "dock-h",
-            "width": 1577
+            "width": 2094
           },
           {
             "active": 1,
@@ -83,9 +76,9 @@
               "console",
               "timeline"
             ],
-            "height": 252,
+            "height": 226,
             "type": "panel",
-            "width": 1577
+            "width": 2094
           }
         ],
         "type": "dock-v"
@@ -100,8 +93,30 @@
         "timeline"
       ]
     },
-    "window-1529411516860": {},
-    "worker": {}
+    "window-1529499080672": {
+      "main": false,
+      "url": "unpack://static/window.html",
+      "windowType": "dockable",
+      "x": 163,
+      "y": 233,
+      "width": 1636,
+      "height": 661,
+      "layout": {
+        "type": "dock-v",
+        "children": [
+          {
+            "type": "panel",
+            "active": 0,
+            "children": [
+              "sprite-editor"
+            ]
+          }
+        ]
+      },
+      "panels": [
+        "sprite-editor"
+      ]
+    }
   },
   "panels": {
     "preferences": {
@@ -120,13 +135,13 @@
       "x": 163,
       "y": 233,
       "width": 1636,
-      "height": 812
+      "height": 661
     },
     "builder": {
       "x": 345,
       "y": 114,
       "width": 1559,
-      "height": 690
+      "height": 1016
     },
     "node-library": {
       "x": 1508,
@@ -145,6 +160,18 @@
       "y": 457,
       "width": 400,
       "height": 422
+    },
+    "package-asset.import": {
+      "x": 1055,
+      "y": 398,
+      "width": 454,
+      "height": 558
+    },
+    "package-asset.export": {
+      "x": 1080,
+      "y": 413,
+      "width": 400,
+      "height": 502
     }
   }
 }

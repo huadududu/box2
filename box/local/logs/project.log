@@ -1,411 +1,53 @@
-2018-06-19T12:28:34.463Z - normal: Load ~/.CocosCreator/settings.json
-2018-06-19T12:28:34.466Z - normal: checking language setting...
-2018-06-19T12:28:34.466Z - normal: Language: zh
-2018-06-19T12:28:35.006Z - success: protocol editor-framework registered
-2018-06-19T12:28:35.007Z - success: protocol app registered
-2018-06-19T12:28:35.007Z - success: protocol theme registered
-2018-06-19T12:28:35.007Z - success: protocol packages registered
-2018-06-19T12:28:35.007Z - success: protocol unpack registerred
-2018-06-19T12:28:35.007Z - success: protocol disable-commonjs registerred
-2018-06-19T12:28:35.288Z - normal: connected!
-2018-06-19T12:28:35.288Z - normal: Check project /Users/bolex1/work/game/box/box
-2018-06-19T12:28:35.289Z - normal: Initializing Cocos2d
-2018-06-19T12:28:35.456Z - normal: Initializing Asset Database
-2018-06-19T12:28:35.477Z - success: protocol uuid registerred
-2018-06-19T12:28:35.477Z - success: protocol db registerred
-2018-06-19T12:28:35.478Z - success: protocol thumbnail registerred
-2018-06-19T12:28:35.478Z - normal: Loading editor/builtin packages
-2018-06-19T12:28:35.491Z - success: anysdk loaded
-2018-06-19T12:28:35.573Z - success: assets loaded
-2018-06-19T12:28:35.575Z - success: builder loaded
-2018-06-19T12:28:35.577Z - success: cocos-analytics loaded
-2018-06-19T12:28:35.584Z - success: console loaded
-2018-06-19T12:28:35.610Z - success: fb-instant-games loaded
-2018-06-19T12:28:35.613Z - success: hierarchy loaded
-2018-06-19T12:28:35.616Z - success: inspector loaded
-2018-06-19T12:28:35.617Z - success: keystore loaded
-2018-06-19T12:28:35.622Z - success: node-library loaded
-2018-06-19T12:28:35.624Z - success: package-asset loaded
-2018-06-19T12:28:35.626Z - success: preferences loaded
-2018-06-19T12:28:35.628Z - success: project-exporter loaded
-2018-06-19T12:28:35.639Z - success: project-importer loaded
-2018-06-19T12:28:35.641Z - success: project-settings loaded
-2018-06-19T12:28:35.645Z - success: ui-kit loaded
-2018-06-19T12:28:35.648Z - success: ui-grid loaded
-2018-06-19T12:28:35.651Z - success: scene loaded
-2018-06-19T12:28:35.652Z - success: sprite-editor loaded
-2018-06-19T12:28:35.655Z - success: store loaded
-2018-06-19T12:28:35.659Z - success: timeline loaded
-2018-06-19T12:28:35.660Z - normal: Loading builtin packages
-2018-06-19T12:28:35.663Z - success: asset-db-debugger loaded
-2018-06-19T12:28:35.664Z - success: color-picker loaded
-2018-06-19T12:28:35.666Z - success: package-manager loaded
-2018-06-19T12:28:35.670Z - success: sdkbox loaded
-2018-06-19T12:28:35.674Z - success: tester loaded
-2018-06-19T12:28:35.677Z - success: ui-kit-preview-extra loaded
-2018-06-19T12:28:35.680Z - success: ui-kit-preview loaded
-2018-06-19T12:28:35.682Z - success: ui-tree loaded
-2018-06-19T12:28:36.405Z - normal: Initializing project /Users/bolex1/work/game/box/box
-2018-06-19T12:28:36.407Z - normal: Loading packages
-2018-06-19T12:28:36.411Z - normal: Watching packages
-2018-06-19T12:28:36.422Z - normal: Run Application
-2018-06-19T12:28:37.030Z - success: preview server running at http://localhost:7456
-2018-06-19T12:28:40.792Z - normal: 1.9.1
-2018-06-19T12:28:41.178Z - error: Property 'CCClass.freindsInfo' must define at least one of 'default', 'get' or 'set'.
-    at Object.errorID (/Applications/CocosCreator.app/Contents/Resources/engine/CCDebugger.js:343:18)
-    at Object.exports.preprocessAttrs (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/preprocess-class.js:232:28)
-    at declareProperties (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/CCClass.js:807:20)
-    at Object.CCClass [as Class] (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/CCClass.js:947:9)
-    at /Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/model/Global.js:22:18
-    at __define (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/model/Global.js:168:2)
-    at /Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/model/Global.js:175:13
-    at Object.<anonymous> (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/model/Global.js:182:11)
-    at Object.<anonymous> (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/model/Global.js:185:3)
-2018-06-19T12:28:58.815Z - normal: Start building with options : {
-  "androidStudio": true,
-  "apiLevel": "",
-  "appABIs": [],
-  "appKey": "",
-  "appSecret": "",
-  "buildPath": "/Users/bolex1/work/game/box/box/build",
-  "debug": false,
-  "dest": "/Users/bolex1/work/game/box/box/build/fb-instant-games",
-  "encryptJs": true,
-  "excludeScenes": [],
-  "excludedModules": [
-    "TiledMap",
-    "VideoPlayer",
-    "WebView",
-    "RichText",
-    "Collider",
-    "Graphics",
-    "DragonBones",
-    "Physics",
-    "StudioComponent",
-    "Chipmunk",
-    "Native NetWork"
-  ],
-  "fb-instant-games": {},
-  "includeAnySDK": false,
-  "includeEruda": false,
-  "includeSDKBox": false,
-  "inlineSpriteFrames": true,
-  "inlineSpriteFrames_native": true,
-  "jailbreakPlatform": false,
-  "md5Cache": false,
-  "mergeStartScene": true,
-  "oauthLoginServer": "",
-  "optimizeHotUpdate": false,
-  "orientation": {
-    "landscapeLeft": true,
-    "landscapeRight": true,
-    "portrait": false,
-    "upsideDown": false
-  },
-  "packageName": "org.cocos2d.tank",
-  "platform": "fb-instant-games",
-  "previewHeight": "720",
-  "previewWidth": "1280",
-  "privateKey": "",
-  "qqplay": {
-    "orientation": "portrait"
-  },
-  "renderMode": "0",
-  "scenes": [
-    "893fda5b-9a68-4ae0-9a30-cbc1a4d8c332"
-  ],
-  "sourceMaps": false,
-  "startScene": "893fda5b-9a68-4ae0-9a30-cbc1a4d8c332",
-  "template": "link",
-  "title": "box",
-  "useDebugKeystore": true,
-  "vsVersion": "auto",
-  "webOrientation": "landscape",
-  "wechatgame": {
-    "appid": "wx6ac3f5090a6b99c5",
-    "orientation": "portrait"
-  },
-  "xxteaKey": "6f779aa9-c97a-43",
-  "zipCompressJs": true,
-  "project": "/Users/bolex1/work/game/box/box",
-  "projectName": "box",
-  "debugBuildWorker": false
-}
-2018-06-19T12:28:58.818Z - normal: Building /Users/bolex1/work/game/box/box
-2018-06-19T12:28:58.818Z - normal: Destination /Users/bolex1/work/game/box/box/build/fb-instant-games
-2018-06-19T12:28:59.038Z - normal: Delete /Users/bolex1/work/game/box/box/build/fb-instant-games/**/*
-2018-06-19T12:29:01.517Z - normal: Compiled project javascript file successfully
-2018-06-19T12:29:01.517Z - normal: Start building assets
-2018-06-19T12:29:01.517Z - normal: Start spawn build-worker
-2018-06-19T12:29:02.052Z - normal: Finish spawn build-worker
-2018-06-19T12:29:02.052Z - normal: Start init build-worker
-2018-06-19T12:29:03.501Z - normal: 1.9.1
-2018-06-19T12:29:03.574Z - error: Error 5516, please go to https://github.com/cocos-creator/engine/blob/master/EngineErrorMap.md#5516 to see details. Arguments: CCClass, freindsInfo
-    at Object.errorID (/Applications/CocosCreator.app/Contents/Resources/engine/CCDebugger.js:351:13)
-    at Object.exports.preprocessAttrs (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/preprocess-class.js:232:28)
-    at declareProperties (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/CCClass.js:807:20)
-    at Object.CCClass [as Class] (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/CCClass.js:947:9)
-    at /Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/model/Global.js:22:18
-    at __define (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/model/Global.js:168:2)
-    at /Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/model/Global.js:175:13
-    at Object.<anonymous> (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/model/Global.js:182:11)
-    at Object.<anonymous> (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/model/Global.js:185:3)
-2018-06-19T12:29:03.600Z - normal: Finish init build-worker
-2018-06-19T12:29:03.600Z - normal: Start build-assets in worker
-2018-06-19T12:29:03.833Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/j_1_100.plist
-2018-06-19T12:29:03.841Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/j_1.plist
-2018-06-19T12:29:03.844Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/j_2.plist
-2018-06-19T12:29:03.847Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/j_3.plist
-2018-06-19T12:29:03.851Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/s_1_100.plist
-2018-06-19T12:29:03.858Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/s_1.plist
-2018-06-19T12:29:03.862Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/s_2_100.plist
-2018-06-19T12:29:03.866Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/s_2.plist
-2018-06-19T12:29:03.876Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/s_3.plist
-2018-06-19T12:29:03.879Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/t_0_100.plist
-2018-06-19T12:29:03.881Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/t_0.plist
-2018-06-19T12:29:03.883Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/t_1_100.plist
-2018-06-19T12:29:03.893Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/t_1.plist
-2018-06-19T12:29:03.896Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/t_2.plist
-2018-06-19T12:29:03.898Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/t_3.plist
-2018-06-19T12:29:03.900Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/t_4.plist
-2018-06-19T12:29:04.320Z - normal: Finish build-assets in worker
-2018-06-19T12:29:04.324Z - normal: Finish building assets
-2018-06-19T12:29:04.336Z - normal: Start building raw assets
-2018-06-19T12:29:04.337Z - normal: Start building plugin scripts
-2018-06-19T12:29:04.394Z - normal: Finish building raw assets
-2018-06-19T12:29:04.400Z - normal: Generating main.js from /Applications/CocosCreator.app/Contents/Resources/static/build-templates/shares/main.js
-2018-06-19T12:29:04.408Z - normal: Generating html from /Applications/CocosCreator.app/Contents/Resources/static/build-templates/fb-instant-games/index.html
-2018-06-19T12:29:04.409Z - normal: Generating main.js from /Applications/CocosCreator.app/Contents/Resources/static/build-templates/fb-instant-games/main.js
-2018-06-19T12:29:04.497Z - normal: Built to "/Users/bolex1/work/game/box/box/build/fb-instant-games" successfully
-2018-06-19T12:32:14.453Z - normal: Start building with options : {
-  "androidStudio": true,
-  "apiLevel": "",
-  "appABIs": [],
-  "appKey": "",
-  "appSecret": "",
-  "buildPath": "/Users/bolex1/work/game/testservice",
-  "debug": false,
-  "dest": "/Users/bolex1/work/game/testservice/fb-instant-games",
-  "encryptJs": true,
-  "excludeScenes": [],
-  "excludedModules": [
-    "TiledMap",
-    "VideoPlayer",
-    "WebView",
-    "RichText",
-    "Collider",
-    "Graphics",
-    "DragonBones",
-    "Physics",
-    "StudioComponent",
-    "Chipmunk",
-    "Native NetWork"
-  ],
-  "fb-instant-games": {},
-  "includeAnySDK": false,
-  "includeEruda": false,
-  "includeSDKBox": false,
-  "inlineSpriteFrames": true,
-  "inlineSpriteFrames_native": true,
-  "jailbreakPlatform": false,
-  "md5Cache": false,
-  "mergeStartScene": true,
-  "oauthLoginServer": "",
-  "optimizeHotUpdate": false,
-  "orientation": {
-    "landscapeLeft": true,
-    "landscapeRight": true,
-    "portrait": false,
-    "upsideDown": false
-  },
-  "packageName": "org.cocos2d.tank",
-  "platform": "fb-instant-games",
-  "previewHeight": "720",
-  "previewWidth": "1280",
-  "privateKey": "",
-  "qqplay": {
-    "orientation": "portrait"
-  },
-  "renderMode": "0",
-  "scenes": [
-    "893fda5b-9a68-4ae0-9a30-cbc1a4d8c332"
-  ],
-  "sourceMaps": false,
-  "startScene": "893fda5b-9a68-4ae0-9a30-cbc1a4d8c332",
-  "template": "link",
-  "title": "box",
-  "useDebugKeystore": true,
-  "vsVersion": "auto",
-  "webOrientation": "landscape",
-  "wechatgame": {
-    "appid": "wx6ac3f5090a6b99c5",
-    "orientation": "portrait"
-  },
-  "xxteaKey": "6f779aa9-c97a-43",
-  "zipCompressJs": true,
-  "project": "/Users/bolex1/work/game/box/box",
-  "projectName": "box",
-  "debugBuildWorker": false
-}
-2018-06-19T12:32:14.456Z - normal: Building /Users/bolex1/work/game/box/box
-2018-06-19T12:32:14.456Z - normal: Destination /Users/bolex1/work/game/testservice/fb-instant-games
-2018-06-19T12:32:14.457Z - normal: Delete /Users/bolex1/work/game/testservice/fb-instant-games/**/*
-2018-06-19T12:32:16.919Z - normal: Compiled project javascript file successfully
-2018-06-19T12:32:16.920Z - normal: Start building assets
-2018-06-19T12:32:16.920Z - normal: Start spawn build-worker
-2018-06-19T12:32:17.453Z - normal: Finish spawn build-worker
-2018-06-19T12:32:17.453Z - normal: Start init build-worker
-2018-06-19T12:32:18.875Z - normal: 1.9.1
-2018-06-19T12:32:18.952Z - error: Error 5516, please go to https://github.com/cocos-creator/engine/blob/master/EngineErrorMap.md#5516 to see details. Arguments: CCClass, freindsInfo
-    at Object.errorID (/Applications/CocosCreator.app/Contents/Resources/engine/CCDebugger.js:351:13)
-    at Object.exports.preprocessAttrs (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/preprocess-class.js:232:28)
-    at declareProperties (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/CCClass.js:807:20)
-    at Object.CCClass [as Class] (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/CCClass.js:947:9)
-    at /Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/model/Global.js:22:18
-    at __define (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/model/Global.js:168:2)
-    at /Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/model/Global.js:175:13
-    at Object.<anonymous> (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/model/Global.js:182:11)
-    at Object.<anonymous> (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/model/Global.js:185:3)
-2018-06-19T12:32:18.978Z - normal: Finish init build-worker
-2018-06-19T12:32:18.979Z - normal: Start build-assets in worker
-2018-06-19T12:32:19.209Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/j_1_100.plist
-2018-06-19T12:32:19.211Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/j_1.plist
-2018-06-19T12:32:19.219Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/j_2.plist
-2018-06-19T12:32:19.222Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/j_3.plist
-2018-06-19T12:32:19.227Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/s_1_100.plist
-2018-06-19T12:32:19.229Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/s_1.plist
-2018-06-19T12:32:19.236Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/s_2_100.plist
-2018-06-19T12:32:19.241Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/s_2.plist
-2018-06-19T12:32:19.244Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/s_3.plist
-2018-06-19T12:32:19.246Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/t_0_100.plist
-2018-06-19T12:32:19.256Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/t_0.plist
-2018-06-19T12:32:19.259Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/t_1_100.plist
-2018-06-19T12:32:19.262Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/t_1.plist
-2018-06-19T12:32:19.266Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/t_2.plist
-2018-06-19T12:32:19.274Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/t_3.plist
-2018-06-19T12:32:19.278Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/t_4.plist
-2018-06-19T12:32:19.692Z - normal: Finish build-assets in worker
-2018-06-19T12:32:19.695Z - normal: Finish building assets
-2018-06-19T12:32:19.707Z - normal: Start building raw assets
-2018-06-19T12:32:19.708Z - normal: Start building plugin scripts
-2018-06-19T12:32:19.811Z - normal: Finish building raw assets
-2018-06-19T12:32:19.820Z - normal: Generating main.js from /Applications/CocosCreator.app/Contents/Resources/static/build-templates/shares/main.js
-2018-06-19T12:32:19.826Z - normal: Generating html from /Applications/CocosCreator.app/Contents/Resources/static/build-templates/fb-instant-games/index.html
-2018-06-19T12:32:19.827Z - normal: Generating main.js from /Applications/CocosCreator.app/Contents/Resources/static/build-templates/fb-instant-games/main.js
-2018-06-19T12:32:19.912Z - normal: Built to "/Users/bolex1/work/game/testservice/fb-instant-games" successfully
-2018-06-19T12:37:38.162Z - normal: Start building with options : {
-  "androidStudio": true,
-  "apiLevel": "",
-  "appABIs": [],
-  "appKey": "",
-  "appSecret": "",
-  "buildPath": "/Users/bolex1/work/game/testservice",
-  "debug": false,
-  "dest": "/Users/bolex1/work/game/testservice/fb-instant-games",
-  "encryptJs": true,
-  "excludeScenes": [],
-  "excludedModules": [
-    "TiledMap",
-    "VideoPlayer",
-    "WebView",
-    "RichText",
-    "Collider",
-    "Graphics",
-    "DragonBones",
-    "Physics",
-    "StudioComponent",
-    "Chipmunk",
-    "Native NetWork"
-  ],
-  "fb-instant-games": {},
-  "includeAnySDK": false,
-  "includeEruda": false,
-  "includeSDKBox": false,
-  "inlineSpriteFrames": true,
-  "inlineSpriteFrames_native": true,
-  "jailbreakPlatform": false,
-  "md5Cache": false,
-  "mergeStartScene": true,
-  "oauthLoginServer": "",
-  "optimizeHotUpdate": false,
-  "orientation": {
-    "landscapeLeft": true,
-    "landscapeRight": true,
-    "portrait": false,
-    "upsideDown": false
-  },
-  "packageName": "org.cocos2d.tank",
-  "platform": "fb-instant-games",
-  "previewHeight": "720",
-  "previewWidth": "1280",
-  "privateKey": "",
-  "qqplay": {
-    "orientation": "portrait"
-  },
-  "renderMode": "0",
-  "scenes": [
-    "893fda5b-9a68-4ae0-9a30-cbc1a4d8c332"
-  ],
-  "sourceMaps": false,
-  "startScene": "893fda5b-9a68-4ae0-9a30-cbc1a4d8c332",
-  "template": "link",
-  "title": "box",
-  "useDebugKeystore": true,
-  "vsVersion": "auto",
-  "webOrientation": "landscape",
-  "wechatgame": {
-    "appid": "wx6ac3f5090a6b99c5",
-    "orientation": "portrait"
-  },
-  "xxteaKey": "6f779aa9-c97a-43",
-  "zipCompressJs": true,
-  "project": "/Users/bolex1/work/game/box/box",
-  "projectName": "box",
-  "debugBuildWorker": false
-}
-2018-06-19T12:37:38.171Z - normal: Building /Users/bolex1/work/game/box/box
-2018-06-19T12:37:38.171Z - normal: Destination /Users/bolex1/work/game/testservice/fb-instant-games
-2018-06-19T12:37:38.173Z - normal: Delete /Users/bolex1/work/game/testservice/fb-instant-games/**/*
-2018-06-19T12:37:40.629Z - normal: Compiled project javascript file successfully
-2018-06-19T12:37:40.629Z - normal: Start building assets
-2018-06-19T12:37:40.629Z - normal: Start spawn build-worker
-2018-06-19T12:37:41.169Z - normal: Finish spawn build-worker
-2018-06-19T12:37:41.169Z - normal: Start init build-worker
-2018-06-19T12:37:42.612Z - normal: 1.9.1
-2018-06-19T12:37:42.691Z - error: Error 5516, please go to https://github.com/cocos-creator/engine/blob/master/EngineErrorMap.md#5516 to see details. Arguments: CCClass, freindsInfo
-    at Object.errorID (/Applications/CocosCreator.app/Contents/Resources/engine/CCDebugger.js:351:13)
-    at Object.exports.preprocessAttrs (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/preprocess-class.js:232:28)
-    at declareProperties (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/CCClass.js:807:20)
-    at Object.CCClass [as Class] (/Applications/CocosCreator.app/Contents/Resources/engine/cocos2d/core/platform/CCClass.js:947:9)
-    at /Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/model/Global.js:22:18
-    at __define (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/model/Global.js:168:2)
-    at /Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/model/Global.js:175:13
-    at Object.<anonymous> (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/model/Global.js:182:11)
-    at Object.<anonymous> (/Users/bolex1/work/game/box/box/temp/quick-scripts/assets/src/model/Global.js:185:3)
-2018-06-19T12:37:42.720Z - normal: Finish init build-worker
-2018-06-19T12:37:42.720Z - normal: Start build-assets in worker
-2018-06-19T12:37:42.987Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/j_1_100.plist
-2018-06-19T12:37:42.991Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/j_1.plist
-2018-06-19T12:37:42.996Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/j_2.plist
-2018-06-19T12:37:42.998Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/j_3.plist
-2018-06-19T12:37:43.005Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/s_1_100.plist
-2018-06-19T12:37:43.011Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/s_1.plist
-2018-06-19T12:37:43.016Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/s_2_100.plist
-2018-06-19T12:37:43.019Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/s_2.plist
-2018-06-19T12:37:43.026Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/s_3.plist
-2018-06-19T12:37:43.028Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/t_0_100.plist
-2018-06-19T12:37:43.034Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/t_0.plist
-2018-06-19T12:37:43.036Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/t_1_100.plist
-2018-06-19T12:37:43.040Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/t_1.plist
-2018-06-19T12:37:43.044Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/t_2.plist
-2018-06-19T12:37:43.047Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/t_3.plist
-2018-06-19T12:37:43.050Z - warn: Can not find particle texture in /Users/bolex1/work/game/box/box/assets/resources/particle/particle_texture.png, plist: /Users/bolex1/work/game/box/box/assets/resources/particle/t_4.plist
-2018-06-19T12:37:43.415Z - normal: Finish build-assets in worker
-2018-06-19T12:37:43.421Z - normal: Finish building assets
-2018-06-19T12:37:43.433Z - normal: Start building raw assets
-2018-06-19T12:37:43.433Z - normal: Start building plugin scripts
-2018-06-19T12:37:43.491Z - normal: Finish building raw assets
-2018-06-19T12:37:43.497Z - normal: Generating main.js from /Applications/CocosCreator.app/Contents/Resources/static/build-templates/shares/main.js
-2018-06-19T12:37:43.502Z - normal: Generating html from /Applications/CocosCreator.app/Contents/Resources/static/build-templates/fb-instant-games/index.html
-2018-06-19T12:37:43.502Z - normal: Generating main.js from /Applications/CocosCreator.app/Contents/Resources/static/build-templates/fb-instant-games/main.js
-2018-06-19T12:37:43.590Z - normal: Built to "/Users/bolex1/work/game/testservice/fb-instant-games" successfully
+2018-06-20T12:49:25.304Z - normal: Load ~/.CocosCreator/settings.json
+2018-06-20T12:49:25.306Z - normal: checking language setting...
+2018-06-20T12:49:25.307Z - normal: Language: zh
+2018-06-20T12:49:25.994Z - success: protocol editor-framework registered
+2018-06-20T12:49:25.994Z - success: protocol app registered
+2018-06-20T12:49:25.994Z - success: protocol theme registered
+2018-06-20T12:49:25.994Z - success: protocol packages registered
+2018-06-20T12:49:25.994Z - success: protocol unpack registerred
+2018-06-20T12:49:25.994Z - success: protocol disable-commonjs registerred
+2018-06-20T12:49:26.094Z - normal: connected!
+2018-06-20T12:49:26.097Z - normal: Check project /Users/bolex1/work/game/box/box
+2018-06-20T12:49:26.098Z - normal: Initializing Cocos2d
+2018-06-20T12:49:26.292Z - normal: Initializing Asset Database
+2018-06-20T12:49:26.324Z - success: protocol uuid registerred
+2018-06-20T12:49:26.324Z - success: protocol db registerred
+2018-06-20T12:49:26.324Z - success: protocol thumbnail registerred
+2018-06-20T12:49:26.324Z - normal: Loading editor/builtin packages
+2018-06-20T12:49:26.341Z - success: anysdk loaded
+2018-06-20T12:49:26.440Z - success: assets loaded
+2018-06-20T12:49:26.443Z - success: builder loaded
+2018-06-20T12:49:26.445Z - success: cocos-analytics loaded
+2018-06-20T12:49:26.449Z - success: console loaded
+2018-06-20T12:49:26.482Z - success: fb-instant-games loaded
+2018-06-20T12:49:26.486Z - success: hierarchy loaded
+2018-06-20T12:49:26.490Z - success: inspector loaded
+2018-06-20T12:49:26.491Z - success: keystore loaded
+2018-06-20T12:49:26.498Z - success: node-library loaded
+2018-06-20T12:49:26.500Z - success: package-asset loaded
+2018-06-20T12:49:26.502Z - success: preferences loaded
+2018-06-20T12:49:26.505Z - success: project-exporter loaded
+2018-06-20T12:49:26.520Z - success: project-importer loaded
+2018-06-20T12:49:26.523Z - success: project-settings loaded
+2018-06-20T12:49:26.527Z - success: ui-kit loaded
+2018-06-20T12:49:26.533Z - success: ui-grid loaded
+2018-06-20T12:49:26.537Z - success: scene loaded
+2018-06-20T12:49:26.538Z - success: sprite-editor loaded
+2018-06-20T12:49:26.542Z - success: store loaded
+2018-06-20T12:49:26.549Z - success: timeline loaded
+2018-06-20T12:49:26.549Z - normal: Loading builtin packages
+2018-06-20T12:49:26.552Z - success: asset-db-debugger loaded
+2018-06-20T12:49:26.553Z - success: color-picker loaded
+2018-06-20T12:49:26.556Z - success: package-manager loaded
+2018-06-20T12:49:26.560Z - success: sdkbox loaded
+2018-06-20T12:49:26.566Z - success: tester loaded
+2018-06-20T12:49:26.570Z - success: ui-kit-preview-extra loaded
+2018-06-20T12:49:26.573Z - success: ui-kit-preview loaded
+2018-06-20T12:49:26.576Z - success: ui-tree loaded
+2018-06-20T12:49:27.433Z - normal: Initializing project /Users/bolex1/work/game/box/box
+2018-06-20T12:49:27.436Z - normal: Loading packages
+2018-06-20T12:49:27.440Z - normal: Watching packages
+2018-06-20T12:49:27.449Z - normal: Run Application
+2018-06-20T12:49:28.270Z - success: preview server running at http://localhost:7456
+2018-06-20T12:49:32.796Z - normal: 1.9.1

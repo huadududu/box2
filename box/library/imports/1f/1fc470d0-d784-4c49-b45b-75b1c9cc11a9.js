@@ -16,6 +16,7 @@ var LevelConfig = require("LevelConfig");
 var LanguageConfig = require("LanguageConfig");
 var GameUtils = require("GameUtils");
 var Global = require('Global');
+var UILeadFactory = require("UILeadFactory");
 
 cc.Class({
     extends: cc.Component,
@@ -25,6 +26,7 @@ cc.Class({
         level: cc.Label,
         gold: cc.Label,
         gem: cc.Label,
+        toplist: cc.Node,
         TopProgressBar: cc.ProgressBar,
         radioButton: {
             default: [],
@@ -42,6 +44,7 @@ cc.Class({
         BoxController: require("BoxController")
 
     },
+
     onLoad: function onLoad() {
 
         this.config = [AcceleratorConfig, ToolConfig, EfficiencyConfig];
@@ -51,13 +54,22 @@ cc.Class({
         this.radiotext[0].string = LanguageConfig['10035'][Global.language];
         this.radiotext[1].string = LanguageConfig['10036'][Global.language];
         this.radiotext[2].string = LanguageConfig['10037'][Global.language];
+        this.levelLeadNode = null; //level的引导节点
+    },
+    initInfo: function initInfo() {
+        this.setGoldNum(Global.gold);
+        this.setLevel(Global.level);
+        this.setGem(Global.gem);
+        var hard = Global.hard;
+
+        var exp = LevelConfig[Global.level].exp;
+        this.setProgress(Global.exp / exp);
     },
     addUIBottom: function addUIBottom() {
         if (this.config == undefined) {
             this.config = [AcceleratorConfig, ToolConfig, EfficiencyConfig];
         }
         this.itemList = [];
-        // let startpos = -this.bottomlist.width/2;
         var startpos = 0;
 
         for (var i = 0; i < this.config.length; i++) {
@@ -80,15 +92,7 @@ cc.Class({
         // this.bottomlist.x = needlength/2;
 
     },
-    initInfo: function initInfo() {
-        this.setGoldNum(Global.gold);
-        this.setLevel(Global.level);
-        this.setGem(Global.gem);
-        var hard = Global.hard;
 
-        var exp = LevelConfig[Global.level].exp;
-        this.setProgress(Global.exp / exp);
-    },
     //设置金币
     setGoldNum: function setGoldNum(num) {
         var strnum = GameUtils.formatNum(num);
@@ -102,11 +106,29 @@ cc.Class({
     },
     setProgress: function setProgress(value) {
         var pro = this.TopProgressBar.progress;
+        this.addLevelLead(value >= 1);
         if (pro == 1.0 && value == 1) return;
         this.levelupBtn.interactable = value >= 1;
+
         this.TopProgressBar.progress = value;
     },
 
+    addLevelLead: function addLevelLead(bool) {
+        if (Global.level == 1 && bool) {
+            if (!this.levelLeadNode) {
+                var node = UILeadFactory.create();
+                node.position = this.levelupBtn.node.position;
+                // node.ratation = 270;
+                this.levelLeadNode = node;
+                this.toplist.addChild(node);
+            }
+        } else {
+            if (this.levelLeadNode && cc.isValid(this.levelLeadNode)) {
+                this.levelLeadNode.destroy();
+                // this.levelLeadNode= null;
+            }
+        }
+    },
     changeHammerSpine: function changeHammerSpine(data) {
         this.BoxController.changeHammerSpine(data);
     },
@@ -138,14 +160,6 @@ cc.Class({
     scrollEvent: function scrollEvent(sender, event) {
         var thispos = sender.getScrollOffset();
         var movex = -thispos.x;
-        // switch(event) {
-        //     case 2: //left
-        //        // this.lblScrollEvent.string = "Scroll to Left";
-        //        break;
-        //     case 3: ////right
-        //        // this.lblScrollEvent.string = "Scroll to Right"; 
-        //        break;
-        //    }
         var num1 = this.itemlistNum[0] * 156 - 6;
         var num2 = num1 + this.itemlistNum[1] * 156 - 6;
         if (movex < num1) {
@@ -213,7 +227,14 @@ cc.Class({
             var node = this.itemList[i].getComponent("UIBottom");
             node.setBtnState();
         }
+    },
+    onCallBackFriends: function onCallBackFriends() {
+
+        var prefab = cc.loader.getRes("prefab/inviteUI");
+        var newNode = cc.instantiate(prefab);
+        this.node.addChild(newNode);
     }
+
 });
 
 cc._RF.pop();

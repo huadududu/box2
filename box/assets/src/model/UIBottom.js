@@ -24,7 +24,7 @@ cc.Class({
         progressBar:cc.ProgressBar,
         btntext:cc.Label,
         iconGem:cc.Sprite,
-
+        iconlead:cc.Sprite,
         type:{
             visible:false,
             default:2
@@ -48,10 +48,16 @@ cc.Class({
         lockState:{
             visible:false,
             default:false
-        }
+        },
+        // GameState:{
+        //     visible:false,
+        //     default:2
+        // }
 
     },
     onLoad:function(){
+        //0 can't active 1: can active 2:have active but can't upgrad,3:have active but can't upgrad,4:max
+        this.GameState = 2;
     },
     init: function(){
     },
@@ -61,7 +67,7 @@ cc.Class({
         var bool = GameType.bottomRadio.Efficiency == this.type;
         this.icon.node.active = !bool;
         this.iconLabel.node.active = bool;
-        if(this.lockState){
+        if(this.GameState == 0 ){
             let iconpng = config[this.type][this.ID].locked;
             this.icon.spriteFrame = SpriteFrameCenter.getFrameFromAtlas("png/box",iconpng+".png");
             return;
@@ -92,7 +98,7 @@ cc.Class({
     setDesc_1:function() {
         let desc;
         let attnum;
-        this.desc_1.node.active = !this.lockState;
+        this.desc_1.node.active = this.GameState != 0 ;
         if(this.type != 1){
             desc = config[this.type][this.ID].desc;
         }else{
@@ -130,7 +136,7 @@ cc.Class({
         this.desc_1.string = desc;
     },
     setTitle:function (){
-        this.title.node.active = !this.lockState;
+        this.title.node.active =  this.GameState != 0 ;
         let title  = config[this.type][this.ID].title;
         if(title == null || title == undefined){
             title = "unknow";
@@ -179,6 +185,7 @@ cc.Class({
         this.setTitle();
         this.setDesc_1();
         this.setIcon();
+        this.setLeadState();
 
     },
     setType0BtnState:function(){
@@ -239,41 +246,48 @@ cc.Class({
                     // this.btntext.string="touch active";
                     this.btntext.string= LanguageConfig['10020'][Global.language];
                     if(this.ID == 1){
-                        this.ButtonState(1);
+                        // this.ButtonState(1);
+
                     }else{
                         if(Global.hammer[this.ID-1]){
-                            this.ButtonState(1);
-                            this.lockState = false;
+                            // this.ButtonState(1);
+                            // this.lockState = false;
                         }else{
-                            this.ButtonState(0);
-                            this.lockState = true;
+                            // this.ButtonState(0);
+                            // this.lockState = true;
                         }
                     }
+                    this.GameState = 1;
                 }else if(thisID == 1){//视频激励
                     // this.btntext.string = "n:"+thisID+"c:"+Global.openAdTimes;
                     this.btntext.string= LanguageConfig['10022'][Global.language];
                     if(Global.hammer[this.ID-1]){
-                        this.ButtonState(1);
+                        // this.ButtonState(1);
+                         this.GameState = 1;
                         this.lockState = false;
                     }else{
-                        this.ButtonState(0);
-                        this.lockState = true;
+                        // this.ButtonState(0);
+                        this.GameState = 0;
+                        // this.lockState = true;
                     }
                 }else if(thisID == 2){//等级激活
                     let needlvl = confArry[1];
                     if(level<needlvl){
-                        this.ButtonState(0);
-                        this.lockState = true;
+                        // this.ButtonState(0);
+                        this.GameState = 0;
+                        // this.lockState = true;
                        let str= LanguageConfig['10021'][Global.language];
                         // this.btntext.string='Lv'+needlvl;
                          this.btntext.string=this.formatPrint(str,needlvl);
                     }else{
                         if(Global.hammer[this.ID-1]){
-                            this.ButtonState(1);
-                            this.lockState = false;
+                            // this.ButtonState(1);
+                            this.GameState = 1;
+                            // this.lockState = false;
                         }else{
-                            this.ButtonState(0);
-                            this.lockState = true;
+                            // this.ButtonState(0);
+                            this.GameState = 0;
+                            // this.lockState = true;
                         }
                         // this.btntext.string="touchactive";
                         this.btntext.string= LanguageConfig['10020'][Global.language];
@@ -288,33 +302,39 @@ cc.Class({
                         this.btntext.string= LanguageConfig['10020'][Global.language];
                     }
                     if(Global.hammer[this.ID-1]){
-                        this.ButtonState(1);
-                        this.lockState = false;
+                        // this.ButtonState(1);
+                        this.GameState = 1;
+                        // this.lockState = false;
                     }else{
-                        this.ButtonState(0);
-                        this.lockState = true;
+                        // this.ButtonState(0);
+                        this.GameState = 0;
+                        // this.lockState = true;
                     }
                 }
             } else if(  AttributeConfig[Global.hammer[this.ID].attribute].next == -1){//达到最大
-                this.ButtonState(0);
+                // this.ButtonState(0);
+                this.GameState = 4;
                 this.btntext.string = LanguageConfig['10024'][Global.language];
-                this.lockState = false;
+                // this.lockState = false;
             }
             else {//升级条件
-                this.lockState = false;
+                // this.lockState = false;
                 let conf1 = AttributeConfig[Global.hammer[this.ID].attribute];
                 if (conf1.costtype = 1001) {
                     if (Global.gold > conf1.cost) {
-                        this.ButtonState(1);
+                        // this.ButtonState(1);
+                         this.GameState = 3;
                     } else {
-                        this.ButtonState(0);
+                        // this.ButtonState(0);
+                        this.GameState = 2;
                     }
                     this.btntext.string = GameUtils.formatNum(conf1.cost);
                 }
             }
 
         }
-        this.title.node.active = !this.lockState;
+        this.ButtonState();
+
     },
     setType2BtnState:function(){
         let bool = Global.efficiency[this.ID] != undefined && Global.efficiency[this.ID] != null;
@@ -357,19 +377,23 @@ cc.Class({
 
             if(conf.costtype == 1002){
                 if(Global.gem>= conf.cost){
-                    this.ButtonState(1);
+                    // this.ButtonState(1);
+                    this.GameState = 3;
                 }
                 else{
-                    this.ButtonState(0);
+                    // this.ButtonState(0);
+                    this.GameState = 2;
                 }
                 this.btntext.string = GameUtils.formatNum(conf.cost);
                 this.iconGem.node.active = true;
             }
         }
+        this.ButtonState();
     },
-    //1 可以点击  0 不可以点击
-    ButtonState:function(v){
-        if(v == 1){
+    //this.GameState = 1.3是可以点击的
+    ButtonState:function(){
+        let v=  this.GameState == 1 || this.GameState==3;
+        if(v){
             this.btn.interactable = true;
         }else{
             this.btn.interactable = false;
@@ -391,21 +415,22 @@ cc.Class({
     },
     formatDayTest:function(jumptime) {
         let str = "";
-        let jumpstr="";
-        if(jumptime>=24){
+        let jumpstr = "";
+        if (jumptime >= 24) {
             str = LanguageConfig['10025'][Global.language];
-            str=this.formatPrint(str,Math.floor(jumptime/24));
-            jumpstr+= str;
-            jumptime%=24;
+            str = this.formatPrint(str, Math.floor(jumptime / 24));
+            jumpstr += str;
+            jumptime %= 24;
 
         }
-        if(jumptime>0){
+        if (jumptime > 0) {
             str = LanguageConfig['10019'][Global.language];
-            str=this.formatPrint(str,jumptime);
-            jumpstr+= str;
+            str = this.formatPrint(str, jumptime);
+            jumpstr += str;
         }
         return jumpstr;
+    },
+    setLeadState:function(){
+        this.iconlead.node.active = this.GameState == 1;
     }
-
-
 })

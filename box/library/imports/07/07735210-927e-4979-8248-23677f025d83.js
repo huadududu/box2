@@ -36,7 +36,25 @@ module.exports = function () {
                 callback(v);
             }
         },
+        getMore: function getMore(moreKeys) {
+            var defaultv = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+            var callback = arguments[2];
 
+            if (GameConfig.isFBInstantGame()) {
+                var defaultData = defaultv;
+                console.log("get ", [k]);
+                FBInstant.player.getDataAsync(moreKeys).then(function (data) {
+                    console.log('data is get', data);
+                    if (callback) {
+                        if (typeof data != 'undefined') {
+                            callback(data[k]);
+                        } else {
+                            callback(defaultData);
+                        }
+                    }
+                });
+            }
+        },
         set: function set(k, v) {
 
             if (GameConfig.isFBInstantGame()) {

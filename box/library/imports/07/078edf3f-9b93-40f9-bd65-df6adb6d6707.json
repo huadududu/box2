@@ -19,14 +19,26 @@
     "box-silver": {
       "__uuid__": "eea5fb48-c298-41af-8bb1-67f5db74d2a6"
     },
+    "btn_black": {
+      "__uuid__": "fea2d4a8-413e-4a24-acb7-e04a70a76c11"
+    },
+    "btn_blue": {
+      "__uuid__": "89520103-449f-40a5-8344-f5f35c410f56"
+    },
     "btn_claim": {
       "__uuid__": "7ba3ab4c-a45c-4a03-9273-fbfe2bc87500"
     },
     "btn_claimx3": {
       "__uuid__": "90e6d0e1-4aaa-423f-a8c9-e85e4dec6a89"
     },
+    "btn_close": {
+      "__uuid__": "2a04394b-db97-4063-89b0-8692a902f3c6"
+    },
     "btn_green": {
       "__uuid__": "a8d95501-ea28-47b3-9f92-4005a958ce8d"
+    },
+    "btn_green1": {
+      "__uuid__": "22ffa0db-05be-4a12-ba64-c4ee22449be7"
     },
     "btn_heise": {
       "__uuid__": "ebb5c33e-ff2c-4dad-936b-fad65edc5ddc"
@@ -42,6 +54,18 @@
     },
     "btn_level_open": {
       "__uuid__": "d0fde012-9dfd-459f-aaf5-a2d0cedc1892"
+    },
+    "btn_news": {
+      "__uuid__": "6ba9eca7-a630-4041-bdfd-09ea9d321042"
+    },
+    "btn_qiandao": {
+      "__uuid__": "f0ab917e-4914-4de3-a661-c2e901d2d1e8"
+    },
+    "btn_yaoqing": {
+      "__uuid__": "62d04b08-c9eb-45a9-9cab-9507fce5409d"
+    },
+    "btn_ylq": {
+      "__uuid__": "73e519e6-2fde-4a17-a254-6a16d0e1469e"
     },
     "chanzi_1": {
       "__uuid__": "2b0ad79c-fafc-45fb-a479-aa8745bd0517"
@@ -67,11 +91,20 @@
     "chutou_3": {
       "__uuid__": "bdbfc4f7-655d-493a-9875-45b40f2352b6"
     },
+    "common_friends_bg": {
+      "__uuid__": "5c4b83f2-7d69-4de3-bdc2-2ca427934fd8"
+    },
     "dianzuan_1": {
       "__uuid__": "a31ce2fd-ecac-411f-95a3-fe58aa0129af"
     },
     "dianzuan_2": {
       "__uuid__": "d370a46c-5d55-499f-992e-fce44ff8c7af"
+    },
+    "friends_bg1": {
+      "__uuid__": "140c7b85-c965-4796-8bf1-7935f6c0a139"
+    },
+    "friends_bg2": {
+      "__uuid__": "0fd9a53c-1348-4f5c-93e3-29835b088c9f"
     },
     "icon_baoshi": {
       "__uuid__": "95472f00-a3de-4c6e-a775-d23391eb140a"

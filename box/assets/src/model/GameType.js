@@ -9,7 +9,8 @@ module.exports = {
         UIBottom:2,//底部控件
         MarginsBig:3,
         MarginsSmall:4,
-        RewardItem:5
+        RewardItem:5,
+        Lead:6
     }),
     bottomRadio:cc.Enum({
         Accelerator: 0,//加速

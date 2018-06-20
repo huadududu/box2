@@ -45,8 +45,8 @@ cc.Class({
 
     touchEvent: function (event) {
         let touches = event.getTouches();
-        console.log("touches:"+touches.length );
-        if( touches.length >=2){
+        console.log("touches:"+touches.length, event.type);
+        if( touches.length >=2 && cc.Node.EventType.TOUCH_MOVE == event.type){
             var touch1 = touches[0];
             var touch2 = touches[1];
             var delta1 = touch1.getDelta(), delta2 = touch2.getDelta();
@@ -56,9 +56,20 @@ cc.Class({
             if(this.multMoveCallBack){
                 this.multMoveCallBack(touchPoint1,touchPoint2);
             }
+            this.mutiTouch  =true;
            // console.log("multMoveCallBack",this.multMoveCallBack);
             return;
         }
+
+        if(this.mutiTouch &&
+            cc.Node.EventType.TOUCH_END != event.type)
+        {
+            //TODO::
+            return;
+        }else{
+            this.mutiTouch  = false;
+        }
+
         // console.log('touches:'+touches.length);
         let location = event.getLocation();
         // console.log('location:'+location.length);

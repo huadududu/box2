@@ -29,7 +29,24 @@ module.exports  =  function () {
                 callback(v);
             }
         },
+        getMore: function (moreKeys, defaultv = '',callback) {
+            if(GameConfig.isFBInstantGame()){
+                let defaultData  =  defaultv;
+                console.log("get ",[k]);
+                FBInstant.player.getDataAsync(moreKeys)
+                    .then(function(data){
+                        console.log('data is get',data);
+                        if(callback){
+                            if (typeof data!= 'undefined') {
+                                callback(data[k]);
+                            }else{
+                                callback(defaultData);
+                            }
+                        }
 
+                    });
+            }
+        },
         set: function (k,v) {
 
             if(GameConfig.isFBInstantGame()){
@@ -47,6 +64,7 @@ module.exports  =  function () {
         
         
     });
+
 
     let instance = new LC();
     return instance;
