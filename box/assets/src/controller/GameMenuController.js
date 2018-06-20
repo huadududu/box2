@@ -22,6 +22,7 @@ cc.Class({
         gem:cc.Label,
         toplist:cc.Node,
         TopProgressBar:cc.ProgressBar,
+        practice:cc.Node,
         radioButton:{
             default:[],
             type:cc.Toggle

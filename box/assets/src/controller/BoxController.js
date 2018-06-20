@@ -496,7 +496,7 @@ cc.Class({
             let location = this.hammerpos(line, row);
             let texiao = this.getEffByBlock(line, row);
              console.log("destroylog:", line, ":", row, location);
-            ParticleSystemCenter.addParticleForNode(texiao + ".plist", this.GameMenuController.node, location);
+            ParticleSystemCenter.addParticleForNode(texiao + ".plist", this.GameMenuController.practice, location);
             node.removeFromParent(true);
             this.blocks[line][row] = null;
             this.destroyUpdate();

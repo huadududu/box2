@@ -1,53 +1,55 @@
-2018-06-20T12:49:25.304Z - normal: Load ~/.CocosCreator/settings.json
-2018-06-20T12:49:25.306Z - normal: checking language setting...
-2018-06-20T12:49:25.307Z - normal: Language: zh
-2018-06-20T12:49:25.994Z - success: protocol editor-framework registered
-2018-06-20T12:49:25.994Z - success: protocol app registered
-2018-06-20T12:49:25.994Z - success: protocol theme registered
-2018-06-20T12:49:25.994Z - success: protocol packages registered
-2018-06-20T12:49:25.994Z - success: protocol unpack registerred
-2018-06-20T12:49:25.994Z - success: protocol disable-commonjs registerred
-2018-06-20T12:49:26.094Z - normal: connected!
-2018-06-20T12:49:26.097Z - normal: Check project /Users/bolex1/work/game/box/box
-2018-06-20T12:49:26.098Z - normal: Initializing Cocos2d
-2018-06-20T12:49:26.292Z - normal: Initializing Asset Database
-2018-06-20T12:49:26.324Z - success: protocol uuid registerred
-2018-06-20T12:49:26.324Z - success: protocol db registerred
-2018-06-20T12:49:26.324Z - success: protocol thumbnail registerred
-2018-06-20T12:49:26.324Z - normal: Loading editor/builtin packages
-2018-06-20T12:49:26.341Z - success: anysdk loaded
-2018-06-20T12:49:26.440Z - success: assets loaded
-2018-06-20T12:49:26.443Z - success: builder loaded
-2018-06-20T12:49:26.445Z - success: cocos-analytics loaded
-2018-06-20T12:49:26.449Z - success: console loaded
-2018-06-20T12:49:26.482Z - success: fb-instant-games loaded
-2018-06-20T12:49:26.486Z - success: hierarchy loaded
-2018-06-20T12:49:26.490Z - success: inspector loaded
-2018-06-20T12:49:26.491Z - success: keystore loaded
-2018-06-20T12:49:26.498Z - success: node-library loaded
-2018-06-20T12:49:26.500Z - success: package-asset loaded
-2018-06-20T12:49:26.502Z - success: preferences loaded
-2018-06-20T12:49:26.505Z - success: project-exporter loaded
-2018-06-20T12:49:26.520Z - success: project-importer loaded
-2018-06-20T12:49:26.523Z - success: project-settings loaded
-2018-06-20T12:49:26.527Z - success: ui-kit loaded
-2018-06-20T12:49:26.533Z - success: ui-grid loaded
-2018-06-20T12:49:26.537Z - success: scene loaded
-2018-06-20T12:49:26.538Z - success: sprite-editor loaded
-2018-06-20T12:49:26.542Z - success: store loaded
-2018-06-20T12:49:26.549Z - success: timeline loaded
-2018-06-20T12:49:26.549Z - normal: Loading builtin packages
-2018-06-20T12:49:26.552Z - success: asset-db-debugger loaded
-2018-06-20T12:49:26.553Z - success: color-picker loaded
-2018-06-20T12:49:26.556Z - success: package-manager loaded
-2018-06-20T12:49:26.560Z - success: sdkbox loaded
-2018-06-20T12:49:26.566Z - success: tester loaded
-2018-06-20T12:49:26.570Z - success: ui-kit-preview-extra loaded
-2018-06-20T12:49:26.573Z - success: ui-kit-preview loaded
-2018-06-20T12:49:26.576Z - success: ui-tree loaded
-2018-06-20T12:49:27.433Z - normal: Initializing project /Users/bolex1/work/game/box/box
-2018-06-20T12:49:27.436Z - normal: Loading packages
-2018-06-20T12:49:27.440Z - normal: Watching packages
-2018-06-20T12:49:27.449Z - normal: Run Application
-2018-06-20T12:49:28.270Z - success: preview server running at http://localhost:7456
-2018-06-20T12:49:32.796Z - normal: 1.9.1
+2018-06-20T15:01:42.403Z - normal: Load ~/.CocosCreator/settings.json
+2018-06-20T15:01:42.407Z - normal: checking language setting...
+2018-06-20T15:01:42.407Z - normal: Language: zh
+2018-06-20T15:01:43.936Z - success: protocol editor-framework registered
+2018-06-20T15:01:43.936Z - success: protocol app registered
+2018-06-20T15:01:43.936Z - success: protocol theme registered
+2018-06-20T15:01:43.936Z - success: protocol packages registered
+2018-06-20T15:01:43.937Z - success: protocol unpack registerred
+2018-06-20T15:01:43.937Z - success: protocol disable-commonjs registerred
+2018-06-20T15:01:44.348Z - normal: connected!
+2018-06-20T15:01:44.349Z - normal: Check project E:\gittest\box2\box
+2018-06-20T15:01:44.350Z - normal: Initializing Cocos2d
+2018-06-20T15:01:44.491Z - normal: Initializing Asset Database
+2018-06-20T15:01:44.513Z - success: protocol uuid registerred
+2018-06-20T15:01:44.514Z - success: protocol db registerred
+2018-06-20T15:01:44.514Z - success: protocol thumbnail registerred
+2018-06-20T15:01:44.514Z - normal: Loading editor/builtin packages
+2018-06-20T15:01:44.527Z - success: anysdk loaded
+2018-06-20T15:01:44.605Z - success: assets loaded
+2018-06-20T15:01:44.607Z - success: builder loaded
+2018-06-20T15:01:44.608Z - success: cocos-analytics loaded
+2018-06-20T15:01:44.610Z - success: console loaded
+2018-06-20T15:01:44.636Z - success: fb-instant-games loaded
+2018-06-20T15:01:44.638Z - success: hierarchy loaded
+2018-06-20T15:01:44.640Z - success: inspector loaded
+2018-06-20T15:01:44.641Z - success: keystore loaded
+2018-06-20T15:01:44.642Z - success: node-library loaded
+2018-06-20T15:01:44.643Z - success: package-asset loaded
+2018-06-20T15:01:44.644Z - success: preferences loaded
+2018-06-20T15:01:44.649Z - success: project-exporter loaded
+2018-06-20T15:01:44.659Z - success: project-importer loaded
+2018-06-20T15:01:44.660Z - success: project-settings loaded
+2018-06-20T15:01:44.661Z - success: ui-kit loaded
+2018-06-20T15:01:44.662Z - success: ui-grid loaded
+2018-06-20T15:01:44.664Z - success: scene loaded
+2018-06-20T15:01:44.664Z - success: sprite-editor loaded
+2018-06-20T15:01:44.666Z - success: store loaded
+2018-06-20T15:01:44.668Z - success: timeline loaded
+2018-06-20T15:01:44.668Z - normal: Loading builtin packages
+2018-06-20T15:01:44.670Z - success: asset-db-debugger loaded
+2018-06-20T15:01:44.670Z - success: code-editor loaded
+2018-06-20T15:01:44.670Z - success: color-picker loaded
+2018-06-20T15:01:44.672Z - success: package-manager loaded
+2018-06-20T15:01:44.675Z - success: sdkbox loaded
+2018-06-20T15:01:44.677Z - success: tester loaded
+2018-06-20T15:01:44.678Z - success: ui-kit-preview-extra loaded
+2018-06-20T15:01:44.678Z - success: ui-kit-preview loaded
+2018-06-20T15:01:44.679Z - success: ui-tree loaded
+2018-06-20T15:01:45.401Z - normal: Initializing project E:\gittest\box2\box
+2018-06-20T15:01:45.403Z - normal: Loading packages
+2018-06-20T15:01:45.406Z - normal: Watching packages
+2018-06-20T15:01:45.414Z - normal: Run Application
+2018-06-20T15:01:48.152Z - success: preview server running at http://localhost:7456
+2018-06-20T15:01:51.714Z - normal: 1.9.0
+2018-06-20T16:07:17.082Z - info: shutdown preview server
