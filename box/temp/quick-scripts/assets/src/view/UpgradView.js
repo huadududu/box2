@@ -78,6 +78,7 @@ cc.Class({
         var desc = LanguageConfig['10031'][Global.language];
         var time = EfficiencyConfig[Global.skipID].jumptime;
         desc = GameUtils.formatHour(desc, time);
+        Global.addgold = Math.floor(Global.addgold);
         this.TitleLable.string = LanguageConfig['10017'][Global.language];
         this.DescLable.string = desc;
         this.RewardLable.string = "x" + Global.addgold;

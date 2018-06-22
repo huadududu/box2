@@ -17,12 +17,41 @@ module.exports = {
     formatNum:function(num){
         let str;
         if(num> 1000){
-            str = parseInt(num/1000)+"K";
+            str = (num/1000).toFixed(1)+"K";
         }else{
             str = ""+num;
         }
         return str;
     },
+    formatNumMAX:function(num){
+        let str;
+        let num1=0;
+        if(num>1000000000){
+            str = this.roundFun(num/1000000000)+"G";
+        }else if(num> 1000000){
+            str = this.roundFun(num/1000000)+"M";
+            num1
+        }else if(num> 1000){
+            str =this.roundFun(num/1000)+"K";
+        }else{
+            str = num;
+        }
+        return str;
+    },
+    //保留n位小数
+    roundFun:function(value, n) {
+        let  value1 = (value).toString();
+        let  re = /([0-9]+\.[0-9]{1})[0-9]*/;
+        value1 = value1.replace(re,"$1");
+        return value1 ;
+    },
+    //标准钱币表达（不带小数点）
+    stardandFun:function(value){
+        value= value.toString();
+        var temp = value.split('').reverse().join('').match(/(\d{1,3})/g);
+        return  temp.join(',').split('').reverse().join('');
+    },
+
     formatTime(num){
         let str="";
         if(num>=3600){

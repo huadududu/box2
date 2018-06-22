@@ -1,5 +1,5 @@
 
-chuizi_2.png
+chuizi_1.png
 size: 69,75
 format: RGBA8888
 filter: Linear,Linear
@@ -8,6 +8,6 @@ chuizi_1
   rotate: false
   xy: 1, 1
   size: 66, 72
-  orig: 66, 72
-  offset: 0, 0
+  orig: 69, 75
+  offset: 1, 2
   index: -1

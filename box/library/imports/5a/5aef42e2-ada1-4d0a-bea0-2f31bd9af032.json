@@ -43,19 +43,12 @@
           "chanzi_2": {
             "translate": [
               {
-                "time": 0,
-                "x": 84.33,
-                "y": 8.55
+                "time": 0
               },
               {
-                "time": 0.125,
-                "x": 52.62,
-                "y": -13.6
-              },
-              {
-                "time": 0.25,
-                "x": 84.33,
-                "y": 8.55
+                "time": 0.1667,
+                "x": -27.23,
+                "y": -43.27
               }
             ],
             "rotate": [
@@ -64,12 +57,8 @@
                 "angle": 0
               },
               {
-                "time": 0.125,
-                "angle": -9.11
-              },
-              {
-                "time": 0.25,
-                "angle": 0
+                "time": 0.1667,
+                "angle": -0.59
               }
             ],
             "shear": [
@@ -77,10 +66,7 @@
                 "time": 0
               },
               {
-                "time": 0.125
-              },
-              {
-                "time": 0.25
+                "time": 0.1667
               }
             ]
           }
@@ -98,7 +84,7 @@
       }
     }
   },
-  "_atlasText": "\r\nchanzi_2.png\r\nsize: 74,75\r\nformat: RGBA8888\r\nfilter: Linear,Linear\r\nrepeat: none\r\nchanzi_2\r\n  rotate: false\r\n  xy: 1, 1\r\n  size: 71, 72\r\n  orig: 71, 72\r\n  offset: 0, 0\r\n  index: -1\r\n",
+  "_atlasText": "\nchanzi_2.png\nsize: 74,75\nformat: RGBA8888\nfilter: Linear,Linear\nrepeat: none\nchanzi_2\n  rotate: false\n  xy: 1, 1\n  size: 71, 72\n  orig: 74, 75\n  offset: 1, 2\n  index: -1\n",
   "atlasUrl": {
     "__uuid__": "cd0b4b2a-2772-4748-9294-41229c39b0e4"
   },

@@ -14,10 +14,10 @@ cc._RF.push(module, '8a654TrH0xLVZOmV8SpsIXn', 'GameMenuView');
 var GameConfig = require("GameConfig");
 
 cc.Class({
-    extends: cc.Component,
-    properties: {},
+  extends: cc.Component,
+  properties: {},
 
-    onLoad: function onLoad() {}
+  onLoad: function onLoad() {}
 
 });
 

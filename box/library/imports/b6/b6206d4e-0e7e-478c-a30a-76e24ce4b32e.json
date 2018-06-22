@@ -43,33 +43,22 @@
           "chutou_2": {
             "translate": [
               {
-                "time": 0,
-                "x": -7.49,
-                "y": -20.76
+                "time": 0
               },
               {
-                "time": 0.125,
-                "x": 22.33,
-                "y": 9.67
-              },
-              {
-                "time": 0.25,
-                "x": -7.49,
-                "y": -20.76
+                "time": 0.1667,
+                "x": -20.01,
+                "y": -26.11
               }
             ],
             "rotate": [
               {
                 "time": 0,
-                "angle": 19.64
+                "angle": 0
               },
               {
-                "time": 0.125,
-                "angle": -22
-              },
-              {
-                "time": 0.25,
-                "angle": 19.64
+                "time": 0.1667,
+                "angle": 16.61
               }
             ],
             "shear": [
@@ -77,10 +66,7 @@
                 "time": 0
               },
               {
-                "time": 0.125
-              },
-              {
-                "time": 0.25
+                "time": 0.1667
               }
             ]
           }
@@ -98,7 +84,7 @@
       }
     }
   },
-  "_atlasText": "\r\nchutou_2.png\r\nsize: 85,69\r\nformat: RGBA8888\r\nfilter: Linear,Linear\r\nrepeat: none\r\nchutou_2\r\n  rotate: false\r\n  xy: 1, 1\r\n  size: 82, 66\r\n  orig: 82, 66\r\n  offset: 0, 0\r\n  index: -1\r\n",
+  "_atlasText": "\nchutou_2.png\nsize: 85,69\nformat: RGBA8888\nfilter: Linear,Linear\nrepeat: none\nchutou_2\n  rotate: false\n  xy: 1, 1\n  size: 82, 66\n  orig: 85, 69\n  offset: 1, 2\n  index: -1\n",
   "atlasUrl": {
     "__uuid__": "be45a2d9-9a5f-4e84-8440-20030be07441"
   },

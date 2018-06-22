@@ -18,6 +18,7 @@ var AcceleratorConfig = require("AcceleratorConfig");
 var EfficiencyConfig = require("EfficiencyConfig");
 var BoxConfig = require("BoxConfig");
 var RewardConfig = require("RewardConfig");
+var LanguageConfig = require("LanguageConfig");
 
 var GameType = require("GameType");
 var GameUtils = require("GameUtils");
@@ -34,10 +35,6 @@ var GameConfig = require("GameConfig");
 // let GameMenuController = require('GameMenuController');
 
 var Global = require('Global');
-
-var GameHeight = 514;
-var GameCenterY = 0;
-var BaseGame = GameHeight / 2;
 
 cc.Class({
     extends: cc.Component,
@@ -60,11 +57,15 @@ cc.Class({
         motionStreak: cc.MotionStreak,
         // hammer: sp.Skeleton,
         boxSpine: sp.Skeleton,
-        btnbox: cc.Button,
         GameMenu: cc.Node,
         treasure: cc.Button,
         upgradView: cc.Node,
+        loadingView: cc.Node,
+        hammerNode: cc.Node,
+        blockNodes: cc.Node,
+        onLoadPage: cc.Node,
         openbox: cc.Node,
+
         type: {
             visible: false,
             default: 0
@@ -112,15 +113,18 @@ cc.Class({
         },
         efficeGold: 0,
         startClock: 3,
-        gameState: GameState.init //0 init 1 playing 2 rolling 3 end
+        gameState: GameState.init, //0 init 1 playing 2 rolling 3 end,
+        loadstate: 2
     },
 
     onLoad: function onLoad() {
         var _this = this;
 
+        SpriteFrameCenter.preLoadAtlas("png/box", this.onloadState.bind(this));
         this.winsize = cc.winSize;
         this.BaseHeight = this.winsize.height / 2;
         this.BaseWidth = this.winsize.width / 2;
+        this.GameHeight = this.winsize.height - 206;
         this.hammerStart = 1; //表示锤子的起始id
         this.hammerEnd = 10; //表示锤子的最后一个id
         this.boxLeadNode = null; //box的引导节点
@@ -129,26 +133,37 @@ cc.Class({
         this.blockLeadNode = null;
         this.blockPosNode = null;
 
-        SpriteFrameCenter.preLoadAtlas("png/box", this.initdata.bind(this));
         this.GameMenuController = cc.find("Canvas/GameMenu").getComponent("GameMenuController");
-        Global.initInfo();
+        // this.  loadingView = cc.find("Canvas/loading").getComponent("loadingView");
+        // Global.initInfo();
         this.blocks = [];
         this.marginlist = [];
         this.hammers = {};
         this.rewardItem = [];
         this.accelerHammer = 1;
         this.accelerGold = 1;
-        this.startPos = -GameHeight / 2;
+        this.startPos = -this.GameHeight / 2;
         this.boxSpine.setCompleteListener(function (trackEntry) {
             var animationName1 = trackEntry.animation ? trackEntry.animation.name : "";
             cc.log("recordSpine [track %s][animation %s] end.", trackEntry.trackIndex, animationName1);
             // this.restart();
             _this.addItems();
         });
-        this.firstblock = true;
+
         this.firstOpen = true;
     },
+    onloadState: function onloadState() {
+        // this.loadstate--;
+        // if(this.loadstate<=0){
+        this.startSC();
+        this.initdata();
+        // }
+    },
     start: function start() {
+        this.onloadState();
+        this.onLoadPage.active = false;
+    },
+    startSC: function startSC() {
         var _this2 = this;
 
         this.GameMenuController.initInfo();
@@ -156,6 +171,7 @@ cc.Class({
         var timescale = 1;
         var hammer = Global.hammer;
         this.initEfficienyInfo(); //[改 延迟执行]
+        // SpriteFrameCenter.preLoadAtlas("png/box", this.initdata.bind(this));
 
         var _loop = function _loop() {
             if (hammer[i] == undefined) return "continue";
@@ -164,7 +180,7 @@ cc.Class({
             var info = ToolConfig[i];
             var animation = info.animation;
             SkeletonDataCenter.addSkeletonData(animation, nodehammer);
-            _this2.GameMenu.addChild(node);
+            _this2.hammerNode.addChild(node);
             _this2.hammers[hammer[i].id] = nodehammer;
             nodehammer.node.active = false;
             var j = i;
@@ -179,6 +195,7 @@ cc.Class({
             var attribute = Global.hammer[i].attribute;
             var conf1 = AttributeConfig[attribute];
             nodehammer.timeScale = 0.17 * conf1.att / parseFloat(conf1.time) * _this2.accelerHammer;
+            // nodehammer.timeScale =  conf1.att / parseFloat(conf1.time) * this.accelerHammer;
         };
 
         for (var i = this.hammerStart; i <= this.hammerEnd; i++) {
@@ -227,7 +244,7 @@ cc.Class({
         this.addBlocks();
         this.cameraStartPosY();
         this.changeBlockLead();
-        this.btnbox.node.active = true;
+        this.treasure.node.active = true;
         this.playHammers();
         this.initTreasure();
         if (this.firstOpen) {
@@ -248,6 +265,7 @@ cc.Class({
             }
         }
     },
+    startAddHammer: function startAddHammer() {},
     stopHammerSpine: function stopHammerSpine(hammerpos) {
         this.hammers[hammerpos].node.active = false;
     },
@@ -261,7 +279,7 @@ cc.Class({
         var conf = AttributeConfig[info.attribute];
 
         SkeletonDataCenter.addSkeletonData(animation, hammer);
-        this.GameMenu.addChild(node);
+        this.hammerNode.addChild(node);
         this.hammers[id] = hammer;
         hammer.node.active = false;
         hammer.setCompleteListener(function (trackEntry) {
@@ -273,6 +291,7 @@ cc.Class({
             }
         });
         var timescale = 0.17 * conf.att / parseFloat(conf.time) * this.accelerHammer;
+        // let timescale =  conf.att / parseFloat(conf.time) * this.accelerHammer;
         hammer.timeScale = timescale;
     },
     changeHammerSpine: function changeHammerSpine(data) {
@@ -375,13 +394,16 @@ cc.Class({
     },
     //根据块的位置计算锤子的位置
     hammerpos: function hammerpos(line, row) {
-        var cameraY = this.camera.node.getPositionY();
-        var gameY = this.gameNode.y;
+        // let cameraY = this.camera.node.getPositionY();
+        // let gameY = this.gameNode.y;
         var realwidth = this.blockWidth + this.blockBlank;
-        var realx = row * realwidth + this.margins + this.blockBlank;
-        var realy = line * realwidth - cameraY;
-        var hamX = realx - this.BaseWidth - 42 + this.blockWidth;
-        var hamY = realy - 42;
+        // let realx = row * realwidth + this.margins + this.blockBlank;
+        // let realy = line * realwidth - cameraY ;
+        // let hamX = realx - this.BaseWidth  + this.blockWidth - 50;
+        // let hamY = realy + this.blockWidth -140;
+        // return cc.p(hamX, hamY);
+        var hamX = row * realwidth + this.margins + this.blockBlank - this.BaseWidth + 50;
+        var hamY = line * realwidth - this.GameHeight / 2 + this.blockWidth;
         return cc.p(hamX, hamY);
     },
     smCallback: function smCallback(hammerpos) {
@@ -399,8 +421,9 @@ cc.Class({
     },
     //-----------------------------锤子部分 end-------------------------
     //-----------------------------block start-------------------------
+
     resetMarginList: function resetMarginList() {
-        if (this.marginlist.length > 0) {
+        if (this.marginlist && this.marginlist.length > 0) {
             for (var i = 0; i < this.marginlist.length; i++) {
                 var node = this.marginlist[i];
                 if (cc.isValid(node)) {
@@ -411,7 +434,7 @@ cc.Class({
         this.marginlist = [];
     },
     resetBlockList: function resetBlockList() {
-        if (this.blocks.length > 0) {
+        if (this.blocks && this.blocks.length > 0) {
             for (var i = 0; i < this.blocks.length; i++) {
                 for (var _j = 0; _j < this.blocks[i].length; _j++) {
                     var node = this.blocks[i][_j];
@@ -449,19 +472,19 @@ cc.Class({
         var left = factory.createMargins(pngname);
 
         left.position = cc.p(conf.margins / 2 - this.BaseWidth, curY + this.blockWidth / 2);
-        this.gameNode.addChild(left);
+        this.blockNodes.addChild(left);
         this.marginlist.push(left);
         var right = factory.createMargins(pngname);
         var endpos = this.BaseWidth - conf.margins / 2;
         right.position = cc.p(endpos, curY + this.blockWidth / 2);
-        this.gameNode.addChild(right);
+        this.blockNodes.addChild(right);
         this.marginlist.push(right);
 
         for (var i = 0; i < count; i++) {
             var node = factory.create(pngname);
             node.position = cc.p(curX + this.blockWidth / 2, curY + this.blockWidth / 2);
             curX += this.blockWidth + conf.blank;
-            this.gameNode.addChild(node);
+            this.blockNodes.addChild(node);
             lineArray.push(node);
         }
 
@@ -516,28 +539,18 @@ cc.Class({
     },
     changeBlockLead: function changeBlockLead() {
         var bool = this.startClock > 0;
-        // if(this.startClock>0){
-        //     if(this.HattingPos && this.HattingPos[1]){
-        //         this.blockLead(bool,this.HattingPos[1].x,this.HattingPos[1].y);
-        //     }else{
-        //         this.blockLead(bool,2,2+this.startClock);
-        //     }
-        // }else{
-        //     this.blockLead(bool);
-        // }
-
-
         if (Global.hard == 1 && bool) {
             if (!this.blockLeadNode) {
                 var node = UILeadFactory.create();
                 this.blockLeadNode = node;
-                this.gameNode.addChild(node);
+                this.hammerNode.addChild(node);
             }
             var row = 3 + this.startClock;
             var line = 2;
 
             var position = this.hammerpos(line, row);
-            position.y = position.y - 216;
+            position.y = position.y - 50;
+            position.x = position.x;
             this.blockLeadNode.position = position;
             this.blockPosNode = { x: line, y: row };
         } else {
@@ -588,9 +601,12 @@ cc.Class({
     destroyUpdate: function destroyUpdate() {
 
         var myinfo = {};
-        myinfo.exp = Global.exp + 1;
-        myinfo.gold = Global.gold + 1 * this.accelerGold + this.efficeGold;
+        var addexp = 1;
+        var addgold = 1 * this.accelerGold + this.efficeGold;
+        myinfo.exp = Global.exp + addexp;
+        myinfo.gold = Global.gold + addgold;
         this.GameMenuController.updateDate(myinfo);
+        this.GameMenuController.broadcastShows({ exp: addexp, coin: addgold });
         Global.saveExp(myinfo.exp);
         Global.saveGold(myinfo.gold);
     },
@@ -648,13 +664,13 @@ cc.Class({
         var action1 = cc.moveTo(0.1, location);
         this.camera.node.runAction(action1);
         var ralmovelength = oldY - newY;
-        for (var i = this.hammerStart; i < this.hammerEnd; i++) {
-            if (this.hammers[i] != undefined) {
-                var _location = this.hammers[i].node.position;
-                var action2 = cc.moveTo(0.1, { x: _location.x, y: _location.y + ralmovelength });
-                this.hammers[i].node.runAction(action2);
-            }
-        }
+        // for (var i = this.hammerStart; i < this.hammerEnd; i++) {
+        //     if(this.hammers[i] != undefined){
+        //         let location=this.hammers[i].node.position;
+        //         let action2 = cc.moveTo(0.1,{x:location.x,y:location.y+ralmovelength})
+        //         this.hammers[i].node.runAction(action2);
+        //     }
+        // }
     },
 
     cameraStartPosY: function cameraStartPosY() {
@@ -662,20 +678,20 @@ cc.Class({
         var height = floorNum * (this.blockWidth + this.blockBlank);
         //地下
         this.Underground.height = height;
-        var posbottom = (height - GameHeight) / 2;
+        var posbottom = (height - this.GameHeight) / 2;
         this.Underground.y = posbottom;
         //地面
         var totoal = this.Bgbz.height + height - 50;
         var skyposy = void 0;
         var bzYbottom = void 0;
-        var other = GameHeight - totoal;
-        bzYbottom = (totoal + height - GameHeight) / 2 - 25;
+        var other = this.GameHeight - totoal;
+        bzYbottom = (totoal + height - this.GameHeight) / 2 - 25;
         this.Bgbz.y = bzYbottom;
         var movePos = 0;
         if (other > 0) {
             this.Sky.active = true;
             this.Sky.height = other + 10;
-            skyposy = (GameHeight - other) / 2;
+            skyposy = (this.GameHeight - other) / 2;
             this.Sky.y = skyposy;
             // this.camera.node.setPositionY(0);
             movePos = 0;
@@ -706,8 +722,8 @@ cc.Class({
         this.treasure.disabledSprite = SpriteFrameCenter.getFrameFromAtlas("png/box", BoxConf.icon + ".png");
         var animation = BoxConf.animation;
         SkeletonDataCenter.addSkeletonDataWait(animation, this.boxSpine);
-        this.treasure.node.y = -GameHeight / 2 + this.blockWidth + 35 - 20;
-        this.boxSpine.node.y = -GameHeight / 2 + this.blockWidth + 35 - 20 + 103;
+        this.treasure.node.y = -this.GameHeight / 2 + this.blockWidth + 35 - 20;
+        this.boxSpine.node.y = -this.GameHeight / 2 + this.blockWidth + 35 - 20 + 103;
         // let loction  = this.gameNode.convertToWorldSpace(this.treasure.node.position);
         // let loction1 = this.openbox.convertToNodeSpace(loction);
         // this.boxSpine.node = loction1;
@@ -804,7 +820,7 @@ cc.Class({
             this.updateTouch(this.touchEndPoint);
             return;
         }
-        this.btnbox.node.active = false;
+        this.treasure.node.active = false;
         this.gameState = GameState.end;
         this.canTouch = false;
         this.openbox.active = true;
@@ -886,6 +902,7 @@ cc.Class({
     },
 
     touchCancelCallBack: function touchCancelCallBack(location1) {
+        this.touchState = 'cancle';
         var location = this.gameNode.convertToNodeSpace(location1);
         this.updateTouch(location);
         this.isTouching = false;
@@ -894,6 +911,7 @@ cc.Class({
     },
 
     touchEndCallBack: function touchEndCallBack(location1) {
+        this.touchState = 'end';
         var location = this.gameNode.convertToNodeSpace(location1);
         this.updateTouch(location);
         this.isTouching = false;
@@ -937,7 +955,6 @@ cc.Class({
             return;
         }
         var distance = cc.pSub(this.previousPt[0], location1);
-        // console.log("distance",distance);
         if (distance.y != 0) {
             var origin = this.camera.node.getPositionY();
             var endpos = (origin + distance.y) * 0.5;
@@ -950,14 +967,6 @@ cc.Class({
             if (endpos == 0) return;
             var move = origin - endpos;
             this.camera.node.setPositionY(endpos);
-            for (var i = this.hammerStart; i < this.hammerEnd; i++) {
-                if (this.hammers[i] != undefined) {
-                    var location = this.hammers[i].node.position;
-                    // let action2 = cc.moveTo(0.1,{x:location.x,y:location.y+move})
-                    // this.hammers[i].node.runAction(action2);
-                    this.hammers[i].node.setPositionY(location.y + move);
-                }
-            }
         }
     },
     //-----------------------------touch   end-------------------------
@@ -973,13 +982,18 @@ cc.Class({
                 if (string == null) {
                     //视频激励
                     if (GameConfig.isFBInstantGame()) {
+
+                        this.loadingView.active = true;
+                        var self = this;
                         var FBP = require("FBPlugin");
-                        self = this;
                         FBP.RewardedVideoAsync(function () {
+                            // let FBP = require("FBPlugin");
+                            // self.adGame();
+                            self.loadingView.active = false;
                             self.accleleratorChange(id);
-                            self.GameMenuController.updateButtom();
                         });
                     } else {
+                        this.loadingView.active = true; //[change]
                         this.accleleratorChange(id);
                     }
                 } else {
@@ -1030,6 +1044,7 @@ cc.Class({
             if (this.hammers[i] != undefined) {
                 var conf1 = AttributeConfig[Global.hammer[i].attribute];
                 this.hammers[i].timeScale = 0.17 * (conf1.att / parseFloat(conf1.time)) * this.accelerHammer;
+                // this.hammers[i].timeScale =  (conf1.att / parseFloat(conf1.time)) * this.accelerHammer;
             }
         }
     },
@@ -1066,6 +1081,7 @@ cc.Class({
                 var conf1 = AttributeConfig[conf.next];
                 Global.saveHammer(Global.hammer);
                 this.hammers[id].timeScale = 0.17 * (conf1.att / parseFloat(conf1.time)) * this.accelerHammer;
+                // this.hammers[id].timeScale = (conf1.att / parseFloat(conf1.time)) * this.accelerHammer;
             }
             this.GameMenuController.updateDate(mess);
         }
@@ -1100,12 +1116,22 @@ cc.Class({
                 }
             } else if (thisID == 3) {
                 //邀请好友
-                // if(Global.freindsInfo[id]&&Global.freindsInfo[id].length){
-                //     Global.inviteFriends = Global.freindsInfo[id].length;
-                // }else{
-                //     Global.inviteFriends=0;
-                // }
-                if (Global.inviteFriends < confArry[1]) {
+                var inviteFriends = void 0;
+                if (GameConfig.isFBInstantGame()) {
+                    if (Global.freindsInfo == null || Global.freindsInfo[id] == null) {
+                        inviteFriends = 0;
+                    } else {
+                        inviteFriends = Global.freindsInfo[id].length;
+                    }
+                } else {
+                    if (Global.freindsInfo == null || Global.freindsInfo[id] == null) {
+                        inviteFriends = 0;
+                    } else {
+                        inviteFriends = Global.freindsInfo[id].length;
+                    }
+                    // inviteFriends = Global.inviteFriends;
+                }
+                if (inviteFriends < confArry[1]) {
                     return false;
                 } else {
                     return true;
@@ -1133,14 +1159,19 @@ cc.Class({
             }
             if (thisID == 1) {
                 //视频激励
+
                 if (GameConfig.isFBInstantGame()) {
+                    this.loadingView.active = true;
                     var FBP = require("FBPlugin");
                     FBP.RewardedVideoAsync(function () {
+                        var FBP = require("FBPlugin");
                         Global.openAdTimes++;
+                        self.adGame();
                         self.GameMenuController.updateButtom();
                     });
                 } else {
                     Global.openAdTimes++;
+                    this.loadingView.active = true; //[change]
                 }
             } else if (thisID == 3) {
                 //邀请好友
@@ -1159,17 +1190,31 @@ cc.Class({
                             var oldFriend = Global.freindsInfo[id];
                             if (oldFriend == friendID) {
                                 find = true;
+                                var PopMsgController = require("PopMsgController");
+                                PopMsgController.showMsg(LanguageConfig['10039'][Global.language]);
                                 break;
                             }
                         }
                         if (!find) {
                             Global.freindsInfo[id].push(friendID);
-                            Global.inviteFriends = Global.freindsInfo[id].length;
+                            Global.savefreindsInfo(Global.freindsInfo);
+                            // Global.inviteFriends = Global.freindsInfo[id].length;
                         }
                         _self.GameMenuController.updateButtom();
                     });
                 } else {
-                    Global.inviteFriends++;
+                    // Global.inviteFriends++;
+                    if (Global.freindsInfo == null) {
+                        Global.freindsInfo = {};
+                    }
+                    if (Global.freindsInfo[id] == null) {
+                        Global.freindsInfo[id] = [];
+                    }
+                    var friendID = Global.freindsInfo[id].length + 1;
+
+                    Global.freindsInfo[id].push(friendID);
+                    Global.savefreindsInfo(Global.freindsInfo);
+                    _self.GameMenuController.updateButtom();
                 }
             }
         }
@@ -1268,10 +1313,12 @@ cc.Class({
         this.GameMenuController.updateButtom();
     },
     //-----------------------------bottom   end----------------------------
-    //-----------------------------引导   start----------------------------
+    //-----------------------------loading   start----------------------------
 
-
-    //-----------------------------引导   end----------------------------
+    adGame: function adGame() {
+        this.loadingView.active = false;
+    },
+    //-----------------------------loading   end----------------------------
     //-----------------------------GM   part start-------------------------
 
     onClickBtnaddGem: function onClickBtnaddGem() {
@@ -1290,24 +1337,45 @@ cc.Class({
     },
     onClickBtnaddGold: function onClickBtnaddGold() {
 
-        var gold = Global.gold + 10;
+        var gold = Global.gold + 100000;
         this.GameMenuController.updateDate({ 'gold': gold });
         Global.saveGold(gold);
         this.GameMenuController.updateButtom();
     },
     onClickBtnsubGold: function onClickBtnsubGold() {
 
-        var gold = Global.gold - 10 > 0 ? Global.gold - 10 : 0;
+        // let localStorage = require("LocalStorage");
+        // localStorage.get('gold',0,function (data) {
+        //     console.log("fb data",data);
+        // });
+        // return;
+
+        var gold = Global.gold - 10000 > 0 ? Global.gold - 10000 : 0;
         this.GameMenuController.updateDate({ 'gold': gold });
         Global.saveGold(gold);
         this.GameMenuController.updateButtom();
     },
     onClickBtnaddExp: function onClickBtnaddExp() {
 
-        var exp = Global.exp + 1000;
+        // let localStorage = require("LocalStorage");
+        // localStorage.set('gold',1);
+        // return;
+
+        var exp = Global.exp + 500000;
         this.GameMenuController.updateDate({ 'exp': exp });
         Global.saveExp(exp);
         // this.GameMenuController.updateButtom();
+    },
+    onClickUnlockAll: function onClickUnlockAll() {
+        for (var id = this.hammerStart; id <= this.hammerEnd; id++) {
+            var info = ToolConfig[id];
+            if (Global.hammer[id] == undefined) {
+                Global.hammer[id] = { id: id, attribute: info.attribute };
+                Global.saveHammer(Global.hammer);
+                this.addHammer(id);
+                this.setSmPosition(id);
+            }
+        }
     }
     //-----------------------------GM   part end-------------------------
 

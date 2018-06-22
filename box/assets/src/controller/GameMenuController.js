@@ -1,7 +1,6 @@
 /*
  * Created by Ren on 2018/6/6.
  */
-let GameMenuView = require('GameMenuView');
 let UIBottomFactory = require("UIBottomFactory");
 let AcceleratorConfig = require("AcceleratorConfig");
 let ToolConfig = require("ToolConfig");
@@ -19,10 +18,12 @@ cc.Class({
         scrollView: cc.ScrollView,
         level: cc.Label,
         gold:cc.Label,
+        golddesc:cc.Label,
         gem:cc.Label,
         toplist:cc.Node,
         TopProgressBar:cc.ProgressBar,
         practice:cc.Node,
+        broadcast:cc.Label,
         radioButton:{
             default:[],
             type:cc.Toggle
@@ -50,7 +51,50 @@ cc.Class({
         this.radiotext[1].string = LanguageConfig['10036'][Global.language];
         this.radiotext[2].string = LanguageConfig['10037'][Global.language];
         this.levelLeadNode=null;//level的引导节点
+        this.newBroadcast = 0;
+        // this.broadcast.onEnable(trackEntry =>{
+        //     // this.schedule(this.broadcastCallBack,0.5);
+        //     // this.newBroadcast=0;
+        //
+        // });
+    },
+    broadcastShows:function(info){
 
+        if(!this.showThings){
+            this.showThings=[];
+        }
+        this.showThings.push("coin+"+info.coin);
+        this.showThings.push("exp+"+info.exp);
+        let str = "coin+"+info.coin+"\nexp+"+info.exp;
+        // if(this.showThings.length>5){
+        //     let deletenum = this.showThings.length-5;
+        //     this.showThings.splice(0,deletenum);
+        // }
+        // let str ="";
+        //
+        // for(let i=0;i<this.showThings.length;i++)
+        // {
+        //     str+=this.showThings[i]+"\n";
+        //
+        // }
+        let PopMsgController = require("PopMsgController");
+        PopMsgController.showMsg(str);
+        // this.broadcast.string = str;
+        // this.broadcast.node.active = true;
+        // if(this.checkisrun){
+        //     this.unschedule(this.callback)
+        //     this.checkisrun= false;
+        // }
+        // let self = this;
+        // this.callback=function(){
+        //         self.broadcast.node.active =false ;
+        //         self.checkisrun = false;
+        // }
+        // if(!this.checkisrun){
+        //     this.checkisrun = true;
+        //     this.schedule(this.callback,1,1);
+        //
+        // }
     },
     initInfo:function() {
         this.setGoldNum(Global.gold);
@@ -63,13 +107,10 @@ cc.Class({
 
     },
     addUIBottom:function(){
-        if(this.config == undefined)
-        {
-            this.config=[AcceleratorConfig,ToolConfig,EfficiencyConfig];
-        }
+        this.config=[AcceleratorConfig,ToolConfig,EfficiencyConfig];
         this.itemList=[];
         let startpos = 0;
-
+        this.itemlistNum=[];
         for(var i = 0;i < this.config.length;i++){
             var j = 1;
             for(; this.config[i][j] != undefined;j++){
@@ -95,8 +136,14 @@ cc.Class({
 
     //设置金币
     setGoldNum: function (num) {
-        let strnum = GameUtils.formatNum(num);
-        this.gold.string = strnum;
+        let strnum1 = GameUtils.formatNumMAX(num);
+        this.gold.string = strnum1;
+        if(num >= 1000){
+        this.golddesc.string = '('+GameUtils.stardandFun(num)+')';
+            this.golddesc.node.active  =true;
+        }else{
+            this.golddesc.node.active  =false;
+        }
     },
     setLevel: function (level) {
         this.level.string = "LEVEL"+level;
@@ -118,7 +165,9 @@ cc.Class({
         if(Global.level ==1 && bool){
             if(!this.levelLeadNode){
                 let node = UILeadFactory.create();
-                node.position= this.levelupBtn.node.position;
+                let position = this.levelupBtn.node.position;
+                position.y=position.y-15;
+                node.position= position;
                 // node.ratation = 270;
                 this.levelLeadNode = node;
                 this.toplist.addChild(node);
@@ -216,7 +265,6 @@ cc.Class({
         }
     },
 
-
     //点击升级按钮
     onClickLevel:function(){
         if(this.TopProgressBar.progress >=1){
@@ -242,6 +290,7 @@ cc.Class({
         let newNode= cc.instantiate(prefab);
         this.node.addChild(newNode);
     },
+
 
 
 });

@@ -613,6 +613,7 @@ module.exports = function () {
         },
 
         InterstitialAdAsync: function InterstitialAdAsync(callback) {
+            //插屏广告
             var GameConfig = require("GameConfig");
             var ad = null;
 
@@ -636,6 +637,7 @@ module.exports = function () {
         },
 
         RewardedVideoAsync: function RewardedVideoAsync(callback) {
+            //激励视频
             var GameConfig = require("GameConfig");
             var ad = null;
             FBInstant.getRewardedVideoAsync(GameConfig.RewardedVideoId).then(function (rewardedVideo) {

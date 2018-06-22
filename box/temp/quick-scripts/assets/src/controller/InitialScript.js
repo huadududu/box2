@@ -15,7 +15,8 @@ var SpriteFrameCenter = require("SpriteFrameCenter");
 cc.Class({
     extends: cc.Component,
     properties: {
-        progress: cc.Label
+        progress: cc.Label,
+        bgsp: cc.Node
     },
 
     onLoad: function onLoad() {
@@ -30,8 +31,8 @@ cc.Class({
         var randoms = [1, 3, 6, 9];
         var index = GameUtils.randomInt(0, 3);
         Global.initHistory();
-        Global.syncInviteFriends();
-        Global.tankid = randoms[index].toString();
+        // Global.syncInviteFriends();
+        // Global.tankid  = randoms[index].toString();
 
         // request data
         var DataCenter = require("DataCenter");
@@ -50,11 +51,12 @@ cc.Class({
         // preloadFiles.push({ name:"prefab/HintController",type:"file"});
         preloadFiles.push({ name: "fonts", type: "dir" });
         preloadFiles.push({ name: "particle", type: "dir" });
-        preloadFiles.push({ name: "png/share", type: "dir" });
-        // preloadFiles.push({ name:"prefab",type:"dir"});
+        // preloadFiles.push({ name:"png/share",type:"dir"});
+        preloadFiles.push({ name: "prefab", type: "dir" });
 
-
-        var files = ["prefab/bar", "prefab/block", "prefab/bullet", "prefab/item", "prefab/rankitem", "prefab/rankitemInvite", "prefab/rankitemEmpty", "prefab/rankUI", "prefab/inviteUI", "prefab/msg", "prefab/popwin", "prefab/popmsg", "prefab/tank", "prefab/tankhead", "png/game", "png/tanks"];
+        var files = [
+        // "prefab/bar",
+        "png/box", "prefab/blockbig", "prefab/blocksmall", "prefab/blockbig", "prefab/popmsg"];
 
         for (var i = 0; i < files.length; ++i) {
             preloadFiles.push({ name: files[i], type: "file" });
@@ -113,15 +115,19 @@ cc.Class({
         if (progress > 100) {
             progress = 100;
         }
-        this.progress.string = progress.toFixed(0).toString() + "%";
+        // this.progress.string = progress.toFixed(0).toString() + "%";
+
+        console.log("progress", progress);
+        var red = 90 + 18 * progress / 100;
+        var green = 180 + 11 * progress / 100;
+        var blue = 220 + 19 * progress / 100;
+        this.bgsp.setColor(cc.color(red, green, blue));
     },
 
     goMenu: function goMenu() {
 
-        SpriteFrameCenter.preLoadAtlas("png/game", function () {
-            SpriteFrameCenter.preLoadAtlas("png/tanks", function () {
-                cc.director.loadScene("gamemenu");
-            });
+        SpriteFrameCenter.preLoadAtlas("png/box", function () {
+            cc.director.loadScene("boxa");
         });
 
         // cc.director.loadScene("gametest");

@@ -25,12 +25,41 @@ module.exports = _defineProperty({
     formatNum: function formatNum(num) {
         var str = void 0;
         if (num > 1000) {
-            str = parseInt(num / 1000) + "K";
+            str = (num / 1000).toFixed(1) + "K";
         } else {
             str = "" + num;
         }
         return str;
     },
+    formatNumMAX: function formatNumMAX(num) {
+        var str = void 0;
+        var num1 = 0;
+        if (num > 1000000000) {
+            str = this.roundFun(num / 1000000000) + "G";
+        } else if (num > 1000000) {
+            str = this.roundFun(num / 1000000) + "M";
+            num1;
+        } else if (num > 1000) {
+            str = this.roundFun(num / 1000) + "K";
+        } else {
+            str = num;
+        }
+        return str;
+    },
+    //保留n位小数
+    roundFun: function roundFun(value, n) {
+        var value1 = value.toString();
+        var re = /([0-9]+\.[0-9]{1})[0-9]*/;
+        value1 = value1.replace(re, "$1");
+        return value1;
+    },
+    //标准钱币表达（不带小数点）
+    stardandFun: function stardandFun(value) {
+        value = value.toString();
+        var temp = value.split('').reverse().join('').match(/(\d{1,3})/g);
+        return temp.join(',').split('').reverse().join('');
+    },
+
     formatTime: function formatTime(num) {
         var str = "";
         if (num >= 3600) {

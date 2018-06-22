@@ -8,6 +8,6 @@ chutou_2
   rotate: false
   xy: 1, 1
   size: 82, 66
-  orig: 82, 66
-  offset: 0, 0
+  orig: 85, 69
+  offset: 1, 2
   index: -1

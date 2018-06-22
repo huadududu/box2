@@ -1,8 +1,3 @@
-"use strict";
-cc._RF.push(module, '4d84cHfepJMm5hdOQQhmuG8', 'Global');
-// src/model/Global.js
-
-"use strict";
 
 /*
  * Created by Ren on 2018/6/11.
@@ -22,7 +17,7 @@ module.exports = function () {
             gem: 0,
             exp: 0,
             openAdTimes: 0,
-            inviteFriends: 0,
+
             hammer: {
                 default: {}
             },
@@ -31,6 +26,7 @@ module.exports = function () {
             },
             addgold: 0,
             addgem: 0,
+            inviteFriends: 0,
             freindsInfo: {
                 default: {}
             },
@@ -41,91 +37,86 @@ module.exports = function () {
             offlinetime:0,
             language:'English',
             InviteCount:10,
+            // BoxController:require("BoxController")
 
 
         },
 
-        initInfo: function initInfo() {
+        initHistory: function initInfo() {
             this.hard = 1;
-
-            lc.get('level', 1, function (v) {
-                if (typeof v == "string") {
-                    this.level = parseInt(v);
-                } else if (typeof v == "number") {
-                    this.level = v;
-                } else {
-                    this.level = 1;
-                }
-            }.bind(this));
-            lc.get('hard', 1, function (v) {
-                if (typeof v == "string") {
-                    this.hard = parseInt(v);
-                } else if (typeof v == "number") {
-                    this.hard = v;
-                } else {
-                    this.hard = 1;
-                }
-            }.bind(this));
-            lc.get('gold', 0, function (v) {
-                if (typeof v == "string") {
-                    this.gold = parseInt(v);
-                } else if (typeof v == "number") {
-                    this.gold = v;
-                } else {
-                    this.gold = 0;
-                }
-            }.bind(this));
-
-            lc.get('hammer', null, function (v) {
-                if (v != null) {
-                    this.hammer = JSON.parse(v);
-                } else {
-                    this.hammer = {};
-                }
-            }.bind(this));
-
-            lc.get('exp', 0, function (v) {
-                if (typeof v == "string") {
-                    this.exp = parseInt(v);
-                } else if (typeof v == "number") {
-                    this.exp = v;
-                } else {
-                    this.exp = 0;
-                }
-            }.bind(this));
-
-            lc.get('gem', 0, function (v) {
-                if (typeof v == "string") {
-                    this.gem = parseInt(v);
-                } else if (typeof v == "number") {
-                    this.gem = v;
-                } else {
-                    this.gem = 0;
-                }
-            }.bind(this));
-            lc.get('openAdTimes', 0, function (v) {
-                if (typeof v == "string") {
-                    this.openAdTimes = parseInt(v);
-                } else if (typeof v == "number") {
-                    this.openAdTimes = v;
-                } else {
-                    this.openAdTimes = 0;
-                }
-            }.bind(this));
-            lc.get('freindsInfo', {}, function (v) {
-                if (v != null) {
-                    this.freindsInfo = v;
-                } else {
-                    this.freindsInfo = {};
-                }
-            }.bind(this));
-            lc.get('efficiency', null, function (v) {
-                if (v != null) {
-                    this.efficiency = JSON.parse(v);
-                } else {
-                    this.efficiency = {};
-                }
-            }.bind(this));
+            //
+            // lc.get('level', 1, function (v) {
+            //     if (typeof v == "string") {
+            //         this.level = parseInt(v);
+            //     } else if (typeof v == "number") {
+            //         this.level = v;
+            //     } else {
+            //         this.level = 1;
+            //     }
+            //     this.BoxController.GameMenuController.
+            // }.bind(this));
+            // lc.get('hard', 1, function (v) {
+            //     if (typeof v == "string") {
+            //         this.hard = parseInt(v);
+            //     } else if (typeof v == "number") {
+            //         this.hard = v;
+            //     } else {
+            //         this.hard = 1;
+            //     }
+            //
+            // }.bind(this));
+            // lc.get('gold', 0, function (v) {
+            //     if (typeof v == "string") {
+            //         this.gold = parseInt(v);
+            //     } else if (typeof v == "number") {
+            //         this.gold = v;
+            //     } else {
+            //         this.gold = 0;
+            //     }
+            // }.bind(this));
+            //
+            // lc.get('hammer', null, function (v) {
+            //     if (v != null) {
+            //         this.hammer = JSON.parse(v);
+            //     } else {
+            //         this.hammer = {};
+            //     }
+            // }.bind(this));
+            //
+            // lc.get('exp', 0, function (v) {
+            //     if (typeof v == "string") {
+            //         this.exp = parseInt(v);
+            //     } else if (typeof v == "number") {
+            //         this.exp = v;
+            //     } else {
+            //         this.exp = 0;
+            //     }
+            // }.bind(this));
+            //
+            // lc.get('gem', 0, function (v) {
+            //     if (typeof v == "string") {
+            //         this.gem = parseInt(v);
+            //     } else if (typeof v == "number") {
+            //         this.gem = v;
+            //     } else {
+            //         this.gem = 0;
+            //     }
+            // }.bind(this));
+            // lc.get('freindsInfo', null, function (v) {
+            //     if (v != null) {
+            //         this.freindsInfo = JSON.parse(v);
+            //     } else {
+            //         this.freindsInfo = null;
+            //     }
+            // }.bind(this));
+            // lc.get('efficiency', null, function (v) {
+            //     if (v != null) {
+            //          this.efficiency = JSON.parse(v);
+            //     } else {
+            //         this.efficiency = {};
+            //     }
+            // }.bind(this));
+            lc.getMore(['gold','gem','exp','level','hard','freindsInfo','efficiency','hammer'],0,this.syncPlayerInfoMainInfo.bind(this));
             this.InviteClaim  =[true,false,false,false];
             lc.getMore(['Coins',"invite_0","invite_1","invite_2","invite_3"],0,this.syncPlayerInfo.bind(this));
 
@@ -161,25 +152,32 @@ module.exports = function () {
             lc.set('gem', gem);
             this.gem = gem;
         },
-        saveOpenAdTimes: function saveInviteFriends(openAdTimes) {
+        saveOpenAdTimes: function saveOpenAdTimes(openAdTimes) {
             lc.set('openAdTimes', openAdTimes);
             this.openAdTimes = openAdTimes;
-        },
-        saveInviteFriends: function saveInviteFriends(inviteFriends) {
-            lc.set('inviteFriends', inviteFriends);
-            this.inviteFriends = inviteFriends;
         },
         saveEfficiency: function saveEfficiency(efficiency) {
             lc.set('efficiency', JSON.stringify(efficiency));
             this.efficiency = efficiency;
         },
+        savefreindsInfo:function (info) {
+            lc.set('freindsInfo', JSON.stringify(info));
+            this.freindsInfo =info;
+        },
+        saveInviteFriends: function saveInviteFriends(inviteFriends) {
+            lc.set('inviteFriends',   inviteFriends.join(";"));
+            // this.inviteFriends = inviteFriends;
+
+            this.inviteFriends=[];
+            this.inviteFriends.push(...inviteFriends);
+        },
+
         updateInviteFriends:function (count) {
             this.InviteCount = count;
         },
         syncPlayerInfoToFB:function () {
             LocalStorage.set(['Coins',],this.Coins);
         },
-
         syncPlayerInfo:function (data) {
             if (typeof data["Coins"] != 'undefined') {
                 this.Coins = data["Coins"];
@@ -209,8 +207,73 @@ module.exports = function () {
             }else{
                 this.InviteClaim.push(false)
             }
-        },
 
+        },
+        syncPlayerInfoMainInfo:function (data) {
+            if(typeof data['gold'] != 'undefined'){
+                if ( typeof data['gold']  == "string") {
+                    this.gold = parseInt(data['gold']);
+                } else if (typeof data['gold'] == "number") {
+                    this.gold = data['gold'];
+                } else {
+                    this.gold = 0;
+                }
+            }
+            if(typeof data['gem'] != 'undefined'){
+                if ( typeof data['gem']  == "string") {
+                    this.gem = parseInt(data['gem']);
+                } else if (typeof data['gem'] == "number") {
+                    this.gem = data['gem'];
+                } else {
+                    this.gem = 0;
+                }
+            }
+            if(typeof data['exp'] != 'undefined'){
+                if ( typeof data['exp']  == "string") {
+                    this.exp = parseInt(data['exp']);
+                } else if (typeof data['exp'] == "number") {
+                    this.exp = data['exp'];
+                } else {
+                    this.exp = 0;
+                }
+            }
+            if(typeof data['hard'] != 'undefined'){
+                if ( typeof data['hard']  == "string") {
+                    this.hard = parseInt(data['hard']);
+                } else if (typeof data['hard'] == "number") {
+                    this.hard = data['hard'];
+                } else {
+                    this.hard = 1;
+                }
+            }
+            if(typeof data['level'] != 'undefined'){
+                if ( typeof data['level']  == "string") {
+                    this.level = parseInt(data['level']);
+                } else if (typeof data['level'] == "number") {
+                    this.level = data['level'];
+                } else {
+                    this.level = 1;
+                }
+            }
+            this.hammer={};
+            if(typeof data['hammer'] != 'undefined'){
+                this.hammer = JSON.parse(data['hammer']);
+            }
+            this.freindsInfo=[];
+            if(typeof data['freindsInfo'] != 'undefined'){
+                this.freindsInfo.push(data['freindsInfo']);
+            }
+            this.efficiency={};
+            if(typeof data['efficiency'] != 'undefined' ){
+                this.efficiency = JSON.parse(data['efficiency']);
+            }else{
+                this.efficiency = {};
+            }
+            // let BoxController = cc.find("Canvas").getComponent("BoxController");
+            // BoxController.onloadState();
+            // this.BoxController.GameMenuController.initInfo();
+            // this.BoxController.startSC();
+        },
         syncInviteFriends:function () {
 
             // if(GameConfig.isFBInstantGame()){
@@ -226,5 +289,3 @@ module.exports = function () {
     var instance = new cls();
     return instance;
 }();
-
-cc._RF.pop();

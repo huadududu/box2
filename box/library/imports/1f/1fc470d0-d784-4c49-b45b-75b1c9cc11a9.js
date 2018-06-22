@@ -7,7 +7,6 @@ cc._RF.push(module, '1fc47DQ14RMSbRbdbHJzBGp', 'GameMenuController');
 /*
  * Created by Ren on 2018/6/6.
  */
-var GameMenuView = require('GameMenuView');
 var UIBottomFactory = require("UIBottomFactory");
 var AcceleratorConfig = require("AcceleratorConfig");
 var ToolConfig = require("ToolConfig");
@@ -25,10 +24,12 @@ cc.Class({
         scrollView: cc.ScrollView,
         level: cc.Label,
         gold: cc.Label,
+        golddesc: cc.Label,
         gem: cc.Label,
         toplist: cc.Node,
         TopProgressBar: cc.ProgressBar,
         practice: cc.Node,
+        broadcast: cc.Label,
         radioButton: {
             default: [],
             type: cc.Toggle
@@ -56,6 +57,50 @@ cc.Class({
         this.radiotext[1].string = LanguageConfig['10036'][Global.language];
         this.radiotext[2].string = LanguageConfig['10037'][Global.language];
         this.levelLeadNode = null; //level的引导节点
+        this.newBroadcast = 0;
+        // this.broadcast.onEnable(trackEntry =>{
+        //     // this.schedule(this.broadcastCallBack,0.5);
+        //     // this.newBroadcast=0;
+        //
+        // });
+    },
+    broadcastShows: function broadcastShows(info) {
+
+        if (!this.showThings) {
+            this.showThings = [];
+        }
+        this.showThings.push("coin+" + info.coin);
+        this.showThings.push("exp+" + info.exp);
+        var str = "coin+" + info.coin + "\nexp+" + info.exp;
+        // if(this.showThings.length>5){
+        //     let deletenum = this.showThings.length-5;
+        //     this.showThings.splice(0,deletenum);
+        // }
+        // let str ="";
+        //
+        // for(let i=0;i<this.showThings.length;i++)
+        // {
+        //     str+=this.showThings[i]+"\n";
+        //
+        // }
+        var PopMsgController = require("PopMsgController");
+        PopMsgController.showMsg(str);
+        // this.broadcast.string = str;
+        // this.broadcast.node.active = true;
+        // if(this.checkisrun){
+        //     this.unschedule(this.callback)
+        //     this.checkisrun= false;
+        // }
+        // let self = this;
+        // this.callback=function(){
+        //         self.broadcast.node.active =false ;
+        //         self.checkisrun = false;
+        // }
+        // if(!this.checkisrun){
+        //     this.checkisrun = true;
+        //     this.schedule(this.callback,1,1);
+        //
+        // }
     },
     initInfo: function initInfo() {
         this.setGoldNum(Global.gold);
@@ -67,12 +112,10 @@ cc.Class({
         this.setProgress(Global.exp / exp);
     },
     addUIBottom: function addUIBottom() {
-        if (this.config == undefined) {
-            this.config = [AcceleratorConfig, ToolConfig, EfficiencyConfig];
-        }
+        this.config = [AcceleratorConfig, ToolConfig, EfficiencyConfig];
         this.itemList = [];
         var startpos = 0;
-
+        this.itemlistNum = [];
         for (var i = 0; i < this.config.length; i++) {
             var j = 1;
             for (; this.config[i][j] != undefined; j++) {
@@ -96,8 +139,14 @@ cc.Class({
 
     //设置金币
     setGoldNum: function setGoldNum(num) {
-        var strnum = GameUtils.formatNum(num);
-        this.gold.string = strnum;
+        var strnum1 = GameUtils.formatNumMAX(num);
+        this.gold.string = strnum1;
+        if (num >= 1000) {
+            this.golddesc.string = '(' + GameUtils.stardandFun(num) + ')';
+            this.golddesc.node.active = true;
+        } else {
+            this.golddesc.node.active = false;
+        }
     },
     setLevel: function setLevel(level) {
         this.level.string = "LEVEL" + level;
@@ -118,7 +167,9 @@ cc.Class({
         if (Global.level == 1 && bool) {
             if (!this.levelLeadNode) {
                 var node = UILeadFactory.create();
-                node.position = this.levelupBtn.node.position;
+                var position = this.levelupBtn.node.position;
+                position.y = position.y - 15;
+                node.position = position;
                 // node.ratation = 270;
                 this.levelLeadNode = node;
                 this.toplist.addChild(node);

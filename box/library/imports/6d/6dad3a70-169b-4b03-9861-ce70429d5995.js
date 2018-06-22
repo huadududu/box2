@@ -30,7 +30,7 @@ cc.Class({
         progressBar: cc.ProgressBar,
         btntext: cc.Label,
         iconGem: cc.Sprite,
-        iconlead: cc.Sprite,
+        iconlead: cc.Node,
         type: {
             visible: false,
             default: 2
@@ -239,98 +239,71 @@ cc.Class({
                 var iconpng = config[this.type][this.ID].locked;
                 if (thisID == 0) {
                     //点击激活
-
-                    // this.btntext.string="touch active";
                     this.btntext.string = LanguageConfig['10020'][Global.language];
-                    if (this.ID == 1) {
-                        // this.ButtonState(1);
-
-                    } else {
-                        if (Global.hammer[this.ID - 1]) {
-                            // this.ButtonState(1);
-                            // this.lockState = false;
-                        } else {
-                                // this.ButtonState(0);
-                                // this.lockState = true;
-                            }
-                    }
                     this.GameState = 1;
                 } else if (thisID == 1) {
                     //视频激励
-                    // this.btntext.string = "n:"+thisID+"c:"+Global.openAdTimes;
-                    this.btntext.string = LanguageConfig['10022'][Global.language];
+
                     if (Global.hammer[this.ID - 1]) {
-                        // this.ButtonState(1);
                         this.GameState = 1;
-                        this.lockState = false;
+                        if (Global.openAdTimes > 0) {
+                            //看广告了
+                            this.btntext.string = LanguageConfig['10020'][Global.language];
+                        } else {
+                            //没看
+                            this.btntext.string = LanguageConfig['10022'][Global.language];
+                        }
                     } else {
-                        // this.ButtonState(0);
+                        this.btntext.string = LanguageConfig['10022'][Global.language];
                         this.GameState = 0;
-                        // this.lockState = true;
                     }
                 } else if (thisID == 2) {
                     //等级激活
                     var needlvl = confArry[1];
+                    var str = LanguageConfig['10021'][Global.language];
                     if (level < needlvl) {
-                        // this.ButtonState(0);
                         this.GameState = 0;
-                        // this.lockState = true;
-                        var str = LanguageConfig['10021'][Global.language];
-                        // this.btntext.string='Lv'+needlvl;
                         this.btntext.string = this.formatPrint(str, needlvl);
                     } else {
                         if (Global.hammer[this.ID - 1]) {
-                            // this.ButtonState(1);
                             this.GameState = 1;
-                            // this.lockState = false;
+                            this.btntext.string = LanguageConfig['10020'][Global.language];
                         } else {
-                            // this.ButtonState(0);
                             this.GameState = 0;
-                            // this.lockState = true;
+
+                            this.btntext.string = this.formatPrint(str, needlvl);
                         }
-                        // this.btntext.string="touchactive";
-                        this.btntext.string = LanguageConfig['10020'][Global.language];
                     }
                 } else if (thisID == 3) {
                     //邀请好友
-                    // this.btntext.string = "n:"+confArry[1]+"c:"+Global.inviteFriends;
-                    if (Global.inviteFriends == 0) {
+                    if (Global.freindsInfo == null || Global.freindsInfo[this.ID] == null || Global.freindsInfo[this.ID].length == 0) {
                         this.btntext.string = LanguageConfig['10023'][Global.language];
-                    } else if (confArry[1] > Global.inviteFriends) {
-                        this.btntext.string = Global.inviteFriends + '／' + confArry[1];
+                    } else if (confArry[1] > Global.freindsInfo[this.ID].length) {
+                        this.btntext.string = Global.freindsInfo[this.ID].length + '／' + confArry[1];
                     } else {
                         //邀请的数量够
                         this.btntext.string = LanguageConfig['10020'][Global.language];
                     }
                     if (Global.hammer[this.ID - 1]) {
-                        // this.ButtonState(1);
                         this.GameState = 1;
-                        // this.lockState = false;
                     } else {
-                        // this.ButtonState(0);
                         this.GameState = 0;
-                        // this.lockState = true;
                     }
                 }
             } else if (AttributeConfig[Global.hammer[this.ID].attribute].next == -1) {
                 //达到最大
-                // this.ButtonState(0);
                 this.GameState = 4;
                 this.btntext.string = LanguageConfig['10024'][Global.language];
-                // this.lockState = false;
             } else {
                 //升级条件
-                // this.lockState = false;
                 var conf1 = AttributeConfig[Global.hammer[this.ID].attribute];
                 if (conf1.costtype = 1001) {
                     if (Global.gold > conf1.cost) {
-                        // this.ButtonState(1);
                         this.GameState = 3;
                     } else {
-                        // this.ButtonState(0);
                         this.GameState = 2;
                     }
-                    this.btntext.string = GameUtils.formatNum(conf1.cost);
+                    this.btntext.string = GameUtils.formatNumMAX(conf1.cost);
                 }
             }
         }
@@ -428,7 +401,7 @@ cc.Class({
         return jumpstr;
     },
     setLeadState: function setLeadState() {
-        this.iconlead.node.active = this.GameState == 1;
+        this.iconlead.active = this.GameState == 1;
     }
 });
 

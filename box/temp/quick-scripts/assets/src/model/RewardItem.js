@@ -32,7 +32,7 @@ cc.Class({
         if (reward.indexOf(";") != -1) {
             var rewardarry = reward.split(";");
             this.pngID = rewardarry[0];
-            this.text.string = rewardarry[1];
+            this.text.string = "+" + rewardarry[1];
             this.text.node.active = false;
         }
         this.icon.spriteFrame = SpriteFrameCenter.getFrameFromAtlas("png/box", ItemConfig[this.pngID].icon + ".png");

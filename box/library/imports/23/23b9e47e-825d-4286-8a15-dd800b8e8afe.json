@@ -242,7 +242,7 @@
       }
     }
   },
-  "_atlasText": "\r\nbox-gold.png\r\nsize: 128,256\r\nformat: RGBA8888\r\nfilter: Linear,Linear\r\nrepeat: none\r\nbox_jin1\r\n  rotate: false\r\n  xy: 1, 1\r\n  size: 120, 111\r\n  orig: 120, 111\r\n  offset: 0, 0\r\n  index: -1\r\nbox_jin2\r\n  rotate: false\r\n  xy: 1, 114\r\n  size: 115, 71\r\n  orig: 115, 71\r\n  offset: 0, 0\r\n  index: -1\r\nbox_jin3\r\n  rotate: false\r\n  xy: 1, 187\r\n  size: 120, 60\r\n  orig: 120, 60\r\n  offset: 0, 0\r\n  index: -1\r\n",
+  "_atlasText": "\nbox-gold.png\nsize: 128,256\nformat: RGBA8888\nfilter: Linear,Linear\nrepeat: none\nbox_jin1\n  rotate: false\n  xy: 1, 1\n  size: 120, 111\n  orig: 120, 111\n  offset: 0, 0\n  index: -1\nbox_jin2\n  rotate: false\n  xy: 1, 114\n  size: 115, 71\n  orig: 115, 71\n  offset: 0, 0\n  index: -1\nbox_jin3\n  rotate: false\n  xy: 1, 187\n  size: 120, 60\n  orig: 120, 60\n  offset: 0, 0\n  index: -1\n",
   "atlasUrl": {
     "__uuid__": "5141359d-a378-47db-aa74-dde0d96897c9"
   },
