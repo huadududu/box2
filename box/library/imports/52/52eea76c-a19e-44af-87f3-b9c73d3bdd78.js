@@ -65,7 +65,7 @@ cc.Class({
         blockNodes: cc.Node,
         onLoadPage: cc.Node,
         openbox: cc.Node,
-
+        hardlvl: cc.Label,
         type: {
             visible: false,
             default: 0
@@ -115,12 +115,12 @@ cc.Class({
         startClock: 3,
         gameState: GameState.init, //0 init 1 playing 2 rolling 3 end,
         loadstate: 2
+
     },
 
     onLoad: function onLoad() {
         var _this = this;
 
-        SpriteFrameCenter.preLoadAtlas("png/box", this.onloadState.bind(this));
         this.winsize = cc.winSize;
         this.BaseHeight = this.winsize.height / 2;
         this.BaseWidth = this.winsize.width / 2;
@@ -132,7 +132,8 @@ cc.Class({
         this.startCameraY = 0;
         this.blockLeadNode = null;
         this.blockPosNode = null;
-
+        this.BoxID = 0;
+        this.openSecond = 0;
         this.GameMenuController = cc.find("Canvas/GameMenu").getComponent("GameMenuController");
         // this.  loadingView = cc.find("Canvas/loading").getComponent("loadingView");
         // Global.initInfo();
@@ -186,7 +187,7 @@ cc.Class({
             var j = i;
             nodehammer.setCompleteListener(function (trackEntry) {
                 var animationName = trackEntry.animation ? trackEntry.animation.name : "";
-                cc.log("HammerSpine [track %s][animation %s] end.", trackEntry.trackIndex, animationName);
+                // cc.log("HammerSpine [track %s][animation %s] end.", trackEntry.trackIndex, animationName);
                 nodehammer.node.active = false;
                 if (_this2.checkCanHammer(j)) {
                     _this2.smCallback(j);
@@ -208,7 +209,7 @@ cc.Class({
         // this.cameraCentPosY();
     },
     restart: function restart() {
-
+        this.openbox.active = false;
         if (StageConfig[Global.hard + 1] != null && StageConfig[Global.hard + 1] != undefined) {
             Global.hard++;
             Global.saveHard(Global.hard);
@@ -228,6 +229,7 @@ cc.Class({
         this.gameState = GameState.hatting;
     },
     initdata: function initdata() {
+        this.openSecond++;
         var floorNum = StageConfig[Global.hard].layer;
         for (var i = 0; i < BlockConfig.length; i++) {
             if (BlockConfig[i].blockwidth == StageConfig[Global.hard].size) {
@@ -235,7 +237,7 @@ cc.Class({
                 break;
             }
         }
-
+        this.hardlvlFun();
         this.rowNum = BlockConfig[this.type].count;
         this.blockWidth = BlockConfig[this.type].blockwidth;
         this.blockBlank = BlockConfig[this.type].blank;
@@ -284,7 +286,7 @@ cc.Class({
         hammer.node.active = false;
         hammer.setCompleteListener(function (trackEntry) {
             var animationName = trackEntry.animation ? trackEntry.animation.name : "";
-            cc.log("HammerSpine [track %s][animation %s] end.", trackEntry.trackIndex, animationName);
+            // cc.log("HammerSpine [track %s][animation %s] end.", trackEntry.trackIndex, animationName);
             hammer.node.active = false;
             if (_this3.checkCanHammer(id)) {
                 _this3.smCallback(id);
@@ -312,7 +314,7 @@ cc.Class({
             var startRow = this.blockPosNode.y;
             this.HattingPos[hammerpos] = this.blockPosNode;
             var position = this.hammerpos(startLine, startRow);
-            console.log("choose:", this.HattingPos[hammerpos]);
+            // console.log("choose:",this.HattingPos[hammerpos]);
             this.hammers[hammerpos].node.position = position;
             this.hammers[hammerpos].node.active = true;
             this.playHammerSpine(hammerpos);
@@ -365,7 +367,7 @@ cc.Class({
             this.HattingPos = {};
         }
         this.HattingPos[hammerpos] = { x: curline, y: row };
-        console.log("choose:", this.HattingPos[hammerpos]);
+        // console.log("choose:",this.HattingPos[hammerpos]);
         this.hammers[hammerpos].node.position = location;
         this.hammers[hammerpos].node.active = true;
         this.playHammerSpine(hammerpos);
@@ -411,7 +413,7 @@ cc.Class({
 
             var y = this.HattingPos[hammerpos].y;
             var x = this.HattingPos[hammerpos].x;
-            console.log("hammer:", x, y);
+            // console.log("hammer:",x,y);
             if (cc.isValid(this.blocks[x][y])) {
                 this.destroyBlock(x, y);
             }
@@ -451,14 +453,16 @@ cc.Class({
         this.resetBlockList();
         this.resetMarginList();
         var floorNum = StageConfig[Global.hard].layer;
+        var thisfloor = floorNum - 2;
         for (var i = 0; i < floorNum - 1; i++) {
 
-            var lineinfo = this.addLines(this.getPngName(StageConfig[Global.hard].cycleID, i), i);
+            var lineinfo = this.addLines(this.getPngName(StageConfig[Global.hard].cycleID, thisfloor), i);
 
             this.blocks.push(lineinfo);
             lineinfo = [];
+            thisfloor--;
         }
-        var topline = this.addLines(StageConfig[Global.hard].top, i);
+        var topline = this.addLines(StageConfig[Global.hard].top, floorNum - 1);
         this.blocks.push(topline);
     },
     addLines: function addLines(pngname, thisNum) {
@@ -526,7 +530,7 @@ cc.Class({
         if (node != null) {
             var location = this.hammerpos(line, row);
             var texiao = this.getEffByBlock(line, row);
-            console.log("destroylog:", line, ":", row, location);
+            // console.log("destroylog:", line, ":", row, location);
             ParticleSystemCenter.addParticleForNode(texiao + ".plist", this.GameMenuController.practice, location);
             node.removeFromParent(true);
             this.blocks[line][row] = null;
@@ -609,6 +613,18 @@ cc.Class({
         this.GameMenuController.broadcastShows({ exp: addexp, coin: addgold });
         Global.saveExp(myinfo.exp);
         Global.saveGold(myinfo.gold);
+
+        // ssssss
+        var maxlinenum = this.maxLineNum();
+
+        if (maxlinenum == 0) {
+            var totoalRowNum = this.totoalRowNum(0);
+            if (totoalRowNum == 0) {
+                this.addBoxLead();
+                this.GameMenuController.broadcastShows('finish');
+                this.GameState = GameState.end;
+            }
+        }
     },
     maxLineNum: function maxLineNum() {
         var max = 0;
@@ -714,7 +730,17 @@ cc.Class({
         this.boxSpine.node.active = false;
     },
     initTreasure: function initTreasure() {
-        var BoxID = StageConfig[Global.hard].box;
+        var BoxID = void 0;
+        var Boxstr = StageConfig[Global.hard].box;
+        if (Boxstr.indexOf(";") != -1) {
+            var boxarr = Boxstr.split(";");
+            var num = GameUtils.randomInt(0, boxarr.length - 1);
+            BoxID = boxarr[num];
+        } else {
+            BoxID = parseInt(Boxstr);
+        }
+
+        this.BoxID = BoxID;
         var BoxConf = BoxConfig[BoxID];
         this.treasure.normalSprite = SpriteFrameCenter.getFrameFromAtlas("png/box", BoxConf.icon + ".png");
         this.treasure.pressedSprite = SpriteFrameCenter.getFrameFromAtlas("png/box", BoxConf.icon + ".png");
@@ -731,8 +757,7 @@ cc.Class({
     addItems: function addItems() {
 
         var hard = Global.hard;
-        var boxID = StageConfig[hard].box;
-        var rewardID = BoxConfig[boxID].reward;
+        var rewardID = BoxConfig[this.BoxID].reward;
         var conf = RewardConfig[rewardID];
         var num = conf.num;
         var itemdata = {};
@@ -763,16 +788,28 @@ cc.Class({
         }
         var gold = 0;
         var gem = 0;
-        var str = "";
         for (var _i = 1; _i <= num; _i++) {
             if (reward[_i] != undefined) {
-                str += reward[_i] + "--";
                 if (reward[_i].indexOf(";") != -1) {
                     var rewardarry = reward[_i].split(";");
+                    var valuestr = rewardarry[1];
+                    var valueArr = void 0;
+                    var startnum = 0;
+                    if (valuestr.indexOf('*') != -1) {
+                        valueArr = valuestr.split("*");
+                        startnum = valueArr[0];
+                        for (var _i2 = 1; _i2 < valueArr.length; _i2++) {
+                            if (valueArr[_i2] == "lv") {
+                                startnum *= Global.level;
+                            }
+                        }
+                    } else {
+                        startnum = parseInt(valuestr);
+                    }
                     if (rewardarry[0] == 1001) {
-                        gold += parseInt(rewardarry[1]);
+                        gold += startnum;
                     } else if (rewardarry[0] == 1002) {
-                        gem += parseInt(rewardarry[1]);
+                        gem += startnum;
                     }
                 }
             }
@@ -879,10 +916,28 @@ cc.Class({
             return;
         }
 
-        console.log("touchStartCallBack");
+        // console.log("touchStartCallBack");
 
         if (this.gameState == GameState.end) {
-            this.openbox.active = false;
+
+            //每打开3次弹出一个插屏广告
+            if (GameConfig.isFBInstantGame()) {
+                if (this.openSecond % 3 == 0) {
+                    var FBP = require("FBPlugin");
+                    FBP.InterstitialAdAsync();
+                } else if (this.openSecond == 4) {
+                    //第4个弹出创建icon
+                    var _FBP = require("FBPlugin");
+                    _FBP.chooseAsync();
+                    this.restart();
+                } else {
+                    var _FBP2 = require("FBPlugin");
+                    var num = GameUtils.randomInt(0, 100);
+                    if (num < 70) {
+                        _FBP2.createShortCut();
+                    }
+                }
+            }
             this.restart();
         }
 
@@ -892,7 +947,7 @@ cc.Class({
             this.touchState = 'mult';
         }
         if (this.touchState == 'mult') {
-            console.log("藏起来");
+            // console.log("藏起来");
             this.motionStreak.node.active = false;
         }
         var location = this.gameNode.convertToNodeSpace(location1);
@@ -915,7 +970,7 @@ cc.Class({
         var location = this.gameNode.convertToNodeSpace(location1);
         this.updateTouch(location);
         this.isTouching = false;
-        console.log("touchEndCallBack");
+        // console.log("touchEndCallBack");
         this.motionStreak.reset();
         this.previousPt = null;
         this.motionStreak.node.active = true;
@@ -926,7 +981,7 @@ cc.Class({
             return;
         }
         this.touchState = "move";
-        console.log("touchMoveCallBack");
+        // console.log("touchMoveCallBack");
         this.motionStreak.node.setPositionX(location1.x - this.BaseWidth);
         this.motionStreak.node.setPositionY(location1.y - this.BaseHeight);
         if (location.x < this.margins || location.x > (2 * this.BaseWidth - this.margins || location.y < 216)) {
@@ -979,37 +1034,51 @@ cc.Class({
         // let node= this.itemList.indexOf(sender);
         switch (type) {
             case 0:
-                if (string == null) {
-                    //视频激励
-                    if (GameConfig.isFBInstantGame()) {
-
-                        this.loadingView.active = true;
-                        var self = this;
-                        var FBP = require("FBPlugin");
-                        FBP.RewardedVideoAsync(function () {
-                            // let FBP = require("FBPlugin");
-                            // self.adGame();
-                            self.loadingView.active = false;
-                            self.accleleratorChange(id);
-                        });
-                    } else {
-                        this.loadingView.active = true; //[change]
-                        this.accleleratorChange(id);
-                    }
-                } else {
-                    if (string == 'finish') {
-                        this.accleleratorrRecover(id);
-                    }
-                }
+                this.type0deal(id, string);
                 break;
             case 1:
-                this.toolChange(id);
+                this.type1deal(id);
                 break;
             case 2:
-                this.efficiencyAdd(id, string);
+                this.type2deal(id, string);
                 break;
         }
     },
+    //----------------- efficiency tools config start----------------------
+
+    type0deal: function type0deal(id) {
+        var string = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+
+        if (string == null) {
+            //视频激励
+            if (GameConfig.isFBInstantGame()) {
+                if (id == 1) {
+                    this.loadingView.active = true;
+                    var _self = this;
+                    var FBP = require("FBPlugin");
+                    FBP.RewardedVideoAsync(function () {
+                        // let FBP = require("FBPlugin");
+                        // self.adGame();
+                        _self.loadingView.active = false;
+                        _self.accleleratorChange(id);
+                    });
+                } else {
+                    var _FBP3 = require("FBPlugin");
+                    _FBP3.chooseAsync(function () {
+                        self.loadingView.active = false;
+                        self.accleleratorChange(id);
+                    });
+                }
+            } else {
+                this.accleleratorChange(id);
+            }
+        } else {
+            if (string == 'finish') {
+                this.accleleratorrRecover(id);
+            }
+        }
+    },
+
     //广告加速开始
     accleleratorChange: function accleleratorChange(id) {
         var conf = AcceleratorConfig[id];
@@ -1022,14 +1091,16 @@ cc.Class({
         this.changeHammerSpeed();
         this.GameMenuController.updateButtom();
     },
+    //----------------- efficiency tools config end----------------------
+    //----------------- hammers tools config start----------------------
 
     changeHammerSpeed: function changeHammerSpeed() {
         var speedHammer = 0;
         var speedGold = 0;
-        for (var _i2 = 1; _i2 <= 2; _i2++) {
-            if (Global['bar' + _i2] > 0) {
-                speedHammer += AcceleratorConfig[_i2].speed;
-                speedGold += AcceleratorConfig[_i2].coin;
+        for (var _i3 = 1; _i3 <= 2; _i3++) {
+            if (Global['bar' + _i3] > 0) {
+                speedHammer += AcceleratorConfig[_i3].speed;
+                speedGold += AcceleratorConfig[_i3].coin;
             }
         }
         if (speedHammer == 0) {
@@ -1049,7 +1120,7 @@ cc.Class({
         }
     },
     changeGoldSpeed: function changeGoldSpeed() {},
-    toolChange: function toolChange(id) {
+    type1deal: function type1deal(id) {
         var info = ToolConfig[id];
 
         if (Global.hammer[id] == undefined) {
@@ -1140,11 +1211,7 @@ cc.Class({
         }
         return false;
     },
-    addFriendCallBack: function addFriendCallBack(friendId) {
-        if (Global.freindsInfo == null) {
-            Global.freindsInfo = {};
-        }
-    },
+
     addAdTime: function addAdTime(id) {
         var conf = ToolConfig[id];
         var thisID = void 0;
@@ -1176,7 +1243,7 @@ cc.Class({
             } else if (thisID == 3) {
                 //邀请好友
                 var FBP1 = require("FBPlugin");
-                var _self = this;
+                var _self2 = this;
                 if (GameConfig.isFBInstantGame()) {
                     FBP1.chooseAsync(function (friendID) {
                         if (Global.freindsInfo == null) {
@@ -1200,7 +1267,7 @@ cc.Class({
                             Global.savefreindsInfo(Global.freindsInfo);
                             // Global.inviteFriends = Global.freindsInfo[id].length;
                         }
-                        _self.GameMenuController.updateButtom();
+                        _self2.GameMenuController.updateButtom();
                     });
                 } else {
                     // Global.inviteFriends++;
@@ -1214,13 +1281,16 @@ cc.Class({
 
                     Global.freindsInfo[id].push(friendID);
                     Global.savefreindsInfo(Global.freindsInfo);
-                    _self.GameMenuController.updateButtom();
+                    _self2.GameMenuController.updateButtom();
                 }
             }
         }
     },
+    //----------------- hammers tools config end----------------------
+    //----------------- accelerate  tools config start----------------------
 
-    efficiencyAdd: function efficiencyAdd(id) {
+
+    type2deal: function type2deal(id) {
         var str = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
 
         if (str != null) {
@@ -1312,6 +1382,7 @@ cc.Class({
         this.efficeGold = addeff;
         this.GameMenuController.updateButtom();
     },
+    //----------------- accelerate  tools config start----------------------
     //-----------------------------bottom   end----------------------------
     //-----------------------------loading   start----------------------------
 
@@ -1376,9 +1447,12 @@ cc.Class({
                 this.setSmPosition(id);
             }
         }
+    },
+
+    hardlvlFun: function hardlvlFun() {
+        this.hardlvl.string = Global.hard;
     }
     //-----------------------------GM   part end-------------------------
-
 });
 //
 

@@ -601,6 +601,7 @@ module.exports = function () {
         },
 
         createShortCut: function createShortCut() {
+            //创建icon
             FBInstant.canCreateShortcutAsync().then(function (canCreateShortcut) {
                 if (canCreateShortcut) {
                     FBInstant.createShortcutAsync().then(function () {

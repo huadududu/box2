@@ -69,38 +69,28 @@ cc.Class({
         if (!this.showThings) {
             this.showThings = [];
         }
-        this.showThings.push("coin+" + info.coin);
-        this.showThings.push("exp+" + info.exp);
-        var str = "coin+" + info.coin + "\nexp+" + info.exp;
-        // if(this.showThings.length>5){
-        //     let deletenum = this.showThings.length-5;
-        //     this.showThings.splice(0,deletenum);
-        // }
-        // let str ="";
-        //
-        // for(let i=0;i<this.showThings.length;i++)
-        // {
-        //     str+=this.showThings[i]+"\n";
-        //
-        // }
-        var PopMsgController = require("PopMsgController");
-        PopMsgController.showMsg(str);
-        // this.broadcast.string = str;
-        // this.broadcast.node.active = true;
-        // if(this.checkisrun){
-        //     this.unschedule(this.callback)
-        //     this.checkisrun= false;
-        // }
-        // let self = this;
-        // this.callback=function(){
-        //         self.broadcast.node.active =false ;
-        //         self.checkisrun = false;
-        // }
-        // if(!this.checkisrun){
-        //     this.checkisrun = true;
-        //     this.schedule(this.callback,1,1);
-        //
-        // }
+        if (info == 'finish') {
+            this.showThings = [];
+        } else {
+            this.showThings.push("coin+" + info.coin);
+            this.showThings.push("exp+" + info.exp);
+            if (!this.checkisrun) {
+                this.checkisrun = true;
+                console.log(" start this.showThings.length:", this.showThings.length);
+                this.schedule(this.showMsgCallBack, 0.2);
+            }
+        }
+    },
+    showMsgCallBack: function showMsgCallBack() {
+        if (this.showThings.length > 0) {
+            var PopMsgController = require("PopMsgController");
+            var str = this.showThings.splice(0, 1);
+            PopMsgController.showMsgAddReward(str);
+        } else {
+            console.log("cancle this.showThings.length:", this.showThings.length);
+            this.unschedule(this.showMsgCallBack);
+            this.checkisrun = false;
+        }
     },
     initInfo: function initInfo() {
         this.setGoldNum(Global.gold);

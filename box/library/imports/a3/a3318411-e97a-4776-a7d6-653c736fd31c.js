@@ -24,6 +24,20 @@ module.exports = {
         pop.init(content, animation);
         cc.find("Canvas").addChild(newNode);
         newNode.setPosition(0, 0);
+    },
+    showMsgAddReward: function showMsgAddReward(content) {
+        var animation = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+
+        var name = "prefab/popmsg";
+        if (!animation) {
+            name = "prefab/popmsg2";
+        }
+        var prefab = cc.loader.getRes(name);
+        var newNode = cc.instantiate(prefab);
+        var pop = newNode.getComponent("PopMsg");
+        pop.init(content, animation);
+        cc.find("Canvas").addChild(newNode);
+        newNode.setPosition(0, 0);
     }
 
 };

@@ -11,6 +11,7 @@ var Global = require('Global');
 var StageConfig = require("StageConfig");
 var BoxConfig = require("BoxConfig");
 var RewardConfig = require("RewardConfig");
+var GameConfig = require("GameConfig");
 var GameUtils = require("GameUtils");
 var LevelConfig = require("LevelConfig");
 var EfficiencyConfig = require("EfficiencyConfig");
@@ -56,6 +57,7 @@ cc.Class({
         var claim = LanguageConfig['10028'][Global.language];
         this.TitleLable.string = LanguageConfig['10026'][Global.language];
         this.DescLable.string = LanguageConfig['10027'][Global.language];
+        needgold = GameUtils.formatNumMAX(needgold);
         this.RewardLable.string = "x" + needgold;
         this.nextdesc.string = claim;
         this.vediodesc.string = claim + 'x' + this.type;
@@ -68,7 +70,8 @@ cc.Class({
         var claim = LanguageConfig['10028'][Global.language];
         this.TitleLable.string = LanguageConfig['10033'][Global.language];
         this.DescLable.string = LanguageConfig['10032'][Global.language];
-        this.RewardLable.string = "x" + Global.addgold;
+        var needgold = GameUtils.formatNumMAX(Global.addgold);
+        this.RewardLable.string = "x" + needgold;
         this.nextdesc.string = claim;
         this.vediodesc.string = claim + 'x' + this.type;
     },
@@ -81,25 +84,39 @@ cc.Class({
         Global.addgold = Math.floor(Global.addgold);
         this.TitleLable.string = LanguageConfig['10017'][Global.language];
         this.DescLable.string = desc;
-        this.RewardLable.string = "x" + Global.addgold;
+        var needgold = GameUtils.formatNumMAX(Global.addgold);
+        this.RewardLable.string = "x" + needgold;
         this.nextdesc.string = claim;
         this.vediodesc.string = claim + 'x' + this.type;
     },
-    onVedioSureBtn: function onVedioSureBtn() {
-        var golds = Global.gold + Global.addgold * this.type;
-        if (Global.addgold > 0) {
-            this.BoxController.GameMenuController.updateDate({ gold: golds });
-            Global.saveGold(golds);
-        }
-        Global.addgold = 0;
-        this.node.active = false;
-    },
     onNextBtn: function onNextBtn() {
+
         var golds = Global.gold + Global.addgold;
         this.BoxController.GameMenuController.updateDate({ gold: golds });
         Global.saveGold(golds);
         if (Global.addgold > 0) {
             this.node.active = false;
+            Global.saveGold(golds);
+        }
+        Global.addgold = 0;
+        this.node.active = false;
+    },
+    onVedioSureBtn: function onVedioSureBtn() {
+
+        if (GameConfig.isFBInstantGame()) {
+            this.BoxController.loadingView.active = true;
+            var FBP = require("FBPlugin");
+            FBP.RewardedVideoAsync(this.seeAdCallBack);
+        } else {
+            this.BoxController.loadingView.active = true; //[change]
+            this.seeAdCallBack();
+        }
+    },
+    seeAdCallBack: function seeAdCallBack() {
+        this.BoxController.loadingView.active = false;
+        var golds = Global.gold + Global.addgold * this.type;
+        if (Global.addgold > 0) {
+            this.BoxController.GameMenuController.updateDate({ gold: golds });
             Global.saveGold(golds);
         }
         Global.addgold = 0;

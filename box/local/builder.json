@@ -3,7 +3,7 @@
   "apiLevel": "",
   "appABIs": [],
   "buildPath": "/Users/bolex1/work/game/testservice",
-  "debug": false,
+  "debug": true,
   "includeEruda": false,
   "keystoreAlias": "",
   "keystoreAliasPassword": "",
@@ -12,7 +12,7 @@
   "platform": "fb-instant-games",
   "previewHeight": "720",
   "previewWidth": "1280",
-  "sourceMaps": false,
+  "sourceMaps": true,
   "template": "link",
   "useDebugKeystore": true,
   "vsVersion": "auto"

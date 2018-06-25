@@ -34,15 +34,15 @@ cc.Class({
     },
 
     hideAction: function hideAction() {
-        var time = 2.0;
+        var time = 1;
         var faceOut = cc.fadeOut(1);
         // faceOut.easing(cc.easeIn(time));
         var winsize = cc.winSize;
         var mv = cc.moveTo(time, cc.p(0, winsize.height * 0.3));
-        mv.easing(cc.easeIn(time));
-        // let spawn = cc.spawn(mv,faceOut);
+        // mv.easing(cc.easeIn(time));
+        var spawn = cc.spawn(mv, faceOut);
         var finished = cc.callFunc(this.removeNode, this);
-        var seq = cc.sequence(mv, faceOut, finished);
+        var seq = cc.sequence(spawn, faceOut, finished);
         this.node.runAction(seq);
     },
 

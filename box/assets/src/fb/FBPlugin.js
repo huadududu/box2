@@ -603,7 +603,7 @@ module.exports = function () {
         },
 
 
-        createShortCut:function () {
+        createShortCut:function () {   //创建icon
             FBInstant.canCreateShortcutAsync()
                 .then(function(canCreateShortcut) {
                     if (canCreateShortcut) {

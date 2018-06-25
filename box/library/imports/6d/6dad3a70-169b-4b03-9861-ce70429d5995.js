@@ -31,6 +31,7 @@ cc.Class({
         btntext: cc.Label,
         iconGem: cc.Sprite,
         iconlead: cc.Node,
+        icon_gold: cc.Sprite,
         type: {
             visible: false,
             default: 2
@@ -72,18 +73,22 @@ cc.Class({
         var bool = GameType.bottomRadio.Efficiency == this.type;
         this.icon.node.active = !bool;
         this.iconLabel.node.active = bool;
+        this.icon_gold.node.active = false;
         if (this.GameState == 0) {
             var iconpng = config[this.type][this.ID].locked;
             this.icon.spriteFrame = SpriteFrameCenter.getFrameFromAtlas("png/box", iconpng + ".png");
             return;
         }
         if (bool) {
-            var time = config[this.type][this.ID].time;
-            if (time > 0) {
-                pngname = "X" + time;
+            var coin = config[this.type][this.ID].coin;
+            if (coin > 0) {
+                pngname = "X" + coin;
+                this.icon_gold.node.active = true;
+                this.iconLabel.node.x = -30;
             } else {
                 var jumptime = config[this.type][this.ID].jumptime;
                 pngname = this.formatDayTest(jumptime);
+                this.iconLabel.node.x = -50;
                 // pngname = "x"+config[this.type][this.ID].jumptime;
             }
             this.iconLabel.string = pngname;
