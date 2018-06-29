@@ -18,7 +18,7 @@ import codecs
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
-
+ 
 # keyindex 作为 keyf
 def generageLua(rowsContent,rowMap,keyindex):
 
@@ -189,54 +189,6 @@ def parseLineConfig(content):
     # for item in content:
     #     print item
 
-def parseTankConfig(content):
-    # '1':{id: 1, head: 't_1001.png', body: ['t_1002.png', 't_1002.png'], itemIcon: "i_10001.png", bulletsp: "",
-    #      bulletspeed: 100, bulletF: 10, onepos: [4.5], twopos: [3, 6]}
-
-
-    # type
-    ret = {}
-    ret['id'] = str2i(content[0])
-    ret['head'] =  str2str(content[1])
-
-    # body
-    ret['body'] = []
-    body1 = str2str(content[2])
-    if body1:
-        ret['body'].append(body1)
-
-    body2 = str2str(content[3])
-    if body2:
-        ret['body'].append(body2)
-
-    body3 = str2str(content[4])
-    if body3:
-        ret['body'].append(body3)
-
-    # bullet
-
-    ret['bulletsp'] = str2str(content[5])
-
-    #bullet position
-    ret['onepos'] = [str2i(content[6])]
-    ret['twopos'] =[]
-
-    twopos = str2str(content[7])
-    twopos = twopos.split(';')
-    ret['twopos'].append(float(twopos[0]))
-    ret['twopos'].append(float(twopos[1]))
-
-
-    ret['bulletspeed'] = str2i(content[8])
-
-    ret['bulletF'] = str2f(content[9])
-
-    ret['itemIcon'] = str2str(content[10])
-    ret['wudi'] = str2str(content[11])
-    ret['texiao'] = str2str(content[12])
-
-    return str(ret['id']),ret
-
 def parseItemConfig(content):
     # {
     #
@@ -285,7 +237,7 @@ def parseStageConfig(content):
     ret = {}
     key = str2i(content[0])
     ret['id'] = str(key)
-    ret['box'] = str2i(content[1])
+    ret['box'] = str2str(content[1])
     ret['layer'] = str2i(content[2])
     ret['size'] = str2i(content[3])
     ret['top'] = str2i(content[4])
@@ -356,6 +308,7 @@ def parseToolConfig(content):
     ret['animation'] = str2str(content[4])
     ret['attribute'] = str2i(content[5])
     ret['unlock'] = str2str(content[6])
+    ret['locked'] = str2str(content[7])
 
     return ret['id'], ret
 
@@ -427,6 +380,16 @@ def parseRewardConfig(content):
 
     return ret['id'], ret
 
+
+def parseSignInviteConfig(content):
+    ret = {}
+    key = str2i(content[0])
+    ret['id']= str(key)
+    ret['name'] = str2str(content[1])
+    ret['item'] = str2i(content[2])
+    ret['num'] = str2i(content[3])
+
+    return ret['id'], ret
 
 def parseItemConfig(content):
     ret = {}
@@ -599,6 +562,20 @@ def converRewardConfig(excelPath, savepath):
     print 'config', config
     convertoJs(config, savepath)
 
+def converSignInviteConfig(excelPath, savepath):
+    rowstartindex = 1
+    rowendindex = 0
+    sheetName = 'signinvite'
+    rowscontent, err = readExcel(excelPath, sheetName, rowstartindex, rowendindex)
+
+    config = {}
+    for item in rowscontent:
+        index, c = parseSignInviteConfig(item)
+        config[index] = c
+
+    print 'config', config
+    convertoJs(config, savepath)
+
 def converItemConfig(excelPath, savepath):
     rowstartindex = 1
     rowendindex = 0
@@ -631,7 +608,7 @@ def convertoJs(content,savefile='test.js'):
     json_string = json.dumps(content)
     print json_string
 
-    SlotConfigContent = """\n//xubing \n//这个文件是根据脚本自动生成，修改无效。\nmodule.exports = %s;""" % (json_string)
+    SlotConfigContent = """\n//ren \n//这个文件是根据脚本自动生成，修改无效。\nmodule.exports = %s;""" % (json_string)
 
     SlotConfigContentFile = codecs.open(savefile, "w", "utf-8")
     SlotConfigContentFile.write(SlotConfigContent)
@@ -648,7 +625,7 @@ def converTank():
     excelPath = """/Users/bolex1/work/game/doc/daddy's treasure/gameconfig.xlsx"""
 
    
-    basePath = "/Users//bolex1/work/game/box/box/assets/src/model/"
+    basePath = "/Users//bolex1/work/game/box/box/assets/src/config/"
      # level
     savepath = "LevelConfig.js"
     converLevelConfig(excelPath,basePath + savepath)
@@ -690,9 +667,14 @@ def converTank():
     savepath = "RewardConfig.js"
     converRewardConfig(excelPath, basePath + savepath)
 
+    #signinvate conifg
+    savepath = "SignInviteConfig.js"
+    converSignInviteConfig(excelPath, basePath + savepath)
+
     # item config
     savepath = "ItemConfig.js"
     converItemConfig(excelPath, basePath + savepath)
+
 
      # language config
     savepath = "LanguageConfig.js"

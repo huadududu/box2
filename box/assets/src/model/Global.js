@@ -11,6 +11,7 @@ module.exports = function () {
 
     var cls = cc.Class({
         properties: {
+            loadstate:2,
             hard: 1,
             level: 1,
             gold: 0,
@@ -269,8 +270,12 @@ module.exports = function () {
             }else{
                 this.efficiency = {};
             }
-            // let BoxController = cc.find("Canvas").getComponent("BoxController");
-            // BoxController.onloadState();
+            this.loadstate--;
+            if(this.loadstate <= 0){
+                let BoxController = cc.find("Canvas").getComponent("BoxController");
+                 BoxController.onloadState();
+            }
+             //
             // this.BoxController.GameMenuController.initInfo();
             // this.BoxController.startSC();
         },

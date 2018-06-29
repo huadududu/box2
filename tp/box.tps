@@ -154,6 +154,7 @@
             <filename>../../doc/daddy's treasure/ui/bg/bg_1.png</filename>
             <filename>../../doc/daddy's treasure/ui/bg/bg_2.png</filename>
             <filename>../../doc/daddy's treasure/ui/bg/bg_tk.png</filename>
+            <filename>../../doc/daddy's treasure/ui/friends</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

@@ -23,8 +23,8 @@ module.exports = function () {
             TankWidth: 70,
             ItemWidth: 50,
             //ad
-            InterstitialAdId: "488883394847366_506509883084717",
-            RewardedVideoId: "488883394847366_506509619751410",
+            InterstitialAdId: "1022687211213478_1038887692926763",
+            RewardedVideoId: "1022687211213478_1038888492926683",
             AdInterval: 8000,
 
             //leaderboard

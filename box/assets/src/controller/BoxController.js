@@ -152,15 +152,15 @@ cc.Class({
 
     },
     onloadState:function(){
-        // this.loadstate--;
-        // if(this.loadstate<=0){
             this.startSC();
             this.initdata();
-        // }
+             this.onLoadPage.active = false;
     },
     start: function () {
-        this.onloadState();
-        this.onLoadPage.active = false;
+        Global.loadstate--;
+        if(Global.loadstate<=0) {
+            this.onloadState();
+        }
     },
     startSC: function () {
         this.GameMenuController.initInfo();
@@ -953,7 +953,6 @@ cc.Class({
             this.touchState = 'mult';
         }
         if(this.touchState == 'mult'){
-            // console.log("藏起来");
             this.motionStreak.node.active = false;
         }
         let location= this.gameNode.convertToNodeSpace(location1);

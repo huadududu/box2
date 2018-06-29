@@ -225,7 +225,7 @@
     "relativePath": "prefab/webview.prefab"
   },
   "c491aacf-1d76-407f-ac1c-27617490f528": {
-    "asset": 1529915042000,
+    "asset": 1529932599000,
     "meta": 1529915042000,
     "relativePath": "resources"
   },
@@ -420,7 +420,7 @@
     "relativePath": "resources/effect/dianzuan_1.json"
   },
   "9197ac71-318f-48f3-a816-39cc3e4d234a": {
-    "asset": 1529920492000,
+    "asset": 1529932599000,
     "meta": 1528421476000,
     "relativePath": "resources/fonts"
   },
@@ -520,7 +520,7 @@
     "relativePath": "resources/particle/t_4.plist"
   },
   "554ec7a9-cea2-4cdb-9486-54b557b790ef": {
-    "asset": 1529920517000,
+    "asset": 1529932599000,
     "meta": 1528421476000,
     "relativePath": "resources/png"
   },
@@ -535,7 +535,7 @@
     "relativePath": "resources/png/box.png"
   },
   "bbe181f7-f5d6-42a6-940e-897bbc06bc48": {
-    "asset": 1529926623000,
+    "asset": 1529932599000,
     "meta": 1528421476000,
     "relativePath": "resources/prefab"
   },
@@ -575,17 +575,17 @@
     "relativePath": "resources/prefab/uilead.prefab"
   },
   "1aa57d55-1fd2-41e4-9e5a-bc745c1259ee": {
-    "asset": 1529907616000,
+    "asset": 1529932599000,
     "meta": 1528421476000,
     "relativePath": "sc"
   },
   "5fef8f72-d57e-44a3-b757-a3b335f3d708": {
-    "asset": 1529926623000,
+    "asset": 1529932483000,
     "meta": 1529915042000,
     "relativePath": "src"
   },
   "60ba2152-77fd-4361-96f6-2b7b71f0c738": {
-    "asset": 1529926483000,
+    "asset": 1529978030000,
     "meta": 1529899219000,
     "relativePath": "src/config"
   },
@@ -665,7 +665,7 @@
     "relativePath": "src/config/ToolConfig.js"
   },
   "8a5f9df5-bf3e-4da6-b41e-0f1f44433580": {
-    "asset": 1529931803000,
+    "asset": 1529979008000,
     "meta": 1528421476000,
     "relativePath": "src/controller"
   },
@@ -695,7 +695,7 @@
     "relativePath": "src/controller/smController.js"
   },
   "2416997f-28e8-4ef6-9e43-266ac4f1d9e2": {
-    "asset": 1529909386000,
+    "asset": 1529932599000,
     "meta": 1528421476000,
     "relativePath": "src/fb"
   },
@@ -705,7 +705,7 @@
     "relativePath": "src/controller/SpriteFrameCenter.js"
   },
   "e35e7086-b311-4a00-a909-6a64bb9a59a0": {
-    "asset": 1529931041000,
+    "asset": 1529978835000,
     "meta": 1528421476000,
     "relativePath": "src/model"
   },
@@ -765,7 +765,7 @@
     "relativePath": "src/model/UILead.js"
   },
   "145f7df7-c087-4db8-9cd8-d8f10324745d": {
-    "asset": 1529914626000,
+    "asset": 1529932599000,
     "meta": 1528421476000,
     "relativePath": "src/utils"
   },
@@ -889,11 +889,6 @@
     "meta": 1529932604000,
     "relativePath": "sc/boxa.fire"
   },
-  "7edd0433-d27a-45bd-bae9-46bbbb31ad63": {
-    "asset": 1529932599000,
-    "meta": 1529932604000,
-    "relativePath": "src/config/GameConfig.js"
-  },
   "b7f6256b-53c4-45cc-a9e0-155f770d00ed": {
     "asset": 1529914490000,
     "meta": 1529932604000,
@@ -959,11 +954,6 @@
     "meta": 1529932604000,
     "relativePath": "resources/png/streak.png"
   },
-  "4d84c1df-7a92-4c9b-985d-3904219ae1bc": {
-    "asset": 1529932716000,
-    "meta": 1529932769000,
-    "relativePath": "src/model/Global.js"
-  },
   "afc58e98-1a62-4bc6-a636-ee81d3d577ef": {
     "asset": 1529932760000,
     "meta": 1529932769000,
@@ -974,9 +964,19 @@
     "meta": 1529932769000,
     "relativePath": "src/model/UIBottom.js"
   },
+  "7edd0433-d27a-45bd-bae9-46bbbb31ad63": {
+    "asset": 1529978030000,
+    "meta": 1529978035000,
+    "relativePath": "src/config/GameConfig.js"
+  },
+  "4d84c1df-7a92-4c9b-985d-3904219ae1bc": {
+    "asset": 1529978835000,
+    "meta": 1529978930000,
+    "relativePath": "src/model/Global.js"
+  },
   "52eea76c-a19e-44af-87f3-b9c73d3bdd78": {
-    "asset": 1529933885000,
-    "meta": 1529933969000,
+    "asset": 1529979008000,
+    "meta": 1529979014000,
     "relativePath": "src/controller/BoxController.js"
   }
 }
