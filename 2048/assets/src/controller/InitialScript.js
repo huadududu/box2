@@ -70,6 +70,7 @@ cc.Class({
                     self.loadedCount++;
                     BingLog.log("loading:",self.loadedCount,self.loadedCount*100.0/self.preloadCount);
 
+
                     // let base = self.node.getComponent(Welcome).Stage1Percent;
                     // BingLog.log("percent:",base+self.loadedCount* (100-base)/self.preloadCount);
                     // self.node.getComponent(Welcome).updateUIProgress(base+self.loadedCount* (100-base)/self.preloadCount,0.5);
@@ -106,7 +107,7 @@ cc.Class({
         {
             progress = 100;
         }
-        this.progress.string = progress.toFixed(0).toString() + "%";
+        // this.progress.string = progress.toFixed(0).toString() + "%";
 
     },
 

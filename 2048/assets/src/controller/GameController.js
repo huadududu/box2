@@ -20,22 +20,56 @@ cc.Class({
         //     serializable: true,   // optional, default is true
         // },
         bar: {
-            get () {
+            get() {
                 return this._bar;
             },
-            set (value) {
+            set(value) {
                 this._bar = value;
             }
         },
+        game: cc.Node,
     },
 
     // LIFE-CYCLE CALLBACKS:
 
-    // onLoad () {},
-
-    start () {
+    onLoad() {
+        this.movelength = 0;
+        this.moveRation = 0;// 0 down 1 left 2 right
+        this.previousPos = null;
+        this.blockWidth = 110;
+        this.blockFloor = 7;
+        this.blockRow = 5;
+        this.TouchState;//start move end cancel
+        // this.schedule()
 
     },
 
-    // update (dt) {},
-});
+    start() {
+
+    },
+    //create block;
+
+
+    //-------------- touch part -----------------------------
+    //-------------- touch part -----------------------------
+    touchCancelCallBack: function (location) {
+    },
+    touchStartCallBack: function (location) {
+        this.previousPos = location;
+        this.TouchState = 'start';
+    },
+    touchEndCallBack: function (location) {
+        if (this.TouchState == 'move') {
+            return;
+        }
+    },
+    touchMoveCallBack: function (location) {
+        this.TouchState = 'move';
+        this.movelength += movelength.x - this.previousPos.x;
+        let moveNum = Math.floor(this.movelength / this.blockWidth);
+
+    }
+
+// update (dt) {},
+})
+;
