@@ -7,7 +7,11 @@
 // Learn life-cycle callbacks:
 //  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
 //  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/life-cycle-callbacks.html
-
+let BlockFactory = require("BlockFactory");
+let Global = require("Global");
+let GameState = require("GameState");
+let BingLog = require("BingLog");
+let GameUtils = require("GameUtils");
 cc.Class({
     extends: cc.Component,
 
@@ -19,57 +23,53 @@ cc.Class({
         //     type: cc.SpriteFrame, // optional, default is typeof default
         //     serializable: true,   // optional, default is true
         // },
-        bar: {
-            get() {
-                return this._bar;
-            },
-            set(value) {
-                this._bar = value;
-            }
-        },
-        game: cc.Node,
+        BlocksController:require("BlocksController"),
+        GameMenuController:require("GameMenuController"),
+        startMenu:cc.Node,
+        endMenu:cc.Node,
+
     },
 
     // LIFE-CYCLE CALLBACKS:
 
     onLoad() {
-        this.movelength = 0;
-        this.moveRation = 0;// 0 down 1 left 2 right
-        this.previousPos = null;
-        this.blockWidth = 110;
-        this.blockFloor = 7;
-        this.blockRow = 5;
-        this.TouchState;//start move end cancel
-        // this.schedule()
-
+        this.endMenu.active = false;
+        this.startMenu.active = true;
     },
+
+    onPause:function(){
+
+        cc.director.pause();
+    },
+
+    onResume:function(){
+
+        cc.director.resume();
+    },
+
+
 
     start() {
-
+        // this.createBlocks();
+        // this.schedule(this.refreshBlocks, 0.5);
+    },
+    updeteFinish:function(){
+        this.endMenu.active = true;
     },
     //create block;
+    onTouchStartBtn:function(){
+        this.startMenu.active = false;
+        this.BlocksController.startMenu();
 
+    },
+    onTouchRestartBtn:function(){
+        this.endMenu.active = false;
+        this.BlocksController.restartMenu();
 
-    //-------------- touch part -----------------------------
-    //-------------- touch part -----------------------------
-    touchCancelCallBack: function (location) {
     },
-    touchStartCallBack: function (location) {
-        this.previousPos = location;
-        this.TouchState = 'start';
-    },
-    touchEndCallBack: function (location) {
-        if (this.TouchState == 'move') {
-            return;
-        }
-    },
-    touchMoveCallBack: function (location) {
-        this.TouchState = 'move';
-        this.movelength += movelength.x - this.previousPos.x;
-        let moveNum = Math.floor(this.movelength / this.blockWidth);
+    onTouchShareBtn:function(){
 
     }
-
 // update (dt) {},
 })
 ;

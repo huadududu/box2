@@ -14,8 +14,8 @@
   "design-resolution-height": 1130,
   "design-resolution-width": 720,
   "excluded-modules": [],
-  "fit-height": true,
-  "fit-width": false,
+  "fit-height": false,
+  "fit-width": true,
   "group-list": [
     "default"
   ],
