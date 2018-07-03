@@ -27,6 +27,8 @@ cc.Class({
         GameMenuController:require("GameMenuController"),
         startMenu:cc.Node,
         endMenu:cc.Node,
+        continueMenu:cc.Node,
+        loadingad:cc.Node,
 
     },
 
@@ -37,15 +39,6 @@ cc.Class({
         this.startMenu.active = true;
     },
 
-    onPause:function(){
-
-        cc.director.pause();
-    },
-
-    onResume:function(){
-
-        cc.director.resume();
-    },
 
 
 
@@ -55,21 +48,65 @@ cc.Class({
     },
     updeteFinish:function(){
         this.endMenu.active = true;
+        Global.newHistory(Global.thisscore);
     },
     //create block;
     onTouchStartBtn:function(){
         this.startMenu.active = false;
-        this.BlocksController.startMenu();
+        this.BlocksController.restartMenu();
 
     },
     onTouchRestartBtn:function(){
         this.endMenu.active = false;
-        this.BlocksController.restartMenu();
+        let num = GameUtils.randomInt(0,100);
+        if(num < 30){
+            let FBP = require("FBPlugin");
+            this.loadingad.active = true;
+            FBP.RewardedVideoAsync(this.restartCallBack.bind(this));
+        }else if(num < 80){
+            let FBP = require("FBPlugin");
+            this.loadingad.active = true;
+            FBP.InterstitialAdAsync(this.restartCallBack.bind(this));
+        }else{
+            this.BlocksController.restartMenu();
+        }
 
     },
-    onTouchShareBtn:function(){
 
-    }
+    onTouchShareBtn:function(){
+        let FBP = require("FBPlugin");
+        FBP.chooseAsync();
+
+    },
+    onTouchPause:function(){
+        this.continueMenu.active = true;
+        cc.director.pause();
+    },
+
+    onTouchResume:function(){
+        this.continueMenu.active = false;
+        cc.director.resume();
+    },
+    restartCallBack:function(){
+        this.loadingad.active = false;
+        this.BlocksController.restartMenu();
+    },
+
+
+    touchCancelCallBack: function (location) {
+        this.BlocksController.touchCancelCallBack(location);
+    },
+    touchStartCallBack: function (location) {
+        this.BlocksController.touchStartCallBack(location);
+    },
+    touchEndCallBack: function (location) {
+        this.BlocksController.touchEndCallBack(location);
+    },
+    touchMoveCallBack: function (location) {
+        this.BlocksController.touchMoveCallBack(location);
+        // this.previousPos = location;
+    },
+
 // update (dt) {},
 })
 ;

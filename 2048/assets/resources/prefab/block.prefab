@@ -142,8 +142,8 @@
     },
     "_fillStart": 0,
     "_fillRange": 0,
-    "_isTrimmedMode": false,
-    "_srcBlendFactor": 770,
+    "_isTrimmedMode": true,
+    "_srcBlendFactor": 0,
     "_dstBlendFactor": 771,
     "_atlas": {
       "__uuid__": "6512847b-9884-4f6d-aa5c-ad3d8020455d"

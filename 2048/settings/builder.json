@@ -26,9 +26,9 @@
     "orientation": "portrait"
   },
   "renderMode": "0",
-  "startScene": "ca69c127-0990-4abf-9654-f66a9a76564b",
-  "title": "hello_world",
-  "webOrientation": "auto",
+  "startScene": "1daaf784-a851-4c10-96f6-057b291325f5",
+  "title": "2048",
+  "webOrientation": "portrait",
   "wechatgame": {
     "REMOTE_SERVER_ROOT": "",
     "appid": "wx6ac3f5090a6b99c5",

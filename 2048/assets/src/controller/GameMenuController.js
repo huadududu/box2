@@ -17,11 +17,6 @@ cc.Class({
     },
     updateNext:function(num){
         this.nextScoreLabel.setBlockNumber(num);
-    },
-    onTouchPasueBtn:function(num){
-
-        this.gameController.BlocksController.pauseAll();
-
     }
 
 });

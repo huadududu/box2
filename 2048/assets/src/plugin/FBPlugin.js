@@ -2,34 +2,20 @@
  * Created by bing on 04/05/2018.
  */
 
-module.exports = function () {
-
     //TODO::replace the image.
     let SharePngConfig  = require("SharePngConfig");
-    let sharePng =  "";//SharePngConfig['sharePng'];
-    let newrecordPng = "";//SharePngConfig['newrecordPng'];
+    let sharePng = SharePngConfig['sharePng'];
+    let newrecordPng = SharePngConfig['newrecordPng'];
 
     let plugin =  cc.Class({
         extends:cc.Object,
-
-        sharePngFun:function(){
-            let num = Math.random();
-            let SharePngConfig  = require("SharePngConfig");
-            let thissharePng;
-            if(num<0.5){
-                thissharePng = SharePngConfig['sharePng1'];
-            }else{
-                thissharePng = SharePngConfig['sharePng'];
-            }
-            return thissharePng;
-        },
 
         //intent  "INVITE" | "REQUEST" | "CHALLENGE" | "SHARE"
         shareFb:function (intent = 'REQUEST',callback) {
 
             FBInstant.shareAsync({
                 intent: intent,
-                image: this.sharePngFun(),
+                image: sharePng,
                 text: "It's a amazing game, play with me!",
                 data: { type:5 },
             }).then(function() {
@@ -71,12 +57,12 @@ module.exports = function () {
                         callback(FBInstant.context.getID());
                     }
                 }).catch(function(e) {
-                console.log('chooseAsync error',FBInstant.context.getID(),e);
-                if(e.code == "SAME_CONTEXT"){
-                    if(errorCallback){
-                        errorCallback(FBInstant.context.getID());
+                    console.log('chooseAsync error',FBInstant.context.getID(),e);
+                    if(e.code == "SAME_CONTEXT"){
+                        if(errorCallback){
+                            errorCallback(FBInstant.context.getID());
+                        }
                     }
-                }
             });
         },
 
@@ -236,11 +222,12 @@ module.exports = function () {
 
         updateAsync:function (usertext,callback) {
 
-            let text  =  usertext;
+            let text  = usertext;
+
             FBInstant.updateAsync({
                 action: 'CUSTOM',
                 cta: 'Play',
-                image: this.sharePngFun(),
+                image: sharePng,
                 text: {
                     default: text,
                     localizations: this.localSameText(text)
@@ -262,7 +249,7 @@ module.exports = function () {
 
         updateHighAsync:function (usertext,callback) {
 
-            let text  = FBInstant.player.getName() + usertext;
+            let text  = usertext;
             FBInstant.updateAsync({
                 action: 'CUSTOM',
                 cta: 'Play',
@@ -289,7 +276,7 @@ module.exports = function () {
             FBInstant.updateAsync({
                 action: 'CUSTOM',
                 cta: 'Join The Fight',
-                image: this.sharePngFun(),
+                image: sharePng,
                 text: {
                     default: text,
                     localizations: this.localSameText(text)
@@ -309,11 +296,11 @@ module.exports = function () {
 
         updateCallBackFriendsAsync:function (callback) {
 
-            let text =  "I need your help in Dady's Treasure！" ;
+            let text =  "I need your help in Tank and Fire！" ;
             FBInstant.updateAsync({
                 action: 'CUSTOM',
                 cta: 'Join The Fight',
-                image: this.sharePngFun(),
+                image: sharePng,
                 text: {
                     default: text,
                     localizations:this.localSameText(text)
@@ -341,7 +328,7 @@ module.exports = function () {
             FBInstant.updateAsync({
                 action: 'CUSTOM',
                 cta: 'Join The Fight',
-                image: this.sharePngFun(),
+                image: sharePng,
                 text: {
                     default: text,
                     localizations:this.localSameText(text)
@@ -425,6 +412,42 @@ module.exports = function () {
             });
         },
 
+        isReadyReward:function () {
+            if(this.Reward){
+                return true;
+            }else{
+                this.preLoadRewardedVideoAsync();
+                return false;
+            }
+        },
+
+        preLoadRewardedVideoAsync:function () {
+            let GameConfig = require("GameConfig");
+            var ad = null;
+            FBInstant.getRewardedVideoAsync(
+                GameConfig.RewardedVideoId,
+            ).then(function(rewardedVideo) {
+                this.Reward = rewardedVideo;
+                return ad.loadAsync();
+            }).then(function () {
+
+            });
+        },
+
+        PlayRewardedVideo:function (callback) {
+            if(this.Reward){
+                this.Reward.showAsync().then(function () {
+                    this.Reward = null;
+                    if (callback) {
+                        callback();
+                    }
+                });
+            }else{
+                this.Reward = null;
+                this.RewardedVideoAsync(callback)
+            }
+
+        },
 
         RewardedVideoAsync:function (callback) {
             let GameConfig = require("GameConfig");
@@ -448,7 +471,7 @@ module.exports = function () {
 
 
 
-        //    game play
+    //    game play
         getOrCreateContextId:function() {
             var contextType = FBInstant.context.getType();
             var contextId = FBInstant.context.getID();
@@ -460,15 +483,15 @@ module.exports = function () {
 
         LeaderboardCount:function(leaderName ='my_leaderboard',callback) {
             FBInstant.getLeaderboardAsync(leaderName)
-                .then(function(leaderboard) {
-                    return leaderboard.getEntryCountAsync();
-                })
-                .then(function(count) {
-                    console.log(count);
-                    if(callback){
-                        callback(ret);
-                    }
-                });
+            .then(function(leaderboard) {
+                return leaderboard.getEntryCountAsync();
+            })
+            .then(function(count) {
+                console.log(count);
+                if(callback){
+                    callback(ret);
+                }
+            });
         },
 
         getFriendLeaderboard:function (leaderName ='my_leaderboard',callback) {
@@ -602,12 +625,9 @@ module.exports = function () {
                         callback(ret);
                     }
                 });
-
+            
         },
     });
 
 
-    let p = new plugin();
-    return p;
-
-}();
+module.exports = plugin;

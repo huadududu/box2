@@ -17,8 +17,8 @@ module.exports = function () {
             TankWidth : 70,
             ItemWidth : 50,
             //ad
-            InterstitialAdId:"1022687211213478_1038887692926763",
-            RewardedVideoId:"1022687211213478_1038888492926683",
+            InterstitialAdId:"234752730650527_235702233888910",
+            RewardedVideoId:"234752730650527_235702997222167",
             AdInterval:8000,
 
             //leaderboard
@@ -40,7 +40,7 @@ module.exports = function () {
             HelperEnterTip:"You helped XXX in daily task today",
             YourHelperNameTip:"XXX have helped you in daily task today",
 
-            GameName:"wfg", //tank //icegame
+            GameName:"2048", //tank //icegame
             //    server  test
             // ServerURL:"http://localhost:8088/",
             ServerURL:"https://77889900.space/",

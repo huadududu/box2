@@ -7,7 +7,7 @@ let TouchView = require("TouchView");
 cc.Class({
     extends:TouchView,
     properties:{
-        controller:require("BlocksController")
+        controller:require("GameController")
     },
 
     onLoad:function () {
