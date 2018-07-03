@@ -41,7 +41,7 @@ cc.Class({
 
     touchEvent: function (event) {
         let location = event.getLocation();
-        cc.log(event.type, event.type == cc.Node.EventType.TOUCH_END, event.eventPhase, location.x, location.y, event.getID());
+        // cc.log(event.type, event.type == cc.Node.EventType.TOUCH_END, event.eventPhase, location.x, location.y, event.getID());
 
         //相对于锚点的位置。
         // let locationInNode = event.currentTarget.convertToNodeSpaceAR(event.getLocation());

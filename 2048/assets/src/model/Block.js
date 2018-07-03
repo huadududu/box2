@@ -13,7 +13,7 @@ cc.Class({
         sp:cc.Sprite,
         numberLab:cc.Label,
         lineNum:0,
-        columnNum:0,
+        rowNum:0,
         number:1,
         type:{
             default:1,
@@ -26,20 +26,14 @@ cc.Class({
             visible:false,
         }
     },
-
     //count
     init:function () {
         BingLog.log("Block"+status+" init:");
-        // this.text.string= x+","+y;
     },
 
     onLoad:function () {
         // BingLog.log("tanke onLoad");
         // this.updateNode();
-    },
-
-    showBlockBig:function (show) {
-        // this.sp.node.active = show;
     },
     setBlockPng: function(num){
         this.pngID = num;
@@ -71,5 +65,17 @@ cc.Class({
     setBlockPos:function(line,row){
         this.lineNum = line;
         this.rowNum  = row;
+    },
+    getBlockRow:function(){
+       return this.rowNum;
+    },
+    getBlockLine:function(){
+        return  this.lineNum;
+    },
+    setBlockRow:function(row){
+        this.rowNum = row;
+    },
+    setBlockLine:function(line){
+         this.lineNum = line ;
     }
 });
