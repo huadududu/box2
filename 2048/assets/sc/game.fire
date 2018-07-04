@@ -1147,7 +1147,7 @@
       "__id__": 28
     },
     "lineNum": 0,
-    "columnNum": 0,
+    "rowNum": 0,
     "number": 1,
     "type": 1,
     "pngID": 1
@@ -3860,8 +3860,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 369,
-      "height": 230
+      "width": 289,
+      "height": 177
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -3869,8 +3869,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 260,
-      "y": 430
+      "x": 213,
+      "y": 438
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -3928,8 +3928,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -134.5,
-      "y": 95
+      "x": -94.5,
+      "y": 68.5
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -4164,8 +4164,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 15.5,
-      "y": 95
+      "x": 55.5,
+      "y": 68.5
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -4400,8 +4400,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -134.5,
-      "y": 5
+      "x": -94.5,
+      "y": 8.5
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -4636,8 +4636,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 15.5,
-      "y": 5
+      "x": 55.5,
+      "y": 8.5
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -4872,8 +4872,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -134.5,
-      "y": -85
+      "x": -94.5,
+      "y": -51.5
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -5108,8 +5108,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 15.5,
-      "y": -85
+      "x": 55.5,
+      "y": -51.5
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -5331,8 +5331,8 @@
     "_enabled": true,
     "_layoutSize": {
       "__type__": "cc.Size",
-      "width": 369,
-      "height": 230
+      "width": 289,
+      "height": 177
     },
     "_resize": 0,
     "_N$layoutType": 3,
@@ -5348,7 +5348,7 @@
     "_N$paddingTop": 0,
     "_N$paddingBottom": 0,
     "_N$spacingX": 50,
-    "_N$spacingY": 50,
+    "_N$spacingY": 20,
     "_N$verticalDirection": 1,
     "_N$horizontalDirection": 0
   },

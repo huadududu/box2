@@ -35,8 +35,9 @@ cc.Class({
         this.TouchState = null;//start move end cancel
         this.moveState = false;
         this.blockNodes = [];
-        this.centerBlock = null;
         this.movingBlock = null;
+        this.movingNodes = [];
+        this.waitMovingNodes = [];
         this.addCount = 0;
         this.firstAction = 0;
         this.BlockNum = 1;
@@ -44,16 +45,59 @@ cc.Class({
         this.NextBlockNum = this.createNextNum();
         this.gameController = cc.find("Canvas").getComponent("GameController");
         this.gameController.GameMenuController.updateNext(this.NextBlockNum);
+        this.canhorizon = false;
 
 
     },
-
 
     start() {
         // this.createBlocks();
         // this.schedule(this.refreshBlocks, 0.5);
     },
-    //create block;
+
+
+    startMenu: function () {
+        this.createBlocks();
+        this.schedule(this.refreshBlocks, 0.6);
+    }
+    ,
+    restartMenu: function () {
+        this.clearAll();
+        this.createBlocks();
+        this.schedule(this.refreshBlocks, 0.6);
+    },
+    clearAll: function () {
+        this.gameNode.removeAllChildren(true);
+        this.blockNodes = [];
+    },
+    finishGame: function () {
+        console.log("finish");
+        this.unschedule(this.refreshBlocks);
+        this.gameController.updeteFinish();
+    },
+    refreshBlocks: function (centernode = null) {
+        if (this.gameState > 0)
+            return;
+        // ////console.log("refresh:",this.centerBlock);
+
+        // else
+        if (this.checkAllDownBlock()) {
+            this.downAllBlock();
+        } else {
+            this.downAllBlock();
+            if (this.gameState > 0)
+                return;
+            if (this.canJoinBlock()) {
+                this.joinBlock();
+            } else if (this.canAddNewBlock()) {
+                this.createBlocks();
+            } else {
+                this.finishGame();
+            }
+        }
+    },
+
+
     createBlocks: function () {
         if (this.gameState > 0)
             return;
@@ -78,6 +122,7 @@ cc.Class({
             this.blockNodes[6] = [];
         }
         this.blockNodes[6][2] = node;
+        this.canhorizon = true;
 
     },
     canAddNewBlock: function () {
@@ -86,31 +131,15 @@ cc.Class({
         }
         return false;
     },
-    refreshBlocks: function (centernode = null) {
-        if (this.gameState > 0)
-            return;
-        // ////console.log("refresh:",this.centerBlock);
 
-        // else
-        let jointype = this.checkAllDownBlock();
-        if (jointype) {
-            this.downBlock();
-        } else if (this.canAddNewBlock()) {
-            this.createBlocks();
-        } else {
-            this.finishGame();
-        }
-    },
-
-    joinBlock: function (centernode = null) {
+    joinBlock: function (joinNode) {
         // let line = this.centerBlock.y;
         // let row = this.centerBlock.x;
-        let line = this.movingBlock.getComponent("Block").getBlockLine();
-        let row = this.movingBlock.getComponent("Block").getBlockRow();
-        if (centernode != null) {
-            line = centernode.y;
-            row = centernode.x;
-        }
+
+        let endBlock = joinNode == null ? this.movingBlock : joinNode;
+        let line = endBlock.getComponent("Block").getBlockLine();
+        let row = endBlock.getComponent("Block").getBlockRow();
+        let centerNumber = endBlock.getComponent("Block").getBlockNumber();
         let nextNode;
         let rightNode;
         let leftNode;
@@ -118,7 +147,7 @@ cc.Class({
         // ////console.log("refresh:",this.centerBlock);
 
         // let centerNumber = this.blockNodes[line][row].getComponent("Block").getBlockNumber();
-        let centerNumber =  this.movingBlock.getComponent("Block").getBlockNumber();
+
         if (line > 0) {
             if (this.blockNodes[line - 1] && this.blockNodes[line - 1][row]) {
                 nextNode = this.blockNodes[line - 1][row];
@@ -152,24 +181,26 @@ cc.Class({
             }
         }
         if (moveBlock.length > 0) {
-            this.moveAction(moveBlock, this.movingBlock);
+            this.canhorizon = false;
+            this.joinAction(moveBlock, endBlock);
         }
     },
     //判断是否可以合并
     canJoinBlock: function (centernode = null) {
-        let line = this.centerBlock.y;
-        let row = this.centerBlock.x;
-        if (centernode != null) {
-            line = centernode.y;
-            row = centernode.x;
-        }
+        // let line = this.centerBlock.y;
+        // let row = this.centerBlock.x;
+        // if (centernode != null) {
+        //     line = centernode.y;
+        //     row = centernode.x;
+        // }
+        let endBlock = centernode == null ? this.movingBlock : centernode;
+        let line = endBlock.getComponent("Block").getBlockLine();
+        let row = endBlock.getComponent("Block").getBlockRow();
+        let centerNumber = endBlock.getComponent("Block").getBlockNumber();
         let nextNode;
         let rightNode;
         let leftNode;
         let moveBlock = [];
-        // ////console.log("refresh:",this.centerBlock);
-        // let centerNumber = this.blockNodes[line][row].getComponent("Block").getBlockNumber();
-        let centerNumber =  this.movingBlock .getComponent("Block").getBlockNumber();
         if (centerNumber >= Math.pow(2, MAX_NUM)) {
             return false;
 
@@ -184,7 +215,7 @@ cc.Class({
                 }
             }
         }
-        if (row > 0) {
+        if (row > 0 && row < this.blockRow) {
             if (this.blockNodes[line] && this.blockNodes[line][row - 1]) {
                 leftNode = this.blockNodes[line][row - 1];
                 let leftNumber = leftNode.getComponent("Block").getBlockNumber();
@@ -195,7 +226,7 @@ cc.Class({
                 }
             }
         }
-        if (row < this.blockRow - 1) {
+        if (row >= 0 && row < this.blockRow - 1) {
             if (this.blockNodes[line] && this.blockNodes[line][row + 1]) {
                 rightNode = this.blockNodes[line][row + 1];
                 let rightNumber = rightNode.getComponent("Block").getBlockNumber();
@@ -208,45 +239,298 @@ cc.Class({
         }
         return false;
     },
+    joinAction: function (startNodes, EndNode) {
+
+        console.log("this.gameState", this.gameState);
+        let moveNum = startNodes.length;
+        let addCount = 0;
+        for (let i = 0; i < moveNum; i++) {
+            // let action1 = cc.moveTo(0.2, EndNode.position);
+            this.gameState++;
+            console.log("this.gameState", this.gameState);
+            let action1 = cc.moveTo(0.1, EndNode.position);
+            var action2 = cc.scaleTo(0.05, 1, 0.8);
+            let spawn = cc.spawn(action1, action2);
+            var action4 = cc.scaleTo(0.05, 1, 1);
+            let thisNodePos = startNodes[i];
+            let thisNode = this.blockNodes[thisNodePos.line][thisNodePos.row];
+            let action3 = cc.callFunc(() => {
+                if (this.blockNodes[thisNodePos.line][thisNodePos.row]) {
+                    this.blockNodes[thisNodePos.line][thisNodePos.row].removeFromParent(true);
+                    this.blockNodes[thisNodePos.line][thisNodePos.row] = null;
+                }
+                ////console.log("destroy",thisNodePos);
+                addCount++;
+
+                console.log("this.gameState", this.gameState);
+                if (addCount == moveNum) {
+                    this.gameState++;
+                    console.log("this.gameState", this.gameState);
+                    this.addScore(addCount);
+                    // ////console.log("othermove",this.centerBlock)
+
+                    // let CenterBlock = this.blockNodes[EndNode.y][EndNode.x];
+
+                    let action_1 = cc.scaleTo(0.05, 1, 0.8);
+                    let action_2 = cc.scaleTo(0.05, 1, 1);
+                    let action_3 = cc.callFunc(() => {
+                        // if (this.canDownBlock()) {
+                        //     this.downBlock();
+                        // }
+                        this.gameState--;
+                        console.log("this.gameState", this.gameState);
+                    });
+                    EndNode.runAction(cc.sequence(action_1, action_2, action_3));
+                }
+                this.gameState--;
+                console.log("this.gameState", this.gameState);
+
+            }, this);
+
+            thisNode.runAction(cc.sequence(spawn, action4, action3));
+        }
+    },
     checkAllDownBlock: function () {
-        for (let line = 6; line >= 0; line--) {
-            for (let row = 4; row >= 0; row--) {
+        for (let line = 0; line <= 6; line++) {
+            for (let row = 0; row <= 4; row++) {
                 if (!this.blockNodes[line] || !this.blockNodes[line][row]) {
                     continue;
                 }
                 else if (this.canDownBlock(this.blockNodes[line][row])) {
-                    this.movingBlock = this.blockNodes[line][row];
+                    // this.movingBlock = this.blockNodes[line][row];
                     return true;
                 }
 
             }
         }
         return false;
-
     },
-    /*
-    checkAllJoinBlock: function () {
-        for (let line = 6; line >= 0; line--) {
-            for (let row = 4; row >= 0; row--) {
+    canDownBlock: function (centerNode = null) {
+        let line = this.movingBlock.getComponent("Block").getBlockLine();
+        let row = this.movingBlock.getComponent("Block").getBlockRow();
+        if (centerNode != null) {
+            line = centerNode.getComponent("Block").getBlockLine();
+            row = centerNode.getComponent("Block").getBlockRow();
+
+        }
+        if (line <= 0) {
+            return false;
+        }
+        if (!this.blockNodes[line - 1] || !this.blockNodes[line - 1][row]) {
+            return true;
+
+        }
+        return false;
+
+    }
+    ,
+    findAllCanDownBlock: function () {
+        let canDownList = [];
+        for (let line = 0; line <= 6; line++) {
+            for (let row = 0; row <= 4; row++) {
                 if (!this.blockNodes[line] || !this.blockNodes[line][row]) {
                     continue;
                 }
-                else if (this.canJoinBlock({y: line, x: row})) {
-                    // bool = true;
-                    this.centerBlock = {y: line, x: row};
-                    return true;
+                else if (this.canDownBlock(this.blockNodes[line][row])) {
+                    canDownList.push(this.blockNodes[line][row]);
                 }
             }
         }
-        return false;
-    },*/
-    addScore: function () {
-        let line = this.centerBlock.y;
-        let row = this.centerBlock.x;
+        return canDownList;
+    },
+    downAllBlock: function () {
+
+        let canMoving = this.findAllCanDownBlock();
+        let stopMoving = [];
+        for (let i = 0; i < this.waitMovingNodes.length; i++) {
+            let find = false;
+            for (let j = 0; j < canMoving.length; j++) {
+                if (canMoving[j] == this.waitMovingNodes[i]) {
+                    find = true;
+                }
+            }
+            if (!find) {
+                stopMoving.push(this.waitMovingNodes[i]);
+            }
+        }
+        this.waitMovingNodes = canMoving;
+        for (let i = 0; i < stopMoving.length; i++) {
+            this.stopDownBlock(stopMoving[i]);
+        }
+        for (let i = 0; i < canMoving.length; i++) {
+            this.downBlock(-1, canMoving[i]);
+        }
+
+
+    },
+
+
+//向下移动 默认单位是1个格子
+    downBlock: function (moveNum = -1, centerNode = null) {
+
+        // if (this.gameState > 0)
+        //     return;
+        if (this.gameStateHorizon > 0) {
+            return;
+        }
+        for (let i = 0; i < this.movingNodes.length; i++) {
+            if (centerNode == this.movingNodes[i]) {
+                return;
+            }
+        }
+        this.movingNodes.push(centerNode);
+        // let line = this.centerBlock.y;
+        // let row = this.centerBlock.x;
+        let realLine;
+        // let line = this.movingBlock.getComponent("Block").getBlockLine();
+        // let row = this.movingBlock.getComponent("Block").getBlockRow();
+        // if (centerNode != null) {
+        let line = centerNode.getComponent("Block").getBlockLine();
+        let row = centerNode.getComponent("Block").getBlockRow();
+        // }
+        if (moveNum == -1) {
+            realLine = line - 1;
+        } else {
+            realLine = moveNum;
+        }
+        if (realLine < 0) {
+            realLine = 0;
+        } else if (realLine > this.blockFloor - 1) {
+            realLine = this.blockFloor - 1;
+        }
+        if (realLine == line)
+            return;
+        let realMove = line - realLine;
+        let movelist = [];
+        console.log("downmoveing", realLine);
+        for (let start = line; start <= this.blockFloor - 1; start++) {
+            if (!this.blockNodes[start] || !this.blockNodes[start][row])
+                continue;
+
+            console.log("this.gameState", this.gameState);
+            let beginLine = start;
+            let endLine = beginLine - realMove;
+            if (endLine < 0)
+                continue;
+            this.gameState++;
+            let startNode = this.blockNodes[beginLine][row];
+            let x = row * (this.blockblank + this.blockWidth);
+            let y = endLine * (this.blockblank + this.blockWidth);
+            let endPos = cc.p(x, y);
+            console.log("downposing", "row", row, "line", endLine, "y", y);
+            let action1 = cc.moveTo(0.1, endPos);
+            movelist[endLine] = startNode;
+            // var action2 = cc.scaleTo(0.1, 1, 0.8);
+            // let spawn = cc.spawn(action1, action2);
+            // var action3 = cc.scaleTo(0.1, 1, 1);
+
+            let action4 = cc.callFunc(() => {
+
+                if (!this.blockNodes[endLine]) {
+                    this.blockNodes[endLine] = [];
+                }
+                if (movelist[endLine]) {
+                    this.blockNodes[endLine][row] = movelist[endLine];
+                    this.blockNodes[beginLine][row] = null;
+                    // this.movingBlock = startNode;
+                    ////console.log("destroy",moveNum,"position:",row,line);
+                    // this.centerBlock.y = realLine;
+                    this.blockNodes[endLine][row].getComponent("Block").setBlockLine(endLine);
+                    this.blockNodes[endLine][row].position = endPos;
+                    console.log("successdownposing", "row", row, "line", endLine, "position", this.blockNodes[endLine][row].position);
+                    // if (!this.canDownBlock(movelist[endLine])) {
+                    //
+                    //     this.gameState++;
+                    //     let action_1 = cc.scaleTo(0.2, 1, 0.8);
+                    //     let action_2 = cc.scaleTo(0.2, 1, 1);
+                    //     let action_3 = cc.callFunc(() => {
+                    //         this.gameState--;
+                    //         if (this.canJoinBlock()) {
+                    //             this.joinBlock();
+                    //         }
+                    //     });
+                    //     movelist[endLine].runAction(cc.sequence(action_1, action_2, action_3));
+                    // }
+                    // let ID = this.movingNodes.indexOf(movelist[endLine]);
+                    for (let i = 0; i < this.movingNodes.length; i++) {
+                        if (this.movingNodes[i] == movelist[endLine]) {
+                            this.movingNodes.splice(i, 1);
+                            break;
+                        }
+                    }
+                } else {
+                    console.log("get two error");
+                }
+                this.gameState--;
+                console.log("this.gameState", this.gameState);
+            }, this);
+            startNode.runAction(cc.sequence(action1, action4));
+        }
+    },
+    stopDownBlock: function (stopBlock) {
+        let line = stopBlock.getComponent("Block").getBlockLine();
+        let row = stopBlock.getComponent("Block").getBlockRow();
+        for (let start = line; start <= this.blockFloor - 1; start++) {
+            if (!this.blockNodes[start] || !this.blockNodes[start][row])
+                continue;
+            this.gameState++;
+            console.log("this.gameState", this.gameState);
+            let curline = start;
+            let currow = row;
+            let action_1 = cc.scaleTo(0.05, 1, 0.8);
+            let action_2 = cc.scaleTo(0.05, 1, 1);
+            let action_3 = cc.callFunc(() => {
+                this.gameState--;
+                console.log("this.gameState", this.gameState);
+                // if (this.canJoinBlock(this.blockNodes[curline][currow])) {
+                //     this.joinBlock(this.blockNodes[curline][currow]);
+                // }
+                // let ID = this.waitMovingNodes.indexOf(this.blockNodes[curline][currow]);
+                // if (ID != -1) {
+                //     this.waitMovingNodes.splice(ID, 1);
+                // }
+                for (let i = 0; i < this.movingNodes.length; i++) {
+                    if (this.movingNodes[i] == this.blockNodes[curline][currow]) {
+                        this.movingNodes.splice(i, 1);
+                        break;
+                    }
+                }
+            });
+            this.blockNodes[start][row].runAction(cc.sequence(action_1, action_2, action_3));
+        }
+
+    },
+
+    maxTargetDown() {//
+        // let line = this.centerBlock.y;
+        // let row = this.centerBlock.x;
+        let line = this.movingBlock.getComponent("Block").getBlockLine();
+        let row = this.movingBlock.getComponent("Block").getBlockRow();
+        let target = line;
+        for (target = line - 1; target >= 0; target--) {
+            if (!this.blockNodes[target] || !this.blockNodes[target][row]) {
+                continue;
+            }
+            else {
+                break;
+            }
+        }
+        return target + 1;
+    }
+    ,
+
+    changeNextNum: function (num) {
+        this.BlockNum = num;
+        this.gameController.GameMenuController.updateNext(this.BlockNum);
+    }
+    ,
+    addScore: function (addCount) {
+        // let line = this.centerBlock.y;
+        // let row = this.centerBlock.x;
         // let EndNode = this.blockNodes[line][row];
-        let EndNode =  this.movingBlock;
+        let EndNode = this.movingBlock;
         let baseNumber = EndNode.getComponent("Block").getBlockNumber();
-        let newScore = baseNumber + this.addCount;
+        let newScore = baseNumber + addCount;
         let showNumber = Math.pow(2, newScore);
         Global.thisscore += showNumber;
 
@@ -257,18 +541,40 @@ cc.Class({
         this.addCount = 0;
         this.gameController.GameMenuController.updateScore();
         let PopMsgController = require("PopMsgController");
-        let x = row * (this.blockblank + this.blockWidth) + 55;
-        let y = line * (this.blockblank + this.blockWidth) + 110;
+        let x = EndNode.position.x + 55;
+        let y = EndNode.position.y + 110;
         let position = cc.p(x, y);
         PopMsgController.showMsg("+" + showNumber, position);
-    }
-    ,
+    },
 
     horizontalMove: function (moveNum) {
 
-        this.gameStateHorizon++;
-        let line = this.centerBlock.y;
-        let row = this.centerBlock.x;
+        // let line = this.centerBlock.y;
+        // let row = this.centerBlock.x;
+        if (!this.canhorizon)
+            return;
+
+
+        let line = this.movingBlock.getComponent("Block").getBlockLine();
+        let row = this.movingBlock.getComponent("Block").getBlockRow();
+
+        // let ID = this.movingNodes.indexOf(this.movingBlock);
+        // if (ID != -1) {
+        //     this.movingNodes.splice(ID, 1);
+        //     this.movingBlock.stopAllActions();
+        //     console.log("       他动不了 了");
+        //
+        // }
+        for (let i = 0; i < this.movingNodes.length; i++) {
+            if (this.movingNodes[i] == this.movingBlock) {
+                this.movingNodes.splice(i, 1);
+                break;
+            }
+        }
+        if (!this.blockNodes[line][row]) {
+            console.log("impossible");
+            return;
+        }
         // let startNode = this.blockNodes[line][row];
         let startNode = this.movingBlock;
         let newRow = row + moveNum;
@@ -278,7 +584,6 @@ cc.Class({
             newRow = this.blockRow - 1;
         }
         if (newRow == row) {
-            this.gameStateHorizon--;
             return;
         }
         console.log("moveRow", newRow);
@@ -307,7 +612,6 @@ cc.Class({
             }
         }
         if (newRow == row) {
-            this.gameStateHorizon--;
             return;
         }
 
@@ -315,183 +619,28 @@ cc.Class({
         let y = line * (this.blockblank + this.blockWidth);
         let endPos = cc.p(x, y);
         let action1 = cc.moveTo(0.1, endPos);
+        console.log("horizontalMove", "row", newRow, "line", line, "y", y);
+
         let action3 = cc.callFunc(() => {
-            this.blockNodes[line][row] = null;
-            this.blockNodes[line][newRow] = startNode;
-           this.movingBlock = startNode;
-            ////console.log("destroy",moveNum,row,line);
-            this.centerBlock.x = newRow;
-            this.movingBlock.getComponent("Block").setBlockRow(newRow);
-            ////console.log("horizontalMove",moveNum,this.centerBlock,this.blockNodes[line][newRow]);
-            this.gameStateHorizon --;
+
+            if (this.blockNodes[line][row]) {
+
+                this.movingBlock.getComponent("Block").setBlockRow(newRow);
+                this.blockNodes[line][newRow] = this.blockNodes[line][row];
+                this.movingBlock = startNode;
+                this.blockNodes[line][row] = null;
+                this.blockNodes[line][newRow].position = endPos;
+                console.log("successhorizontalMove", "row", newRow, "line", line, "position", this.blockNodes[line][newRow].position);
+                // this.centerBlock.x = newRow;
+            } else {
+                console.log("get one error");
+            }
+            this.gameStateHorizon--;
         }, this);
 
-        // var action4 = cc.scaleTo(0.1, 1, 1);
-        // var action2 = cc.scaleTo(0.1, 1, 0.8);
-        // let spawn = cc.spawn(action1, action2);
+        this.gameStateHorizon++;
+
         startNode.runAction(cc.sequence(action1, action3));
-    }
-    ,
-
-//向下移动 默认单位是1个格子
-    downBlock: function (moveNum = 1, centerNode = null) {
-
-        if (this.gameState > 0)
-            return;
-        // let line = this.centerBlock.y;
-        // let row = this.centerBlock.x;
-        let line = this.movingBlock.getComponent("Block").getBlockLine();
-        let row = this.movingBlock.getComponent("Block").getBlockRow();
-        if (centerNode != null) {
-             line = centerNode.getComponent("Block").getBlockLine();
-             row = centerNode.getComponent("Block").getBlockRow();
-        }
-        let realLine = line - moveNum;
-        if (realLine < 0) {
-            realLine = 0;
-        } else if (realLine > this.blockFloor - 1) {
-            realLine = this.blockFloor - 1;
-        }
-        if (realLine == line)
-            return;
-        let realMove = line - realLine;
-
-
-        this.gameState++;
-        for (let start = this.blockFloor - 1; start >= line; start--) {
-            if (!this.blockNodes[start] || !this.blockNodes[start][row])
-                continue;
-            realLine = start - realMove;
-            let startNode = this.blockNodes[start][row];
-            let x = row * (this.blockblank + this.blockWidth);
-            let y = realLine * (this.blockblank + this.blockWidth);
-            let endPos = cc.p(x, y);
-            let action1 = cc.moveTo(0.1, endPos);
-            // var action2 = cc.scaleTo(0.1, 1, 0.8);
-            // let spawn = cc.spawn(action1, action2);
-            // var action3 = cc.scaleTo(0.1, 1, 1);
-
-            let action4 = cc.callFunc(() => {
-                if (!this.blockNodes[realLine]) {
-                    this.blockNodes[realLine] = [];
-                }
-                this.blockNodes[realLine][row] = startNode;
-                this.blockNodes[line][row] = null;
-                this.movingBlock = startNode;
-                ////console.log("destroy",moveNum,"position:",row,line);
-                this.centerBlock.y = realLine;
-                this.movingBlock.getComponent("Block").setBlockLine(realLine);
-                if (this.canJoinBlock()) {
-                    this.joinBlock();
-                }
-                this.gameState--;
-            }, this);
-            startNode.runAction(cc.sequence(action1, action4));
-        }
-    }
-    ,
-    canDownBlock: function (centerNode = null) {
-        let line = this.movingBlock.getComponent("Block").getBlockLine();
-        let row = this.movingBlock.getComponent("Block").getBlockRow();
-        if (centerNode != null) {
-            line = centerNode.getComponent("Block").getBlockLine();
-            row = centerNode.getComponent("Block").getBlockRow();
-
-        }
-        if (line <= 0) {
-            return false;
-        }
-        if (!this.blockNodes[line - 1] || !this.blockNodes[line - 1][row]) {
-            return true;
-        }
-        return false;
-
-    }
-    ,
-    maxMoveDown() {
-        let num = 1;
-        // let line = this.centerBlock.y;
-        // let row = this.centerBlock.x;
-        let line = this.movingBlock.getComponent("Block").getBlockLine();
-        let row = this.movingBlock.getComponent("Block").getBlockRow();
-        for (; num <= line; num++) {
-            if (!this.blockNodes[line - num] || !this.blockNodes[line - num][row]) {
-                continue;
-            }
-            else {
-                break;
-            }
-        }
-        return num - 1;
-    }
-    ,
-
-// more  blocks add
-    moveAction: function (startNodes, EndNode) {
-        this.gameState++;
-        let moveNum = startNodes.length;
-
-
-        for (let i = 0; i < moveNum; i++) {
-            // let action1 = cc.moveTo(0.2, EndNode.position);
-            let action1 = cc.moveTo(0.2, EndNode);
-            var action2 = cc.scaleTo(0.2, 1, 0.8);
-            let spawn = cc.spawn(action1, action2);
-            var action4 = cc.scaleTo(0.2, 1, 1);
-            let thisNodePos = startNodes[i];
-            let thisNode = this.blockNodes[thisNodePos.line][thisNodePos.row];
-            let action3 = cc.callFunc(() => {
-                thisNode.removeFromParent(true);
-                this.blockNodes[thisNodePos.line][thisNodePos.row] = null;
-                ////console.log("destroy",thisNodePos);
-                this.addCount++;
-                if (this.addCount == moveNum) {
-                    this.addScore();
-                    // ////console.log("othermove",this.centerBlock)
-
-                    // let CenterBlock = this.blockNodes[EndNode.y][EndNode.x];
-
-                    let action_1 = cc.scaleTo(0.2, 1, 0.8);
-                    let action_2 = cc.scaleTo(0.2, 1, 1);
-                    let action_3 = cc.callFunc(() => {
-                        this.gameState--;
-                    });
-                   this.movingBlock.runAction(cc.sequence(action_1, action_2, action_3));
-
-
-                }
-
-            }, this);
-
-            thisNode.runAction(cc.sequence(spawn, action4, action3));
-        }
-    }
-    ,
-    finishGame: function () {
-        this.unschedule(this.refreshBlocks);
-        this.gameController.updeteFinish();
-    }
-    ,
-
-    startMenu: function () {
-        this.createBlocks();
-        this.schedule(this.refreshBlocks, 1);
-    }
-    ,
-    restartMenu: function () {
-        this.clearAll();
-        this.createBlocks();
-        this.schedule(this.refreshBlocks, 1);
-    }
-    ,
-    clearAll: function () {
-        this.gameNode.removeAllChildren(true);
-        this.blockNodes = [];
-    }
-    ,
-    changeNextNum: function (num) {
-        this.BlockNum = num;
-        this.gameController.GameMenuController.updateNext(this.BlockNum);
     }
     ,
 
@@ -509,15 +658,17 @@ cc.Class({
     ,
     touchEndCallBack: function (location) {
         if (this.TouchState == 'move') {
-            this.movelength = location.x - this.previousPos.x;
-            let moveNum = Math.floor(this.movelength / this.blockWidth);
-            if (moveNum == 0 && !this.moveState) {
-                let maxMoveDown = this.maxMoveDown();
-                this.downBlock(maxMoveDown);
+            this.movelength = Math.abs(location.x - this.previousPos.x);
+            // let moveNum = Math.floor(this.movelength / this.blockWidth);
+            if (!this.moveState && this.movelength < 10) {
+                let maxMoveDown = this.maxTargetDown();
+                console.log("maxMoveDown", maxMoveDown)
+                this.downBlock(maxMoveDown, this.movingBlock);
             }
         } else {
-            let maxMoveDown = this.maxMoveDown();
-            this.downBlock(maxMoveDown);
+            let maxMoveDown = this.maxTargetDown();
+            console.log("maxMoveDown", maxMoveDown)
+            this.downBlock(maxMoveDown, this.movingBlock);
         }
         this.TouchState == 'end';
         this.moveState = false;
@@ -525,25 +676,26 @@ cc.Class({
     ,
     touchMoveCallBack: function (location) {
         this.TouchState = 'move';
-        // if (this.gameState >0)
-        //     return;
+        if (this.gameState > 0)
+            return;
         if (!this.canDownBlock()) {
             return;
         }
-        this.movelength = location.x - this.previousPos.x;
-        let moveNum = Math.floor(this.movelength / this.blockWidth);
-        if (moveNum != 0 ) {
-            // console.log("moveNum", moveNum)
+        if (this.gameState > 0)
+            return;
+        this.movelength = Math.abs(location.x - this.previousPos.x) * 2;
+        if (this.movelength >= this.blockWidth) {
+
+            let moveNum = Math.floor(this.movelength / this.blockWidth);
+            if (location.x < this.previousPos.x) {
+                moveNum = -moveNum;
+            }
             if (this.gameStateHorizon <= 0) {
                 this.horizontalMove(moveNum);
                 this.previousPos = location;
+                this.moveState = true;
             }
-            this.moveState = true;
-
         }
-        this.movelength = 0;
-
-        // this.previousPos = location;
     }
     ,
     createNextNum: function () {
@@ -579,6 +731,5 @@ cc.Class({
         }
         return create;
     }
-// update (dt) {},
 })
 ;
