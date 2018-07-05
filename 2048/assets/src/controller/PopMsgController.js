@@ -17,7 +17,7 @@ module.exports = {
         let pop = newNode.getComponent("PopMsg");
         newNode.position = position;
         pop.init(content);
-        cc.find("Canvas/game").addChild(newNode);
+        cc.find("Canvas/blockpanl/game").addChild(newNode);
     },
 
 

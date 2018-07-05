@@ -60,11 +60,11 @@ cc.Class({
         this.endMenu.active = false;
         let num = GameUtils.randomInt(0,100);
         if(num < 30){
-            let FBP = require("FBPlugin");
+            let FBP = require("Plugin");
             this.loadingad.active = true;
             FBP.RewardedVideoAsync(this.restartCallBack.bind(this));
         }else if(num < 80){
-            let FBP = require("FBPlugin");
+            let FBP = require("Plugin");
             this.loadingad.active = true;
             FBP.InterstitialAdAsync(this.restartCallBack.bind(this));
         }else{
@@ -74,7 +74,7 @@ cc.Class({
     },
 
     onTouchShareBtn:function(){
-        let FBP = require("FBPlugin");
+        let FBP = require("Plugin");
         FBP.chooseAsync();
 
     },

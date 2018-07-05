@@ -12,7 +12,7 @@ cc.Class({
     properties:{
         sp:cc.Sprite,
         numberLab:cc.Label,
-       posLab:cc.Label,
+         posLab:cc.Label,
         lineNum:0,
         rowNum:0,
         number:1,
@@ -66,7 +66,7 @@ cc.Class({
     setBlockPos:function(line,row){
         this.lineNum = line;
         this.rowNum  = row;
-        this.posLab.string =  ""+line+","+row;
+         this.posLab.string =  ""+line+","+row;
     },
     getBlockRow:function(){
        return this.rowNum;
@@ -76,10 +76,10 @@ cc.Class({
     },
     setBlockRow:function(row){
         this.rowNum = row;
-        this.posLab.string =  ""+this.lineNum+","+this.rowNum;
+         this.posLab.string =  ""+this.lineNum+","+this.rowNum;
     },
     setBlockLine:function(line){
          this.lineNum = line ;
-        this.posLab.string =  ""+this.lineNum+","+this.rowNum;
+         this.posLab.string =  ""+this.lineNum+","+this.rowNum;
     }
 });
