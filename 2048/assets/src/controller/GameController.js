@@ -23,7 +23,7 @@ cc.Class({
         //     type: cc.SpriteFrame, // optional, default is typeof default
         //     serializable: true,   // optional, default is true
         // },
-        BlocksController:require("BlocksController"),
+        BlocksController:require("BlocksControllers"),
         GameMenuController:require("GameMenuController"),
         startMenu:cc.Node,
         endMenu:cc.Node,

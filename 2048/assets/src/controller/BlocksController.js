@@ -18,6 +18,7 @@ cc.Class({
 
     properties: {
         gameNode: cc.Node,
+        gameNodeAni:cc.Node,
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -125,7 +126,6 @@ cc.Class({
         this.gameController.GameMenuController.updateNext(this.NextBlockNum);
         this.NextBlockNum = this.createNextNum();
         node.getComponent("Block").setBlockPos(6, 2);
-        this.centerBlock = cc.p(2, 6);
         this.movingBlock = node;
         this.newCreateList = [];
         this.newCreateList[0] = node;
@@ -466,6 +466,7 @@ cc.Class({
             let movedis = realMove * (this.blockblank + this.blockWidth);
             // console.log("downposing", "row", row, "line", endLine, "y", y);
             let action1 = cc.moveBy(0.1,cc.p(0,-movedis));
+            console.log("moveByposY",movedis);
             // console.log("endpos",endPos);
             movelist[endLine] = startNode;
             // var action2 = cc.scaleTo(0.1, 1, 0.8);
@@ -492,6 +493,7 @@ cc.Class({
                     // this.centerBlock.y = realLine;
                     movelist[endLine].getComponent("Block").setBlockLine(endLine);
                     let y = endLine * (this.blockblank + this.blockWidth);
+                    console.log("endposY",y);
                     movelist[endLine].setPositionY(y);
 
                     // if (!this.canDownBlock(movelist[endLine])) {
@@ -565,7 +567,7 @@ cc.Class({
 
                     //movelist[endLine]("stopDownBlock gameState--", this.gameState);
 
-                });
+                },this);
                 this.blockNodes[start][row].runAction(cc.sequence(action_1, action_2, action_3));
             }
         }
@@ -592,13 +594,9 @@ cc.Class({
     changeNextNum: function (num) {
         this.BlockNum = num;
         this.gameController.GameMenuController.updateNext(this.BlockNum);
-    }
-    ,
-    addScore: function (addCount) {
-        // let line = this.centerBlock.y;
-        // let row = this.centerBlock.x;
-        // let EndNode = this.blockNodes[line][row];
-        let EndNode = this.movingBlock;
+    },
+    addScore: function (addCount,endNode) {
+        let EndNode = endNode;
         let baseNumber = EndNode.getComponent("Block").getBlockNumber();
         let newScore = baseNumber + addCount;
         let showNumber = Math.pow(2, newScore);
@@ -616,7 +614,6 @@ cc.Class({
         let position = cc.p(x, y);
         PopMsgController.showMsg("+" + showNumber, position);
     },
-
     horizontalMove: function (moveNum) {
 
         if (!this.canhorizon)
@@ -702,9 +699,11 @@ cc.Class({
             // let moveNum = Math.floor(this.movelength / this.blockWidth);
             if (!this.moveState && this.movelength < 10) {
                 let maxMoveDown = this.maxTargetDown();
+                if(maxMoveDown <= 0)
+                    return;
                 // console.log("maxMoveDown", maxMoveDown)
                 // this.movingBlock.stopAllActions();
-                this.movingNodes = [];
+                // this.movingNodes = [];
                 // this.gameState =0;
                 // console.log("clearmove gameState", this.gameState);
                 this.downBlock(maxMoveDown, this.movingBlock, true);
@@ -713,7 +712,7 @@ cc.Class({
             let maxMoveDown = this.maxTargetDown();
             // console.log("maxMoveDown", maxMoveDown)
             // this.movingBlock.stopAllActions();
-            this.movingNodes = [];
+            // this.movingNodes = [];
             // this.gameState =0;
             // console.log("clearmovegameState", this.gameState);
             this.downBlock(maxMoveDown, this.movingBlock, true);
