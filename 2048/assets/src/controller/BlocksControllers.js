@@ -24,6 +24,7 @@ cc.Class({
         this.panelMax = 1;
         this.gameController = cc.find("Canvas").getComponent("GameController");
         this.downspeed = 1;
+        this.joinspeed = 0.5;
         this.blockWidth = 110;
         this.blockblank = 6;
         this.blockFloor = 7;
@@ -42,7 +43,7 @@ cc.Class({
     },
     startMenu: function () {
         this.createBlocks();
-        this.schedule(this.refreshBlocks, 1);
+        // this.schedule(this.refreshBlocks, downspeed);
     }
     ,
     restartMenu: function () {
@@ -131,7 +132,7 @@ cc.Class({
             this.finishGame();
             return;
         }
-        this.canhorizon= true;
+        this.canhorizon = true;
         this.newCreateList = [];
         this.waitMovingNodes = [];//等待移动点
         this.stopMoveNodes = [];//刚停止移动的点
@@ -158,8 +159,7 @@ cc.Class({
         this.blockNodes[6][2] = node;
         this.canhorizon = true;
         this.movingState = 0;// 0移动状态 1：正在抖动 2：抖动完成
-        this.schedule(this.refreshBlocks, 1);
-
+        this.schedule(this.refreshBlocks, this.downspeed);
     },
 
     canDownBlock: function (centerNode = null) {
@@ -180,7 +180,7 @@ cc.Class({
         var action1 = cc.scaleTo(0.1, 1, 0.8);
         var action2 = cc.scaleTo(0.1, 1, 1);
         this.movingBlock.runAction(cc.sequence(action1, action2));
-        this.scheduleOnce(this.doShakeCallBack.bind(this), 0.5);
+        this.scheduleOnce(this.doShakeCallBack.bind(this), 0.2);
         this.waitMovingNodes = [];
         this.waitMovingNodes.push(...this.movingBlock);
     },
@@ -189,9 +189,9 @@ cc.Class({
         this.canhorizon = false;
         if (this.canJoinBlock(this.movingBlock)) {
             this.joinBlock(this.movingBlock);
-        }else if(this.checkAllDownBlock()){
+        } else if (this.checkAllDownBlock()) {
             this.downAllBlock();
-        }else{
+        } else {
             this.createBlocks();
         }
 
@@ -218,6 +218,9 @@ cc.Class({
         let rightNode;
         let leftNode;
         let moveBlock = [];
+        if (this.canDownBlock(centernode)) {
+            return;
+        }
         if (centerNumber >= Math.pow(2, MAX_NUM)) {
             return false;
         }
@@ -327,7 +330,7 @@ cc.Class({
             let thisNode = this.blockNodes[thisNodePos.line][thisNodePos.row];
             thisNode.runAction(cc.sequence(spawn, action4));
         }
-        this.scheduleOnce(this.joinCallback.bind(this, startNodes, EndNode), 0.5);
+        this.scheduleOnce(this.joinCallback.bind(this, startNodes, EndNode), 0.2);
     },
 
     addScore: function (addCount, endNode) {
@@ -361,17 +364,6 @@ cc.Class({
                 console.log("error");
             }
         }
-        this.addScore(startNodes.length, EndNode);
-        let dosomThing = false;
-        if (this.checkAllDownBlock()) {
-            dosomThing = true;
-            this.downAllBlock();
-        }
-        if (this.canJoinBlock(EndNode)) {
-            dosomThing = true
-            this.joinBlock(EndNode);
-        }
-        let find = false;
         for (let i = 0; i < this.newCreateList.length; i++) {
             if (this.newCreateList[i] == EndNode) {
                 find = true;
@@ -381,6 +373,17 @@ cc.Class({
         if (!find) {
             this.newCreateList.push(EndNode);
         }
+        this.addScore(startNodes.length, EndNode);
+        let dosomThing = false;
+        if (this.checkAllDownBlock()) {
+            dosomThing = true;
+            this.downAllBlock();
+        } else if (this.canJoinBlock(EndNode)) {
+            dosomThing = true
+            this.joinBlock(EndNode);
+        }
+        let find = false;
+
         if (!dosomThing) {
             this.canrefresh = true;
             this.createBlocks();
@@ -388,20 +391,14 @@ cc.Class({
     },
 
     //向下移动 默认单位是1个格子
-    downBlockAction: function (centerNode = null, acceler = false) {
+    downBlockAction: function (centerNode = null) {
 
         if (this.gameStateHorizon > 0) {
             return;
         }
-        if (acceler) {
-            this.unschedule(this.refreshBlocks);
-        }
         let line = centerNode.getComponent("Block").getBlockLine();
         let row = centerNode.getComponent("Block").getBlockRow();
         let realLine = line - 1;
-        if (acceler) {
-            realLine = this.maxTargetDown();
-        }
         if (realLine == line)
             return;
         let realMove = line - realLine;
@@ -414,17 +411,11 @@ cc.Class({
             for (let i = 0; i < this.movingNodes.length; i++) {
                 if (this.movingNodes[i] == this.blockNodes[start][row]) {
                     find = true;
-                    if (acceler) {
-                        this.movingNodes[i].stopAllActions();
-                        console.log("他正在跑 你点也没用");
-                    }
                 }
             }
             if (!find) {
                 this.movingNodes.push(this.blockNodes[start][row]);
 
-            } else if (!acceler) {
-                continue;
             }
             realLine = line - realMove;
             let beginLine = start;
@@ -438,8 +429,35 @@ cc.Class({
             let action1 = cc.moveTo(0.1, cc.p(moveX, moveY));
             startNode.runAction(action1);
         }
-        this.scheduleOnce(this.downBlockCallback.bind(this, realLine, centerNode), 0.5);
+        this.scheduleOnce(this.downBlockCallback.bind(this, realLine, centerNode), 0.1);
         // }
+
+    },
+    accelarDownAction: function () {
+        let realLine = this.maxTargetDown();
+        this.unschedule(this.refreshBlocks);
+        this.movingBlock.stopAllActions();
+        let row = this.movingBlock.getComponent("Block").getBlockRow();
+        let line = this.movingBlock.getComponent("Block").getBlockLine();
+        let moveY = realLine * (this.blockblank + this.blockWidth);
+        let realY = line * (this.blockblank + this.blockWidth);
+        let moveX = row * (this.blockblank + this.blockWidth);
+        let action1 = cc.moveTo(0.1, cc.p(moveX, moveY));
+        this.movingBlock.position = cc.p(moveX,realY);
+        this.movingBlock.runAction(action1);
+        this.scheduleOnce(this.downBlockCallback.bind(this, realLine, this.movingBlock), 0.1);
+        // let line = centerNode.getComponent("Block").getBlockLine();
+        // let row = centerNode.getComponent("Block").getBlockRow();
+        // console.log("他正在跑 你点也没用");
+        // let getthisNum = this.movingBlock.getComponent("Block").getBlockNumber();
+        // let NewNode = BlockFactory.create(getthisNum);
+        // NewNode.getComponent("Block").setBlockPos(start, row);
+        // let newx = start *
+        //     let
+        // endpos = cc.p();
+        // this.movingBlock.removeFromParent(true);
+        // this.movingBlock = NewNode;
+        // this.blockNodes[start][row] = NewNode;
 
     },
     findAllCanDownBlock: function () {
@@ -546,7 +564,7 @@ cc.Class({
                 this.stopMoveNodes[i].runAction(cc.sequence(action_1, action_2));
             }
         }
-        this.scheduleOnce(this.stopDownBlockCallBack.bind(this), 0.5);
+        this.scheduleOnce(this.stopDownBlockCallBack.bind(this), 0.1);
     },
     stopDownBlockCallBack: function () {
         let find = false;
@@ -693,19 +711,19 @@ cc.Class({
     }
     ,
     touchEndCallBack: function (location) {
-        // if (!this.canhorizon) {
-        //     console.log("点击不生效原因canhorizon", this.canhorizon);
-        //     return;
-        // }
+        if (!this.canhorizon) {
+            console.log("点击不生效原因canhorizon", this.canhorizon);
+            return;
+        }
         if (this.TouchState == 'move') {
             this.movelength = Math.abs(location.x - this.previousPos.x);
             // let moveNum = Math.floor(this.movelength / this.blockWidth);
             if (!this.moveState && this.movelength < 10) {
 
-                this.downBlockAction(this.movingBlock, true);
+                this.accelarDownAction();
             }
         } else {
-            this.downBlockAction(this.movingBlock, true);
+            this.accelarDownAction();
         }
         this.TouchState == 'end';
         this.moveState = false;
