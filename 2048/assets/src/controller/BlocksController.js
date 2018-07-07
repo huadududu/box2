@@ -18,7 +18,7 @@ cc.Class({
 
     properties: {
         gameNode: cc.Node,
-        gameNodeAni:cc.Node,
+        gameNodeAni: cc.Node,
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -64,6 +64,7 @@ cc.Class({
 
 
     startMenu: function () {
+
         this.createBlocks();
         this.schedule(this.refreshBlocks, 1);
     }
@@ -125,12 +126,13 @@ cc.Class({
 
         this.gameController.GameMenuController.updateNext(this.NextBlockNum);
         this.NextBlockNum = this.createNextNum();
-        node.getComponent("Block").setBlockPos(6, 2);
+
         this.movingBlock = node;
         this.newCreateList = [];
         this.newCreateList[0] = node;
         this.gameNode.addChild(node);
         let realpath = this.blockWidth + this.blockblank;
+        node.getComponent("Block").setBlockPos(6, 2);
         let row = realpath * 2;
         let line = realpath * 6;
         node.position = cc.p(row, line);
@@ -275,7 +277,7 @@ cc.Class({
     joinAction: function (startNodes, EndNode) {
 
         let moveNum = startNodes.length;
-        console.log("joinstart:",startNodes);
+        console.log("joinstart:", startNodes);
         // console.log("joinend:",startNodes);
         let addCount = 0;
         for (let i = 0; i < moveNum; i++) {
@@ -465,8 +467,8 @@ cc.Class({
 
             let movedis = realMove * (this.blockblank + this.blockWidth);
             // console.log("downposing", "row", row, "line", endLine, "y", y);
-            let action1 = cc.moveBy(0.1,cc.p(0,-movedis));
-            console.log("moveByposY",movedis);
+            let action1 = cc.moveBy(0.1, cc.p(0, -movedis));
+            console.log("moveByposY", movedis);
             // console.log("endpos",endPos);
             movelist[endLine] = startNode;
             // var action2 = cc.scaleTo(0.1, 1, 0.8);
@@ -493,7 +495,7 @@ cc.Class({
                     // this.centerBlock.y = realLine;
                     movelist[endLine].getComponent("Block").setBlockLine(endLine);
                     let y = endLine * (this.blockblank + this.blockWidth);
-                    console.log("endposY",y);
+                    console.log("endposY", y);
                     movelist[endLine].setPositionY(y);
 
                     // if (!this.canDownBlock(movelist[endLine])) {
@@ -523,6 +525,7 @@ cc.Class({
             startNode.runAction(cc.sequence(action1, action4));
         }
     },
+    /*
     stopDownBlock: function (stopBlockList) {
         let stopnum = 0;
         for (let i = 0; i < stopBlockList.length; i++) {
@@ -572,7 +575,7 @@ cc.Class({
             }
         }
     },
-
+*/
     maxTargetDown() {//
         // let line = this.centerBlock.y;
         // let row = this.centerBlock.x;
@@ -595,7 +598,7 @@ cc.Class({
         this.BlockNum = num;
         this.gameController.GameMenuController.updateNext(this.BlockNum);
     },
-    addScore: function (addCount,endNode) {
+    addScore: function (addCount, endNode) {
         let EndNode = endNode;
         let baseNumber = EndNode.getComponent("Block").getBlockNumber();
         let newScore = baseNumber + addCount;
@@ -667,7 +670,7 @@ cc.Class({
             this.blockNodes[newline][newRow] = this.movingBlock;
             this.blockNodes[newline][row] = null;
             let newx = newRow * (this.blockblank + this.blockWidth);
-            this.blockNodes[newline][newRow].setPositionX( newx);
+            this.blockNodes[newline][newRow].setPositionX(newx);
             // console.log("get one now", newline, newRow, "->", line, newRow);
         } else {
             console.log("get 3 error");
@@ -699,7 +702,7 @@ cc.Class({
             // let moveNum = Math.floor(this.movelength / this.blockWidth);
             if (!this.moveState && this.movelength < 10) {
                 let maxMoveDown = this.maxTargetDown();
-                if(maxMoveDown <= 0)
+                if (maxMoveDown <= 0)
                     return;
                 // console.log("maxMoveDown", maxMoveDown)
                 // this.movingBlock.stopAllActions();

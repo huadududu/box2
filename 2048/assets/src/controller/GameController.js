@@ -52,7 +52,7 @@ cc.Class({
     //create block;
     onTouchStartBtn: function () {
         this.startMenu.active = false;
-        this.BlocksController.restartMenu();
+        this.BlocksController.startMenu();
 
     },
     onTouchRestartBtn: function () {

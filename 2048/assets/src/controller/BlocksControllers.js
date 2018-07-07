@@ -21,6 +21,7 @@ cc.Class({
         this.blockNodes = [];//所有点
         this.waitMovingNodes = [];//所有等待移动点//下落
         this.movingNodes = [];//正在移动的点
+        this.needDestroy = [];//正在移动的点
         this.panelMax = 1;
         this.gameController = cc.find("Canvas").getComponent("GameController");
         this.downspeed = 1;
@@ -42,6 +43,7 @@ cc.Class({
         this.gameController.GameMenuController.updateNext(this.NextBlockNum);
     },
     startMenu: function () {
+        // this.beforeBagin();
         this.createBlocks();
         // this.schedule(this.refreshBlocks, downspeed);
     }
@@ -55,8 +57,31 @@ cc.Class({
         this.gameNode.removeAllChildren(true);
         this.blockNodes = [];
     },
+    beforeBagin: function () {
+        let testConfig = require("testConfig");
+        for (let line = 0; line < this.blockFloor - 1; line++) {
+            let showNode = testConfig[line];
+            for (let row = 0; row < showNode.length; row++) {
+                if (showNode[row] == 0)
+                    continue;
+                let node = BlockFactory.create(showNode[row]);// 写死生成的新的数组是math.pow(2,1)[改]
+                this.gameNode.addChild(node);
+                let realpath = this.blockWidth + this.blockblank;
+                node.getComponent("Block").setBlockPos(line, row);
+                let lineY = realpath * line;
+                let rowX = realpath * row;
+                node.position = cc.p(rowX, lineY);
+                if (this.blockNodes == null) {
+                    this.blockNodes = [];
+                }
+                if (this.blockNodes[line] == null) {
+                    this.blockNodes[line] = [];
+                }
+                this.blockNodes[line][row] = node;
+            }
+        }
+    },
     finishGame: function () {
-        // console.log("finish");
         this.unschedule(this.refreshBlocks);
         this.gameController.updeteFinish();
     },
@@ -114,10 +139,13 @@ cc.Class({
 
         if (this.canDownBlock(this.movingBlock)) {
             this.downBlockAction(this.movingBlock);
-        } else if (this.movingState == 0) {
-            this.doShake(this.movingBlock);
-        } else if (this.movingState == 1) {
-            return;
+        } else {
+            this.unschedule(this.refreshBlocks);
+            if (this.movingState == 0) {
+                this.doShake(this.movingBlock);
+            } else if (this.movingState == 1) {
+                return;
+            }
         }
     },
     canAddNewBlock: function () {
@@ -137,6 +165,7 @@ cc.Class({
         this.waitMovingNodes = [];//等待移动点
         this.stopMoveNodes = [];//刚停止移动的点
         this.movingNodes = [];//正在移动的点
+        this.needDestroy = [];// 准备删除点
         this.BlockNum = this.NextBlockNum;
         let node = BlockFactory.create(this.BlockNum);
         this.NextBlockNum = this.createNextNum();
@@ -176,6 +205,7 @@ cc.Class({
     },
     doShake: function () {
         this.unschedule(this.refreshBlocks);
+        // this.schedule(this.refreshChoose.bind(this), this.joinspeed);
         this.movingState = 1;
         var action1 = cc.scaleTo(0.1, 1, 0.8);
         var action2 = cc.scaleTo(0.1, 1, 1);
@@ -188,24 +218,24 @@ cc.Class({
     doShakeCallBack: function () {
         this.canhorizon = false;
         if (this.canJoinBlock(this.movingBlock)) {
-            this.joinBlock(this.movingBlock);
-        } else if (this.checkAllDownBlock()) {
-            this.downAllBlock();
+            this.schedule(this.refreshChoose, this.joinspeed);
         } else {
             this.createBlocks();
         }
 
+
     },
     checkisMoving: function (line, row) {
+        // return
 
-        for (let i = 0; i < this.waitMovingNodes.length; i++) {
-            let x = this.waitMovingNodes[i].getComponent("Block").getBlockRow();
-            let y = this.waitMovingNodes[i].getComponent("Block").getBlockLine();
+        for (let i = 0; i < this.needDestroy.length; i++) {
+            let x = this.needDestroy[i].getComponent("Block").getBlockRow();
+            let y = this.needDestroy[i].getComponent("Block").getBlockLine();
             if (x == row && y == line) {
                 return true;
             }
-            return false;
         }
+        return false;
     },
     //判断是否可以合并
     canJoinBlock: function (centernode = null) {
@@ -260,65 +290,62 @@ cc.Class({
         let line = endBlock.getComponent("Block").getBlockLine();
         let row = endBlock.getComponent("Block").getBlockRow();
         let centerNumber = endBlock.getComponent("Block").getBlockNumber();
-        let nextNode;
-        let rightNode;
-        let leftNode;
-        let moveBlock = [];
 
+        this.joinAllNodeList = [];
+        this.findCanJoinNode(endBlock);
+        if (this.joinAllNodeList.length > 0) {
+            this.canhorizon = false;
+            this.joinAction(this.joinAllNodeList, endBlock);
+        }
+    },
+    //递归去找节点相同点点
+    findCanJoinNode: function (endBlock, Direction = 'd') {//noDirection l left r right d down
+        let line = endBlock.getComponent("Block").getBlockLine();
+        let row = endBlock.getComponent("Block").getBlockRow();
+        let centerNumber = endBlock.getComponent("Block").getBlockNumber();
         if (line > 0 && !this.checkisMoving(line - 1, row)) {
             if (this.blockNodes[line - 1] && this.blockNodes[line - 1][row]) {
-                nextNode = this.blockNodes[line - 1][row];
+               let  nextNode = this.blockNodes[line - 1][row];
                 let nextNumber = nextNode.getComponent("Block").getBlockNumber();
                 if (nextNumber == centerNumber) {
                     // this.moveBlock(nextNode.position,this.blockNodes[line][row].position);
-                    moveBlock.push({line: line - 1, row: row});
+                    this.joinAllNodeList.push({line: line - 1, row: row});
                 }
             }
         }
-        if (row > 0 && row < this.blockRow && !this.checkisMoving(line, row - 1)) {//left
-            for (let end = row - 1; end >= 0; end--) {
-                if (this.blockNodes[line] && this.blockNodes[line][end]) {
-                    leftNode = this.blockNodes[line][end];
-                    let leftNumber = leftNode.getComponent("Block").getBlockNumber();
-                    if (leftNumber == centerNumber) {
-                        // this.moveBlock(leftNode.position,this.blockNodes[line][row].position);
-                        // moveBlock.push(leftNode);
-                        moveBlock.push({line: line, row: end});
-                    } else {
-                        break;
-                    }
-                } else {
-                    break;
+        if (row > 0 && row < this.blockRow && !this.checkisMoving(line, row - 1) && Direction != 'r') {//left
+            let end = row - 1;
+            if (this.blockNodes[line] && this.blockNodes[line][end]) {
+                let leftNode = this.blockNodes[line][end];
+                let leftNumber = leftNode.getComponent("Block").getBlockNumber();
+                if (leftNumber == centerNumber) {
+                    // this.moveBlock(leftNode.position,this.blockNodes[line][row].position);
+                    // moveBlock.push(leftNode);
+                    this.joinAllNodeList.push({line: line, row: end});
+                    this.findCanJoinNode(leftNode, 'l');
                 }
             }
+
         }
-        if (row >= 0 && row < this.blockRow - 1 && !this.checkisMoving(line, row + 1)) {
-            for (let start = row + 1; start <= this.blockRow - 1; start++) {
-                if (this.blockNodes[line] && this.blockNodes[line][start]) {
-                    rightNode = this.blockNodes[line][start];
-                    let rightNumber = rightNode.getComponent("Block").getBlockNumber();
-                    if (rightNumber == centerNumber) {
-                        // this.moveBlock(rightNode.position,this.blockNodes[line][row].position);
-                        // moveBlock.push(rightNode);
-                        moveBlock.push({line: line, row: start});
-                    } else {
-                        break;
-                    }
+        if (row >= 0 && row < this.blockRow - 1 && !this.checkisMoving(line, row + 1) && Direction != 'l') {
+            let start = row + 1;
+            if (this.blockNodes[line] && this.blockNodes[line][start]) {
+               let  rightNode = this.blockNodes[line][start];
+                let rightNumber = rightNode.getComponent("Block").getBlockNumber();
+                if (rightNumber == centerNumber) {
+                    // this.moveBlock(rightNode.position,this.blockNodes[line][row].position);
+                    // moveBlock.push(rightNode);
+                    // moveBlock.push({line: line, row: start});
+                    this.joinAllNodeList.push({line: line, row: start});
+                    this.findCanJoinNode(rightNode, 'r');
                 }
-                else {
-                    break;
-                }
+
             }
-        }
-        if (moveBlock.length > 0) {
-            this.canhorizon = false;
-            this.joinAction(moveBlock, endBlock);
         }
     },
     joinAction: function (startNodes, EndNode) {
 
         let moveNum = startNodes.length;
-        console.log("joinstart:", startNodes);
         // console.log("joinend:",startNodes);
         let addCount = 0;
         for (let i = 0; i < moveNum; i++) {
@@ -329,7 +356,10 @@ cc.Class({
             let thisNodePos = startNodes[i];
             let thisNode = this.blockNodes[thisNodePos.line][thisNodePos.row];
             thisNode.runAction(cc.sequence(spawn, action4));
+            this.needDestroy.push(thisNode);
         }
+        // this.joinCallback(startNodes, EndNode);
+
         this.scheduleOnce(this.joinCallback.bind(this, startNodes, EndNode), 0.2);
     },
 
@@ -358,12 +388,26 @@ cc.Class({
             let thisNode = this.blockNodes[thisNodePos.line][thisNodePos.row];
 
             if (thisNode) {
+
+                for (let i = 0; i < this.needDestroy.length; i++) {
+                    if (thisNode == this.needDestroy[i]) {
+                        this.needDestroy.splice(i, 1);
+                        break;
+                    }
+                }
+                for (let i = 0; i < this.waitMovingNodes.length; i++) {
+                    if (thisNode == this.waitMovingNodes[i]) {
+                        this.waitMovingNodes.splice(i, 1);
+                        break;
+                    }
+                }
                 thisNode.removeFromParent(true);
                 this.blockNodes[thisNodePos.line][thisNodePos.row] = null;
             } else {
                 console.log("error");
             }
         }
+        let find = false;
         for (let i = 0; i < this.newCreateList.length; i++) {
             if (this.newCreateList[i] == EndNode) {
                 find = true;
@@ -374,20 +418,6 @@ cc.Class({
             this.newCreateList.push(EndNode);
         }
         this.addScore(startNodes.length, EndNode);
-        let dosomThing = false;
-        if (this.checkAllDownBlock()) {
-            dosomThing = true;
-            this.downAllBlock();
-        } else if (this.canJoinBlock(EndNode)) {
-            dosomThing = true
-            this.joinBlock(EndNode);
-        }
-        let find = false;
-
-        if (!dosomThing) {
-            this.canrefresh = true;
-            this.createBlocks();
-        }
     },
 
     //向下移动 默认单位是1个格子
@@ -399,36 +429,23 @@ cc.Class({
         let line = centerNode.getComponent("Block").getBlockLine();
         let row = centerNode.getComponent("Block").getBlockRow();
         let realLine = line - 1;
-        if (realLine == line)
-            return;
-        let realMove = line - realLine;
-
-        for (let start = line; start <= this.blockFloor - 1; start++) {
-            if (!this.blockNodes[start] || !this.blockNodes[start][row])
-                continue;
-
-            let find = false;
-            for (let i = 0; i < this.movingNodes.length; i++) {
-                if (this.movingNodes[i] == this.blockNodes[start][row]) {
-                    find = true;
-                }
+        let realMove = 1;
+        let find = false;
+        for (let i = 0; i < this.movingNodes.length; i++) {
+            if (this.movingNodes[i] == this.blockNodes[line][row]) {
+                find = true;
+                return;
             }
-            if (!find) {
-                this.movingNodes.push(this.blockNodes[start][row]);
 
-            }
-            realLine = line - realMove;
-            let beginLine = start;
-            let endLine = beginLine - realMove;
-            if (endLine < 0)
-                continue;
-            this.gameState++;
-            let startNode = this.blockNodes[beginLine][row];
-            let moveY = realLine * (this.blockblank + this.blockWidth);
-            let moveX = row * (this.blockblank + this.blockWidth);
-            let action1 = cc.moveTo(0.1, cc.p(moveX, moveY));
-            startNode.runAction(action1);
         }
+        if (!find) {
+            this.movingNodes.push(this.blockNodes[line][row]);
+
+        }
+        let moveY = realLine * (this.blockblank + this.blockWidth);
+        let moveX = row * (this.blockblank + this.blockWidth);
+        let action1 = cc.moveTo(0.1, cc.p(moveX, moveY));
+        centerNode.runAction(action1);
         this.scheduleOnce(this.downBlockCallback.bind(this, realLine, centerNode), 0.1);
         // }
 
@@ -436,6 +453,8 @@ cc.Class({
     accelarDownAction: function () {
         let realLine = this.maxTargetDown();
         this.unschedule(this.refreshBlocks);
+        this.canhorizon = false;
+        this.schedule(this.refreshChoose, this.joinspeed);
         this.movingBlock.stopAllActions();
         let row = this.movingBlock.getComponent("Block").getBlockRow();
         let line = this.movingBlock.getComponent("Block").getBlockLine();
@@ -443,21 +462,9 @@ cc.Class({
         let realY = line * (this.blockblank + this.blockWidth);
         let moveX = row * (this.blockblank + this.blockWidth);
         let action1 = cc.moveTo(0.1, cc.p(moveX, moveY));
-        this.movingBlock.position = cc.p(moveX,realY);
+        this.movingBlock.position = cc.p(moveX, realY);
         this.movingBlock.runAction(action1);
         this.scheduleOnce(this.downBlockCallback.bind(this, realLine, this.movingBlock), 0.1);
-        // let line = centerNode.getComponent("Block").getBlockLine();
-        // let row = centerNode.getComponent("Block").getBlockRow();
-        // console.log("他正在跑 你点也没用");
-        // let getthisNum = this.movingBlock.getComponent("Block").getBlockNumber();
-        // let NewNode = BlockFactory.create(getthisNum);
-        // NewNode.getComponent("Block").setBlockPos(start, row);
-        // let newx = start *
-        //     let
-        // endpos = cc.p();
-        // this.movingBlock.removeFromParent(true);
-        // this.movingBlock = NewNode;
-        // this.blockNodes[start][row] = NewNode;
 
     },
     findAllCanDownBlock: function () {
@@ -468,38 +475,74 @@ cc.Class({
                     continue;
                 }
                 else if (this.canDownBlock(this.blockNodes[line][row])) {
-                    canDownList.push(this.blockNodes[line][row]);
+                    for (let start = line; start <= this.blockFloor - 1; start++) {
+                        if (!this.blockNodes[start] || !this.blockNodes[start][row]) {
+                            continue;
+                        } else if (this.blockNodes[start][row]) {
+                            canDownList.push(this.blockNodes[start][row]);
+                        }
+
+                    }
                 }
             }
         }
         return canDownList;
     },
     downAllBlock: function () {
+
+        if (this.movingNodes.length > 0) {
+            console.log("error");
+        }
         this.movingNodes = [];
         let canMoving = this.findAllCanDownBlock();
-        let stopMoving = [];
-        let find = false;
-        for (let i = 0; i < this.waitMovingNodes.length; i++) {
-            find = false;
-            for (let j = 0; j < canMoving.length; j++) {
-                if (canMoving[j] == this.waitMovingNodes[i]) {
-                    find = true;
-                }
-            }
-            if (!find) {
-                stopMoving.push(this.waitMovingNodes[i]);
-            }
-        }
-        this.waitMovingNodes = canMoving;
-        this.stopMoveNodes = stopMoving;
-        // for (let i = 0; i < stopMoving.length; i++) {
-        if (this.stopMoveNodes.length > 0) {
-            this.stopDownBlockCallBack();
-        }
+        // let stopMoving = [];
+        // let stopList = [];
+
+        // let find = false;
+        // for (let i = 0; i < this.waitMovingNodes.length; i++) {
+        //     find = false;
+        //     for (let j = 0; j < canMoving.length; j++) {
+        //         if (canMoving[j] == this.waitMovingNodes[i]) {
+        //             find = true;
+        //             break;
+        //         }
+        //     }
+        //     if (!find) {
+        //         this.stopMoveNodes.push(this.waitMovingNodes[i]);
+        //     }
         // }
-        for (let i = 0; i < canMoving.length; i++) {
-            this.downBlockAction(canMoving[i]);
+        this.waitMovingNodes = canMoving;
+
+        // for(let i =0;i<  this.stopMoveNodes.length-1;i++){
+        //     for(let j =i+1;j<   this.stopMoveNodes.length;j++){
+        //         if(this.stopMoveNodes[i] == this.stopMoveNodes[j]){//  去除相同点节点
+        //             this.stopMoveNodes.splice(i,1);
+        //             j--;
+        //         }
+        //     }
+        // }
+        for (let i = 0; i < this.waitMovingNodes.length; i++) {
+            this.downBlockAction(this.waitMovingNodes[i]);
         }
+    },
+    beforeJoinAll: function () {
+
+        let find = false;
+        // for (let i = 0; i < this.waitMovingNodes.length; i++) {
+        //     find = false;
+        //     for (let j = 0; j < this.stopMoveNodes.length; j++) {
+        //         if (this.stopMoveNodes[j] == this.waitMovingNodes[i]) {
+        //             find = true;
+        //             break;
+        //         }
+        //     }
+        //     if (!find) {
+        //         this.stopMoveNodes.push(this.waitMovingNodes[i]);
+        //     }
+        // }
+        this.stopMoveNodes = this.waitMovingNodes;
+
+
     },
     downBlockCallback: function (realLine, endNode) {
 
@@ -515,7 +558,7 @@ cc.Class({
         if (line <= realLine) {//异常情况
             console.log("exception");
             let endY = line * (this.blockWidth + this.blockblank);
-            endNode.setPositionY(endY);
+            // endNode.setPositionY(endY);
             return;
         }
         if (!this.blockNodes[realLine]) {
@@ -529,12 +572,8 @@ cc.Class({
         endNode.getComponent("Block").setBlockLine(realLine);
         this.blockNodes[line][row] = null;
         let endY = realLine * (this.blockWidth + this.blockblank);
-        endNode.setPositionY(endY);
-        if (!this.canDownBlock(this.movingBlock)) {
-            this.doShake();
-        }
-    }
-    ,
+        // endNode.setPositionY(endY);
+    },
     checkAllDownBlock: function () {
         for (let line = 0; line <= 6; line++) {
             for (let row = 0; row <= 4; row++) {
@@ -550,22 +589,24 @@ cc.Class({
         }
         return false;
     },
-    stopDownBlock: function () {
-        let stopnum = 0;
-        for (let i = 0; i < this.stopMoveNodes.length; i++) {
-            let stopBlock = this.stopMoveNodes[i];
-            let line = stopBlock.getComponent("Block").getBlockLine();
-            let row = stopBlock.getComponent("Block").getBlockRow();
-            for (let start = line; start <= this.blockFloor - 1; start++) {
-                if (!this.blockNodes[start] || !this.blockNodes[start][row])
-                    continue;
-                let action_1 = cc.scaleTo(0.05, 1, 0.8);
-                let action_2 = cc.scaleTo(0.05, 1, 1);
-                this.stopMoveNodes[i].runAction(cc.sequence(action_1, action_2));
-            }
-        }
-        this.scheduleOnce(this.stopDownBlockCallBack.bind(this), 0.1);
-    },
+
+    // stopDownBlock: function () {
+    //     let stopnum = 0;
+    //     for (let i = 0; i < this.stopMoveNodes.length; i++) {
+    //         let stopBlock = this.stopMoveNodes[i];
+    //         let line = stopBlock.getComponent("Block").getBlockLine();
+    //         let row = stopBlock.getComponent("Block").getBlockRow();
+    //         for (let start = line; start <= this.blockFloor - 1; start++) {
+    //             if (!this.blockNodes[start] || !this.blockNodes[start][row])
+    //                 continue;
+    //             let action_1 = cc.scaleTo(0.05, 1, 0.8);
+    //             let action_2 = cc.scaleTo(0.05, 1, 1);
+    //              this.stopMoveNodes[i].runAction(cc.sequence(action_1, action_2));
+    //         }
+    //     }
+    //     // this.scheduleOnce(this.stopDownBlockCallBack.bind(this), 0.1);
+    // },
+    /*
     stopDownBlockCallBack: function () {
         let find = false;
         for (let i = 0; i < this.newCreateList.length; i++) {
@@ -578,10 +619,10 @@ cc.Class({
             }
         }
         if (!find) {
-            for (let i = 0; i < this.stopDownBlock.length; i++) {
-                if (this.canJoinBlock(this.stopDownBlock[i])) {
+            for (let i = 0; i < this.stopMoveNodes.length; i++) {
+                if (this.canJoinBlock(this.stopMoveNodes[i])) {
                     find = true;
-                    this.joinBlock(this.stopDownBlock[i]);
+                    this.joinBlock(this.stopMoveNodes[i]);
                 }
             }
         }
@@ -590,6 +631,52 @@ cc.Class({
             this.createBlocks();
         }
 
+    },*/
+    checkCanAllJoin: function () {
+
+        let find = false;
+        for (let i = 0; i < this.newCreateList.length; i++) {
+            if (this.canJoinBlock(this.newCreateList[i])) {
+                return true;
+            }
+        }
+        for (let i = 0; i < this.stopMoveNodes.length; i++) {
+            if (this.canJoinBlock(this.stopMoveNodes[i])) {
+                return true;
+            }
+        }
+        return false;
+    },
+    joinAllBlock: function () {
+        let find = false;
+        for (let i = 0; i < this.newCreateList.length; i++) {
+            if (this.canJoinBlock(this.newCreateList[i])) {
+                this.joinBlock(this.newCreateList[i]);
+                find = true;
+                break;
+            }
+        }
+        if (!find) {
+            for (let i = 0; i < this.stopMoveNodes.length; i++) {
+                if (this.canJoinBlock(this.stopMoveNodes[i])) {
+                    this.joinBlock(this.stopMoveNodes[i]);
+                }
+            }
+        }
+    },
+    refreshChoose: function () {
+
+        if (this.checkAllDownBlock()) {
+            this.downAllBlock();
+        } else {
+            this.beforeJoinAll();
+            if (this.checkCanAllJoin()) {
+                this.joinAllBlock();
+            } else {
+                this.unschedule(this.refreshChoose);
+                this.createBlocks();
+            }
+        }
     },
     updateCheck: function () {
         if (this.canrefresh)
@@ -635,8 +722,10 @@ cc.Class({
 
         }
     },
+
+
     update: function () {
-        this.updateCheck();
+        // this.updateCheck();
     },
     //-------------- touch part -----------------------------
     horizontalMove: function (moveNum) {

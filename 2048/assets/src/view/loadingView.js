@@ -16,9 +16,16 @@ cc.Class({
         this.scheduleOnce(this.showAdCloseBtn,10);
     },
     onTouchCloseBtn(){
-        this.node.active = false;
+        // this.node.active = false;
+        let FBP = require("Plugin");
+        FBP.chooseAsync(this.backFriend.bind(this),this.backFriend.bind(this));
     },
     showAdCloseBtn:function () {
         this.loadingAdCloseNode.active  = true;
     },
+    backFriend:function(){
+        this.node.active = false;
+        let gameController = cc.find("Canvas").getComponent("GameController");
+        gameController.restartCallBack();
+    }
 });
