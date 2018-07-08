@@ -43,7 +43,7 @@ cc.Class({
         this.gameController.GameMenuController.updateNext(this.NextBlockNum);
     },
     startMenu: function () {
-        // this.beforeBagin();
+        this.beforeBagin();
         this.createBlocks();
         // this.schedule(this.refreshBlocks, downspeed);
     }
@@ -160,12 +160,12 @@ cc.Class({
             this.finishGame();
             return;
         }
-        this.canhorizon = true;
         this.newCreateList = [];
         this.waitMovingNodes = [];//等待移动点
         this.stopMoveNodes = [];//刚停止移动的点
         this.movingNodes = [];//正在移动的点
         this.needDestroy = [];// 准备删除点
+        this.stopMoveNodes = [];//本轮中结束运动的点
         this.BlockNum = this.NextBlockNum;
         let node = BlockFactory.create(this.BlockNum);
         this.NextBlockNum = this.createNextNum();
@@ -189,6 +189,7 @@ cc.Class({
         this.canhorizon = true;
         this.movingState = 0;// 0移动状态 1：正在抖动 2：抖动完成
         this.schedule(this.refreshBlocks, this.downspeed);
+        this.canhorizon = true;
     },
 
     canDownBlock: function (centerNode = null) {
@@ -204,9 +205,10 @@ cc.Class({
 
     },
     doShake: function () {
-        this.unschedule(this.refreshBlocks);
+        // this.unschedule(this.refreshBlocks);
         // this.schedule(this.refreshChoose.bind(this), this.joinspeed);
         this.movingState = 1;
+        this.canhorizon = false;
         var action1 = cc.scaleTo(0.1, 1, 0.8);
         var action2 = cc.scaleTo(0.1, 1, 1);
         this.movingBlock.runAction(cc.sequence(action1, action2));
@@ -251,7 +253,7 @@ cc.Class({
         if (this.canDownBlock(centernode)) {
             return;
         }
-        if (centerNumber >= Math.pow(2, MAX_NUM)) {
+        if (centerNumber >= MAX_NUM) {
             return false;
         }
         if (line > 0 && !this.checkisMoving(line - 1, row)) {
@@ -294,7 +296,6 @@ cc.Class({
         this.joinAllNodeList = [];
         this.findCanJoinNode(endBlock);
         if (this.joinAllNodeList.length > 0) {
-            this.canhorizon = false;
             this.joinAction(this.joinAllNodeList, endBlock);
         }
     },
@@ -305,7 +306,7 @@ cc.Class({
         let centerNumber = endBlock.getComponent("Block").getBlockNumber();
         if (line > 0 && !this.checkisMoving(line - 1, row)) {
             if (this.blockNodes[line - 1] && this.blockNodes[line - 1][row]) {
-               let  nextNode = this.blockNodes[line - 1][row];
+                let nextNode = this.blockNodes[line - 1][row];
                 let nextNumber = nextNode.getComponent("Block").getBlockNumber();
                 if (nextNumber == centerNumber) {
                     // this.moveBlock(nextNode.position,this.blockNodes[line][row].position);
@@ -330,7 +331,7 @@ cc.Class({
         if (row >= 0 && row < this.blockRow - 1 && !this.checkisMoving(line, row + 1) && Direction != 'l') {
             let start = row + 1;
             if (this.blockNodes[line] && this.blockNodes[line][start]) {
-               let  rightNode = this.blockNodes[line][start];
+                let rightNode = this.blockNodes[line][start];
                 let rightNumber = rightNode.getComponent("Block").getBlockNumber();
                 if (rightNumber == centerNumber) {
                     // this.moveBlock(rightNode.position,this.blockNodes[line][row].position);
@@ -446,6 +447,12 @@ cc.Class({
         let moveX = row * (this.blockblank + this.blockWidth);
         let action1 = cc.moveTo(0.1, cc.p(moveX, moveY));
         centerNode.runAction(action1);
+        if (!this.blockNodes[realLine]) {
+            this.blockNodes[realLine] = [null, null, null, null, null];
+        }
+        this.blockNodes[realLine][row] = centerNode;
+        centerNode.getComponent("Block").setBlockLine(realLine);
+        this.blockNodes[line][row] = null;
         this.scheduleOnce(this.downBlockCallback.bind(this, realLine, centerNode), 0.1);
         // }
 
@@ -540,38 +547,53 @@ cc.Class({
         //         this.stopMoveNodes.push(this.waitMovingNodes[i]);
         //     }
         // }
-        this.stopMoveNodes = this.waitMovingNodes;
+        for (let i = 0; i < this.waitMovingNodes.length; i++) {
+            find = false;
+            for (let j = 0; j < this.stopMoveNodes.length; j++) {
+                if (this.stopMoveNodes[j] == this.waitMovingNodes[i]) {
+                    find = true;
+                    break;
+                }
+            }
+            if (!find) {
+                this.stopMoveNodes.push(this.waitMovingNodes[i]);
+            }
+        }
 
 
     },
     downBlockCallback: function (realLine, endNode) {
 
-        let line = endNode.getComponent("Block").getBlockLine();
-        let row = endNode.getComponent("Block").getBlockRow();
-        console.log("brefore:", line, "after:", realLine);
+        // let line = endNode.getComponent("Block").getBlockLine();
+        // let row = endNode.getComponent("Block").getBlockRow();
+        // console.log("brefore:", line, "after:", realLine, "row", row);
         for (let i = 0; i < this.movingNodes.length; i++) {
             if (this.movingNodes[i] == endNode) {
                 this.movingNodes.splice(i, 1);
                 break;
             }
         }
-        if (line <= realLine) {//异常情况
-            console.log("exception");
-            let endY = line * (this.blockWidth + this.blockblank);
-            // endNode.setPositionY(endY);
-            return;
-        }
-        if (!this.blockNodes[realLine]) {
-            this.blockNodes[realLine] = [null, null, null, null, null];
-        }
-        if (!this.blockNodes[line][row]) {
-            console.log("Error");
-            return;
-        }
-        this.blockNodes[realLine][row] = endNode;
-        endNode.getComponent("Block").setBlockLine(realLine);
-        this.blockNodes[line][row] = null;
-        let endY = realLine * (this.blockWidth + this.blockblank);
+        // if (line <= realLine) {//异常情况
+        //     console.log("exception");
+        //     let endY = line * (this.blockWidth + this.blockblank);
+        //     // endNode.setPositionY(endY);
+        //     return;
+        // }
+        // if (!this.blockNodes[realLine]) {
+        //     this.blockNodes[realLine] = [null, null, null, null, null];
+        // }
+        // if (!this.blockNodes[line][row]) {
+        //     console.log("Error");
+        //     return;
+        // }
+        // if (!this.blockNodes[realLine][row]) {
+        //     this.blockNodes[realLine][row] = endNode;
+        //     endNode.getComponent("Block").setBlockLine(realLine);
+        //     this.blockNodes[line][row] = null;
+        //     // let endY = realLine * (this.blockWidth + this.blockblank);
+        // }else{
+        //     console.log("stopmove");
+        // }
         // endNode.setPositionY(endY);
     },
     checkAllDownBlock: function () {
@@ -732,6 +754,10 @@ cc.Class({
 
         if (!this.canhorizon)
             return;
+        if (this.gameStateHorizon > 0) {
+            return;
+        }
+        this.gameStateHorizon++;
         let line = this.movingBlock.getComponent("Block").getBlockLine();
         let row = this.movingBlock.getComponent("Block").getBlockRow();
 
@@ -748,44 +774,53 @@ cc.Class({
         }
         if (newRow == row) {
             return;
-        }
-        //检查之间有没有其他的块
-        if (newRow < row) {//left
+        } else if (newRow < row) {//left
             for (let start = row - 1; start >= newRow; start--) {
                 if (this.blockNodes[line][start]) {
                     newRow = start + 1;
+                    console.log("can not move left");
                     break;
-                } else {
                 }
             }
         } else {//right
             for (let start = row + 1; start <= newRow; start++) {
                 if (this.blockNodes[line][start]) {
                     newRow = start - 1;
-                    ////movelist[endLine]("rightnewRow", newRow);
+                    console.log("can not move right");
                     break;
-                } else {
-                    ////movelist[endLine]("continue", start);
                 }
             }
         }
         if (newRow == row) {
+            console.log(" can not move");
+            return;
+        }
+        if (this.blockNodes[line][newRow]) {
+
+            console.log("wrong!");
             return;
         }
         if (this.movingBlock) {
             //movelist[endLine]("get one error");
-            // console.log("get one format", line, row, "->", line, newRow);
+
             let newline = this.movingBlock.getComponent("Block").getBlockLine();
+            if (newline != line) {
+
+                console.log(" can not in ");
+                return;
+            }
+
             this.movingBlock.getComponent("Block").setBlockRow(newRow);
-            this.blockNodes[newline][newRow] = this.movingBlock;
             this.blockNodes[newline][row] = null;
+            this.blockNodes[newline][newRow] = this.movingBlock;
+
             let newx = newRow * (this.blockblank + this.blockWidth);
             this.blockNodes[newline][newRow].setPositionX(newx);
             // console.log("get one now", newline, newRow, "->", line, newRow);
         } else {
             console.log("get 3 error");
         }
-        // this.gameStateHorizon--;
+        this.gameStateHorizon--;
     }
     ,
 
@@ -824,6 +859,10 @@ cc.Class({
             console.log("点击不生效原因canhorizon", this.canhorizon);
             return;
         }
+        // if(!this.canDownBlock(this.movingBlock)){
+        //     this.canhorizon = false;
+        //     return;
+        // }
         this.movelength = Math.abs(location.x - this.previousPos.x);
         if (this.movelength >= this.blockWidth) {
 

@@ -45,5 +45,11 @@ cc.Class({
         this.gameController.BlocksController.changeNextNum(6);
 
     },
+    onTouchBtnOther: function (even,num) {
+        let next = parseInt(num)
+
+        this.gameController.BlocksController.changeNextNum(next);
+
+    },
 
 });
