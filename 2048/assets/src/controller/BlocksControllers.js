@@ -304,7 +304,19 @@ cc.Class({
         let line = endBlock.getComponent("Block").getBlockLine();
         let row = endBlock.getComponent("Block").getBlockRow();
         let centerNumber = endBlock.getComponent("Block").getBlockNumber();
-        if (line > 0 && !this.checkisMoving(line - 1, row)) {
+
+        if (line >=0 &&  line <this.blockFloor-1 && Direction != 'd' &&  !this.checkisMoving(line - 1, row) ) { //top
+            if (this.blockNodes[line +1] && this.blockNodes[line +1][row]) {
+                let topNode = this.blockNodes[line + 1][row];
+                let nextNumber = topNode.getComponent("Block").getBlockNumber();
+                if (nextNumber == centerNumber) {
+                    // this.moveBlock(nextNode.position,this.blockNodes[line][row].position);
+                    this.joinAllNodeList.push({line: line + 1, row: row});
+                    this.findCanJoinNode(topNode, 't');
+                }
+            }
+        }
+        if (line > 0  && line <this.blockFloor-1 && Direction != 't'  && !this.checkisMoving(line - 1, row)) {
             if (this.blockNodes[line - 1] && this.blockNodes[line - 1][row]) {
                 let nextNode = this.blockNodes[line - 1][row];
                 let nextNumber = nextNode.getComponent("Block").getBlockNumber();
@@ -314,7 +326,7 @@ cc.Class({
                 }
             }
         }
-        if (row > 0 && row < this.blockRow && !this.checkisMoving(line, row - 1) && Direction != 'r') {//left
+        if (row > 0 && row < this.blockRow   && Direction != 'r' && !this.checkisMoving(line, row - 1)) {//left
             let end = row - 1;
             if (this.blockNodes[line] && this.blockNodes[line][end]) {
                 let leftNode = this.blockNodes[line][end];
@@ -471,6 +483,12 @@ cc.Class({
         let action1 = cc.moveTo(0.1, cc.p(moveX, moveY));
         this.movingBlock.position = cc.p(moveX, realY);
         this.movingBlock.runAction(action1);
+        if (!this.blockNodes[realLine]) {
+            this.blockNodes[realLine] = [null, null, null, null, null];
+        }
+        this.blockNodes[realLine][row] = this.movingBlock;
+        this.movingBlock.getComponent("Block").setBlockLine(realLine);
+        this.blockNodes[line][row] = null;
         this.scheduleOnce(this.downBlockCallback.bind(this, realLine, this.movingBlock), 0.1);
 
     },
