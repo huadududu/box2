@@ -48,6 +48,7 @@ cc.Class({
     updeteFinish: function () {
         this.endMenu.active = true;
         Global.newHistory(Global.thisscore);
+        Global.thisscore = 0;
     },
     //create block;
     onTouchStartBtn: function () {
@@ -68,7 +69,11 @@ cc.Class({
                 this.loadingad.active = true;
                 FBP.InterstitialAdAsync(this.restartCallBack.bind(this));
             } else {
-                this.BlocksController.restartMenu();
+                let FBP = require("Plugin");
+                this.loadingad.active = true;
+                FBP.chooseAsync(this.restartCallBack.bind(this));//[add]
+                // FBP.InterstitialAdAsync(this.restartCallBack.bind(this));
+                 // this.BlocksController.restartMenu();
             }
         } else {
             this.BlocksController.restartMenu();
@@ -77,8 +82,14 @@ cc.Class({
     },
 
     onTouchShareBtn: function () {
-        let FBP = require("Plugin");
-        FBP.chooseAsync();
+        // onShare:function (event, intent) {
+            if(GameConfig.isFBInstantGame()){
+                let FBP = require("Plugin");
+                FBP.shareFb('SHARE');
+            }
+        // },
+        // let FBP = require("Plugin");
+        // FBP.chooseAsync();
 
     },
     onTouchPause: function () {

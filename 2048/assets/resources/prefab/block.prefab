@@ -360,6 +360,12 @@
     "rowNum": 0,
     "number": 1,
     "type": 1,
+    "downAudio": {
+      "__uuid__": "d212676e-056c-450e-8c8d-7e569c330a90"
+    },
+    "joinAudio": {
+      "__uuid__": "18e05328-d677-4c4d-884b-33e6223fabae"
+    },
     "pngID": 1
   },
   {

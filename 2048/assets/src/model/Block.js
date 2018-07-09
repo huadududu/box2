@@ -22,6 +22,14 @@ cc.Class({
             visible:false,
 
         },
+        downAudio: {
+            default: null,
+            url: cc.AudioClip
+        },
+        joinAudio: {
+            default: null,
+            url: cc.AudioClip
+        },
         pngID:{
             default:1,
             visible:false,
@@ -35,6 +43,14 @@ cc.Class({
     onLoad:function () {
         // BingLog.log("tanke onLoad");
         // this.updateNode();
+    },
+    playdownSound: function () {
+        // 调用声音引擎播放声音
+        cc.audioEngine.playEffect(this.downAudio, false);
+    },
+    playJoinSound: function () {
+        // 调用声音引擎播放声音
+        cc.audioEngine.playEffect(this.joinAudio, false);
     },
     setBlockPng: function(num){
         this.pngID = num;

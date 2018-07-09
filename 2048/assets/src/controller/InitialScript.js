@@ -38,14 +38,16 @@ cc.Class({
         let preloadFiles = [];
         // preloadFiles.push({ name:"prefab/HintController",type:"file"});
         preloadFiles.push({name: "fonts", type: "dir"});
-        preloadFiles.push({name: "particle", type: "dir"});
-        preloadFiles.push({name: "png/share", type: "dir"});
+        // preloadFiles.push({name: "particle", type: "dir"});
+        //  preloadFiles.push({name: "png/share", type: "dir"});
         // preloadFiles.push({ name:"prefab",type:"dir"});
 
 
         let files = [
+            "png/game",
+            "png/splash",
             "prefab/block",
-            "prefab/popmsg"
+            "prefab/popmsg",
         ];
 
         for (let i = 0; i < files.length; ++i) {
@@ -107,7 +109,7 @@ cc.Class({
         if (progress > 100) {
             progress = 100;
         }
-        // this.progress.string = progress.toFixed(0).toString() + "%";
+         this.progress.string = progress.toFixed(0).toString() + "%";
 
     },
 

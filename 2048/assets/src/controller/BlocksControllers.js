@@ -23,27 +23,26 @@ cc.Class({
         this.movingNodes = [];//正在移动的点
         this.needDestroy = [];//正在移动的点
         this.panelMax = 1;
-        this.gameController = cc.find("Canvas").getComponent("GameController");
-        this.downspeed = 1;
-        this.joinspeed = 0.5;
+
         this.blockWidth = 110;
         this.blockblank = 6;
         this.blockFloor = 7;
         this.blockRow = 5;
-        this.BlockNum = this.createNextNum();
-        this.panelMax = this.BlockNum;
-        this.NextBlockNum = this.createNextNum();
+        this.NextBlockNum = 1;
+        this.BlockNum = 1;
+        this.panelMax = 1;
         this.gameController = cc.find("Canvas").getComponent("GameController");
-        this.gameController.GameMenuController.updateNext(this.NextBlockNum);
+        // this.gameController.GameMenuController.updateNext(this.NextBlockNum);
         this.canrefresh = true;
-        this.isacceler = false;
+        this.createCount = 0;
     },
     changeNextNum: function (num) {
         this.NextBlockNum = num;
         this.gameController.GameMenuController.updateNext(this.NextBlockNum);
     },
     startMenu: function () {
-        this.beforeBagin();
+        // this.beforeBagin();
+        this.clearAll();
         this.createBlocks();
         // this.schedule(this.refreshBlocks, downspeed);
     }
@@ -52,10 +51,18 @@ cc.Class({
         this.clearAll();
         this.createBlocks();
 
+
     },
     clearAll: function () {
         this.gameNode.removeAllChildren(true);
         this.blockNodes = [];
+        this.panelMax = 1;
+        Global.thisscore = 0;
+        this.gameController.GameMenuController.updateScore();
+        this.NextBlockNum = this.createNextNum();
+        this.gameController.GameMenuController.updateNext(this.NextBlockNum);
+        this.blockNum =0;
+        this.createCount = 0;
     },
     beforeBagin: function () {
         let testConfig = require("testConfig");
@@ -96,8 +103,6 @@ cc.Class({
         for (let i = 1; i <= MAX_NUM; i++) {
             if (conf['rate' + i] != 0) {
                 max += conf['rate' + i];
-            } else {
-                break;
             }
         }
         let curCoun = 0;
@@ -111,9 +116,6 @@ cc.Class({
                     create = i;
                     break;
                 }
-            } else {
-                create = i;
-                break;
             }
         }
         return create;
@@ -168,6 +170,7 @@ cc.Class({
         this.stopMoveNodes = [];//本轮中结束运动的点
         this.BlockNum = this.NextBlockNum;
         let node = BlockFactory.create(this.BlockNum);
+        // this.BlockNum = this.createNextNum();
         this.NextBlockNum = this.createNextNum();
         this.gameController.GameMenuController.updateNext(this.NextBlockNum);
 
@@ -186,10 +189,34 @@ cc.Class({
             this.blockNodes[6] = [];
         }
         this.blockNodes[6][2] = node;
-        this.canhorizon = true;
         this.movingState = 0;// 0移动状态 1：正在抖动 2：抖动完成
+        this.updateSpeed();
         this.schedule(this.refreshBlocks, this.downspeed);
         this.canhorizon = true;
+        this.testmultext=0;
+        this.createCount++;
+
+    },
+    updateSpeed:function(){
+        let curScore = Global.thisscore;
+        let SpeedConfig = require("SpeedConfig");
+        let max = 1;
+        let find  = false;
+        for(let i =1; SpeedConfig[i] != undefined;i++){
+            max = i;
+            if(curScore< SpeedConfig[i].score){
+                continue;
+            }
+            else{
+                find= true;
+                this.downspeed = SpeedConfig[i].time;
+                 this.joinspeed = SpeedConfig[i].time;
+            }
+        }
+        if(!find){
+            this.downspeed = SpeedConfig[max].time;
+            this.joinspeed = SpeedConfig[max].time;
+        }
     },
 
     canDownBlock: function (centerNode = null) {
@@ -215,10 +242,10 @@ cc.Class({
         this.scheduleOnce(this.doShakeCallBack.bind(this), 0.2);
         this.waitMovingNodes = [];
         this.waitMovingNodes.push(...this.movingBlock);
+        this.movingBlock.getComponent("Block").playdownSound();
     },
 
     doShakeCallBack: function () {
-        this.canhorizon = false;
         if (this.canJoinBlock(this.movingBlock)) {
             this.schedule(this.refreshChoose, this.joinspeed);
         } else {
@@ -305,8 +332,8 @@ cc.Class({
         let row = endBlock.getComponent("Block").getBlockRow();
         let centerNumber = endBlock.getComponent("Block").getBlockNumber();
 
-        if (line >=0 &&  line <this.blockFloor-1 && Direction != 'd' &&  !this.checkisMoving(line - 1, row) ) { //top
-            if (this.blockNodes[line +1] && this.blockNodes[line +1][row]) {
+        if (line >= 0 && line < this.blockFloor - 1 && Direction != 'd' && !this.checkisMoving(line - 1, row)) { //top
+            if (this.blockNodes[line + 1] && this.blockNodes[line + 1][row]) {
                 let topNode = this.blockNodes[line + 1][row];
                 let nextNumber = topNode.getComponent("Block").getBlockNumber();
                 if (nextNumber == centerNumber) {
@@ -316,7 +343,7 @@ cc.Class({
                 }
             }
         }
-        if (line > 0  && line <this.blockFloor-1 && Direction != 't'  && !this.checkisMoving(line - 1, row)) {
+        if (line > 0 && line <= this.blockFloor - 1 && Direction != 't' && !this.checkisMoving(line - 1, row)) {
             if (this.blockNodes[line - 1] && this.blockNodes[line - 1][row]) {
                 let nextNode = this.blockNodes[line - 1][row];
                 let nextNumber = nextNode.getComponent("Block").getBlockNumber();
@@ -326,7 +353,7 @@ cc.Class({
                 }
             }
         }
-        if (row > 0 && row < this.blockRow   && Direction != 'r' && !this.checkisMoving(line, row - 1)) {//left
+        if (row > 0 && row < this.blockRow && Direction != 'r' && !this.checkisMoving(line, row - 1)) {//left
             let end = row - 1;
             if (this.blockNodes[line] && this.blockNodes[line][end]) {
                 let leftNode = this.blockNodes[line][end];
@@ -369,6 +396,7 @@ cc.Class({
             let thisNodePos = startNodes[i];
             let thisNode = this.blockNodes[thisNodePos.line][thisNodePos.row];
             thisNode.runAction(cc.sequence(spawn, action4));
+            thisNode.getComponent("Block").playJoinSound();
             this.needDestroy.push(thisNode);
         }
         // this.joinCallback(startNodes, EndNode);
@@ -468,15 +496,31 @@ cc.Class({
         this.scheduleOnce(this.downBlockCallback.bind(this, realLine, centerNode), 0.1);
         // }
 
+
+    },
+    doStopShake:function(EndNode){
+        if(this.canhorizon){
+            return;
+        }
+        var action1 = cc.scaleTo(0.1, 1, 0.8);
+        var action2 = cc.scaleTo(0.1, 1, 1);
+        EndNode.runAction(cc.sequence(action1, action2));
+        EndNode.getComponent("Block").playdownSound();
+       
+
     },
     accelarDownAction: function () {
-        let realLine = this.maxTargetDown();
-        this.unschedule(this.refreshBlocks);
-        this.canhorizon = false;
-        this.schedule(this.refreshChoose, this.joinspeed);
-        this.movingBlock.stopAllActions();
         let row = this.movingBlock.getComponent("Block").getBlockRow();
         let line = this.movingBlock.getComponent("Block").getBlockLine();
+        this.canhorizon = false;
+        let realLine = this.maxTargetDown();
+        this.unschedule(this.refreshBlocks);
+        this.schedule(this.refreshChoose, this.joinspeed);
+        if (realLine >= line) {
+            return;
+        }
+        this.movingBlock.stopAllActions();
+
         let moveY = realLine * (this.blockblank + this.blockWidth);
         let realY = line * (this.blockblank + this.blockWidth);
         let moveX = row * (this.blockblank + this.blockWidth);
@@ -486,9 +530,10 @@ cc.Class({
         if (!this.blockNodes[realLine]) {
             this.blockNodes[realLine] = [null, null, null, null, null];
         }
+        this.blockNodes[line][row] = null;
         this.blockNodes[realLine][row] = this.movingBlock;
         this.movingBlock.getComponent("Block").setBlockLine(realLine);
-        this.blockNodes[line][row] = null;
+
         this.scheduleOnce(this.downBlockCallback.bind(this, realLine, this.movingBlock), 0.1);
 
     },
@@ -520,32 +565,9 @@ cc.Class({
         }
         this.movingNodes = [];
         let canMoving = this.findAllCanDownBlock();
-        // let stopMoving = [];
-        // let stopList = [];
-
-        // let find = false;
-        // for (let i = 0; i < this.waitMovingNodes.length; i++) {
-        //     find = false;
-        //     for (let j = 0; j < canMoving.length; j++) {
-        //         if (canMoving[j] == this.waitMovingNodes[i]) {
-        //             find = true;
-        //             break;
-        //         }
-        //     }
-        //     if (!find) {
-        //         this.stopMoveNodes.push(this.waitMovingNodes[i]);
-        //     }
-        // }
         this.waitMovingNodes = canMoving;
 
-        // for(let i =0;i<  this.stopMoveNodes.length-1;i++){
-        //     for(let j =i+1;j<   this.stopMoveNodes.length;j++){
-        //         if(this.stopMoveNodes[i] == this.stopMoveNodes[j]){//  去除相同点节点
-        //             this.stopMoveNodes.splice(i,1);
-        //             j--;
-        //         }
-        //     }
-        // }
+
         for (let i = 0; i < this.waitMovingNodes.length; i++) {
             this.downBlockAction(this.waitMovingNodes[i]);
         }
@@ -553,18 +575,7 @@ cc.Class({
     beforeJoinAll: function () {
 
         let find = false;
-        // for (let i = 0; i < this.waitMovingNodes.length; i++) {
-        //     find = false;
-        //     for (let j = 0; j < this.stopMoveNodes.length; j++) {
-        //         if (this.stopMoveNodes[j] == this.waitMovingNodes[i]) {
-        //             find = true;
-        //             break;
-        //         }
-        //     }
-        //     if (!find) {
-        //         this.stopMoveNodes.push(this.waitMovingNodes[i]);
-        //     }
-        // }
+
         for (let i = 0; i < this.waitMovingNodes.length; i++) {
             find = false;
             for (let j = 0; j < this.stopMoveNodes.length; j++) {
@@ -582,9 +593,15 @@ cc.Class({
     },
     downBlockCallback: function (realLine, endNode) {
 
-        // let line = endNode.getComponent("Block").getBlockLine();
+         let line = endNode.getComponent("Block").getBlockLine();
+         if(realLine == line){
+             this.doStopShake(endNode);
+         }else{
+             console.log("我是上一次的");
+         }
         // let row = endNode.getComponent("Block").getBlockRow();
         // console.log("brefore:", line, "after:", realLine, "row", row);
+
         for (let i = 0; i < this.movingNodes.length; i++) {
             if (this.movingNodes[i] == endNode) {
                 this.movingNodes.splice(i, 1);
@@ -630,48 +647,6 @@ cc.Class({
         return false;
     },
 
-    // stopDownBlock: function () {
-    //     let stopnum = 0;
-    //     for (let i = 0; i < this.stopMoveNodes.length; i++) {
-    //         let stopBlock = this.stopMoveNodes[i];
-    //         let line = stopBlock.getComponent("Block").getBlockLine();
-    //         let row = stopBlock.getComponent("Block").getBlockRow();
-    //         for (let start = line; start <= this.blockFloor - 1; start++) {
-    //             if (!this.blockNodes[start] || !this.blockNodes[start][row])
-    //                 continue;
-    //             let action_1 = cc.scaleTo(0.05, 1, 0.8);
-    //             let action_2 = cc.scaleTo(0.05, 1, 1);
-    //              this.stopMoveNodes[i].runAction(cc.sequence(action_1, action_2));
-    //         }
-    //     }
-    //     // this.scheduleOnce(this.stopDownBlockCallBack.bind(this), 0.1);
-    // },
-    /*
-    stopDownBlockCallBack: function () {
-        let find = false;
-        for (let i = 0; i < this.newCreateList.length; i++) {
-            if (this.canDownBlock(this.newCreateList[i])) {
-                find = true;
-                this.downBlockAction(this.newCreateList[i]);
-            } else if (this.canJoinBlock(this.newCreateList[i])) {
-                find = true;
-                this.joinBlock(this.newCreateList[i]);
-            }
-        }
-        if (!find) {
-            for (let i = 0; i < this.stopMoveNodes.length; i++) {
-                if (this.canJoinBlock(this.stopMoveNodes[i])) {
-                    find = true;
-                    this.joinBlock(this.stopMoveNodes[i]);
-                }
-            }
-        }
-        if (!find) {
-            this.canrefresh = true;
-            this.createBlocks();
-        }
-
-    },*/
     checkCanAllJoin: function () {
 
         let find = false;
@@ -718,54 +693,8 @@ cc.Class({
             }
         }
     },
-    updateCheck: function () {
-        if (this.canrefresh)
-            return;
-        if (!this.movingNodes)
-            return;
-        for (let i = 0; i < this.movingNodes.length; i++) {
-            let startNode = this.movingNodes[i];
-            let startLine = startNode.getComponent("Block").getBlockLine();
-            let startY = startNode.getPositionY();
-            let startRow = startNode.getComponent("Block").getBlockRow();
-            if (startLine == 0) {
-                this.movingNodes.splice(i, 1);
-                i--;
-                this.blockNodes[0][startRow].setPositionY(0);
-                this.downAllBlock();
-
-            } else {
-                if (this.blockNodes[startLine - 1][startRow]) {
-                    this.movingNodes.splice(i, 1);
-                    i--;
-                    if (this.movingNodes.length == 0) {
-                        this.downAllBlock();
-                    }
-                } else {
-                    let endY = (startLine - 1) * (this.blockWidth + this.blockblank);
-                    if (Math.abs(startY - endY) < 10) {//误差20像素
-                        let endLine = startLine - 1;
-                        startNode.getComponent("Block").setBlockLine(endLine);
-                        this.blockNodes[startLine][startRow] = null;
-                        this.blockNodes[endLine][startRow] = startNode;
-                        this.blockNodes[endLine][startRow].setPositionY(endY);
-                        this.movingNodes.splice(i, 1);
-                        i--;
-                        if (this.movingNodes.length == 0) {
-                            this.downAllBlock();
-                        }
-
-
-                    }
-                }
-            }
-
-        }
-    },
-
 
     update: function () {
-        // this.updateCheck();
     },
     //-------------- touch part -----------------------------
     horizontalMove: function (moveNum) {
@@ -854,7 +783,7 @@ cc.Class({
     ,
     touchEndCallBack: function (location) {
         if (!this.canhorizon) {
-            console.log("点击不生效原因canhorizon", this.canhorizon);
+            // console.log("点击不生效原因canhorizon", this.canhorizon);
             return;
         }
         if (this.TouchState == 'move') {
@@ -874,7 +803,7 @@ cc.Class({
     touchMoveCallBack: function (location) {
         this.TouchState = 'move';
         if (!this.canhorizon) {
-            console.log("点击不生效原因canhorizon", this.canhorizon);
+            // console.log("点击不生效原因canhorizon", this.canhorizon);
             return;
         }
         // if(!this.canDownBlock(this.movingBlock)){

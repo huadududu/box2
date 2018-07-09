@@ -16,7 +16,7 @@ let plugin = cc.Class({
         FBInstant.shareAsync({
             intent: intent,
             image: sharePng,
-            text: "It's a amazing game, play with me!",
+            text: "Click to help me to make a new RECORD,friend!",
             data: {type: 5},
         }).then(function () {
             // continue with the game.
