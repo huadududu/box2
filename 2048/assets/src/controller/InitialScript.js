@@ -48,6 +48,9 @@ cc.Class({
             "png/splash",
             "prefab/block",
             "prefab/popmsg",
+            "prefab/gold",//金币
+            "prefab/dailyBonusUI",
+            "prefab/poppngmsg"
         ];
 
         for (let i = 0; i < files.length; ++i) {
@@ -114,6 +117,7 @@ cc.Class({
     },
 
     goMenu: function () {
+
 
         SpriteFrameCenter.preLoadAtlas("png/game", function () {
             cc.director.loadScene("game");

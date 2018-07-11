@@ -33,6 +33,7 @@ module.exports  =  function () {
             LoginIndex:0,//这次打开游戏后，进入gamemene场景的次数。
 
             Coins:0,
+            thisCoin:0,
         },
 
         initHistory:function () {

@@ -48,6 +48,8 @@ cc.Class({
     updeteFinish: function () {
         this.endMenu.active = true;
         Global.newHistory(Global.thisscore);
+        Global.Coins +=Global.thisCoin;
+        Global.syncPlayerInfoToFB();
         Global.thisscore = 0;
     },
     //create block;
@@ -73,7 +75,7 @@ cc.Class({
                 this.loadingad.active = true;
                 FBP.chooseAsync(this.restartCallBack.bind(this));//[add]
                 // FBP.InterstitialAdAsync(this.restartCallBack.bind(this));
-                 // this.BlocksController.restartMenu();
+                // this.BlocksController.restartMenu();
             }
         } else {
             this.BlocksController.restartMenu();
@@ -83,17 +85,17 @@ cc.Class({
 
     onTouchShareBtn: function () {
         // onShare:function (event, intent) {
-            if(GameConfig.isFBInstantGame()){
-                let FBP = require("Plugin");
-                FBP.shareFb('SHARE');
-            }
+        if (GameConfig.isFBInstantGame()) {
+            let FBP = require("Plugin");
+            FBP.shareFb('SHARE');
+        }
         // },
         // let FBP = require("Plugin");
         // FBP.chooseAsync();
 
     },
     onTouchPause: function () {
-        this.continueMenu.active = true;
+        // this.continueMenu.active = true;
         cc.director.pause();
     },
 
@@ -108,16 +110,41 @@ cc.Class({
 
 
     touchCancelCallBack: function (location) {
-        this.BlocksController.touchCancelCallBack(location);
+        if (this.GameMenuController.BoomState) {
+
+        } else if (this.GameMenuController.ExchangeState) {
+
+        } else {
+            this.BlocksController.touchCancelCallBack(location);
+        }
     },
     touchStartCallBack: function (location) {
-        this.BlocksController.touchStartCallBack(location);
+        if (this.GameMenuController.BoomState) {
+
+        } else if (this.GameMenuController.ExchangeState) {
+
+        } else {
+            this.BlocksController.touchStartCallBack(location);
+        }
     },
     touchEndCallBack: function (location) {
-        this.BlocksController.touchEndCallBack(location);
+        if (this.GameMenuController.BoomState) {
+            this.BlocksController.onUseBoomTool(location);
+        } else if (this.GameMenuController.ExchangeState) {
+
+        } else {
+            this.BlocksController.touchEndCallBack(location);
+        }
     },
     touchMoveCallBack: function (location) {
-        this.BlocksController.touchMoveCallBack(location);
+        if (this.GameMenuController.BoomState) {
+            return;
+
+        } else if (this.GameMenuController.ExchangeState) {
+
+        } else {
+            this.BlocksController.touchMoveCallBack(location);
+        }
         // this.previousPos = location;
     },
 

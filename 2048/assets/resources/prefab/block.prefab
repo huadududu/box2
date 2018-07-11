@@ -29,10 +29,13 @@
     "_components": [
       {
         "__id__": 11
+      },
+      {
+        "__id__": 12
       }
     ],
     "_prefab": {
-      "__id__": 12
+      "__id__": 13
     },
     "_id": "",
     "_opacity": 255,
@@ -146,7 +149,7 @@
     "_fillStart": 0,
     "_fillRange": 0,
     "_isTrimmedMode": true,
-    "_srcBlendFactor": 0,
+    "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_atlas": {
       "__uuid__": "6512847b-9884-4f6d-aa5c-ad3d8020455d"
@@ -366,7 +369,30 @@
     "joinAudio": {
       "__uuid__": "18e05328-d677-4c4d-884b-33e6223fabae"
     },
+    "fallAudio": {
+      "__uuid__": "1ee01539-dd43-43de-b5f7-bf2d24ad3516"
+    },
     "pngID": 1
+  },
+  {
+    "__type__": "cc.BoxCollider",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "tag": 0,
+    "_offset": {
+      "__type__": "cc.Vec2",
+      "x": 55,
+      "y": 55
+    },
+    "_size": {
+      "__type__": "cc.Size",
+      "width": 110,
+      "height": 110
+    }
   },
   {
     "__type__": "cc.PrefabInfo",

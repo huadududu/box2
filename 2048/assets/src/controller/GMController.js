@@ -51,5 +51,10 @@ cc.Class({
         this.gameController.BlocksController.changeNextNum(next);
 
     },
+    onTouchCreatGold: function () {
+
+        this.gameController.BlocksController.GMCreateGold();
+
+    },
 
 });

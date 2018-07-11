@@ -11,12 +11,11 @@ cc.Class({
             default: 1,
             visible: false
         }
-
-
     },
 
     onLoad: function () {
         this.hideAction();
+
     },
 
     init: function (content, animation = 1) {

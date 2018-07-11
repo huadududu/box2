@@ -30,6 +30,10 @@ cc.Class({
             default: null,
             url: cc.AudioClip
         },
+        fallAudio:{
+            default: null,
+            url: cc.AudioClip
+        },
         pngID:{
             default:1,
             visible:false,
@@ -43,6 +47,8 @@ cc.Class({
     onLoad:function () {
         // BingLog.log("tanke onLoad");
         // this.updateNode();
+        cc.director.getCollisionManager().enabled = true;
+        // cc.director.getCollisionManager().enabledDebugDraw = true;
     },
     playdownSound: function () {
         // 调用声音引擎播放声音
@@ -51,6 +57,10 @@ cc.Class({
     playJoinSound: function () {
         // 调用声音引擎播放声音
         cc.audioEngine.playEffect(this.joinAudio, false);
+    },
+    playFallSound: function () {
+        // 调用声音引擎播放声音
+        cc.audioEngine.playEffect(this.fallAudio, false);
     },
     setBlockPng: function(num){
         this.pngID = num;
@@ -97,5 +107,8 @@ cc.Class({
     setBlockLine:function(line){
          this.lineNum = line ;
          this.posLab.string =  ""+this.lineNum+","+this.rowNum;
-    }
+    },
+    // onCollisionEnter: function (other, self) {
+    //    console.log("hit hit hit");
+    // },
 });
