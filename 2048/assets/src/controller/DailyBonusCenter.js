@@ -4,7 +4,7 @@
 
 let Global = require("Global");
 let GameUtils  = require("GameUtils");
-let FBPlugin = require("FBPlugin");
+let FBPlugin = require("Plugin");
 let StorageKeys = require("StorageKeys");
 let GameStorage = require("GameStorage");
 

@@ -24,12 +24,21 @@ cc.Class({
         //     type: cc.SpriteFrame, // optional, default is typeof default
         //     serializable: true,   // optional, default is true
         // },
-        BlocksController: require("BlocksControllers"),
-        GameMenuController: require("GameMenuController"),
-        startMenu: cc.Node,
+        BlocksController: require("BlocksController"),
+        // GameMenuController: require("GameMenuController"),
+        // startMenu: cc.Node,
+        // startMenu: cc.Node,
         endMenu: cc.Node,
         continueMenu: cc.Node,
         loadingad: cc.Node,
+        scoreLabel: cc.Label,
+        CoinLabel: cc.Label,
+        nextBlockNumber: require("Block"),
+        nextBlockNumber2: require("Block"),
+
+        btnExchange: cc.Button,
+        btnRefresh: cc.Button,
+        btnBomb: cc.Button,
 
     },
 
@@ -37,29 +46,137 @@ cc.Class({
 
     onLoad() {
         this.endMenu.active = false;
-        this.startMenu.active = true;
+        // this.startMenu.active = true;
+        // this.ExchangeState = false;
+        // this.BombState = false;
+        this.isUseChangeTool = false;
+        this.isUseBombTool = false;
+        this.isUseRefreshTool = false;
     },
 
 
     start() {
+        if (Global.thisState == GameState.start) {
+            this.BlocksController.startMenu();
+        } else if (Global.thisState == GameState.continue) {
+            // this.BlocksController.startMenu();
+            this.continueMenu.active = true;
+        } else if (Global.thisState == GameState.restart) {
+            this.endMenu.active = true;
+            this.BlocksController.startMenu();
+        } else {
+            this.BlocksController.startMenu();
+        }
+        this.refreshBottom();
         // this.createBlocks();
         // this.schedule(this.refreshBlocks, 0.5);
+    },
+    moreLife:function(){
+        this.BlocksController.moreLife();
     },
     updeteFinish: function () {
         this.endMenu.active = true;
         Global.newHistory(Global.thisscore);
-        Global.Coins +=Global.thisCoin;
+        Global.Coins += Global.thisCoin;
         Global.syncPlayerInfoToFB();
-        Global.thisscore = 0;
+    },
+    updateScore: function () {
+        this.scoreLabel.string = Global.thisscore;
+    },
+    updateNext: function (num) {
+        this.nextBlockNumber.setBlockNumber(num);
+    },
+    updateNext2: function (num) {
+        this.nextBlockNumber2.setBlockNumber(num);
+    },
+    updateCoin: function () {
+        this.CoinLabel.string = Global.thisCoin;
+    },
+    showJoinMsg: function (num) {
+
+        let find = false;
+        let shownum = 0;
+        if (num < 5 && num > 1) {
+            find = true;
+            shownum = num - 2;
+
+        } else if (num >= 5) {
+            find = true;
+            shownum = 3;
+        }
+        if (find) {
+            let PopMsgController = require("PopMsgController");
+            PopMsgController.showBlockGet(shownum);
+        }
+    },
+    refreshBottom: function () {
+        this.btnExchange.interactable = this.canExchange();
+        this.btnRefresh.interactable = this.canRefresh();
+        this.btnBomb.interactable = this.canBomb();
+
+    },
+    canBomb: function () {
+        if (this.isUseBombTool)
+            return false;
+        return true;
+    },
+    canExchange: function () {
+        if (this.isUseChangeTool)
+            return false;
+        return true;
+    },
+    canRefresh: function () {
+        if (this.isUseRefreshTool)
+            return false;
+        return true;
+    },
+    onTouchExchange: function () {
+
+        if (Global.thisState != GameState.isRuning) {
+            if (Global.thisState == GameState.useExchange) {
+                Global.thisState = GameState.isRuning;
+                return;
+            }
+        }
+        if (!this.canExchange())
+            return;
+        Global.thisState = GameState.useExchange;
+    },
+    onStopExchange: function () {
+        Global.thisState = GameState.isRuning;
+        // this.ExchangeState = false;
+        // cc.director.resume();
+        this.btnExchange.interactable = this.canExchange();
+    },
+    onTouchBomb: function () {
+        if (Global.thisState != GameState.isRuning) {
+            if (Global.thisState == GameState.useBomb) {
+                Global.thisState = GameState.isRuning;
+                return;
+            }
+        }
+        if (!this.canBomb())
+            return;
+        Global.thisState = GameState.useBomb;
+    },
+    stopBomb: function () {
+        Global.thisState = GameState.isRuning;
+        this.btnBomb.interactable = this.canBomb();
+    },
+    onTouchRefresh() {
+        if (!this.canRefresh())
+            return;
+        this.BlocksController.changeNextNum();
+        this.btnRefresh.interactable = this.canRefresh();
     },
     //create block;
     onTouchStartBtn: function () {
-        this.startMenu.active = false;
+        // this.startMenu.active = false;
         this.BlocksController.startMenu();
 
     },
     onTouchRestartBtn: function () {
-        this.endMenu.active = false;
+        // this.continueMenu.active = false;
         if (GameConfig.isFBInstantGame()) {
             let num = GameUtils.randomInt(0, 100);
             if (num < 30) {
@@ -78,74 +195,61 @@ cc.Class({
                 // this.BlocksController.restartMenu();
             }
         } else {
-            this.BlocksController.restartMenu();
+            this.restartCallBack();
         }
-
-    },
-
-    onTouchShareBtn: function () {
-        // onShare:function (event, intent) {
-        if (GameConfig.isFBInstantGame()) {
-            let FBP = require("Plugin");
-            FBP.shareFb('SHARE');
-        }
-        // },
-        // let FBP = require("Plugin");
-        // FBP.chooseAsync();
 
     },
     onTouchPause: function () {
-        // this.continueMenu.active = true;
-        cc.director.pause();
+        this.continueMenu.active = true;
+
+        this.continueMenu.getComponent("continueView").createBottom();
+        Global.thisState = GameState.pasue;
+        // cc.director.pause();
     },
 
     onTouchResume: function () {
         this.continueMenu.active = false;
-        cc.director.resume();
+        if (cc.find("Canvas").getChildByTag(110)) {
+            cc.find("Canvas").getChildByTag(110).removeFromParent(true);
+        }
+        Global.thisState = GameState.isRuning;
+        // cc.director.resume();
     },
     restartCallBack: function () {
         this.loadingad.active = false;
         this.BlocksController.restartMenu();
+        this.continueMenu.active = false;
+        cc.find("Canvas").getChildByTag(110).removeFromParent(true);
+        Global.thisState = GameState.isRuning;
     },
 
 
     touchCancelCallBack: function (location) {
-        if (this.GameMenuController.BoomState) {
 
-        } else if (this.GameMenuController.ExchangeState) {
-
-        } else {
+        if (Global.thisState == GameState.isRuning) {
             this.BlocksController.touchCancelCallBack(location);
         }
+
     },
     touchStartCallBack: function (location) {
-        if (this.GameMenuController.BoomState) {
-
-        } else if (this.GameMenuController.ExchangeState) {
-
-        } else {
+        if (Global.thisState == GameState.isRuning) {
             this.BlocksController.touchStartCallBack(location);
         }
     },
     touchEndCallBack: function (location) {
-        if (this.GameMenuController.BoomState) {
-            this.BlocksController.onUseBoomTool(location);
-        } else if (this.GameMenuController.ExchangeState) {
-
+        if (Global.thisState == GameState.useBomb) {
+            this.BlocksController.onUseBombTool(location);
+        } else if (Global.thisState == GameState.useExchange) {
+            this.BlocksController.onUseChangeTool(location);
         } else {
             this.BlocksController.touchEndCallBack(location);
         }
     },
     touchMoveCallBack: function (location) {
-        if (this.GameMenuController.BoomState) {
-            return;
 
-        } else if (this.GameMenuController.ExchangeState) {
-
-        } else {
+        if (Global.thisState == GameState.isRuning) {
             this.BlocksController.touchMoveCallBack(location);
         }
-        // this.previousPos = location;
     },
 
 // update (dt) {},

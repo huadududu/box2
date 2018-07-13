@@ -46,7 +46,7 @@ let plugin = cc.Class({
         return playerName;
     },
 
-    chooseAsync: function (callback, errorCallback) {
+    chooseAsync: function (callback, errorCallback, doallCallback) {
         FBInstant.context
             .chooseAsync()
             .then(function () {
@@ -56,11 +56,14 @@ let plugin = cc.Class({
                 }
             }).catch(function (e) {
             console.log('chooseAsync error', FBInstant.context.getID(), e);
-            // if(e.code == "SAME_CONTEXT"){
-            if (errorCallback) {
-                errorCallback(FBInstant.context.getID());
+            if (e.code == "SAME_CONTEXT") {
+                if (errorCallback) {
+                    errorCallback(FBInstant.context.getID());
+                }
             }
-            // }
+            else{
+                doallCallback();
+            }
         });
     },
 
@@ -489,7 +492,7 @@ let plugin = cc.Class({
             });
     },
 
-    getFriendLeaderboard: function (leaderName = 'my_leaderboard', callback) {
+    getFriendLeaderboard: function (leaderName = 'my_leaderboard1', callback) {
 
         FBInstant.getLeaderboardAsync(leaderName)
             .then(function (leaderboard) {
@@ -524,7 +527,7 @@ let plugin = cc.Class({
             }).catch(error => console.error(error));
     },
 
-    getWorldLeaderboard: function (leaderName = 'my_leaderboard', callback) {
+    getWorldLeaderboard: function (leaderName = 'my_leaderboard1', callback) {
 
         FBInstant.getLeaderboardAsync(leaderName)
             .then(function (leaderboard) {
@@ -550,7 +553,7 @@ let plugin = cc.Class({
     },
 
     //玩家自己的
-    getPlayerLeaderboard: function (leaderName = 'my_leaderboard', callback) {
+    getPlayerLeaderboard: function (leaderName = 'my_leaderboard1', callback) {
         FBInstant.getLeaderboardAsync(leaderName)
             .then(function (leaderboard) {
                 console.log(leaderboard.getName()); // my_leaderboard

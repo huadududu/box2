@@ -16,10 +16,10 @@ module.exports = {
 
         let pop = newNode.getComponent("PopMsg");
         newNode.position = position;
-        pop.init(content);
+        pop.init(content,1);
         cc.find("Canvas/blockpanl/game").addChild(newNode);
     },
-    showMsg:function (content,position) {
+    showMsg:function (content,) {
         let name = "prefab/popmsg";
         // if(!animation){
         //     name = "prefab/popmsg2";
@@ -28,9 +28,9 @@ module.exports = {
         let newNode = cc.instantiate(prefab);
 
         let pop = newNode.getComponent("PopMsg");
-        newNode.position = position;
-        pop.init(content);
-        cc.find("Canvas/").addChild(newNode);
+        pop.init(content,0);
+        cc.find("Canvas").addChild(newNode);
+        newNode.setPosition(0,0);
     },
     showBlockGet:function(content){
         let name = "prefab/poppngmsg";

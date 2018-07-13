@@ -925,7 +925,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "236bb75f-d02e-4d6b-9ed5-a0280935bd08"
+      "__uuid__": "0a1484a0-7544-4566-9742-0d79aee200f7"
     },
     "_type": 0,
     "_sizeMode": 2,
@@ -1144,7 +1144,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 92,
+      "width": 88,
       "height": 40
     },
     "_rotationX": 0,
@@ -1172,12 +1172,14 @@
     },
     "_enabled": true,
     "_useOriginalSize": false,
-    "_actualFontSize": 40,
+    "_actualFontSize": 30,
     "_fontSize": 30,
     "_lineHeight": 40,
     "_enableWrapText": true,
-    "_N$file": null,
-    "_isSystemFontUsed": true,
+    "_N$file": {
+      "__uuid__": "332d4253-bea0-4388-8d12-c969d0ba0b31"
+    },
+    "_isSystemFontUsed": false,
     "_spacingX": 0,
     "_N$string": "CLAIM",
     "_N$horizontalAlign": 1,
@@ -1205,7 +1207,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "98e7990c-62d3-4a9a-85dc-ded42874c0fe"
+      "__uuid__": "09b625a5-aab4-45f5-9bae-548ec8e6e50e"
     },
     "_type": 1,
     "_sizeMode": 0,

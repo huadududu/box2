@@ -22,7 +22,7 @@ module.exports = function () {
             AdInterval:8000,
 
             //leaderboard
-            LeaderBoardName:"my_leaderboard1",
+            LeaderBoardName:"my_leaderboard2",
 
             //gift
             GiftLimited:10,
@@ -40,7 +40,7 @@ module.exports = function () {
             HelperEnterTip:"You helped XXX in daily task today",
             YourHelperNameTip:"XXX have helped you in daily task today",
 
-            GameName:"2048", //tank //icegame
+            GameName:"wfg", //tank //icegame        //wfg
             //    server  test
             // ServerURL:"http://localhost:8088/",
             ServerURL:"https://77889900.space/",

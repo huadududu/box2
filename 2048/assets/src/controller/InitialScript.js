@@ -5,6 +5,7 @@ let BingLog = require("BingLog");
 let Global = require("Global");
 let GameUtils = require("GameUtils");
 let SpriteFrameCenter = require("SpriteFrameCenter");
+let GameState = require("GameState");
 
 cc.Class({
     extends: cc.Component,
@@ -25,7 +26,10 @@ cc.Class({
         let randoms = [1, 3, 6, 9];
         let index = GameUtils.randomInt(0, 3);
         Global.initHistory();
-
+        let DataCenter = require("DataCenter");
+        DataCenter.requestFriends(null);
+        DataCenter.requestWorld(null);
+        DataCenter.getPlayerLeaderboard(null);
 
     },
 
@@ -49,8 +53,14 @@ cc.Class({
             "prefab/block",
             "prefab/popmsg",
             "prefab/gold",//金币
+            "prefab/rankitem",
+            "prefab/rankitemInvite",
+            "prefab/rankitemEmpty",
             "prefab/dailyBonusUI",
-            "prefab/poppngmsg"
+            "prefab/inviteUI",
+            "prefab/rankUI",
+            "prefab/poppngmsg",
+            "prefab/bottom"
         ];
 
         for (let i = 0; i < files.length; ++i) {
@@ -82,6 +92,7 @@ cc.Class({
                     // self.node.getComponent(Welcome).updateUIProgress(base+self.loadedCount* (100-base)/self.preloadCount,0.5);
                     if (self.loadedCount == self.preloadCount) {
                         self.loadRes = true;
+                        Global.loadstate--;
                     }
                     self.updateProgress();
                 });
@@ -120,7 +131,13 @@ cc.Class({
 
 
         SpriteFrameCenter.preLoadAtlas("png/game", function () {
-            cc.director.loadScene("game");
+
+            // cc.director.loadScene("game");
+            if (Global.thisState == GameState.start || Global.thisState == GameState.end) {
+                cc.director.loadScene("gamemenu");
+            }else{
+                cc.director.loadScene("game");
+            }
         });
 
         // cc.director.loadScene("gametest");
@@ -129,7 +146,7 @@ cc.Class({
     },
 
     update: function (dt) {
-        if (this.loadRes && !this.inited) {
+        if (this.loadRes && !this.inited && Global.loadstate == 0) {
             this.loadRes = false;
             this.inited = true;
             this.goMenu();

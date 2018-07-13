@@ -4,8 +4,12 @@
 
 
 module.exports =cc.Enum({
-    init:0,
-    moving:1,
-    end:2
-
+    start:0,//开始
+    pasue:1,//暂停
+    continue:2,//继续
+    restart :3,//重玩
+    end:4,//结束
+    useExchange:5,//使用交换道具中
+    useBomb:6,//使用炸弹中,
+    isRuning : 7//正常运行中
 });

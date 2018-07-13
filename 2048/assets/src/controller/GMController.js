@@ -54,6 +54,7 @@ cc.Class({
     onTouchCreatGold: function () {
 
         this.gameController.BlocksController.GMCreateGold();
+        cc.director.loadScene("gamemenu");
 
     },
 

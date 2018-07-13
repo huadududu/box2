@@ -14,7 +14,18 @@ cc.Class({
     },
 
     onLoad: function () {
-        this.hideAction();
+        if(this.animation == 1){
+            this.hideAction1();
+            this.cotentLb.fontSize = 40;
+        }
+        else if(this.animation == 0){
+            this.hideAction();
+            this.cotentLb.fontSize = 40;
+            this.cotentLb.node.setColor( cc.hexToColor('#766d66'));
+
+        }else{
+            // this.hideAction2();
+        }
 
     },
 
@@ -30,12 +41,12 @@ cc.Class({
         this.node.removeFromParent(true);
     },
     //exp+1,coin+1
-    hideAction: function () {
+    hideAction1: function () {
         let time = 1;
         let faceOut = cc.fadeOut(1);
         // faceOut.easing(cc.easeIn(time));
         let winsize = cc.winSize;
-        this.node.x;
+
         let mv = cc.moveTo(time, cc.p(  this.node.x, this.node.y+50));
         // mv.easing(cc.easeIn(time));
         let spawn = cc.spawn(mv, faceOut);
@@ -43,7 +54,18 @@ cc.Class({
         let seq = cc.sequence(spawn, faceOut, finished);
         this.node.runAction(seq);
     },
-
+    hideAction:function () {
+        let time = 5.0;
+        let faceOut = cc.fadeOut(1);
+        // faceOut.easing(cc.easeIn(time));
+        let winsize = cc.winSize;
+        let mv = cc.moveTo(time,cc.p(0,winsize.height*0.3));
+        mv.easing(cc.easeIn(time));
+        // let spawn = cc.spawn(mv,faceOut);
+        var finished = cc.callFunc(this.removeNode, this);
+        let seq = cc.sequence(mv,faceOut,finished);
+        this.node.runAction(seq);
+    },
     onClose: function () {
         this.node.removeFromParent(true);
     }

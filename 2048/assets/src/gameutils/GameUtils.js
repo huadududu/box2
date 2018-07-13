@@ -114,4 +114,10 @@ module.exports = {
             return result.toFixed(2) + dw[index];
         }
     },
+    //填充数字，前面补充0。
+    //eg .num 2 2-> 02  /   5,3-> 005
+    padding:function(num, length) {
+        //这里用slice和substr均可
+        return (Array(length).join("0") + num).slice(-length);
+    },
 };

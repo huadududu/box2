@@ -2,113 +2,77 @@
  * Created by Ren on 2018/7/2.
  */
 let Global = require("Global");
+let GameConfig = require("GameConfig");
+let GameState = require("GameState");
 cc.Class({
     extends: cc.Component,
     properties: {
-        scoreLabel: cc.Label,
-        CoinLabel:cc.Label,
-        nextBlockNumber:require("Block"),
-        nextBlockNumber2:require("Block"),
-        JoinLabel:cc.Label,
+
+        //beginpage:
+        beginpage: cc.Node,
+        beginScore: cc.Label,
+        begingold: cc.Label,
+
+
+        endPage: cc.Node,
+        endBestScore: cc.Label,
+        endAddCion: cc.Label,
+        thisScore: cc.Label,
+        thisKing: cc.Sprite,
+        bottom: require("BottomController"),
+    },
+
+    onTouchStart: function () {
+        cc.director.loadScene("game");
+    },
+    onLoad: function () {
+        // this.scheduleOnce(this.showHeler,3);
+
 
     },
-    onLoad:function(){
-        this.gameController = cc.find("Canvas").getComponent("GameController");
-        this.joinMes =["Good！","Great！","Excellent","Incredible"];
-        this.ExchangeState = false;
-        this.BoomState = false;
-
-    },
-
-    updateScore:function(){
-        this.scoreLabel.string = Global.thisscore;
-    },
-    updateNext:function(num){
-        this.nextBlockNumber.setBlockNumber(num);
-    },
-    updateNext2:function(num){
-        this.nextBlockNumber2.setBlockNumber(num);
-    },
-    updateCoin:function(){
-        this.CoinLabel.string = Global.thisCoin;
-    },
-    showJoinMsg:function(num){
-
-        let find = false;
-        let shownum = 0;
-        if(num<5 && num>1){
-            find = true;
-            shownum =num - 2;
-            // this.JoinLabel.string = num+","+this.joinMes[num-2];
-
-        }else if(num>=5){
-            find = true;
-            let shownum =3;
-            // this.JoinLabel.string = num+","+this.joinMes[3];
+    start:function(){
+        if (Global.thisState == GameState.start) {
+            this.beginpage.active = true;
+            this.endPage.active = false;
+            this.initStartPage();
+        } else {
+            this.beginpage.active = false;
+            this.endPage.active = true;
+            this.initEndPage();
         }
-        if(find){
+        // this.createBottom();
+    },
+    initStartPage: function () {
+        this.beginScore.string = Global.highScore;
+        this.begingold.string = Global.Coins;
+
+    },
+    initEndPage: function () {
+        this.endBestScore.string = "BEST:"+Global.highScore;
+        this.endAddCion.string = Global.thisCoin;
+        this.thisScore.string = Global.thisscore;
+        this.thisKing.node.active = Global.highScore<=Global.thisscore;
+        if(GameConfig.isFBInstantGame()){
+            let FBP = require("Plugin");
+            FBP.setScoreAsync(GameConfig.LeaderBoardName, Global.highScore,null);
+        }
+    },
+    showHeler: function () {
+        let InviteCenter = require("InviteCenter");
+        if (InviteCenter.HelperNames.length > 0) {
+            let helpers = InviteCenter.HelperNames.join(",");
+
+            let GameConfig = require("GameConfig");
             let PopMsgController = require("PopMsgController");
-            PopMsgController.showBlockGet(shownum);
-            // this.JoinLabel.node.stopAllActions();
-            // this.JoinLabel.node.active = true;
-            // this.JoinLabel.node.setScale(0.5,0.5);
-            //
-            // let act_1 = cc.scaleTo(0.1,1,1);
-            //
-            // let act_2 = cc.moveBy(0.3,cc.p(0,0));
-            // let act_3 = cc.scaleTo(0.1,0.1,0.1);
-            // let act_4 = cc.callFunc(function(){
-            //     this.JoinLabel.node.active = false;
-            // },this);
-            // this.JoinLabel.node.runAction(cc.sequence(act_1,act_2,act_3,act_4));
+            PopMsgController.showMsg(GameConfig.YourHelperNameTip.replace("XXX", helpers));
         }
     },
-    canBoom:function(){
-        return true;
-    },
-    canExchaneg:function(){
-        return true;
-    },
-    canRefresh:function(){
-        return true;
-    },
-    onTouchExchange:function(){
+    // createBottom: function () {
+    //     let prefab = cc.loader.getRes("prefab/bottom");
+    //     let  newNode = cc.instantiate(prefab);
+    //     newNode.setTag(112);
+    //     cc.find("Canvas").addChild(newNode);
+    // },
 
-        if(this.BoomState)
-            return;
-        if(!this.canExchaneg())
-            return;
-        this.ExchangeState = !this.ExchangeState;
-        if(this.ExchangeState){//暂停
-            cc.director.pause();
-        }else{
-            cc.director.resume();
-        }
-    },
-    onStopExchange:function(){
-        this.ExchangeState = false;
-        cc.director.resume();
-    },
-    onTouchBoom:function(){
-        if(this.ExchangeState)
-            return;
-        if(!this.canBoom())
-            return;
-        this.BoomState = !this.BoomState;
-        if(this.BoomState){//暂停
-            cc.director.pause();
-        }else{
-            cc.director.resume();
-        }
-    },
-    stopBoom:function(){
-        this.BoomState= false;
-        cc.director.resume();
-    },
-    onTouchRefresh(){
-        if(!this.canRefresh())
-            return;
-        this.gameController.BlocksController.changeNextNum();
-    }
 
 });

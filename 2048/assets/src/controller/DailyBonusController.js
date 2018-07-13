@@ -18,6 +18,7 @@ cc.Class({
     // use this for initialization
     onLoad: function () {
 
+        this.node.position = cc.p(0,0);
         for(let i = 0; i < 7;++i){
             let node = this.addItem(i);
             node.setPosition(0,0);
