@@ -48,10 +48,12 @@ cc.Class({
         this.testCount = 0;
         this.goldList = [];
         this.joinCount = 0;
-        Global.thisCoin = 0;
+        // Global.blocks[6][2] = this.BlockNum;
+        //         // Global.saveBlockInfo();
         this.gameController.updateCoin();
         this.exchangenum = 0;
-        this.exchangeList = null;
+        this.exchangeList = [];
+        this.bombNode = null;
     },
     playGoldSound: function () {
         // 调用声音引擎播放声音
@@ -62,12 +64,16 @@ cc.Class({
             this.gameController.isUseRefreshTool = true;
             num = this.createNextNum();
             this.BlockNum = num;
-            this.nextBlockNumber = this.createNextNum();
-            this.gameController.updateNext2(this.nextBlockNumber);
+
+
+            this.NextBlockNum = this.createNextNum();
+            this.gameController.updateNext2(this.NextBlockNum);
+            console.log("NextBlockNum", this.NextBlockNum);
         }
         this.BlockNum = num;
-
         this.gameController.updateNext(this.BlockNum);
+        console.log("BlockNum", this.BlockNum);
+        console.log("this.end");
     },
     startMenu: function () {
         this.clearAll();
@@ -83,23 +89,27 @@ cc.Class({
         this.createBlocks();
     },
     moreLife: function () {
-        for(let line=this.blockFloor -1;line>=this.blockFloor -2;line--){
-            for(let row =0;row<this.blockRow;row++){
-                if(this.blockNodes[line][row]){
+        for (let line = this.blockFloor - 1; line >= this.blockFloor - 2; line--) {
+            for (let row = 0; row < this.blockRow; row++) {
+                if (this.blockNodes[line][row]) {
                     this.blockNodes[line][row].removeFromParent(true);
-                    this.blockNodes[line][row] =null;
+                    this.blockNodes[line][row] = null;
+                    Global.blocks[line][row] = 0;
                 }
             }
         }
+        Global.saveBlockInfo();
         this.createBlocks();
 
     },
     clearAll: function () {
         Global.thisscore = 0;
+        Global.saveThisScore();
+        Global.thisCoin = 0;
+        Global.saveThisCoin();
         this.gameNode.removeAllChildren(true);
         this.blockNodes = [];
         this.panelMax = 1;
-        Global.thisscore = 0;
         this.gameController.updateScore();
         this.blockNum = this.createNextNum();
         this.gameController.updateNext(this.blockNum);
@@ -108,11 +118,62 @@ cc.Class({
         this.blockNum = 0;
         this.createCount = 0;
         this.goldList = [];
-        Global.thisCoin = 0;
         Global.thisState = GameState.isRuning;
+        Global.saveThisState();
+        let initBlockConfig = require("initBlockConfig");
+        Global.blocks = initBlockConfig;
+        Global.saveBlockInfo();
         this.gameController.updateCoin();
         this.unschedule(this.refreshBlocks);
         this.unschedule(this.refreshChoose);
+    },
+    initBeforePage: function () {
+        this.updateSpeed();
+        this.blockNodes = [];
+        for (let line = 0; line < this.blockFloor ; line++) {
+            if (!Global.blocks[line]) {
+                continue;
+            }
+            let showNode = Global.blocks[line];
+            for (let row = 0; row < showNode.length; row++) {
+                if (showNode[row] == 0)
+                    continue;
+                let node = BlockFactory.create(showNode[row]);// 写死生成的新的数组是math.pow(2,1)[改]
+                this.gameNode.addChild(node);
+                let realpath = this.blockWidth + this.blockblank;
+                node.getComponent("Block").setBlockPos(line, row);
+                let lineY = realpath * line;
+                let rowX = realpath * row;
+                node.position = cc.p(rowX, lineY);
+                if (this.blockNodes == null) {
+                    this.blockNodes = [];
+                }
+                if (this.blockNodes[line] == null) {
+                    this.blockNodes[line] = [];
+                }
+                this.blockNodes[line][row] = node;
+            }
+        }
+        if (Global.movingNode) {
+            this.movingBlock = this.blockNodes[Global.movingNode.line][Global.movingNode.row];
+        }
+        this.stopMoveNodes = [];
+        if (Global.stop_nodelist) {
+            for (let i = 0; i < Global.stop_nodelist.length; i++) {
+                let node = this.blockNodes[Global.stop_nodelist[i].line][Global.stop_nodelist[i].row];
+                this.stopMoveNodes.push(node);
+            }
+        }
+        if (Global.new_nodelist) {
+            for (let i = 0; i < this.new_nodelist.length; i++) {
+                let node = this.blockNodes[Global.new_nodelist[i].line][Global.new_nodelist[i].row];
+                this.newCreateList.push(node);
+            }
+        } else {
+            this.newCreateList = [];
+        }
+        this.schedule(this.refreshChoose, this.joinspeed);
+        this.gameController.updateScore();
     },
     beforeBagin: function () {
         let testConfig = require("testConfig");
@@ -141,7 +202,7 @@ cc.Class({
     },
     finishGame: function () {
         this.unschedule(this.refreshBlocks);
-        this.gameController.updeteFinish();
+        this.gameController.updateFinish();
 
     },
     createNextNum: function () {
@@ -190,8 +251,6 @@ cc.Class({
     }
     ,
     refreshBlocks: function () {
-        if (this.ISExchange)
-            return;
 
         if (Global.thisState != GameState.isRuning) {
             return;
@@ -226,13 +285,9 @@ cc.Class({
         this.needDestroy = [];// 准备删除点
         this.stopMoveNodes = [];//本轮中结束运动的点
         let node = BlockFactory.create(this.BlockNum);
-        this.BlockNum = this.NextBlockNum;
-        this.gameController.updateNext(this.BlockNum);
+        Global.blocks[6][2]= this.BlockNum;
+        Global.saveBlockInfo();
         this.createCount++;
-        // this.BlockNum = this.createNextNum();
-        this.NextBlockNum = this.createNextNum();
-        this.gameController.updateNext2(this.NextBlockNum);
-
         node.getComponent("Block").setBlockPos(6, 2);
         this.movingBlock = node;
         this.newCreateList[0] = node;
@@ -250,11 +305,16 @@ cc.Class({
         this.blockNodes[6][2] = node;
         this.movingState = 0;// 0移动状态 1：正在抖动 2：抖动完成
         this.updateSpeed();
-        this.schedule(this.refreshBlocks, this.downspeed);
+
         this.canhorizon = true;
         this.testmultext = 0;
         this.createCoin();
         this.joinCount = 0;
+        this.schedule(this.refreshBlocks, this.downspeed);
+        this.BlockNum = this.NextBlockNum;
+        this.gameController.updateNext(this.BlockNum);
+        this.NextBlockNum = this.createNextNum();
+        this.gameController.updateNext2(this.NextBlockNum);
     },
 
     checkCanCreateCoin: function () {
@@ -348,6 +408,7 @@ cc.Class({
                 break;
             case "get":
                 Global.thisCoin++;
+                Global.saveThisCoin();
                 this.gameController.updateCoin();
                 this.playGoldSound();
                 // Global.syncPlayerInfoToFB();
@@ -509,7 +570,6 @@ cc.Class({
                 let topNode = this.blockNodes[line + 1][row];
                 let nextNumber = topNode.getComponent("Block").getBlockNumber();
                 if (nextNumber == centerNumber) {
-                    // this.moveBlock(nextNode.position,this.blockNodes[line][row].position);
                     this.joinAllNodeList.push({line: line + 1, row: row});
                     this.findCanJoinNode(topNode, 't');
                 }
@@ -520,7 +580,7 @@ cc.Class({
                 let nextNode = this.blockNodes[line - 1][row];
                 let nextNumber = nextNode.getComponent("Block").getBlockNumber();
                 if (nextNumber == centerNumber) {
-                    // this.moveBlock(nextNode.position,this.blockNodes[line][row].position);
+
                     this.joinAllNodeList.push({line: line - 1, row: row});
                     this.findCanJoinNode(nextNode, 'd');
                 }
@@ -532,8 +592,7 @@ cc.Class({
                 let leftNode = this.blockNodes[line][end];
                 let leftNumber = leftNode.getComponent("Block").getBlockNumber();
                 if (leftNumber == centerNumber) {
-                    // this.moveBlock(leftNode.position,this.blockNodes[line][row].position);
-                    // moveBlock.push(leftNode);
+
                     this.joinAllNodeList.push({line: line, row: end});
                     this.findCanJoinNode(leftNode, 'l');
                 }
@@ -546,9 +605,6 @@ cc.Class({
                 let rightNode = this.blockNodes[line][start];
                 let rightNumber = rightNode.getComponent("Block").getBlockNumber();
                 if (rightNumber == centerNumber) {
-                    // this.moveBlock(rightNode.position,this.blockNodes[line][row].position);
-                    // moveBlock.push(rightNode);
-                    // moveBlock.push({line: line, row: start});
                     this.joinAllNodeList.push({line: line, row: start});
                     this.findCanJoinNode(rightNode, 'r');
                 }
@@ -571,9 +627,7 @@ cc.Class({
             thisNode.runAction(cc.sequence(spawn, action4));
             thisNode.getComponent("Block").playJoinSound();
             this.needDestroy.push(thisNode);
-            // this.blockNodes[thisNodePos.line][thisNodePos.row] = null;
         }
-        // this.joinCallback(startNodes, EndNode);
 
         this.scheduleOnce(this.joinCallback.bind(this, startNodes, EndNode), 0.2);
     },
@@ -584,6 +638,7 @@ cc.Class({
         let newScore = baseNumber + addCount;
         let showNumber = Math.pow(2, newScore);
         Global.thisscore += showNumber;
+        Global.saveThisScore();
 
         if (this.panelMax < newScore) {
             this.panelMax = newScore;
@@ -626,6 +681,8 @@ cc.Class({
                 }
                 // thisNode.removeFromParent(true);
                 this.blockNodes[thisNodePos.line][thisNodePos.row] = null;
+                Global.blocks[thisNodePos.line][thisNodePos.row] = 0;
+                Global.saveBlockInfo();
             } else {
                 console.log("error");
             }
@@ -684,6 +741,9 @@ cc.Class({
         this.blockNodes[realLine][row] = centerNode;
         centerNode.getComponent("Block").setBlockLine(realLine);
         this.blockNodes[line][row] = null;
+        Global.blocks[line][row]= 0;
+        this.saveBlockInfo(centerNode);
+        // Global.saveBlockInfo();
         this.scheduleOnce(this.downBlockCallback.bind(this, realLine, centerNode), 0.1);
         // }
 
@@ -731,6 +791,9 @@ cc.Class({
         this.movingBlock.getComponent("Block").setBlockLine(realLine);
 
         this.scheduleOnce(this.downBlockCallback.bind(this, realLine, this.movingBlock), 0.1);
+        Global.blocks[line][row]= 0;
+        Global.blocks[realLine][row]= this.movingBlock.getComponent("Block").getBlockNumber();
+        Global.saveBlockInfo();
 
     },
     findAllCanDownBlock: function () {
@@ -918,8 +981,6 @@ cc.Class({
 
     },
     refreshChoose: function () {
-        if (this.ISExchange)
-            return;
         if (Global.thisState != GameState.isRuning) {
             return;
         }
@@ -1004,6 +1065,9 @@ cc.Class({
             this.blockNodes[newline][row] = null;
             this.blockNodes[newline][newRow] = this.movingBlock;
 
+            Global.blocks[newline][row]= 0;
+            Global.blocks[newline][newRow]= this.movingBlock.getComponent("Block").getBlockNumber();
+            Global.saveBlockInfo();
             let newx = newRow * (this.blockblank + this.blockWidth);
             this.movingBlock.getComponent("Block").playFallSound();
             this.blockNodes[newline][newRow].setPositionX(newx);
@@ -1050,10 +1114,6 @@ cc.Class({
             // console.log("点击不生效原因canhorizon", this.canhorizon);
             return;
         }
-        // if(!this.canDownBlock(this.movingBlock)){
-        //     this.canhorizon = false;
-        //     return;
-        // }
         this.movelength = Math.abs(location.x - this.previousPos.x);
         if (this.movelength >= this.blockWidth) {
 
@@ -1069,9 +1129,19 @@ cc.Class({
             //     console.log("点击不生效this.gameStateHorizon", this.gameStateHorizon);
             // }
         }
-    }
-    ,
+    },
+    saveBlockInfo: function (node, number = true) {
+        let line = node.getComponent("Block").getBlockLine();
+        let row = node.getComponent("Block").getBlockRow();
 
+        if (number) {
+            let numbers = node.getComponent("Block").getBlockNumber();
+            Global.blocks[line][row] = numbers;
+        }else{
+            Global.blocks[line][row] = 0;
+        }
+        Global.saveBlockInfo();
+    },
     onUseBombTool: function (location1) {
         let location = this.gameNode.convertToNodeSpaceAR(location1);
         let realWith = this.blockWidth + this.blockblank;
@@ -1082,9 +1152,10 @@ cc.Class({
         }
         else {
             this.gameController.isUseBombTool = true;
-            let node = this.blockNodes[line][row];
+            this.bombNode = this.blockNodes[line][row];
+            // let node = this.blockNodes[line][row];
             for (let i = 0; i < this.waitMovingNodes.length; i++) {
-                if (node == this.waitMovingNodes[i]) {
+                if (this.bombNode == this.waitMovingNodes[i]) {
                     this.waitMovingNodes.splice(i, 1);
                     break;
                 }
@@ -1092,32 +1163,39 @@ cc.Class({
             }
             //[wrong] 写上所有可能涉及的数组 完善功能
             for (let i = 0; i < this.stopMoveNodes.length; i++) {//
-                if (node == this.stopMoveNodes[i]) {
+                if (this.bombNode == this.stopMoveNodes[i]) {
                     this.stopMoveNodes.splice(i, 1);
                     break;
                 }
             }
             for (let i = 0; i < this.newCreateList.length; i++) {
-                if (node == this.newCreateList[i]) {
+                if (this.bombNode == this.newCreateList[i]) {
                     this.newCreateList.splice(i, 1);
                     break;
                 }
             }
-            if (this.canhorizon && node == this.movingBlock) {
-                this.unschedule(this.refreshBlocks);
-                this.schedule(this.refreshChoose, this.joinspeed);
-            }
-        }
-        this.blockNodes[line][row].removeFromParent(true);
-        this.blockNodes[line][row] = null;
-        this.gameController.stopBomb();
 
+        }
+        this.blockNodes[line][row] = null;
+
+        Global.blocks[line][row] = 0;
+        Global.saveBlockInfo();
+        let act1 = cc.scaleTo(0.2, 1.2, 1.2);
+        let act2 = cc.scaleTo(0.5, 0.1, 0.1);
+        this.bombNode.runAction(cc.sequence(act1, act2));
+        this.scheduleOnce(this.stopBomb.bind(this), 1);
+
+    },
+    stopBomb: function () {
+        if (this.canhorizon && this.bombNode == this.movingBlock) {
+            this.unschedule(this.refreshBlocks);
+            this.schedule(this.refreshChoose, this.joinspeed);
+        }
+        this.bombNode.removeFromParent(true);
+        this.gameController.stopBomb();
     },
     onUseChangeTool: function (location1) {
 
-        if (this.ISExchange) {
-            return;
-        }
         let location = this.gameNode.convertToNodeSpaceAR(location1);
         let realWith = this.blockWidth + this.blockblank;
         let line = Math.floor(location.y / realWith);
@@ -1130,14 +1208,17 @@ cc.Class({
             this.exchangeList = [];
         }
 
+        if (!this.canChangeNode(this.blockNodes[line][row])) {
+            return;
+        }
         this.exchangeList[this.exchangeList.length] = {'line': line, 'row': row};
+        this.blockNodes[line][row].getComponent("Block").setHitState(true);
         if (this.exchangenum == 2) {
             if ((this.exchangeList[0].line == this.exchangeList[1].line) && (this.exchangeList[0].row == this.exchangeList[1].row)) {
                 this.stopExchange();
                 return;
             }
             this.gameController.isUseChangeTool = true;
-            this.ISExchange = true;
             let node1 = this.blockNodes[this.exchangeList[0].line][this.exchangeList[0].row];
             let node2 = this.blockNodes[this.exchangeList[1].line][this.exchangeList[1].row];
             let find = false;
@@ -1160,35 +1241,40 @@ cc.Class({
             if (!find) {
                 this.stopMoveNodes.push(node2);
             }
-            // let realWidth = this.blockblank+ this.blockWidth;
 
-            // let position1 = cc.p(realWidth*this.exchangeList[1].row,realWidth*this.exchangeList[1].row);
-            // let position2 = cc.p();
+            let act1 = cc.moveTo(0.5, node2.position);
+            let act2 = cc.moveTo(0.5, node1.position);
 
-            // let act1= cc.moveTo(0.1,node2.position);
-            // let act2= cc.moveTo(0.1,node1.position);
-            let number1 = node1.getComponent("Block").getBlockNumber();
-            let number2 = node2.getComponent("Block").getBlockNumber();
-            node1.getComponent("Block").setBlockNumber(number2);
-            node2.getComponent("Block").setBlockNumber(number1);
-            // this.blockNodes[this.exchangeList[0].line][this.exchangeList[0].row] = node2;
-            // this.blockNodes[this.exchangeList[1].line][this.exchangeList[1].row] = node1;
-            // node1.getComponent("Block").setBlockRow(this.exchangeList[1].row);
-            // node1.getComponent("Block").setBlockLine(this.exchangeList[1].line);
-            // node2.getComponent("Block").setBlockRow(this.exchangeList[0].row);
-            // node2.getComponent("Block").setBlockLine(this.exchangeList[0].line);
+            this.blockNodes[this.exchangeList[0].line][this.exchangeList[0].row] = node2;
+            this.blockNodes[this.exchangeList[1].line][this.exchangeList[1].row] = node1;
+            node1.getComponent("Block").setBlockRow(this.exchangeList[1].row);
+            node1.getComponent("Block").setBlockLine(this.exchangeList[1].line);
+            node2.getComponent("Block").setBlockRow(this.exchangeList[0].row);
+            node2.getComponent("Block").setBlockLine(this.exchangeList[0].line);
+            node2.runAction(act2);
+            node1.runAction(act1);
+
+
+            // let number1 = node1.getComponent("Block").getBlockNumber();
+            // let number2 = node2.getComponent("Block").getBlockNumber();
+            // node1.getComponent("Block").setBlockNumber(number2);
+            // node2.getComponent("Block").setBlockNumber(number1);
 
             cc.director.resume();
             // node1.runAction(act1);
             // node2.runAction(act2);
-            this.scheduleOnce(this.stopExchange.bind(this), 0.1);
+            this.scheduleOnce(this.stopExchange.bind(this), 1);
         }
 
     },
     stopExchange: function () {
-        this.ISExchange = false;
-        this.exchangeList = null;
+        for (let i = 0; i < this.exchangeList.length; i++) {
+            let node1 = this.blockNodes[this.exchangeList[i].line][this.exchangeList[i].row];
+            node1.getComponent("Block").setHitState(false);
+        }
+        this.exchangeList = [];
         this.exchangenum = 0;
+        this.updateExchange(false);
         this.gameController.onStopExchange();
     },
     GMCreateGold: function () {
@@ -1213,5 +1299,40 @@ cc.Class({
         this.goldList[curGoldPos].line = emptyPos[choosePos].line;
         this.goldList[curGoldPos].node = goldNode;
     },
+    updateExchange: function (bool = false) {
 
-});
+        for (let line = 0; line < this.blockFloor; line++) {
+            if (!this.blockNodes[line])
+                continue;
+            if (bool) {
+                for (let row = 0; row < this.blockRow; row++) {
+                    if (this.blockNodes[line][row] && !this.canChangeNode(this.blockNodes[line][row])) {
+                        let node = this.blockNodes[line][row];
+                        node.getComponent("Block").setGrayState(true);
+                    }
+                }
+            }
+            else {
+                for (let row = 0; row < this.blockRow; row++) {
+                    if (this.blockNodes[line][row]) {
+                        let node = this.blockNodes[line][row];
+                        node.getComponent("Block").setGrayState(false);
+                    }
+                }
+            }
+        }
+
+    },
+    canChangeNode: function (node) {
+        if (this.canDownBlock(node)) {
+            return false;
+        }
+        if (this.canJoinBlock(node)) {
+            return false;
+        }
+        return true;
+    },
+
+
+})
+;

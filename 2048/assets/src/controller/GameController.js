@@ -14,244 +14,302 @@ let BingLog = require("BingLog");
 let GameUtils = require("GameUtils");
 let GameConfig = require("GameConfig");
 cc.Class({
-    extends: cc.Component,
+        extends: cc.Component,
 
-    properties: {
-        // foo: {
-        //     // ATTRIBUTES:
-        //     default: null,        // The default value will be used only when the component attaching
-        //                           // to a node for the first time
-        //     type: cc.SpriteFrame, // optional, default is typeof default
-        //     serializable: true,   // optional, default is true
-        // },
-        BlocksController: require("BlocksController"),
-        // GameMenuController: require("GameMenuController"),
-        // startMenu: cc.Node,
-        // startMenu: cc.Node,
-        endMenu: cc.Node,
-        continueMenu: cc.Node,
-        loadingad: cc.Node,
-        scoreLabel: cc.Label,
-        CoinLabel: cc.Label,
-        nextBlockNumber: require("Block"),
-        nextBlockNumber2: require("Block"),
+        properties: {
+            BlocksController: require("BlocksController"),
+            endMenu: cc.Node,
+            continueMenu: cc.Node,
+            loadingad: cc.Node,
+            scoreLabel: cc.Label,
+            CoinLabel: cc.Label,
+            nextBlockNumber: require("Block"),
+            nextBlockNumber2: require("Block"),
 
-        btnExchange: cc.Button,
-        btnRefresh: cc.Button,
-        btnBomb: cc.Button,
+            btnExchange: cc.Button,
+            btnRefresh: cc.Button,
+            btnBomb: cc.Button,
 
-    },
+        },
 
-    // LIFE-CYCLE CALLBACKS:
+        // LIFE-CYCLE CALLBACKS:
 
-    onLoad() {
-        this.endMenu.active = false;
-        // this.startMenu.active = true;
-        // this.ExchangeState = false;
-        // this.BombState = false;
-        this.isUseChangeTool = false;
-        this.isUseBombTool = false;
-        this.isUseRefreshTool = false;
-    },
+        onLoad() {
+            this.endMenu.active = false;
+            this.continueMenu.active = false;
+            this.isUseChangeTool = false;
+            this.isUseBombTool = false;
+            this.isUseRefreshTool = false;
+        },
 
 
-    start() {
-        if (Global.thisState == GameState.start) {
-            this.BlocksController.startMenu();
-        } else if (Global.thisState == GameState.continue) {
-            // this.BlocksController.startMenu();
-            this.continueMenu.active = true;
-        } else if (Global.thisState == GameState.restart) {
+        start() {//
+            if (Global.thisState == GameState.start) {
+                this.BlocksController.startMenu();
+            }else if(Global.thisState == GameState.end){
+                this.BlocksController.restartMenu();
+            } else {//中断继续玩会走这
+                if (Global.thisState == GameState.isRuning || Global.thisState == GameState.pasue) {
+                    this.continueMenu.active = true;
+                    Global.thisState = GameState.pasue;
+                }
+                Global.saveThisState();
+                this.continueMenu.getComponent("continueView").createBottom();
+                this.BlocksController.initBeforePage();
+                this.refreshBottom();
+            }
+        }
+        ,
+        moreLife: function () {
+            this.BlocksController.moreLife();
+        }
+        ,
+        updateFinish: function () {
+            Global.thisState = GameState.end;
+            Global.saveThisState();
             this.endMenu.active = true;
-            this.BlocksController.startMenu();
-        } else {
-            this.BlocksController.startMenu();
+            Global.newHistory(Global.thisscore);
+            // Global.thisscore = 0;
+            // Global.saveThisScore();
+            // Global.Coins += Global.thisCoin;
+            // Global.thisCoin = 0;
+            Global.saveThisCoin();
+            Global.syncPlayerInfoToFB();
         }
-        this.refreshBottom();
-        // this.createBlocks();
-        // this.schedule(this.refreshBlocks, 0.5);
-    },
-    moreLife:function(){
-        this.BlocksController.moreLife();
-    },
-    updeteFinish: function () {
-        this.endMenu.active = true;
-        Global.newHistory(Global.thisscore);
-        Global.Coins += Global.thisCoin;
-        Global.syncPlayerInfoToFB();
-    },
-    updateScore: function () {
-        this.scoreLabel.string = Global.thisscore;
-    },
-    updateNext: function (num) {
-        this.nextBlockNumber.setBlockNumber(num);
-    },
-    updateNext2: function (num) {
-        this.nextBlockNumber2.setBlockNumber(num);
-    },
-    updateCoin: function () {
-        this.CoinLabel.string = Global.thisCoin;
-    },
-    showJoinMsg: function (num) {
-
-        let find = false;
-        let shownum = 0;
-        if (num < 5 && num > 1) {
-            find = true;
-            shownum = num - 2;
-
-        } else if (num >= 5) {
-            find = true;
-            shownum = 3;
+        ,
+        updateScore: function () {
+            this.scoreLabel.string = Global.thisscore;
         }
-        if (find) {
-            let PopMsgController = require("PopMsgController");
-            PopMsgController.showBlockGet(shownum);
+        ,
+        updateNext: function (num) {
+            this.nextBlockNumber.setBlockNumber(num);
         }
-    },
-    refreshBottom: function () {
-        this.btnExchange.interactable = this.canExchange();
-        this.btnRefresh.interactable = this.canRefresh();
-        this.btnBomb.interactable = this.canBomb();
+        ,
+        updateNext2: function (num) {
+            this.nextBlockNumber2.setBlockNumber(num);
+        }
+        ,
+        updateCoin: function () {
+            this.CoinLabel.string = Global.thisCoin;
+        }
+        ,
+        showJoinMsg: function (num) {
 
-    },
-    canBomb: function () {
-        if (this.isUseBombTool)
-            return false;
-        return true;
-    },
-    canExchange: function () {
-        if (this.isUseChangeTool)
-            return false;
-        return true;
-    },
-    canRefresh: function () {
-        if (this.isUseRefreshTool)
-            return false;
-        return true;
-    },
-    onTouchExchange: function () {
+            let find = false;
+            let shownum = 0;
+            if (num < 5 && num > 1) {
+                find = true;
+                shownum = num - 2;
 
-        if (Global.thisState != GameState.isRuning) {
-            if (Global.thisState == GameState.useExchange) {
-                Global.thisState = GameState.isRuning;
-                return;
+            } else if (num >= 5) {
+                find = true;
+                shownum = 3;
+            }
+            if (find) {
+                let PopMsgController = require("PopMsgController");
+                PopMsgController.showBlockGet(shownum);
             }
         }
-        if (!this.canExchange())
-            return;
-        Global.thisState = GameState.useExchange;
-    },
-    onStopExchange: function () {
-        Global.thisState = GameState.isRuning;
-        // this.ExchangeState = false;
-        // cc.director.resume();
-        this.btnExchange.interactable = this.canExchange();
-    },
-    onTouchBomb: function () {
-        if (Global.thisState != GameState.isRuning) {
-            if (Global.thisState == GameState.useBomb) {
-                Global.thisState = GameState.isRuning;
-                return;
-            }
-        }
-        if (!this.canBomb())
-            return;
-        Global.thisState = GameState.useBomb;
-    },
-    stopBomb: function () {
-        Global.thisState = GameState.isRuning;
-        this.btnBomb.interactable = this.canBomb();
-    },
-    onTouchRefresh() {
-        if (!this.canRefresh())
-            return;
-        this.BlocksController.changeNextNum();
-        this.btnRefresh.interactable = this.canRefresh();
-    },
-    //create block;
-    onTouchStartBtn: function () {
-        // this.startMenu.active = false;
-        this.BlocksController.startMenu();
+        ,
+        refreshBottom: function () {
+            this.btnExchange.interactable = this.canExchange();
+            this.btnRefresh.interactable = this.canRefresh();
+            this.btnBomb.interactable = this.canBomb();
 
-    },
-    onTouchRestartBtn: function () {
-        // this.continueMenu.active = false;
-        if (GameConfig.isFBInstantGame()) {
-            let num = GameUtils.randomInt(0, 100);
-            if (num < 30) {
-                let FBP = require("Plugin");
-                this.loadingad.active = true;
-                FBP.RewardedVideoAsync(this.restartCallBack.bind(this));
-            } else if (num < 80) {
-                let FBP = require("Plugin");
-                this.loadingad.active = true;
-                FBP.InterstitialAdAsync(this.restartCallBack.bind(this));
+        }
+        ,
+        canBomb: function () {
+            if (this.isUseBombTool)
+                return false;
+            return true;
+        }
+        ,
+        canExchange: function () {
+            if (this.isUseChangeTool)
+                return false;
+            return true;
+        }
+        ,
+        canRefresh: function () {
+            if (this.isUseRefreshTool)
+                return false;
+            return true;
+        }
+        ,
+        onTouchExchange: function () {
+
+            if (Global.thisState != GameState.isRuning) {
+                if (Global.thisState == GameState.useExchange) {
+                    this.BlocksController.stopExchange();
+                    Global.thisState = GameState.isRuning;
+                    Global.saveThisState();
+                    return;
+                }
+            }
+            if (!this.canExchange())
+                return;
+            Global.thisState = GameState.useExchange;
+            Global.saveThisState();
+            this.BlocksController.updateExchange(true);
+        }
+        ,
+        onStopExchange: function () {
+            Global.thisState = GameState.isRuning;
+            Global.saveThisState();
+            // this.ExchangeState = false;
+            // cc.director.resume();
+            this.btnExchange.interactable = this.canExchange();
+        }
+        ,
+        onTouchBomb: function () {
+            if (Global.thisState != GameState.isRuning) {
+                if (Global.thisState == GameState.useBomb) {
+                    Global.thisState = GameState.isRuning;
+                    Global.saveThisState();
+                    return;
+                }
+            }
+            if (!this.canBomb())
+                return;
+            Global.thisState = GameState.useBomb;
+            Global.saveThisState();
+        }
+        ,
+        stopBomb: function () {
+            Global.thisState = GameState.isRuning;
+            Global.saveThisState();
+            this.btnBomb.interactable = this.canBomb();
+        }
+        ,
+        onTouchRefresh() {
+            if (!this.canRefresh())
+                return;
+            Global.thisState = GameState.useRefresh;
+            Global.saveThisState();
+            // this.isUseRefreshTool = true;
+            this.onUseRefreshTool();
+
+        }
+        ,
+        //create block;
+        onTouchStartBtn: function () {
+            // this.startMenu.active = false;
+            this.BlocksController.startMenu();
+
+        }
+        ,
+        onTouchRestartBtn: function () {
+            // this.continueMenu.active = false;
+            if (GameConfig.isFBInstantGame()) {
+                let num = GameUtils.randomInt(0, 100);
+                if (num < 30) {
+                    let FBP = require("Plugin");
+                    this.loadingad.active = true;
+                    FBP.RewardedVideoAsync(this.restartCallBack.bind(this));
+                } else if (num < 80) {
+                    let FBP = require("Plugin");
+                    this.loadingad.active = true;
+                    FBP.InterstitialAdAsync(this.restartCallBack.bind(this));
+                } else {
+                    let FBP = require("Plugin");
+                    this.loadingad.active = true;
+                    FBP.chooseAsync(this.restartCallBack.bind(this));//[add]
+                    // FBP.InterstitialAdAsync(this.restartCallBack.bind(this));
+                    // this.BlocksController.restartMenu();
+                }
             } else {
-                let FBP = require("Plugin");
-                this.loadingad.active = true;
-                FBP.chooseAsync(this.restartCallBack.bind(this));//[add]
-                // FBP.InterstitialAdAsync(this.restartCallBack.bind(this));
-                // this.BlocksController.restartMenu();
+                this.restartCallBack();
             }
-        } else {
-            this.restartCallBack();
+
         }
+        ,
+        onTouchPause: function () {
+            this.continueMenu.active = true;
 
-    },
-    onTouchPause: function () {
-        this.continueMenu.active = true;
+            this.continueMenu.getComponent("continueView").createBottom();
+            Global.thisState = GameState.pasue;
+            Global.saveThisState();
+            // cc.director.pause();
+        }
+        ,
 
-        this.continueMenu.getComponent("continueView").createBottom();
-        Global.thisState = GameState.pasue;
-        // cc.director.pause();
-    },
-
-    onTouchResume: function () {
-        this.continueMenu.active = false;
-        if (cc.find("Canvas").getChildByTag(110)) {
+        onTouchResume: function () {
+            this.continueMenu.active = false;
+            if (cc.find("Canvas").getChildByTag(110)) {
+                cc.find("Canvas").getChildByTag(110).removeFromParent(true);
+            }
+            Global.thisState = GameState.isRuning;
+            Global.saveThisState();
+            // cc.director.resume();
+        }
+        ,
+        restartCallBack: function () {
+            this.loadingad.active = false;
+            this.BlocksController.restartMenu();
+            this.continueMenu.active = false;
             cc.find("Canvas").getChildByTag(110).removeFromParent(true);
+            Global.thisState = GameState.isRuning;
+            Global.saveThisState();
         }
-        Global.thisState = GameState.isRuning;
-        // cc.director.resume();
-    },
-    restartCallBack: function () {
-        this.loadingad.active = false;
-        this.BlocksController.restartMenu();
-        this.continueMenu.active = false;
-        cc.find("Canvas").getChildByTag(110).removeFromParent(true);
-        Global.thisState = GameState.isRuning;
-    },
+        ,
+        onUseRefreshTool: function () {
+            let action1 = cc.scaleTo(0.2, 0.1, 0.1);
+            let action2 = cc.scaleTo(0.2, 0.5, 0.5);
+            Global.thisState = GameState.useRefresh;
+            Global.saveThisState();
+            this.nextBlockNumber.node.runAction(cc.sequence(action1, action2));
+            let action3 = cc.scaleTo(0.2, 0.1, 0.1);
+            let action4 = cc.scaleTo(0.2, 0.5, 0.5);
+            this.nextBlockNumber2.node.runAction(cc.sequence(action3, action4));
 
+            this.scheduleOnce(this.changeNextNum.bind(this), 0.2);
+            this.scheduleOnce(this.finishRefresh.bind(this), 0.4);
 
-    touchCancelCallBack: function (location) {
-
-        if (Global.thisState == GameState.isRuning) {
-            this.BlocksController.touchCancelCallBack(location);
         }
+        ,
+        changeNextNum: function () {
+            this.BlocksController.changeNextNum();
+        }
+        ,
+        finishRefresh: function () {
+            Global.thisState = GameState.isRuning;
+            Global.saveThisState();
+            this.btnRefresh.interactable = this.canRefresh();
+        }
+        ,
+        touchCancelCallBack: function (location) {
 
-    },
-    touchStartCallBack: function (location) {
-        if (Global.thisState == GameState.isRuning) {
-            this.BlocksController.touchStartCallBack(location);
-        }
-    },
-    touchEndCallBack: function (location) {
-        if (Global.thisState == GameState.useBomb) {
-            this.BlocksController.onUseBombTool(location);
-        } else if (Global.thisState == GameState.useExchange) {
-            this.BlocksController.onUseChangeTool(location);
-        } else {
-            this.BlocksController.touchEndCallBack(location);
-        }
-    },
-    touchMoveCallBack: function (location) {
+            if (Global.thisState == GameState.isRuning) {
+                this.BlocksController.touchCancelCallBack(location);
+            }
 
-        if (Global.thisState == GameState.isRuning) {
-            this.BlocksController.touchMoveCallBack(location);
         }
-    },
+        ,
+        touchStartCallBack: function (location) {
+            if (Global.thisState == GameState.isRuning) {
+                this.BlocksController.touchStartCallBack(location);
+            }
+        }
+        ,
+        touchEndCallBack: function (location) {
+            if (Global.thisState == GameState.useBomb) {
+                this.BlocksController.onUseBombTool(location);
+            } else if (Global.thisState == GameState.useExchange) {
+                this.BlocksController.onUseChangeTool(location);
+            } else {
+                this.BlocksController.touchEndCallBack(location);
+            }
+        }
+        ,
+        touchMoveCallBack: function (location) {
+
+            if (Global.thisState == GameState.isRuning) {
+                this.BlocksController.touchMoveCallBack(location);
+            }
+        }
+        ,
 
 // update (dt) {},
-})
+    }
+)
 ;

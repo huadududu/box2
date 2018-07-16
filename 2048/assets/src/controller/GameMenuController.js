@@ -11,7 +11,7 @@ cc.Class({
         //beginpage:
         beginpage: cc.Node,
         beginScore: cc.Label,
-        begingold: cc.Label,
+        goldlab: cc.Label,
 
 
         endPage: cc.Node,
@@ -30,7 +30,7 @@ cc.Class({
 
 
     },
-    start:function(){
+    start: function () {
         if (Global.thisState == GameState.start) {
             this.beginpage.active = true;
             this.endPage.active = false;
@@ -44,18 +44,31 @@ cc.Class({
     },
     initStartPage: function () {
         this.beginScore.string = Global.highScore;
-        this.begingold.string = Global.Coins;
+        this.goldlab.string = Global.Coins;
 
     },
     initEndPage: function () {
-        this.endBestScore.string = "BEST:"+Global.highScore;
+
+        Global.newHistory(Global.thisscore);
+        this.endBestScore.string = "BEST:" + Global.highScore;
         this.endAddCion.string = Global.thisCoin;
         this.thisScore.string = Global.thisscore;
-        this.thisKing.node.active = Global.highScore<=Global.thisscore;
-        if(GameConfig.isFBInstantGame()){
+        this.thisKing.node.active = Global.highScore <= Global.thisscore;
+        // let allCoin = Global.thisCoin+Global.Coins;
+        //
+        Global.Coins += Global.thisCoin;
+        this.goldlab.string = Global.Coins;
+        if (GameConfig.isFBInstantGame()) {
             let FBP = require("Plugin");
-            FBP.setScoreAsync(GameConfig.LeaderBoardName, Global.highScore,null);
+            FBP.setScoreAsync(GameConfig.LeaderBoardName, Global.highScore, null);
         }
+        Global.thisState = GameState.start;
+        Global.saveThisState();
+        Global.saveCoins();
+        Global.thisCoin = 0;
+        Global.saveThisCoin();
+        Global.thisscore = 0;
+        Global.saveThisScore();
     },
     showHeler: function () {
         let InviteCenter = require("InviteCenter");

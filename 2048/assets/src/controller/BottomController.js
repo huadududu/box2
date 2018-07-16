@@ -23,7 +23,6 @@ cc.Class({
     },
     onLoad: function () {
 
-        return;
         this.gameMenu = cc.find("Canvas").getComponent("GameController");
         if(!this.gameMenu){
             this.gameMenu = cc.find("Canvas").getComponent("GameMenuController");

@@ -7,11 +7,11 @@ cc.Class({
     properties: {
         loadingAdNode: cc.Node,
         loadingAdCloseNode: cc.Node,
-        type: {
-            visible: false,
-            default: 0,//0 :restart loading 1 end loading
-
-        }
+        // type: {
+        //     visible: false,
+        //     default: 0,//0 :restart loading 1 end loading
+        //
+        // }
     },
     onLoad: function () {
 
@@ -19,9 +19,9 @@ cc.Class({
 
     onEnable: function () {
         this.loadingAdCloseNode.active = false;
-        if (this.type == 0) {
+        // if (this.type == 0) {
             this.scheduleOnce(this.showAdCloseBtn, 10);
-        }
+        // }
     },
     onTouchCloseBtn() {
         if (GameConfig.isFBInstantGame()) {

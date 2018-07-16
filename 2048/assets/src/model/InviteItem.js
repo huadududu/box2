@@ -8,8 +8,15 @@ let Global = require("Global");
 let InviteConfig = require("InviteConfig");
 let RewardConfig = require("RewardConfig");
 let InviteCenter = require("InviteCenter");
+let SpriteFrameCenter = require("SpriteFrameCenter");
 let FBP = require("Plugin");
 
+let Bgs = {
+    coming: "rank_bukelingqu",
+    claim: "rank_kelingqu",
+    retrieve: "rank_kelingqu",
+    done: "rank_yilingqu",
+};
 cc.Class({
     extends:cc.Component,
 
@@ -20,6 +27,7 @@ cc.Class({
         doneNode:cc.Node,
         claimNode:cc.Node,
         index:0,
+        // itembg:cc.Sprite,
     },
 
     onLoad:function () {
@@ -45,15 +53,18 @@ cc.Class({
             if(InviteCenter.InviteClaim[index]){
                 this.claimNode.active = false;
                 this.doneNode.active = true;
+                // this.itembg.spriteFrame = SpriteFrameCenter.getFrameFromAtlas("png/game", spName+".png");
             }else{
                 this.doneNode.active = false;
                 this.claimNode.active = true;
+                // this.itembg.spriteFrame = SpriteFrameCenter.getFrameFromAtlas("png/game", spName+".png");
             }
 
         }else{
             this.numLabel.string =  InviteCenter.InviteCount.toString() +"/" + num.toString();
             this.btn.active = true;
             this.doneNode.active = false;
+            // this.itembg.spriteFrame = SpriteFrameCenter.getFrameFromAtlas("png/game", spName+".png");
         }
     },
 
@@ -93,6 +104,7 @@ cc.Class({
         InviteCenter.getRedTipState();
         //显示RedTip
         this.gameMenu.updateInviteRedTip();
+
     }
 
 

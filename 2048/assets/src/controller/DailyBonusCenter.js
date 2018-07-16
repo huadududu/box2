@@ -39,7 +39,8 @@ let IC = cc.Class({
                 //如果存在，进行获取值
                 for(let i = 0; i < 8; ++i){
                     let claimValue = GameStorage.get(StorageKeys.Key_DailyBonus_Claim + "_"+i.toString(),"0");
-                    this.Claims[i] = (claimValue == "1");
+                     this.Claims[i] = (claimValue == "1");
+
                 }
             }
         }
@@ -60,7 +61,7 @@ let IC = cc.Class({
                 allClaimDays +=1;
             }
         }
-        if(dayIndex == 7){
+        if(dayIndex == 6){
             this.ShowRedTip = !allClaim;
         }else{
             this.ShowRedTip = !(dayIndex+1 == allClaimDays);

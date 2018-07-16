@@ -13,6 +13,8 @@ cc.Class({
         bestScore: cc.Label,
         thisScore: cc.Label,
         thisAddCion: cc.Label,
+        loadingAdNode: cc.Node,
+        loadingAdCloseNode: cc.Node,
 
 
     },
@@ -36,8 +38,8 @@ cc.Class({
         let highScore = Global.highScore;
         let score = Global.thisscore;
         this.showMoreLifePro.progress = 1;
-        this.curCount = 5;
-        let bool = Global.showAdTimes >0;
+        this.curCount = 10;
+        let bool = Global.showAdTimes > 0;
         if (bool) {
             this.schedule(this.eventClock, 1);
         }
@@ -67,38 +69,55 @@ cc.Class({
             this.showRestart.node.active = true;
         }
     },
-    onClockAdBtn:function () {
+    onTouchMoreLife: function () {
 
         this.nohit = false;
         this.unschedule(this.eventClock);
         // this.clockNode.active  = false;
-        this.gameController.loadingad.active  = true;
-        if(GameConfig.isFBInstantGame()){
+        this.loadingAdNode.active = true;
+        this.loadingAdCloseNode.active = false;
+        this.scheduleOnce(this.showAdCloseBtn.bind(this), 10);//[gan]
+        if (GameConfig.isFBInstantGame()) {
             let FBP = require("FBPlugin");
             FBP.RewardedVideoAsync(this.adGame.bind(this));
-        }else{
-            this.adGame();
+        } else {
+             this.adGame();
         }
         // this.scheduleOnce(this.showAdCloseBtn,10);
     },
 
-    adGame:function () {
-        // this.unschedule(this.showAdCloseBtn);
-        Global.showAdTimes --;
+    adGame: function () {
+        Global.showAdTimes--;
+
+        this.loadingAdNode.active = false;
         this.gameController.moreLife();
-        this.gameController.loadingad.active  = false;
+
         this.node.active = false;
 
     },
     OnTouchRestart: function () {
         Global.thisState = GameState.end;
+        Global.saveThisState();
         if (cc.find("Canvas").getChildByTag(111)) {
             cc.find("Canvas").getChildByTag(111).removeFromParent(true);
         }
         cc.director.loadScene("gamemenu");
     },
+    showAdCloseBtn: function () {
+
+        this.loadingAdCloseNode.active = true;
+
+
+    },
+    onTouchAdClose:function(){
+        this.loadingAdNode.active = false;
+        if (Global.showAdTimes > 0) {
+            this.nohit = true;
+            this.schedule(this.eventClock, 1);
+        }
+    },
     update: function (dt) {
-        if (this.curCount > 0  && this.nohit) {
+        if (this.curCount > 0 && this.nohit) {
             this.curCount -= dt;
             this.showMoreLifePro.progress = this.curCount / this.maxCount;
         }

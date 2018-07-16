@@ -12,10 +12,10 @@ let SpriteFrameCenter = require('SpriteFrameCenter');
 
 let Days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 let Bgs = {
-    coming: "img_bonus_di1",
-    claim: "img_bonus_di3",
-    retrieve: "img_bonus_di4",
-    done: "img_bonus_di5",
+    coming: "rank_bukelingqu",
+    claim: "rank_kelingqu",
+    retrieve: "rank_kelingqu",
+    done: "rank_kelingqu",
 };
 
 cc.Class({
@@ -28,7 +28,7 @@ cc.Class({
         comingNode: cc.Node,
         doneNode: cc.Node,
         claimNode: cc.Node,
-        itembg: cc.Node,
+        itembg: cc.Sprite,
         index: 0,
         extraType: false,
     },
@@ -68,6 +68,7 @@ cc.Class({
 
             dayText = Days[this.index];
             let dayIndex = DailyBonusCenter.getWeekDay();
+
             if (st) {
                 this.showDone();
             } else {
@@ -89,6 +90,19 @@ cc.Class({
     updateTotalDays: function () {
         let totalDays = DailyBonusCenter.getClaimDays();
         this.dayLabel.string = "(" + totalDays.toString() + "/7)";
+        let st = DailyBonusCenter.getClaimState(this.index);
+        if (totalDays >= 7) {
+            if (st) {
+                this.showDone();
+            } else {
+                this.showClaim();
+            }
+            this.updateBg();
+        } else {
+            this.showComing();
+            // this.showClaim();
+        }
+
     },
 
     showComing: function () {
@@ -136,7 +150,7 @@ cc.Class({
                     spName = Bgs["coming"];
                 }
             }
-            this.itembg.spriteFrame = SpriteFrameCenter.getFrameFromAtlas("png/game", spName);
+            this.itembg.spriteFrame = SpriteFrameCenter.getFrameFromAtlas("png/game", spName+".png");
         }
     },
 
@@ -146,6 +160,8 @@ cc.Class({
         if (GameConfig.isFBInstantGame()) {
             let FBP = require("Plugin");
             FBP.chooseAsync(this.clickCoin.bind(this), this.clickCoin.bind(this));
+        }else{
+            this.clickCoin();
         }
     },
 
@@ -167,6 +183,8 @@ cc.Class({
         //显示RedTip
         this.gameMenu.updateDailyBonusRedTip();
         this.dailybonusCtr.updateTotalDays();
+        this.updateBg();
+        this.gameMenu.updateDailyBonusRedTip();
     }
 
 
