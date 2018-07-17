@@ -28,7 +28,6 @@ cc.Class({
         this.waitMovingNodes = [];//所有等待移动点//下落
         this.movingNodes = [];//正在移动的点
         this.needDestroy = [];//正在移动的点
-        this.panelMax = 1;
 
         this.blockWidth = 110;
         this.blockblank = 6;
@@ -38,11 +37,7 @@ cc.Class({
         this.BlockNum = 1;
         this.panelMax = 1;
         this.gameController = cc.find("Canvas").getComponent("GameController");
-        this.BlockNum = this.createNextNum();
 
-        this.gameController.updateNext(this.BlockNum);
-        this.NextBlockNum = this.createNextNum();
-        this.gameController.updateNext2(this.NextBlockNum);
         this.canrefresh = true;
         this.createCount = 0;
         this.testCount = 0;
@@ -54,6 +49,7 @@ cc.Class({
         this.exchangenum = 0;
         this.exchangeList = [];
         this.bombNode = null;
+        this.newCreateList = [];
     },
     playGoldSound: function () {
         // 调用声音引擎播放声音
@@ -61,7 +57,8 @@ cc.Class({
     },
     changeNextNum: function (num = -1) {
         if (num == -1) {
-            this.gameController.isUseRefreshTool = true;
+            Global.useTools[1] = true;
+            Global.saveUseTools();
             num = this.createNextNum();
             this.BlockNum = num;
 
@@ -89,7 +86,7 @@ cc.Class({
         this.createBlocks();
     },
     moreLife: function () {
-        for (let line = this.blockFloor - 1; line >= this.blockFloor - 2; line--) {
+        for (let line = this.blockFloor - 1; line >= this.blockFloor - 4; line--) {
             for (let row = 0; row < this.blockRow; row++) {
                 if (this.blockNodes[line][row]) {
                     this.blockNodes[line][row].removeFromParent(true);
@@ -99,14 +96,22 @@ cc.Class({
             }
         }
         Global.saveBlockInfo();
+        Global.thisState = GameState.isRuning;
+        Global.saveThisState();
         this.createBlocks();
+        // Global.gamestate = GameState.isRunning;
+        // ssss
 
     },
     clearAll: function () {
+        Global.useTools = [false, false, false];// 0  change 1 refresh 2 bomb
+        Global.saveUseTools();
         Global.thisscore = 0;
         Global.saveThisScore();
         Global.thisCoin = 0;
         Global.saveThisCoin();
+        Global.showAdTimes = 1;
+        Global.saveShowAdTimes();
         this.gameNode.removeAllChildren(true);
         this.blockNodes = [];
         this.panelMax = 1;
@@ -124,13 +129,18 @@ cc.Class({
         Global.blocks = initBlockConfig;
         Global.saveBlockInfo();
         this.gameController.updateCoin();
+        this.BlockNum = this.createNextNum();
+        this.gameController.updateNext(this.BlockNum);
+        this.NextBlockNum = this.createNextNum();
+        this.gameController.updateNext2(this.NextBlockNum);
         this.unschedule(this.refreshBlocks);
         this.unschedule(this.refreshChoose);
+        Global.saveNextNumbers(this.BlockNum, this.NextBlockNum);
     },
     initBeforePage: function () {
         this.updateSpeed();
         this.blockNodes = [];
-        for (let line = 0; line < this.blockFloor ; line++) {
+        for (let line = 0; line < this.blockFloor; line++) {
             if (!Global.blocks[line]) {
                 continue;
             }
@@ -138,7 +148,7 @@ cc.Class({
             for (let row = 0; row < showNode.length; row++) {
                 if (showNode[row] == 0)
                     continue;
-                let node = BlockFactory.create(showNode[row]);// 写死生成的新的数组是math.pow(2,1)[改]
+                let node = BlockFactory.create(showNode[row]);
                 this.gameNode.addChild(node);
                 let realpath = this.blockWidth + this.blockblank;
                 node.getComponent("Block").setBlockPos(line, row);
@@ -154,27 +164,55 @@ cc.Class({
                 this.blockNodes[line][row] = node;
             }
         }
-        if (Global.movingNode) {
-            this.movingBlock = this.blockNodes[Global.movingNode.line][Global.movingNode.row];
-        }
         this.stopMoveNodes = [];
-        if (Global.stop_nodelist) {
-            for (let i = 0; i < Global.stop_nodelist.length; i++) {
-                let node = this.blockNodes[Global.stop_nodelist[i].line][Global.stop_nodelist[i].row];
+        if (Global.stop_list) {
+            for (let i = 0; i < Global.stop_list.length; i++) {
+                let node = this.blockNodes[Global.stop_list[i].line][Global.stop_list[i].row];
                 this.stopMoveNodes.push(node);
             }
+
         }
-        if (Global.new_nodelist) {
-            for (let i = 0; i < this.new_nodelist.length; i++) {
-                let node = this.blockNodes[Global.new_nodelist[i].line][Global.new_nodelist[i].row];
+        if (Global.new_list) {
+            for (let i = 0; i < Global.new_list.length; i++) {
+                let node = this.blockNodes[Global.new_list[i].line][Global.new_list[i].row];
                 this.newCreateList.push(node);
             }
         } else {
             this.newCreateList = [];
         }
-        this.schedule(this.refreshChoose, this.joinspeed);
+
         this.gameController.updateScore();
-    },
+        if (Global.nextnumber && Global.nextnumber[0] != 0) {
+            this.blockNum = Global.nextnumber[0];
+            this.gameController.updateNext(this.blockNum);
+        } else {
+            this.blockNum = this.createNextNum();
+            this.gameController.updateNext(this.blockNum);
+        }
+        if (Global.nextnumber && Global.nextnumber[1] != 0) {
+            this.NextBlockNum = Global.nextnumber[1];
+            this.gameController.updateNext2(this.NextBlockNum);
+        } else {
+            this.NextBlockNum = this.createNextNum();
+            this.gameController.updateNext2(this.NextBlockNum);
+        }
+        if (Global.gameType == 1) {
+
+            if (Global.movingNode && this.blockNodes[Global.movingNode.line] && this.blockNodes[Global.movingNode.line][Global.movingNode.row]) {
+                this.movingBlock = this.blockNodes[Global.movingNode.line][Global.movingNode.row];
+                this.canhorizon = true;
+                this.movingState = 0;
+                this.schedule(this.refreshBlocks, this.downspeed);
+            } else {
+                this.canhorizon = false;
+                this.schedule(this.refreshChoose, this.joinspeed);
+            }
+        } else if (Global.gameType == 0) {
+            this.canhorizon = false;
+            this.schedule(this.refreshChoose, this.joinspeed);
+        }
+    }
+    ,
     beforeBagin: function () {
         let testConfig = require("testConfig");
 
@@ -264,7 +302,16 @@ cc.Class({
             } else if (this.movingState == 1) {
                 return;
             }
+            this.canhorizon = false;
+            Global.saveGameType(0);
+
         }
+        this.saveNewList();
+        // this.saveMovingNode();
+        let row = this.movingBlock.getComponent("Block").getBlockRow();
+        let line = this.movingBlock.getComponent("Block").getBlockLine();
+        Global.movingNode = {'line': line, 'row': row};
+        Global.saveMovingNode();
     },
     canAddNewBlock: function () {
         if (!this.blockNodes[6] || !this.blockNodes[6][2]) {
@@ -281,21 +328,24 @@ cc.Class({
         this.newCreateList = [];
         this.waitMovingNodes = [];//等待移动点
         this.stopMoveNodes = [];//刚停止移动的点
+
+        Global.saveStopList();
         this.movingNodes = [];//正在移动的点
         this.needDestroy = [];// 准备删除点
         this.stopMoveNodes = [];//本轮中结束运动的点
         let node = BlockFactory.create(this.BlockNum);
-        Global.blocks[6][2]= this.BlockNum;
+        Global.blocks[6][2] = this.BlockNum;
         Global.saveBlockInfo();
         this.createCount++;
         node.getComponent("Block").setBlockPos(6, 2);
         this.movingBlock = node;
         this.newCreateList[0] = node;
+        this.saveNewList();
         this.gameNode.addChild(node);
         let realpath = this.blockWidth + this.blockblank;
-        let row = realpath * 2;
-        let line = realpath * 6;
-        node.position = cc.p(row, line);
+        let posX = realpath * 2;
+        let poxY = realpath * 6;
+        node.position = cc.p(posX, poxY);
         if (this.blockNodes == null) {
             this.blockNodes = [];
         }
@@ -307,14 +357,20 @@ cc.Class({
         this.updateSpeed();
 
         this.canhorizon = true;
+        Global.saveGameType(1);
         this.testmultext = 0;
         this.createCoin();
         this.joinCount = 0;
         this.schedule(this.refreshBlocks, this.downspeed);
         this.BlockNum = this.NextBlockNum;
-        this.gameController.updateNext(this.BlockNum);
+        // this.gameController.updateNext(this.BlockNum);
         this.NextBlockNum = this.createNextNum();
-        this.gameController.updateNext2(this.NextBlockNum);
+        // this.gameController.updateNext2(this.NextBlockNum);
+        this.gameController.updateNexts(this.BlockNum, this.NextBlockNum);
+        Global.saveNextNumbers(this.BlockNum, this.NextBlockNum);
+        let row = this.movingBlock.getComponent("Block").getBlockRow();
+        let line = this.movingBlock.getComponent("Block").getBlockLine();
+        Global.movingNode = {'line': line, 'row': row};
     },
 
     checkCanCreateCoin: function () {
@@ -469,6 +525,7 @@ cc.Class({
     doShake: function () {
         this.movingState = 1;
         this.canhorizon = false;
+        Global.saveGameType(0);
         var action1 = cc.scaleTo(0.1, 1, 0.8);
         var action2 = cc.scaleTo(0.1, 1, 1);
         this.movingBlock.runAction(cc.sequence(action1, action2));
@@ -619,23 +676,30 @@ cc.Class({
         let addCount = 0;
         for (let i = 0; i < moveNum; i++) {
             let action1 = cc.moveTo(0.1, EndNode.position);
-            var action2 = cc.scaleTo(0.1, 1, 0.8);
+            var action2 = cc.scaleTo(0.1, 0.8, 0.8);
             let spawn = cc.spawn(action1, action2);
             var action4 = cc.scaleTo(0.1, 1, 1);
+
             let thisNodePos = startNodes[i];
             let thisNode = this.blockNodes[thisNodePos.line][thisNodePos.row];
             thisNode.runAction(cc.sequence(spawn, action4));
             thisNode.getComponent("Block").playJoinSound();
             this.needDestroy.push(thisNode);
+            this.blockNodes[thisNodePos.line][thisNodePos.row] = null;
+            Global.blocks[thisNodePos.line][thisNodePos.row] = 0;
         }
 
-        this.scheduleOnce(this.joinCallback.bind(this, startNodes, EndNode), 0.2);
+        let baseNumber = EndNode.getComponent("Block").getBlockNumber();
+        let newScore = baseNumber + moveNum;
+        EndNode.getComponent("Block").setBlockNumber(newScore);
+        this.saveBlockInfo(EndNode);
+        this.scheduleOnce(this.joinCallback.bind(this, EndNode), 0.2);
     },
 
-    addScore: function (addCount, endNode) {
+    addScore: function (endNode) {
         let EndNode = endNode;
         let baseNumber = EndNode.getComponent("Block").getBlockNumber();
-        let newScore = baseNumber + addCount;
+        let newScore = baseNumber;
         let showNumber = Math.pow(2, newScore);
         Global.thisscore += showNumber;
         Global.saveThisScore();
@@ -643,7 +707,7 @@ cc.Class({
         if (this.panelMax < newScore) {
             this.panelMax = newScore;
         }
-        EndNode.getComponent("Block").setBlockNumber(newScore);
+        // EndNode.getComponent("Block").setBlockNumber(newScore);
         this.addCount = 0;
         this.gameController.updateScore();
         let PopMsgController = require("PopMsgController");
@@ -651,8 +715,21 @@ cc.Class({
         let y = EndNode.position.y + 110;
         let position = cc.p(x, y);
         PopMsgController.showBlockMsg("+" + showNumber, position);
+        // this.saveBlockInfo();
     },
-    joinCallback: function (startNodes, EndNode) {
+    joinCallback: function (EndNode) {
+        while (this.needDestroy.length > 0) {
+            let thisNode = this.needDestroy.pop();
+            for (let i = 0; i < this.stopMoveNodes.length; i++) {
+                if (thisNode == this.stopMoveNodes[i]) {
+                    this.stopMoveNodes.splice(i, 1);
+                    break;
+                }
+            }
+            thisNode.removeFromParent(true);
+
+        }
+        /*
         for (let i = 0; i < startNodes.length; i++) {
             let thisNodePos = startNodes[i];
             let thisNode = this.blockNodes[thisNodePos.line][thisNodePos.row];
@@ -679,14 +756,15 @@ cc.Class({
                         break;
                     }
                 }
-                // thisNode.removeFromParent(true);
+                // thisNode.removeFromPthiarent(true);
                 this.blockNodes[thisNodePos.line][thisNodePos.row] = null;
                 Global.blocks[thisNodePos.line][thisNodePos.row] = 0;
-                Global.saveBlockInfo();
             } else {
                 console.log("error");
             }
-        }
+        }*/
+        // Global.saveBlockInfo();
+        this.saveStopList();
         let find = false;
         for (let i = 0; i < this.newCreateList.length; i++) {
             if (this.newCreateList[i] == EndNode) {
@@ -705,8 +783,9 @@ cc.Class({
         if (!find) {
             this.newCreateList.push(EndNode);
         }
-        this.addScore(startNodes.length, EndNode);
+        this.addScore(EndNode);
         this.downGoldBlock();
+        this.saveNewList();
     },
 
     //向下移动 默认单位是1个格子
@@ -741,7 +820,7 @@ cc.Class({
         this.blockNodes[realLine][row] = centerNode;
         centerNode.getComponent("Block").setBlockLine(realLine);
         this.blockNodes[line][row] = null;
-        Global.blocks[line][row]= 0;
+        Global.blocks[line][row] = 0;
         this.saveBlockInfo(centerNode);
         // Global.saveBlockInfo();
         this.scheduleOnce(this.downBlockCallback.bind(this, realLine, centerNode), 0.1);
@@ -774,6 +853,7 @@ cc.Class({
         this.unschedule(this.refreshBlocks);
         this.schedule(this.refreshChoose, this.joinspeed);
         this.canhorizon = false;
+        Global.saveGameType(0);
         this.movingBlock.stopAllActions();
 
         let moveY = realLine * (this.blockblank + this.blockWidth);
@@ -791,8 +871,8 @@ cc.Class({
         this.movingBlock.getComponent("Block").setBlockLine(realLine);
 
         this.scheduleOnce(this.downBlockCallback.bind(this, realLine, this.movingBlock), 0.1);
-        Global.blocks[line][row]= 0;
-        Global.blocks[realLine][row]= this.movingBlock.getComponent("Block").getBlockNumber();
+        Global.blocks[line][row] = 0;
+        Global.blocks[realLine][row] = this.movingBlock.getComponent("Block").getBlockNumber();
         Global.saveBlockInfo();
 
     },
@@ -850,6 +930,7 @@ cc.Class({
                 this.stopMoveNodes.push(this.waitMovingNodes[i]);
             }
         }
+        this.saveStopList();
 
 
     },
@@ -980,10 +1061,31 @@ cc.Class({
         }
 
     },
+    saveStopList: function () {
+        Global.stop_list = [];
+        for (let i = 0; i < this.stopMoveNodes.length; i++) {
+            let node = this.stopMoveNodes[i];
+            let line = node.getComponent("Block").getBlockLine();
+            let row = node.getComponent("Block").getBlockRow();
+            Global.stop_list.push({'line': line, 'row': row});
+        }
+        Global.saveStopList();
+    },
+    saveNewList: function () {
+        Global.new_list = [];
+        for (let i = 0; i < this.newCreateList.length; i++) {
+            let node = this.newCreateList[i];
+            let line = node.getComponent("Block").getBlockLine();
+            let row = node.getComponent("Block").getBlockRow();
+            Global.new_list.push({'line': line, 'row': row});
+        }
+        Global.saveNewList();
+    },
     refreshChoose: function () {
         if (Global.thisState != GameState.isRuning) {
             return;
         }
+
         if (this.checkAllDownBlock()) {
             this.downAllBlock();
         } else {
@@ -996,6 +1098,8 @@ cc.Class({
                 this.createBlocks();
             }
         }
+        this.saveStopList();
+        this.saveNewList();
     },
 
     update: function () {
@@ -1065,8 +1169,8 @@ cc.Class({
             this.blockNodes[newline][row] = null;
             this.blockNodes[newline][newRow] = this.movingBlock;
 
-            Global.blocks[newline][row]= 0;
-            Global.blocks[newline][newRow]= this.movingBlock.getComponent("Block").getBlockNumber();
+            Global.blocks[newline][row] = 0;
+            Global.blocks[newline][newRow] = this.movingBlock.getComponent("Block").getBlockNumber();
             Global.saveBlockInfo();
             let newx = newRow * (this.blockblank + this.blockWidth);
             this.movingBlock.getComponent("Block").playFallSound();
@@ -1137,9 +1241,11 @@ cc.Class({
         if (number) {
             let numbers = node.getComponent("Block").getBlockNumber();
             Global.blocks[line][row] = numbers;
-        }else{
+            console.log(line, row, numbers);
+        } else {
             Global.blocks[line][row] = 0;
         }
+
         Global.saveBlockInfo();
     },
     onUseBombTool: function (location1) {
@@ -1151,7 +1257,8 @@ cc.Class({
             return;
         }
         else {
-            this.gameController.isUseBombTool = true;
+            Global.useTools[2] = true;
+            Global.saveUseTools();
             this.bombNode = this.blockNodes[line][row];
             // let node = this.blockNodes[line][row];
             for (let i = 0; i < this.waitMovingNodes.length; i++) {
@@ -1180,6 +1287,8 @@ cc.Class({
 
         Global.blocks[line][row] = 0;
         Global.saveBlockInfo();
+        this.saveStopList();
+        this.saveNewList();
         let act1 = cc.scaleTo(0.2, 1.2, 1.2);
         let act2 = cc.scaleTo(0.5, 0.1, 0.1);
         this.bombNode.runAction(cc.sequence(act1, act2));
@@ -1218,7 +1327,8 @@ cc.Class({
                 this.stopExchange();
                 return;
             }
-            this.gameController.isUseChangeTool = true;
+            Global.useTools[0] = true;
+            Global.saveUseTools();
             let node1 = this.blockNodes[this.exchangeList[0].line][this.exchangeList[0].row];
             let node2 = this.blockNodes[this.exchangeList[1].line][this.exchangeList[1].row];
             let find = false;
@@ -1264,6 +1374,7 @@ cc.Class({
             // node1.runAction(act1);
             // node2.runAction(act2);
             this.scheduleOnce(this.stopExchange.bind(this), 1);
+            this.saveStopList();
         }
 
     },

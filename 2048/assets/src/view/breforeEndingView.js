@@ -48,7 +48,7 @@ cc.Class({
         this.showRestart.node.active = !bool;
         this.bestScore.string = "BEST:" + Global.highScore;
         this.thisScore.string = Global.thisscore;
-        this.thisAddCion.string = Global.thisCoin;
+        this.thisAddCion.string ="+"+ Global.thisCoin;
         if (GameConfig.isFBInstantGame()) {
             let FBP = require("Plugin");
             FBP.setScoreAsync(GameConfig.LeaderBoardName, Global.highScore, null);
@@ -78,7 +78,7 @@ cc.Class({
         this.loadingAdCloseNode.active = false;
         this.scheduleOnce(this.showAdCloseBtn.bind(this), 10);//[gan]
         if (GameConfig.isFBInstantGame()) {
-            let FBP = require("FBPlugin");
+            let FBP = require("Plugin");
             FBP.RewardedVideoAsync(this.adGame.bind(this));
         } else {
              this.adGame();
@@ -88,8 +88,11 @@ cc.Class({
 
     adGame: function () {
         Global.showAdTimes--;
-
+        Global.saveShowAdTimes();
         this.loadingAdNode.active = false;
+        if (cc.find("Canvas").getChildByTag(111)) {
+            cc.find("Canvas").getChildByTag(111).removeFromParent(true);
+        }
         this.gameController.moreLife();
 
         this.node.active = false;

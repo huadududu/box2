@@ -20,6 +20,7 @@ let IC = cc.Class({
         HelperNames:null,
         HaveShow:false, //是否显示过helper
         ShowRedTip:false, //是否显示红点提示。
+        haveload:false,
     },
 
 

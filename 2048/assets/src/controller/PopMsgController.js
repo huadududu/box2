@@ -41,6 +41,7 @@ module.exports = {
         // newNode.position = cc.p(240,360);
         pop.init(content);
         cc.find("Canvas/blockpanl").addChild(newNode);
+        newNode.setPosition(295,647);
     }
 
 

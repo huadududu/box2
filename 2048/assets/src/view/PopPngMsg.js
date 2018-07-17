@@ -24,7 +24,7 @@ cc.Class({
         this.animation = content;
         this.cotentsp.spriteFrame = SpriteFrameCenter.getFrameFromAtlas("png/game",pngname[this.animation] + ".png");
         let act_1 = cc.scaleTo(0.1,1,1);
-        let act_2 = cc.moveBy(0.3,cc.p(0,0));
+        let act_2 = cc.moveBy(0.8,cc.p(0,0));
         let act_3 = cc.scaleTo(0.1,0.1,0.1);
         let act_4 = cc.callFunc(this.removeNode,this);
         this.cotentsp.node.runAction(cc.sequence(act_1,act_2,act_3,act_4));

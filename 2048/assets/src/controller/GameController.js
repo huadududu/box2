@@ -29,6 +29,12 @@ cc.Class({
             btnExchange: cc.Button,
             btnRefresh: cc.Button,
             btnBomb: cc.Button,
+            blockpanelUI: cc.Node,
+            bottomUI: cc.Node,
+            isShowNum2: {
+                visible: false,
+                default: false,
+            }
 
         },
 
@@ -37,16 +43,26 @@ cc.Class({
         onLoad() {
             this.endMenu.active = false;
             this.continueMenu.active = false;
-            this.isUseChangeTool = false;
-            this.isUseBombTool = false;
-            this.isUseRefreshTool = false;
+
+            let topY = this.blockpanelUI.y;
+            let bottomY = -cc.winSize.height / 2;
+            let bottomUIY = topY + (bottomY - topY) / 3;
+            console.log("bottomUIY", bottomUIY);
+            this.bottomUI.y = bottomUIY;
+            let FBP = require("Plugin");
+            // this.scheduleOnce(this.showHeler,3);
+            let InviteCenter = require("InviteCenter");
+            if (!InviteCenter.haveload) {
+                this.scheduleOnce(this.showHeler, 3);
+                FBP.entryGameAsync(this.userEntry.bind(this));
+                InviteCenter.haveload = true;
+            }
+            // Global.FirstLogin = 0;
         },
-
-
         start() {//
             if (Global.thisState == GameState.start) {
                 this.BlocksController.startMenu();
-            }else if(Global.thisState == GameState.end){
+            } else if (Global.thisState == GameState.end) {
                 this.BlocksController.restartMenu();
             } else {//中断继续玩会走这
                 if (Global.thisState == GameState.isRuning || Global.thisState == GameState.pasue) {
@@ -55,7 +71,6 @@ cc.Class({
                 }
                 Global.saveThisState();
                 this.continueMenu.getComponent("continueView").createBottom();
-                this.BlocksController.initBeforePage();
                 this.refreshBottom();
             }
         }
@@ -89,6 +104,24 @@ cc.Class({
             this.nextBlockNumber2.setBlockNumber(num);
         }
         ,
+        updateNexts: function (number1, number2) {
+
+            this.updateNext(number1);
+            this.updateNext2(number2);
+            this.nextBlockNumber.node.position = cc.p(571, 929);
+            if (this.isShowNum2) {
+                this.nextBlockNumber2.node.active = false;
+            }
+
+            let act1 = cc.moveTo(0.2, cc.p(571, 869));
+            let act2 = cc.callFunc(function () {
+                if (this.isShowNum2) {
+                    this.nextBlockNumber2.node.active = true;
+                }
+            }, this);
+            this.nextBlockNumber.node.runAction(cc.sequence(act1, act2));
+
+        },
         updateCoin: function () {
             this.CoinLabel.string = Global.thisCoin;
         }
@@ -112,26 +145,35 @@ cc.Class({
         }
         ,
         refreshBottom: function () {
-            this.btnExchange.interactable = this.canExchange();
-            this.btnRefresh.interactable = this.canRefresh();
-            this.btnBomb.interactable = this.canBomb();
+            // this.btnExchange.interactable = this.canExchange();
+            // this.btnRefresh.interactable = this.canRefresh();
+            // this.btnBomb.interactable = this.canBomb();
 
         }
         ,
         canBomb: function () {
-            if (this.isUseBombTool)
+
+            if (Global.haveTools[2] <= 0)
+                return false;
+            if (Global.useTools[2])
                 return false;
             return true;
         }
         ,
         canExchange: function () {
-            if (this.isUseChangeTool)
+
+            if (Global.haveTools[0] <= 0)
+                return false;
+            if (Global.useTools[0])
                 return false;
             return true;
         }
         ,
         canRefresh: function () {
-            if (this.isUseRefreshTool)
+
+            if (Global.haveTools[1] <= 0)
+                return false;
+            if (Global.useTools[1])
                 return false;
             return true;
         }
@@ -146,8 +188,10 @@ cc.Class({
                     return;
                 }
             }
-            if (!this.canExchange())
+            if (this.canExchange()) {
+                this.onAddGift(0);
                 return;
+            }
             Global.thisState = GameState.useExchange;
             Global.saveThisState();
             this.BlocksController.updateExchange(true);
@@ -169,8 +213,10 @@ cc.Class({
                     return;
                 }
             }
-            if (!this.canBomb())
+            if (!this.canBomb()) {
+                this.onAddGift(2);
                 return;
+            }
             Global.thisState = GameState.useBomb;
             Global.saveThisState();
         }
@@ -182,11 +228,12 @@ cc.Class({
         }
         ,
         onTouchRefresh() {
-            if (!this.canRefresh())
+            if (!this.canRefresh()) {
+                this.onAddGift(1);
                 return;
+            }
             Global.thisState = GameState.useRefresh;
             Global.saveThisState();
-            // this.isUseRefreshTool = true;
             this.onUseRefreshTool();
 
         }
@@ -221,8 +268,19 @@ cc.Class({
                 this.restartCallBack();
             }
 
-        }
-        ,
+        },
+        onTouchHomeBtn: function () {
+            if (cc.find("Canvas").getChildByTag(110)) {
+                cc.find("Canvas").getChildByTag(110).removeFromParent(true);
+            }
+            Global.thisState = GameState.start;
+            Global.newHistory(this.thisscore);
+            if (this.thisCoin > 0) {
+                this.Coins += this.thisCoin;
+                Global.syncPlayerInfoToFB();
+            }
+            cc.director.loadScene("gamemenu");
+        },
         onTouchPause: function () {
             this.continueMenu.active = true;
 
@@ -235,6 +293,11 @@ cc.Class({
 
         onTouchResume: function () {
             this.continueMenu.active = false;
+            if (Global.ifLogin == 0) {
+                this.BlocksController.initBeforePage();
+                Global.ifLogin++;
+            }
+
             if (cc.find("Canvas").getChildByTag(110)) {
                 cc.find("Canvas").getChildByTag(110).removeFromParent(true);
             }
@@ -267,6 +330,10 @@ cc.Class({
 
         }
         ,
+        onAddGift: function (giftType) {
+            let PopDialogController = require("PopDialogController");
+            PopDialogController.showSendGift(giftType);
+        },
         changeNextNum: function () {
             this.BlocksController.changeNextNum();
         }
@@ -308,6 +375,77 @@ cc.Class({
             }
         }
         ,
+        showHeler: function () {
+            let InviteCenter = require("InviteCenter");
+            if (InviteCenter.HelperNames.length > 0) {
+                let helpers = InviteCenter.HelperNames.join(",");
+
+                let GameConfig = require("GameConfig");
+                let PopMsgController = require("PopMsgController");
+                PopMsgController.showMsg(GameConfig.YourHelperNameTip.replace("XXX", helpers));
+            }
+        },
+        userEntry: function (entryPointData) {
+
+            // let GiftType = require("GiftType");
+            let entrytype = entryPointData['type'];
+            let PopMsgController = require("PopMsgController");
+            let InviteCenter = require("InviteCenter");
+            let GameStorage = require("GameStorage");
+            let LocalStorage = require("LocalStorage");
+            let GiftType = require("GiftType");
+
+            if (entrytype == 0) {
+                if (Global.LoginIndex == 0) {
+                    let gifttype = entryPointData['gifttype'];
+                    let time = entryPointData['time'];
+                    let count = entryPointData['count'];
+                    let from = entryPointData['from'];
+                    if (gifttype == GiftType.exchange || gifttype == GiftType.bomb || gifttype == GiftType.refresh) {//有问题
+                        let today = Date.now();
+                        if (Math.abs(today - time) < 1000 * 3600) {
+                            LocalStorage.get(time.toString(), 0, function (num) {
+                                if (num == 0) {
+                                    let PopDialogController = require("PopDialogController");
+                                    PopDialogController.showRecieveGift(from, gifttype);
+                                    LocalStorage.set(time.toString(), 1)
+                                }
+                            }.bind(this));
+                        }
+                    }
+                    Global.LoginIndex++;
+                }
+
+            } else if (entrytype == 1) {
+
+                if (!entryPointData) {
+                    PopMsgController.showMsg("entryPointData is null");
+                } else {
+                    let fromId = entryPointData['fromid'];
+                    let fromName = entryPointData['name'];
+                    let helperId = FBP.getID();
+                    let helperName = FBP.getName();
+
+                    if (fromId == helperId) {
+                        return;
+                    }
+                    let now = new Date();
+                    let nowkey = now.getUTCFullYear().toString() + '-' + now.getUTCMonth().toString() + "-" + now.getUTCDate();
+                    let v = GameStorage.get(fromId + nowkey, "0");
+                    //每天帮助只有一次。
+                    if (v == "0") {
+                        //show tips。 send to server.
+                        PopMsgController.showMsg(GameConfig.HelperEnterTip.replace("XXX", fromName));
+                        // PopMsgController.showMsg("type :"+entrytype.toString(),false);
+                        InviteCenter.HelperVirify(fromId, helperId, helperName);
+                        GameStorage.set(fromId + nowkey, "1");
+                    }
+
+                }
+
+            }
+
+        },
 
 // update (dt) {},
     }

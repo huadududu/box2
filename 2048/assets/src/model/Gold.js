@@ -16,7 +16,7 @@ cc.Class({
         },
         createCount: {
             visible: false,
-            default: 10
+            default: 15
         }
     },
 
@@ -30,11 +30,11 @@ cc.Class({
     },
     destroyNode: function () {
         this.createCount--;
-        if (this.createCount == 3) {
+        if (this.createCount == 5) {
             // let faceOut = cc.fadeOut(0.3);
             // let faceIn = cc.fadeIn(0.3);
             // let seq = cc.sequence(faceOut, faceIn);
-            let seq = cc.blink(3,3);
+            let seq = cc.blink(5,5);
             this.node.runAction(seq);
         }
         if (this.createCount <= 0) {

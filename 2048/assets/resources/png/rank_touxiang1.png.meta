@@ -1,14 +1,14 @@
 {
   "ver": "1.0.0",
-  "uuid": "c69c8133-e063-4bee-9275-42137132cf85",
+  "uuid": "e99b3926-b1de-45da-b685-76c678f5cd1c",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
   "subMetas": {
-    "game": {
+    "rank_touxiang1": {
       "ver": "1.0.3",
-      "uuid": "f632a06b-3b07-4513-aa63-0444595c761d",
-      "rawTextureUuid": "c69c8133-e063-4bee-9275-42137132cf85",
+      "uuid": "80c6a029-763a-46bb-ace7-d8a5e47e67d2",
+      "rawTextureUuid": "e99b3926-b1de-45da-b685-76c678f5cd1c",
       "trimType": "auto",
       "trimThreshold": 1,
       "rotated": false,
@@ -16,10 +16,10 @@
       "offsetY": 0,
       "trimX": 2,
       "trimY": 2,
-      "width": 1261,
-      "height": 1008,
-      "rawWidth": 1265,
-      "rawHeight": 1012,
+      "width": 72,
+      "height": 72,
+      "rawWidth": 76,
+      "rawHeight": 76,
       "borderTop": 0,
       "borderBottom": 0,
       "borderLeft": 0,

@@ -31,9 +31,9 @@ module.exports = function () {
             GiftExtraLife: 0, //是否有额外生命。
 
             // //
-            // FirstLogin: 0, // 第一次登录。
-            // LoginIndex: 0,//这次打开游戏后，进入gamemene场景的次数。
-
+            FirstLogin: 0, // 第一次登录。
+            LoginIndex: 0,//这次打开游戏后，进入gamemene场景的次数。
+            ifLogin: 0,//每次第一次进入
             Coins: 0,
             thisCoin: 0,
             thisState: 0,
@@ -42,6 +42,10 @@ module.exports = function () {
             loadstate: 2,//加载游戏需要的信息个数 场景资源 服务器信息
             blocks: null,//场景中的块的位置信息，
             movingNode: null,//正在移动的块的信息（最新生成的块）
+            new_list: null,
+            stop_list: null,
+            gameType: 0,
+            nextnumber: null,
 
 
         },
@@ -62,10 +66,10 @@ module.exports = function () {
             // }.bind(this));
 
 
-            LocalStorage.get("extraLife", 1, this.updateextraLife.bind(this));
+            // LocalStorage.get("extraLife", 1, this.updateextraLife.bind(this));
             let todayStr = this.getGiftTimesKey();
             LocalStorage.get(todayStr, 0, this.updateGiftTimes.bind(this));
-            LocalStorage.get("FirstLogin", 0, this.updateFirstLogin.bind(this));
+            // LocalStorage.get("FirstLogin", 0, this.updateFirstLogin.bind(this));
 
             // this.InviteClaim = [true, false, false, false];
             // LocalStorage.get('Coins',0,this.syncPlayerInfo.bind(this));
@@ -82,8 +86,11 @@ module.exports = function () {
                     "haveSkin",
                     "useSkin",
                     "movingNode",
-                    "new_nodelist",
-                    "stop_nodelist"
+                    "new_list",
+                    "stop_list",
+                    "nextnumber",
+                    "gametype",
+                    "PopDialog"
                 ],
                 '',
                 this.initMainInfo.bind(this)
@@ -115,7 +122,7 @@ module.exports = function () {
             if (typeof data['useTools'] != 'undefined') {
                 this.useTools = JSON.parse(data['useTools']);
             } else {
-                this.useTools = [false, false, false];
+                this.useTools = [false, false, false];// 0  change 1 refresh 2 bomb
             }
             if (typeof data['haveTools'] != 'undefined') {
                 this.haveTools = JSON.parse(data['haveTools']);
@@ -153,15 +160,25 @@ module.exports = function () {
             } else {
                 this.movingNode = null;
             }
-            if (typeof data['new_nodelist'] != 'undefined') {
-                this.new_nodelist = JSON.parse(data['new_nodelist']);
+            if (typeof data['new_list'] != 'undefined') {
+                this.new_list = JSON.parse(data['new_list']);
             } else {
-                this.new_nodelist = null;
+                this.new_list = null;
             }
-            if (typeof data['stop_nodelist'] != 'undefined') {
-                this.stop_nodelist = JSON.parse(data['stop_nodelist']);
+            if (typeof data['stop_list'] != 'undefined') {
+                this.stop_list = JSON.parse(data['stop_list']);
             } else {
-                this.stop_nodelist = null;
+                this.stop_list = null;
+            }
+            if (typeof data['gametype'] != 'undefined') {
+                this.gameType = parseInt(data['gametype']);
+            } else {
+                this.gameType = 0;
+            }
+            if (typeof data['nextnumber'] != 'undefined') {
+                this.nextnumber = JSON.parse(data['nextnumber']);
+            } else {
+                this.nextnumber = null;
             }
             this.loadstate--;
 
@@ -216,7 +233,11 @@ module.exports = function () {
         updateextraLife: function (count) {
             this.GiftExtraLife = count;
         },
+        updateHaveTools: function (index,count) {
+            this.haveTools[index] = count;
+            LocalStorage.set('haveTools', JSON.stringify(this.haveTools));
 
+        },
         newHistory: function (h) {
             if (h > this.highScore) {
                 LocalStorage.set(high, h);
@@ -271,12 +292,21 @@ module.exports = function () {
         saveMovingNode: function () {
             LocalStorage.set('movingNode', JSON.stringify(this.movingNode));
         },
-        saveNewNodeList: function () {
-            LocalStorage.set('new_nodelist', JSON.stringify(this.new_nodelist));
+        saveNewList: function () {
+            LocalStorage.set('new_list', JSON.stringify(this.new_list));
         },
-        saveStopNodeList: function () {
-            LocalStorage.set('stop_nodelist', JSON.stringify(this.stop_nodelist));
+        saveStopList: function () {
+            LocalStorage.set('stop_list', JSON.stringify(this.stop_list));
         },
+        saveGameType: function (num) {// 0 直接下落部分 1 合成部分
+            LocalStorage.set('gametype', num);
+            this.gameType = num;
+        },
+        saveNextNumbers: function (num1, num2) {
+            this.nextnumber = [num1, num2];
+            LocalStorage.set("nextnumber", JSON.stringify(this.nextnumber));
+
+        }
 
     });
 

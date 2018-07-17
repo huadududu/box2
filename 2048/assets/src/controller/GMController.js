@@ -55,7 +55,13 @@ cc.Class({
 
         this.gameController.BlocksController.GMCreateGold();
         // cc.director.loadScene("gamemenu");
-
     },
+    onTouchResetMyRank:function(){
+        let GameConfig = require("GameConfig");
+        if (GameConfig.isFBInstantGame()) {
+            let FBP = require("Plugin");
+            FBP.setScoreAsync(GameConfig.LeaderBoardName, 68673, null);
+        }
+    }
 
 });
