@@ -1094,7 +1094,10 @@
     "claimNode": {
       "__id__": 25
     },
-    "index": 0
+    "index": 0,
+    "touchAudio": {
+      "__uuid__": "252ff326-8116-4e27-ab8c-daddad9154ce"
+    }
   },
   {
     "__type__": "cc.PrefabInfo",

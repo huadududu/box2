@@ -12,6 +12,15 @@ cc.Class({
     extends:cc.Component,
 
     properties:{
+        touchAudio: {
+            default: null,
+            url: cc.AudioClip
+        },
+
+    },
+    playTouchSound: function () {
+        // 调用声音引擎播放声音
+        cc.audioEngine.playEffect(this.touchAudio, false);
     },
 
     onLoad:function () {
@@ -19,6 +28,7 @@ cc.Class({
     },
 
     onInvite:function () {
+        this.playTouchSound();
         if(GameConfig.isFBInstantGame()){
             let FBP = require("Plugin");
             FBP.chooseAsync();

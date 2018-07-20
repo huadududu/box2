@@ -232,7 +232,10 @@
     "node": {
       "__id__": 1
     },
-    "_enabled": true
+    "_enabled": true,
+    "touchAudio": {
+      "__uuid__": "252ff326-8116-4e27-ab8c-daddad9154ce"
+    }
   },
   {
     "__type__": "cc.PrefabInfo",

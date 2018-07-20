@@ -27,7 +27,7 @@ module.exports = function () {
             // InterstitialAdCount: 0,
             // InterstitialAdTime: Date.now(),
 
-            GiftSendTimes: 0, //发送礼物的次数。
+            GiftSendTimes: [0, 0, 0], //发送礼物的次数。
             GiftExtraLife: 0, //是否有额外生命。
 
             // //
@@ -53,22 +53,11 @@ module.exports = function () {
         initHistory: function () {
             this.score = 0;
             this.showRecord = false;
-            // this.showAdTimes = 0;
 
-            // LocalStorage.get(high, 0, function (v) {
-            //     if (typeof v == "string") {
-            //         this.highScore = parseInt(v);
-            //     } else if (typeof v == "number") {
-            //         this.highScore = v;
-            //     } else {
-            //         this.highScore = 0;
-            //     }
-            // }.bind(this));
-
-
-            // LocalStorage.get("extraLife", 1, this.updateextraLife.bind(this));
             let todayStr = this.getGiftTimesKey();
-            LocalStorage.get(todayStr, 0, this.updateGiftTimes.bind(this));
+            LocalStorage.get("0_" + todayStr, 0, this.updateGiftTimes0.bind(this));
+            LocalStorage.get("1_" + todayStr, 0, this.updateGiftTimes1.bind(this));
+            LocalStorage.get("2_" + todayStr, 0, this.updateGiftTimes2.bind(this));
             // LocalStorage.get("FirstLogin", 0, this.updateFirstLogin.bind(this));
 
             // this.InviteClaim = [true, false, false, false];
@@ -90,7 +79,8 @@ module.exports = function () {
                     "stop_list",
                     "nextnumber",
                     "gametype",
-                    "PopDialog"
+                    "panelmax",
+                    "createcount"
                 ],
                 '',
                 this.initMainInfo.bind(this)
@@ -180,6 +170,16 @@ module.exports = function () {
             } else {
                 this.nextnumber = null;
             }
+            if (typeof data['panelmax'] != 'undefined') {
+                this.panelMax = JSON.parse(data['panelmax']);
+            } else {
+                this.panelMax = 1;
+            }
+            if (typeof data['createcount'] != 'undefined') {
+                this.createCount = JSON.parse(data['createcount']);
+            } else {
+                this.createCount = 0;
+            }
             this.loadstate--;
 
         },
@@ -211,33 +211,51 @@ module.exports = function () {
         },
 
         //是否可以发送gift
-        canSendGift: function () {
-            return this.GiftSendTimes < GameConfig.GiftLimited;
+        canSendGift: function (type) {
+            return this.GiftSendTimes[type] < GameConfig.GiftLimited;
         },
 
-        setGiftTimes: function (count) {
+        setGiftTimes: function (count, type) {
             let todayStr = this.getGiftTimesKey();
-            LocalStorage.set(todayStr, count);
-            this.GiftSendTimes = count;
+            LocalStorage.set(type + "_" + todayStr, count);
+            this.GiftSendTimes[type] = count;
         },
 
-        setExtraLife: function (count) {
-            LocalStorage.set("extraLife", count);
-            this.GiftExtraLife = count;
+        setExtraLife: function (type, count) {
+            if (count > 0) {
+                if (this.haveTools[type] == 0) {
+                    this.haveTools[type] = count;
+                    LocalStorage.set('haveTools', JSON.stringify(this.haveTools));
+                }
+            } else {
+                this.haveTools[type] = count;
+                LocalStorage.set('haveTools', JSON.stringify(this.haveTools));
+            }
+            // LocalStorage.set("haveTools", count);
+            // this.GiftExtraLife = count;
         },
 
-        updateGiftTimes: function (count) {
-            this.GiftSendTimes = count;
+        updateGiftTimes0: function (count) {
+            this.GiftSendTimes[0] = count;
+        },
+        updateGiftTimes1: function (count) {
+            this.GiftSendTimes[1] = count;
+        },
+        updateGiftTimes2: function (count) {
+            this.GiftSendTimes[2] = count;
         },
 
         updateextraLife: function (count) {
             this.GiftExtraLife = count;
         },
-        updateHaveTools: function (index,count) {
-            this.haveTools[index] = count;
-            LocalStorage.set('haveTools', JSON.stringify(this.haveTools));
-
-        },
+        // updateHaveTools: function (index, count) {
+        //     if (this.haveTools[type] < 5) {
+        //         this.haveTools[type] += count;
+        //         LocalStorage.set('haveTools', JSON.stringify(this.haveTools));
+        //     }
+        //
+        //
+        // },
         newHistory: function (h) {
             if (h > this.highScore) {
                 LocalStorage.set(high, h);
@@ -306,6 +324,12 @@ module.exports = function () {
             this.nextnumber = [num1, num2];
             LocalStorage.set("nextnumber", JSON.stringify(this.nextnumber));
 
+        },
+        savePanelMax: function () {
+            LocalStorage.set("panelmax", this.panelMax);
+        },
+        saveCreateCount: function () {
+            LocalStorage.set("createcount", this.createCount);
         }
 
     });

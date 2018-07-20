@@ -28,7 +28,17 @@ cc.Class({
         claimNode:cc.Node,
         index:0,
         // itembg:cc.Sprite,
+        touchAudio: {
+            default: null,
+            url: cc.AudioClip
+        },
+
     },
+    playTouchSound: function () {
+        // 调用声音引擎播放声音
+        cc.audioEngine.playEffect(this.touchAudio, false);
+    },
+
 
     onLoad:function () {
 
@@ -85,11 +95,12 @@ cc.Class({
     },
 
     onInvite:function () {
-
+        this.playTouchSound();
         FBP.chooseAsync(this.inviteOK.bind(this),this.errorCallBack.bind(this));
     },
     
     onClaim:function () {
+        this.playTouchSound();
         this.btn.active = false;
         this.claimNode.active = false;
         this.doneNode.active = true;

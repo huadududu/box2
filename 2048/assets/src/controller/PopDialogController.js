@@ -17,21 +17,22 @@ module.exports = function () {
             sendFree:false, //是否需要添加到记录次数中。
         },
 
-        showSendGift:function (giftType) {
+        showSendGift:function (type) {
             let prefab = cc.loader.getRes("prefab/popwin");
             let newNode= cc.instantiate(prefab);
 
             let popDialog = newNode.getComponent("PopDialog");
             let title = GameConfig.GiftSendTitle;
             let content = GameConfig.GiftSendTip;
-            popDialog.init(title,content,this.onSend.bind(this),giftType);
+            let contentdesc = GameConfig.GiftSendTipdesc;
+            popDialog.init(title,content,contentdesc,this.onSend.bind(this),type);
             cc.find("Canvas").addChild(newNode);
             newNode.setPosition(0,0);
             this.popDialog = newNode;
             this.sendFree = false;
         },
 
-        showRecieveGift:function (from,gifttype) {
+        showRecieveGift:function (from,type) {
             let prefab = cc.loader.getRes("prefab/popwin");
             let newNode= cc.instantiate(prefab);
 
@@ -42,35 +43,36 @@ module.exports = function () {
                 playerName = from;
             }
             let content = GameConfig.GiftRecieveTip + playerName;
-            popDialog.init(title,content,this.onSend.bind(this),this.onOk.bind(this));
+            let contentdesc = "";
+            popDialog.init(title,content,contentdesc,this.onSend.bind(this),type);
             cc.find("Canvas").addChild(newNode);
             newNode.setPosition(0,0);
 
-            // Global.setExtraLife(1);
+             Global.setExtraLife(type,1);
             this.popDialog = newNode;
             this.sendFree = true;
         },
 
-        sendCallBack:function (contextId) {
+        sendCallBack:function (contextId,type) {
             let PopMsgController = require("PopMsgController");
             PopMsgController.showMsg(GameConfig.GiftSendAfterTip);
 
             //设置本地的时间。
-            LocalStorage.set(contextId.toString(),Date.now());
+            LocalStorage.set(type+"_"+contextId.toString(),Date.now());
 
             if(!this.sendFree){
-                Global.setGiftTimes( Global.GiftSendTimes + 1);
-                Global.setExtraLife(1);
+                Global.setGiftTimes( Global.GiftSendTimes[type] + 1,type);
+                Global.setExtraLife(type,1);
             }
 
-            // let gamemenu = cc.find("Canvas").getComponent("gamemenu");
-            // if(gamemenu){
-            //     gamemenu.showExtraLifeUi();
-            // }
+            let gamemenu = cc.find("Canvas").getComponent("GameController");
+            if(gamemenu){
+                gamemenu.refreshBottom(type);
+            }
         },
 
-        sendErrorCallBack:function (contextId) {
-            LocalStorage.get(contextId.toString(),Date.now(),function (time) {
+        sendErrorCallBack:function (contextId,type) {
+            LocalStorage.get(type+"_"+contextId.toString(),Date.now(),function (time) {
                 let PopMsgController = require("PopMsgController");
                 PopMsgController.showMsg(GameConfig.GiftSamePlayerTip +  this.diffTime(time));
             }.bind(this));
@@ -84,31 +86,42 @@ module.exports = function () {
             return hours.toString() +" hours " + mins.toString() + " mins";
         },
 
-        onSend:function () {
-            this.onOk();
+        onSend:function (type) {
+            if(this.sendFree){
+                this.onClose();
+                return;
+            }
             if(GameConfig.isFBInstantGame()){
                 let FBP = require("Plugin");
 
                 //相同的人，24小时才能重新发。
                 FBP.chooseAsync(function (contextId) {
-                    LocalStorage.get(contextId.toString(),0,function (time) {
+                    LocalStorage.get(type+"_"+contextId.toString(),0,function (time) {
                         //默认第一次发送。
+
                         if( time == 0 ){
-                            FBP.updateGiftAsync(0,1,this.sendCallBack.bind(this))
+                            FBP.updateGiftAsync(type,1,this.sendCallBack.bind(this),this.onOk.bind(this))
                         }else{
                             let now = Date.now();
                             let diff =  (time + 24*3600*1000-now);
                             if(diff < 0){
-                                FBP.updateGiftAsync(0,1,this.sendCallBack.bind(this))
+                                FBP.updateGiftAsync(type,1,this.sendCallBack.bind(this),this.onOk.bind(this))
                             }else{
-                                this.sendErrorCallBack(time);
+                                this.sendErrorCallBack(contextId,type);
                             }
                         }
+                        this.onOk();
                     }.bind(this));
 
-                   ;
-                }.bind(this),this.sendErrorCallBack.bind(this));
+                }.bind(this),function(contextId){
 
+                    this.sendErrorCallBack(contextId,type);
+                    this.onOk();
+                }.bind(this),this.onOk.bind(this));
+
+            }else{
+                this.sendCallBack(1111111,type);
+                this.onOk();
             }
         },
 
@@ -117,9 +130,16 @@ module.exports = function () {
             if(cc.isValid(this.popDialog)){
                 this.popDialog.removeFromParent(true);
             }
-            let gamemenu = cc.find("Canvas").getComponent("gamemenu");
-            if(gamemenu){
-                gamemenu.showExtraLifeUi();
+             let GameState = require("GameState");
+             Global.thisState = GameState.isRuning;
+            // let gamemenu = cc.find("Canvas").getComponent("GameController");
+            // if(gamemenu){
+            //     gamemenu.refreshBottom(type);
+            // }
+        },
+        onClose:function(){
+            if(cc.isValid(this.popDialog)){
+                this.popDialog.removeFromParent(true);
             }
         }
     });

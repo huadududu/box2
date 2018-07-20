@@ -1806,7 +1806,7 @@
       }
     ],
     "_tag": -1,
-    "_active": false,
+    "_active": true,
     "_components": [],
     "_prefab": {
       "__id__": 99
@@ -2876,7 +2876,10 @@
     "node": {
       "__id__": 78
     },
-    "_enabled": true
+    "_enabled": true,
+    "touchAudio": {
+      "__uuid__": "252ff326-8116-4e27-ab8c-daddad9154ce"
+    }
   },
   {
     "__type__": "cc.Widget",
@@ -5040,6 +5043,9 @@
     },
     "myRank": {
       "__id__": 158
+    },
+    "touchAudio": {
+      "__uuid__": "252ff326-8116-4e27-ab8c-daddad9154ce"
     }
   },
   {

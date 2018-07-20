@@ -15,7 +15,14 @@ cc.Class({
         thisAddCion: cc.Label,
         loadingAdNode: cc.Node,
         loadingAdCloseNode: cc.Node,
-
+        touchAudio: {
+            default: null,
+            url: cc.AudioClip
+        },
+        timeAudio: {
+            default: null,
+            url: cc.AudioClip
+        },
 
     },
     onLoad: function () {
@@ -29,6 +36,14 @@ cc.Class({
         this.gameController = cc.find("Canvas").getComponent("GameController");
         this.nohit = true;
 
+    },
+    playTouchSound: function () {
+        // 调用声音引擎播放声音
+        cc.audioEngine.playEffect(this.touchAudio, false);
+    },
+    playTimeSound: function () {
+        // 调用声音引擎播放声音
+        cc.audioEngine.playEffect(this.timeAudio, false);
     },
     onEnable: function () {
         if (!this.bottomisDone) {
@@ -62,6 +77,7 @@ cc.Class({
     },
     eventClock: function () {
 
+        this.playTimeSound();
         if (this.curCount <= 0) {
             this.unschedule(this.eventClock);
             this.showVideoBtn.node.active = false;
@@ -71,6 +87,7 @@ cc.Class({
     },
     onTouchMoreLife: function () {
 
+        this.playTouchSound();
         this.nohit = false;
         this.unschedule(this.eventClock);
         // this.clockNode.active  = false;
@@ -92,6 +109,7 @@ cc.Class({
         this.loadingAdNode.active = false;
         if (cc.find("Canvas").getChildByTag(111)) {
             cc.find("Canvas").getChildByTag(111).removeFromParent(true);
+            this.bottomisDone = false;
         }
         this.gameController.moreLife();
 
@@ -99,10 +117,12 @@ cc.Class({
 
     },
     OnTouchRestart: function () {
+        this.playTouchSound();
         Global.thisState = GameState.end;
         Global.saveThisState();
         if (cc.find("Canvas").getChildByTag(111)) {
             cc.find("Canvas").getChildByTag(111).removeFromParent(true);
+            this.bottomisDone = false;
         }
         cc.director.loadScene("gamemenu");
     },
@@ -113,6 +133,7 @@ cc.Class({
 
     },
     onTouchAdClose:function(){
+        this.playTouchSound();
         this.loadingAdNode.active = false;
         if (Global.showAdTimes > 0) {
             this.nohit = true;

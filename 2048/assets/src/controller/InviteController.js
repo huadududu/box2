@@ -11,10 +11,21 @@ cc.Class({
     properties: {
         TimeTipLb:cc.Label,
         invitePrefab:cc.Prefab,
-        inviteContent:cc.Node
+        inviteContent:cc.Node,
+        touchAudio: {
+            default: null,
+            url: cc.AudioClip
+        },
+
+    },
+    playTouchSound: function () {
+        // 调用声音引擎播放声音
+        cc.audioEngine.playEffect(this.touchAudio, false);
     },
 
-    // use this for initialization
+
+
+// use this for initialization
     onLoad: function () {
 
         for(let i = 0; i < 4;++i){
@@ -48,6 +59,7 @@ cc.Class({
     },
 
     onClose:function () {
+        this.playTouchSound();
         this.node.removeFromParent(true);
     },
 

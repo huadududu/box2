@@ -7,6 +7,10 @@ cc.Class({
     properties: {
         loadingAdNode: cc.Node,
         loadingAdCloseNode: cc.Node,
+        touchAudio: {
+            default: null,
+            url: cc.AudioClip
+        },
         // type: {
         //     visible: false,
         //     default: 0,//0 :restart loading 1 end loading
@@ -16,7 +20,10 @@ cc.Class({
     onLoad: function () {
 
     },
-
+    playTouchSound: function () {
+        // 调用声音引擎播放声音
+        cc.audioEngine.playEffect(this.touchAudio, false);
+    },
     onEnable: function () {
         this.loadingAdCloseNode.active = false;
         // if (this.type == 0) {
@@ -24,11 +31,14 @@ cc.Class({
         // }
     },
     onTouchCloseBtn() {
+        this.playTouchSound();
         if (GameConfig.isFBInstantGame()) {
             // let FBP = require("Plugin");
             // FBP.shareFb('SHARE'     ,this.backFriend.bind(this));
             let FBP = require("Plugin");
             FBP.chooseAsync(this.backFriend.bind(this), this.backFriend.bind(this), this.backFriend.bind(this));
+        }else{
+            this.backFriend();
         }
 
     },

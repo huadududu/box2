@@ -19,7 +19,15 @@ cc.Class({
         tipSkin: cc.Node,
         dailybonusTip: cc.Node,
         inviteTip: cc.Node,
+        touchAudio: {
+            default: null,
+            url: cc.AudioClip
+        },
 
+    },
+    playTouchSound: function () {
+        // 调用声音引擎播放声音
+        cc.audioEngine.playEffect(this.touchAudio, false);
     },
     onLoad: function () {
 
@@ -40,25 +48,30 @@ cc.Class({
         this.node.removeFromParent(true);
     },
     onTouchBtnSkin() {
+        this.playTouchSound();
         let PopMsgController  = require("PopMsgController");
         PopMsgController.showMsg("Being developing......");
     },
     onTouchBtnBonus() {
+        this.playTouchSound();
         let prefab = cc.loader.getRes("prefab/dailyBonusUI");
         let newNode = cc.instantiate(prefab);
         cc.find("Canvas").addChild(newNode);
     },
     onTouchBtnInvite() {
+        this.playTouchSound();
         let prefab = cc.loader.getRes("prefab/inviteUI");
         let newNode = cc.instantiate(prefab);
         cc.find("Canvas").addChild(newNode);
     },
     onTouchBtnRank() {
+        this.playTouchSound();
         let prefab = cc.loader.getRes("prefab/rankUI");
         let newNode= cc.instantiate(prefab);
         cc.find("Canvas").addChild(newNode);
     },
     onTouchBtnShare() {
+        this.playTouchSound();
         if(GameConfig.isFBInstantGame()){
             let FBP = require("Plugin");
             FBP.shareFb('SHARE');

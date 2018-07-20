@@ -13,6 +13,9 @@ let GameState = require("GameState");
 let BingLog = require("BingLog");
 let GameUtils = require("GameUtils");
 let GameConfig = require("GameConfig");
+let SpriteFrameCenter = require("SpriteFrameCenter");
+let btnPng = [["common_zhuanhuan1", "common_shuaxin", "common_zhalie"],
+    ["common_zhuanhuan2", "common_shuaxin2", "common_zhalie2"]];
 cc.Class({
         extends: cc.Component,
 
@@ -26,16 +29,19 @@ cc.Class({
             nextBlockNumber: require("Block"),
             nextBlockNumber2: require("Block"),
 
-            btnExchange: cc.Button,
-            btnRefresh: cc.Button,
-            btnBomb: cc.Button,
+            btnExchange: cc.Sprite,
+            btnRefresh: cc.Sprite,
+            btnBomb: cc.Sprite,
             blockpanelUI: cc.Node,
             bottomUI: cc.Node,
             isShowNum2: {
                 visible: false,
                 default: false,
-            }
-
+            },
+            touchAudio: {
+                default: null,
+                url: cc.AudioClip
+            },
         },
 
         // LIFE-CYCLE CALLBACKS:
@@ -52,29 +58,38 @@ cc.Class({
             let FBP = require("Plugin");
             // this.scheduleOnce(this.showHeler,3);
             let InviteCenter = require("InviteCenter");
-            if (!InviteCenter.haveload) {
+            if (!InviteCenter.haveload && GameConfig.isFBInstantGame()) {
                 this.scheduleOnce(this.showHeler, 3);
                 FBP.entryGameAsync(this.userEntry.bind(this));
                 InviteCenter.haveload = true;
+            }else{
+                let info = {"type":0,'time':1531917312123,'gifttype':1,'count':1,'from':'wangfuhui'};
+                this.userEntry(info);
             }
             // Global.FirstLogin = 0;
         },
         start() {//
             if (Global.thisState == GameState.start) {
                 this.BlocksController.startMenu();
+                this.refreshBottom();
             } else if (Global.thisState == GameState.end) {
                 this.BlocksController.restartMenu();
+                this.refreshBottom();
             } else {//中断继续玩会走这
-                if (Global.thisState == GameState.isRuning || Global.thisState == GameState.pasue) {
-                    this.continueMenu.active = true;
-                    Global.thisState = GameState.pasue;
-                }
+                // if (Global.thisState == GameState.isRuning || Global.thisState == GameState.pasue) {
+                this.continueMenu.active = true;
+                Global.thisState = GameState.pasue;
+                // }
                 Global.saveThisState();
                 this.continueMenu.getComponent("continueView").createBottom();
                 this.refreshBottom();
             }
         }
         ,
+        playTouchSound: function () {
+            // 调用声音引擎播放声音
+            cc.audioEngine.playEffect(this.touchAudio, false);
+        },
         moreLife: function () {
             this.BlocksController.moreLife();
         }
@@ -144,7 +159,32 @@ cc.Class({
             }
         }
         ,
-        refreshBottom: function () {
+        refreshBottom: function (type = -1) {
+
+            if (type == -1 || type == 0) {
+                let bool = this.canExchange();
+                if (bool) {
+                    this.btnExchange.spriteFrame = SpriteFrameCenter.getFrameFromAtlas("png/game", btnPng[1][0] + ".png");
+                } else {
+                    this.btnExchange.spriteFrame = SpriteFrameCenter.getFrameFromAtlas("png/game", btnPng[0][0] + ".png");
+                }
+            }
+            if (type == -1 || type == 1) {
+                let bool = this.canRefresh();
+                if (bool) {
+                    this.btnRefresh.spriteFrame = SpriteFrameCenter.getFrameFromAtlas("png/game", btnPng[1][1] + ".png");
+                } else {
+                    this.btnRefresh.spriteFrame = SpriteFrameCenter.getFrameFromAtlas("png/game", btnPng[0][1] + ".png");
+                }
+            }
+            if (type == -1 || type == 2) {
+                let bool = this.canBomb();
+                if (bool) {
+                    this.btnBomb.spriteFrame = SpriteFrameCenter.getFrameFromAtlas("png/game", btnPng[1][2] + ".png");
+                } else {
+                    this.btnBomb.spriteFrame = SpriteFrameCenter.getFrameFromAtlas("png/game", btnPng[0][2] + ".png");
+                }
+            }
             // this.btnExchange.interactable = this.canExchange();
             // this.btnRefresh.interactable = this.canRefresh();
             // this.btnBomb.interactable = this.canBomb();
@@ -180,6 +220,7 @@ cc.Class({
         ,
         onTouchExchange: function () {
 
+            this.playTouchSound();
             if (Global.thisState != GameState.isRuning) {
                 if (Global.thisState == GameState.useExchange) {
                     this.BlocksController.stopExchange();
@@ -188,7 +229,7 @@ cc.Class({
                     return;
                 }
             }
-            if (this.canExchange()) {
+            if (!this.canExchange()) {
                 this.onAddGift(0);
                 return;
             }
@@ -206,6 +247,7 @@ cc.Class({
         }
         ,
         onTouchBomb: function () {
+            this.playTouchSound();
             if (Global.thisState != GameState.isRuning) {
                 if (Global.thisState == GameState.useBomb) {
                     Global.thisState = GameState.isRuning;
@@ -213,12 +255,21 @@ cc.Class({
                     return;
                 }
             }
-            if (!this.canBomb()) {
-                this.onAddGift(2);
-                return;
+            if (this.canBomb()) {
+                Global.thisState = GameState.useBomb;
+                Global.saveThisState();
+            } else {
+                if (Global.haveTools[2] <= 0) {
+                    this.onAddGift(2);
+                    return;
+                }
+                if (Global.useTools[2]) {
+                    ssss
+                    return false;
+                }
+
             }
-            Global.thisState = GameState.useBomb;
-            Global.saveThisState();
+
         }
         ,
         stopBomb: function () {
@@ -228,6 +279,7 @@ cc.Class({
         }
         ,
         onTouchRefresh() {
+            this.playTouchSound();
             if (!this.canRefresh()) {
                 this.onAddGift(1);
                 return;
@@ -241,12 +293,14 @@ cc.Class({
         //create block;
         onTouchStartBtn: function () {
             // this.startMenu.active = false;
+            this.playTouchSound();
             this.BlocksController.startMenu();
 
         }
         ,
         onTouchRestartBtn: function () {
             // this.continueMenu.active = false;
+            this.playTouchSound();
             if (GameConfig.isFBInstantGame()) {
                 let num = GameUtils.randomInt(0, 100);
                 if (num < 30) {
@@ -270,18 +324,21 @@ cc.Class({
 
         },
         onTouchHomeBtn: function () {
+            this.playTouchSound();
             if (cc.find("Canvas").getChildByTag(110)) {
                 cc.find("Canvas").getChildByTag(110).removeFromParent(true);
             }
             Global.thisState = GameState.start;
-            Global.newHistory(this.thisscore);
-            if (this.thisCoin > 0) {
-                this.Coins += this.thisCoin;
+            Global.saveThisState();
+            Global.newHistory(Global.thisscore);
+            if (Global.thisCoin > 0) {
+                Global.Coins += Global.thisCoin;
                 Global.syncPlayerInfoToFB();
             }
             cc.director.loadScene("gamemenu");
         },
         onTouchPause: function () {
+            this.playTouchSound();
             this.continueMenu.active = true;
 
             this.continueMenu.getComponent("continueView").createBottom();
@@ -292,6 +349,7 @@ cc.Class({
         ,
 
         onTouchResume: function () {
+            this.playTouchSound();
             this.continueMenu.active = false;
             if (Global.ifLogin == 0) {
                 this.BlocksController.initBeforePage();
@@ -330,9 +388,15 @@ cc.Class({
 
         }
         ,
-        onAddGift: function (giftType) {
+        onAddGift: function (type) {
+            if (Global.GiftSendTimes[type] >= GameConfig.GiftLimited) {
+                let PopMsgController = require("PopMsgController");
+                PopMsgController.showMsg(GameConfig.GiftBeyondTip);
+                return;
+            }
+            Global.thisState = GameState.shareTool;
             let PopDialogController = require("PopDialogController");
-            PopDialogController.showSendGift(giftType);
+            PopDialogController.showSendGift(type);
         },
         changeNextNum: function () {
             this.BlocksController.changeNextNum();
@@ -385,6 +449,7 @@ cc.Class({
                 PopMsgController.showMsg(GameConfig.YourHelperNameTip.replace("XXX", helpers));
             }
         },
+
         userEntry: function (entryPointData) {
 
             // let GiftType = require("GiftType");
@@ -394,6 +459,7 @@ cc.Class({
             let GameStorage = require("GameStorage");
             let LocalStorage = require("LocalStorage");
             let GiftType = require("GiftType");
+            let FBP = require("Plugin");
 
             if (entrytype == 0) {
                 if (Global.LoginIndex == 0) {
@@ -401,7 +467,8 @@ cc.Class({
                     let time = entryPointData['time'];
                     let count = entryPointData['count'];
                     let from = entryPointData['from'];
-                    if (gifttype == GiftType.exchange || gifttype == GiftType.bomb || gifttype == GiftType.refresh) {//有问题
+                    // let helperId = FBP.getID();
+                    if (gifttype == GiftType.exchange || gifttype == GiftType.bomb || gifttype == GiftType.refresh) {
                         let today = Date.now();
                         if (Math.abs(today - time) < 1000 * 3600) {
                             LocalStorage.get(time.toString(), 0, function (num) {

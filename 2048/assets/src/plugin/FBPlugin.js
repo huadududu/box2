@@ -271,7 +271,7 @@ let plugin = cc.Class({
 
     updateGiftAsync: function (gifttype, count, callback, errorCallback) {
 
-        let text = "Only 10 players can get an extra life in an hour from " + FBInstant.player.getName() + " . ";
+        let text = "Only 10 players can get the gift in an hour from " + FBInstant.player.getName() + " . ";
         FBInstant.updateAsync({
             action: 'CUSTOM',
             cta: 'Join The Fight',
@@ -287,7 +287,7 @@ let plugin = cc.Class({
         }).then(function () {
             console.log('Message was sent successfully');
             if (callback) {
-                callback(FBInstant.context.getID());
+                callback(FBInstant.context.getID(),gifttype);
             }
         });
     },

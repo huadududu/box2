@@ -13,7 +13,17 @@ cc.Class({
         itemMorePrefab:cc.Prefab,
         itemExtra:require("DailyBonusItem"),
         Content:cc.Node,
+        touchAudio: {
+            default: null,
+            url: cc.AudioClip
+        },
+
     },
+    playTouchSound: function () {
+        // 调用声音引擎播放声音
+        cc.audioEngine.playEffect(this.touchAudio, false);
+    },
+
 
     // use this for initialization
     onLoad: function () {
@@ -28,6 +38,7 @@ cc.Class({
     },
 
     onClose:function () {
+        this.playTouchSound();
         this.node.removeFromParent(true);
     },
 

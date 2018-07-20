@@ -1008,7 +1008,7 @@
       }
     ],
     "_tag": -1,
-    "_active": false,
+    "_active": true,
     "_components": [],
     "_prefab": null,
     "_id": "cfGMWOZYpJGrd7GV8dc7hu",
@@ -2993,6 +2993,9 @@
     },
     "inviteTip": {
       "__id__": 60
+    },
+    "touchAudio": {
+      "__uuid__": "252ff326-8116-4e27-ab8c-daddad9154ce"
     }
   },
   {
@@ -3071,7 +3074,7 @@
     "endBestScore": {
       "__id__": 27
     },
-    "endAddCion": {
+    "endAddCoin": {
       "__id__": 29
     },
     "thisScore": {
@@ -3080,6 +3083,11 @@
     "thisKing": {
       "__id__": 35
     },
-    "bottom": null
+    "bottom": {
+      "__id__": 79
+    },
+    "touchAudio": {
+      "__uuid__": "252ff326-8116-4e27-ab8c-daddad9154ce"
+    }
   }
 ]

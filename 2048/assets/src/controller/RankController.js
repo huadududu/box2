@@ -28,9 +28,21 @@ cc.Class({
         friendTipNode: cc.Node,
         // friendInvideNode:cc.Node,
         myRank: require("RankItem"),
+
+        touchAudio: {
+            default: null,
+            url: cc.AudioClip
+        },
+
+    },
+    playTouchSound: function () {
+        // 调用声音引擎播放声音
+        cc.audioEngine.playEffect(this.touchAudio, false);
     },
 
-    // use this for initialization
+
+
+// use this for initialization
     onLoad: function () {
         this.friendsContent = this.friendScrollView.content;
         this.worldContent = this.worldScrollView.content;
@@ -156,14 +168,17 @@ cc.Class({
     },
 
     onClose: function () {
+        this.playTouchSound();
         this.node.removeFromParent(true);
     },
 
     onFriend: function () {
+        this.playTouchSound();
         this.topBarAnimate(true);
     },
 
     onWorld: function () {
+        this.playTouchSound();
         this.topBarAnimate(false);
     },
 

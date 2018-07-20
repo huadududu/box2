@@ -25,15 +25,16 @@ module.exports = function () {
             LeaderBoardName:"my_leaderboard2",
 
             //gift
-            GiftLimited:10,
+            GiftLimited:5,
 
             GiftUseTip:"Extra life from friends",
             GiftSamePlayerTip:"You can sent gift to same friends after ",
-            GiftBeyondTip:"You’ve sent 10 times gifts today,you can get one from your friends.",
-            GiftSendTitle:"Send Gift",
-            GiftSendTip:"You'll send 10 items to different friends at one time,and you'll get one yourself.\n It is better to share them in groups to benifit more friends.",
+            GiftBeyondTip:"You’ve sent 5 times gifts today,you can get one from your friends.",
+            GiftSendTitle:"SEND GIFT",
+            GiftSendTip:"You'll send 10 items to different friends at one time,and you'll get one yourself.",
+            GiftSendTipdesc:"It is better to share them in groups to benifit more friends.",
             GiftSendAfterTip:"You got an  item yourself！",
-            GiftRecieveTitle:"Gift",
+            GiftRecieveTitle:"GIFT",
             GiftRecieveTip:"You got an extra life from ",
             InviteSameTip:"You can't invite the same friends!",
             InviteAfterTip:"You will get the help until your friend enter game!",

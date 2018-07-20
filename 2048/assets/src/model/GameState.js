@@ -12,5 +12,6 @@ module.exports =cc.Enum({
     useExchange:5,//使用交换道具中
     useBomb:6,//使用炸弹中,
     useRefresh:7,//使用刷新道具中
-    isRuning : 8//正常运行中
+    isRuning : 8,//正常运行中,
+    shareTool:9//正在分享道具
 });

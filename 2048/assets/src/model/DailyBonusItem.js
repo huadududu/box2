@@ -31,6 +31,15 @@ cc.Class({
         itembg: cc.Sprite,
         index: 0,
         extraType: false,
+        touchAudio: {
+            default: null,
+            url: cc.AudioClip
+        },
+
+    },
+    playTouchSound: function () {
+        // 调用声音引擎播放声音
+        cc.audioEngine.playEffect(this.touchAudio, false);
     },
 
     onLoad: function () {
@@ -170,8 +179,8 @@ cc.Class({
     },
 
     clickCoin: function () {
+        this.playTouchSound();
         this.showDone();
-
         let Con = DailyBonusConfig["Signin"][this.index];
         let rewardid = Con['rewardid'];
         let rewardCon = RewardConfig[rewardid.toString()];

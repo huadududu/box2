@@ -35,11 +35,9 @@ cc.Class({
         this.blockRow = 5;
 
         this.BlockNum = 1;
-        this.panelMax = 1;
         this.gameController = cc.find("Canvas").getComponent("GameController");
 
         this.canrefresh = true;
-        this.createCount = 0;
         this.testCount = 0;
         this.goldList = [];
         this.joinCount = 0;
@@ -57,8 +55,7 @@ cc.Class({
     },
     changeNextNum: function (num = -1) {
         if (num == -1) {
-            Global.useTools[1] = true;
-            Global.saveUseTools();
+            this.useTool(1, true);
             num = this.createNextNum();
             this.BlockNum = num;
 
@@ -114,14 +111,16 @@ cc.Class({
         Global.saveShowAdTimes();
         this.gameNode.removeAllChildren(true);
         this.blockNodes = [];
-        this.panelMax = 1;
+        Global.panelMax = 1;
+        Global.savePanelMax();
         this.gameController.updateScore();
         this.blockNum = this.createNextNum();
         this.gameController.updateNext(this.blockNum);
         this.NextBlockNum = this.createNextNum();
         this.gameController.updateNext2(this.NextBlockNum);
         this.blockNum = 0;
-        this.createCount = 0;
+        Global.createCount = 0;
+        Global.saveCreateCount();
         this.goldList = [];
         Global.thisState = GameState.isRuning;
         Global.saveThisState();
@@ -167,15 +166,20 @@ cc.Class({
         this.stopMoveNodes = [];
         if (Global.stop_list) {
             for (let i = 0; i < Global.stop_list.length; i++) {
-                let node = this.blockNodes[Global.stop_list[i].line][Global.stop_list[i].row];
-                this.stopMoveNodes.push(node);
+                if (this.blockNodes[Global.stop_list[i].line] && this.blockNodes[Global.stop_list[i].line][Global.stop_list[i].row]) {
+                    let node = this.blockNodes[Global.stop_list[i].line][Global.stop_list[i].row];
+                    this.stopMoveNodes.push(node);
+                }
             }
 
         }
         if (Global.new_list) {
             for (let i = 0; i < Global.new_list.length; i++) {
-                let node = this.blockNodes[Global.new_list[i].line][Global.new_list[i].row];
-                this.newCreateList.push(node);
+                if (this.blockNodes[Global.new_list[i].line] && this.blockNodes[Global.new_list[i].line][Global.new_list[i].row]) {
+                    let node = this.blockNodes[Global.new_list[i].line][Global.new_list[i].row];
+                    this.newCreateList.push(node);
+                }
+
             }
         } else {
             this.newCreateList = [];
@@ -245,7 +249,7 @@ cc.Class({
     },
     createNextNum: function () {
         let BlockConfig = require("BlockConfig");
-        let conf = BlockConfig[this.panelMax];
+        let conf = BlockConfig[Global.panelMax];
         let create = 1;
         if (!conf) {
             conf = BlockConfig[MAX_NUM];
@@ -336,7 +340,8 @@ cc.Class({
         let node = BlockFactory.create(this.BlockNum);
         Global.blocks[6][2] = this.BlockNum;
         Global.saveBlockInfo();
-        this.createCount++;
+        Global.createCount++;
+        Global.saveCreateCount();
         node.getComponent("Block").setBlockPos(6, 2);
         this.movingBlock = node;
         this.newCreateList[0] = node;
@@ -371,14 +376,15 @@ cc.Class({
         let row = this.movingBlock.getComponent("Block").getBlockRow();
         let line = this.movingBlock.getComponent("Block").getBlockLine();
         Global.movingNode = {'line': line, 'row': row};
+        Global.saveMovingNode();
     },
 
     checkCanCreateCoin: function () {
         let CoinConfig = require("CoinConfig");
-        if (CoinConfig[this.createCount] != undefined) {
+        if (CoinConfig[Global.createCount] != undefined) {
             let rate = GameUtils.randomInt(1, Math.pow(10, 4));
 
-            if (rate < CoinConfig[this.createCount].rate)
+            if (rate < CoinConfig[Global.createCount].rate)
                 return true;
             else {
                 console.log(" you are not hit");
@@ -457,20 +463,26 @@ cc.Class({
         return canUsePos;
     },
     GoldCallBack: function (type, GoldID) {
-        this.goldList[GoldID].node.removeFromParent(true);
-        this.goldList[GoldID] = null;
+
+
         switch (type) {
             case "end":
                 break;
             case "get":
                 Global.thisCoin++;
+                let PopMsgController = require("PopMsgController");
+                let x = this.goldList[GoldID].node.position.x + 55;
+                let y = this.goldList[GoldID].node.position.y + 110;
+                let position = cc.p(x, y);
+                PopMsgController.showBlockMsg("coin+" + 1, position);
                 Global.saveThisCoin();
                 this.gameController.updateCoin();
                 this.playGoldSound();
                 // Global.syncPlayerInfoToFB();
                 break;
         }
-
+        this.goldList[GoldID].node.removeFromParent(true);
+        this.goldList[GoldID] = null;
     },
     downGoldBlock: function () {
 
@@ -704,8 +716,9 @@ cc.Class({
         Global.thisscore += showNumber;
         Global.saveThisScore();
 
-        if (this.panelMax < newScore) {
-            this.panelMax = newScore;
+        if (Global.panelMax < newScore) {
+            Global.panelMax = newScore;
+            Global.savePanelMax();
         }
         // EndNode.getComponent("Block").setBlockNumber(newScore);
         this.addCount = 0;
@@ -1249,6 +1262,8 @@ cc.Class({
         Global.saveBlockInfo();
     },
     onUseBombTool: function (location1) {
+        if (this.bombNode != null)
+            return;
         let location = this.gameNode.convertToNodeSpaceAR(location1);
         let realWith = this.blockWidth + this.blockblank;
         let line = Math.floor(location.y / realWith);
@@ -1257,8 +1272,7 @@ cc.Class({
             return;
         }
         else {
-            Global.useTools[2] = true;
-            Global.saveUseTools();
+            this.useTool(2, true);
             this.bombNode = this.blockNodes[line][row];
             // let node = this.blockNodes[line][row];
             for (let i = 0; i < this.waitMovingNodes.length; i++) {
@@ -1301,10 +1315,13 @@ cc.Class({
             this.schedule(this.refreshChoose, this.joinspeed);
         }
         this.bombNode.removeFromParent(true);
+        this.bombNode = null;
         this.gameController.stopBomb();
     },
     onUseChangeTool: function (location1) {
 
+        if (this.exchangenum >= 2)
+            return;
         let location = this.gameNode.convertToNodeSpaceAR(location1);
         let realWith = this.blockWidth + this.blockblank;
         let line = Math.floor(location.y / realWith);
@@ -1312,23 +1329,23 @@ cc.Class({
         if (!this.blockNodes[line] || !this.blockNodes[line][row]) {
             return;
         }
-        this.exchangenum++;
-        if (this.exchangeList == null) {
-            this.exchangeList = [];
-        }
 
         if (!this.canChangeNode(this.blockNodes[line][row])) {
             return;
         }
+
+        if (this.exchangeList == null) {
+            this.exchangeList = [];
+        }
         this.exchangeList[this.exchangeList.length] = {'line': line, 'row': row};
+        this.exchangenum++;
         this.blockNodes[line][row].getComponent("Block").setHitState(true);
         if (this.exchangenum == 2) {
             if ((this.exchangeList[0].line == this.exchangeList[1].line) && (this.exchangeList[0].row == this.exchangeList[1].row)) {
                 this.stopExchange();
                 return;
             }
-            Global.useTools[0] = true;
-            Global.saveUseTools();
+            this.useTool(0, true);
             let node1 = this.blockNodes[this.exchangeList[0].line][this.exchangeList[0].row];
             let node2 = this.blockNodes[this.exchangeList[1].line][this.exchangeList[1].row];
             let find = false;
@@ -1443,6 +1460,14 @@ cc.Class({
         }
         return true;
     },
+    useTool: function (type, bool) {
+        Global.useTools[type] = bool;
+        Global.saveUseTools();
+        Global.haveTools[type] = 0;
+        Global.saveHaveTools();
+        this.gameController.refreshBottom(type);
+
+    }
 
 
 })

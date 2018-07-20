@@ -60,7 +60,8 @@ cc.Class({
             "prefab/inviteUI",
             "prefab/rankUI",
             "prefab/poppngmsg",
-            "prefab/bottom"
+            "prefab/bottom",
+            "prefab/popwin"
         ];
 
         for (let i = 0; i < files.length; ++i) {
