@@ -18,7 +18,7 @@ import codecs
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
- 
+
 # keyindex 作为 keyf
 def generageLua(rowsContent,rowMap,keyindex):
 
@@ -189,276 +189,90 @@ def parseLineConfig(content):
     # for item in content:
     #     print item
 
-def parseItemConfig(content):
-    # {
-    #
-    #     '10000': {name: '无敌', type: 1, icon: 'i_10000.png', time: 5},
-    #     '10001': {name: '身体', type: 2, icon: '', time: 0},
-    #     '10002': {name: '单排子弹', type: 3, icon: 'i_10002.png', time: 0},
-    #     '10003': {name: '双排子弹', type: 4, icon: 'i_10003.png', time: 0},
-    #     '10004': {name: '子弹频率双倍', type: 5, icon: 'i_10004.png', time: 0},
-    #
-    # };
 
-    # excel 10000	无敌	1	i_10000.png	10	持续10秒
-    # type
-    ret = {}
-    key = str2str(str2i(content[0]))
-    ret['name'] = str2str(content[1])
-    ret['type'] =  str2i(content[2])
-    ret['icon'] = str2str(content[3])
-    ret['time'] = str2f(content[4])
-
-    return key,ret
-
-
-def parseSpeedConfig(content):
-    score = str2i(content[0])
-    v = str2f(content[1])
-    return score,v
-
-def parsePositionConfig(content):
-
-    ret = {}
-    key = str2str(content[0])
-    ret['min'] = str2i(content[1])
-    ret['max'] = str2i(content[2])
-    return key,ret
-
-def parseLevelConfig(content):
-    ret = {}
-    key = str2i(content[0])
-    ret['id'] = str(key)
-    ret['exp'] = str2i(content[1])
-    ret['rewardcoin'] = str2i(content[2])
-    return ret['id'], ret
-
-def parseStageConfig(content):
-    ret = {}
-    key = str2i(content[0])
-    ret['id'] = str(key)
-    ret['box'] = str2str(content[1])
-    ret['layer'] = str2i(content[2])
-    ret['size'] = str2i(content[3])
-    ret['top'] = str2i(content[4])
-    ret['cycleID'] = str2str(content[5])
-
-    return ret['id'], ret
-
-def parseCycleConfig(content):
-    ret = {}
-    key = str2i(content[0])
-    ret['id'] = str(key)
-    ret['size'] = str2i(content[1])
-    ret['block1'] = str2i(content[2])
-    ret['num1'] = str2i(content[3])
-    ret['block2'] = str2i(content[4])
-    ret['num2'] = str2i(content[5])
-    ret['block3'] = str2i(content[6])
-    ret['num3'] = str2i(content[7])
-    ret['block4'] = str2i(content[8])
-    ret['num4'] = str2i(content[9])
-    ret['block5'] = str2i(content[10])
-    ret['num5'] = str2i(content[11])
-    ret['block6'] = str2i(content[12])
-    ret['num6'] = str2i(content[13])
-    ret['block7'] = str2i(content[14])
-    ret['num7'] = str2i(content[15])
-    ret['block8'] = str2i(content[16])
-    ret['num8'] = str2i(content[17])
-    ret['block9'] = str2i(content[18])
-    ret['num9'] = str2i(content[19])
-    ret['block10'] = str2i(content[20])
-    ret['num10'] = str2i(content[21])
-
-    return ret['id'], ret
 
 def parseBlockConfig(content):
     ret = {}
     key = str2i(content[0])
     ret['id'] = str(key)
-    ret['size'] = str2i(content[1])
-    ret['resources'] = str2str(content[2])
-    ret['texiao'] = str2str(content[3])
+    ret['rate1'] = str2i(content[1])
+    ret['rate2'] = str2i(content[2])
+    ret['rate3'] = str2i(content[3])
+    ret['rate4'] = str2i(content[4])
+    ret['rate5'] = str2i(content[5])
+    ret['rate6'] = str2i(content[6])
+    ret['rate7'] = str2i(content[7])
+    ret['rate8'] = str2i(content[8])
+    ret['rate9'] = str2i(content[9])
+    ret['rate10'] = str2i(content[10])
+    ret['rate11'] = str2i(content[11])
+    ret['rate12'] = str2i(content[12])
+    ret['rate13'] = str2i(content[13])
 
     return ret['id'], ret
-
-def parseAcceleratorConfig(content):
+def parseSpeedConfig(content):
     ret = {}
     key = str2i(content[0])
     ret['id'] = str(key)
-    ret['name'] = str2str(content[1])
-    ret['title'] = str2i(content[2])
-    ret['icon'] = str2str(content[3])
-    ret['speed'] = str2i(content[4])
-    ret['coin'] = str2i(content[5])
-    ret['time'] = str2i(content[6])
-    ret['desc'] = str2i(content[7])
-    ret['checkdes'] = str2str(content[8])
+    ret['score'] = str2i(content[1])
+    ret['time'] = str2f(content[2])
 
     return ret['id'], ret
 
-def parseToolConfig(content):
+def parseCoinConfig(content):
     ret = {}
-    key = str2i(content[0])
-    ret['id'] = str(key)
-    ret['name'] = str2str(content[1])
-    ret['title'] = str2i(content[2])
-    ret['icon'] = str2str(content[3])
-    ret['animation'] = str2str(content[4])
-    ret['attribute'] = str2i(content[5])
-    ret['unlock'] = str2str(content[6])
-    ret['locked'] = str2str(content[7])
+    key = str2i(content[1])
+   # ret['id'] = str(key)
+    ret['block'] = str(key)
+    ret['rate'] = str2i(content[2])
 
-    return ret['id'], ret
-
-def parseAttributeConfig(content):
-    ret = {}
-    key = str2i(content[0])
-    ret['id'] = str(key)
-    ret['relate'] = str2str(content[1])
-    ret['next'] = str2i(content[2])
-    ret['att'] = str2i(content[3])
-    ret['time'] = str2str(content[4])
-    ret['cost'] = str2i(content[5])
-    ret['costtype'] = str2i(content[6])
-    ret['desc'] = str2i(content[7])
-    ret['checkdes'] = str2str(content[8])
-    return ret['id'], ret
-
-def parseEfficiencyConfig(content):
-    ret = {}
-    key = str2i(content[0])
-    ret['id'] = str(key)
-    ret['name'] = str2str(content[1])
-    ret['title'] = str2i(content[2])
-    ret['type'] = str2i(content[3])
-    ret['coin'] = str2i(content[4])
-    ret['jumptime'] = str2i(content[5])
-    ret['time'] = str2i(content[6])
-    ret['cost'] = str2i(content[7])
-    ret['costtype'] = str2i(content[8])
-    ret['desc'] = str2i(content[9])
-    ret['checkdes'] = str2str(content[10])
-    return ret['id'], ret
-
-
-def parseBoxConfig(content):
-    ret = {}
-    key = str2i(content[0])
-    ret['id'] = str(key)
-    ret['icon'] = str2str(content[1])
-    ret['animation'] = str2str(content[2])
-    ret['reward'] = str2i(content[3])
-
-    return ret['id'], ret
-
-
+    return ret['block'], ret
 def parseRewardConfig(content):
+
+    ret = {}
+    key = str(str2i(content[0]))
+    # ret['id'] = key
+    # 1 for design
+    ret['coin'] = str2i(content[2])
+    return key,ret
+
+# 
+def parseInviteConfig(content):
+
     ret = {}
     key = str2i(content[0])
-    ret['id'] = str(key)
-    ret['name'] = str2str(content[1])
+    ret['id'] = key
+    # 1 for design
     ret['num'] = str2i(content[2])
-    ret['item1'] = str2str(content[3])
-    ret['rate1'] = str2i(content[4])
+    ret['rewardid'] = str2i(content[3])
+    return key,ret
 
-    ret['item2'] = str2str(content[5])
-    ret['rate2'] = str2i(content[6])
+def parseSigninConfig(content):
 
-    ret['item3'] = str2str(content[7])
-    ret['rate3'] = str2i(content[8])
-
-    ret['item4'] = str2str(content[9])
-    ret['rate4'] = str2i(content[10])
-
-    ret['item5'] = str2str(content[11])
-    ret['rate5'] = str2i(content[12])
-
-    ret['item6'] = str2str(content[13])
-    ret['rate6'] = str2i(content[14])
-
-    return ret['id'], ret
-
-
-def parseSignInviteConfig(content):
     ret = {}
     key = str2i(content[0])
-    ret['id']= str(key)
-    ret['name'] = str2str(content[1])
-    ret['item'] = str2i(content[2])
-    ret['num'] = str2i(content[3])
-
-    return ret['id'], ret
-
-def parseItemConfig(content):
-    ret = {}
-    key = str2i(content[0])
-    ret['id'] = str(key)
-    ret['name'] = str2str(content[1])
-    ret['icon'] = str2str(content[2])
-
-    return ret['id'], ret
-
-def parseLanguageConfig(content):
-    ret = {}
-    key = str2i(content[0])
-    ret['id'] = str(key)
-    ret['Chinese'] = str2str(content[1])
-    ret['English'] = str2str(content[2])
-    ret['Japanese'] = str2str(content[3])
-
-    return ret['id'], ret
+    ret['id'] = key
+    # 1 for design
+    ret['retrieve'] = str2i(content[2])
+    ret['rewardid'] = str2i(content[3])
+    return key,ret
 
 
 
-#
-#
-#
-#
-def converLevelConfig(excelPath,savepath):
+def converSpeedConfig(excelPath, savepath):
     rowstartindex = 1
     rowendindex = 0
-    sheetName = 'level'
+    sheetName = 'speed'
     rowscontent, err = readExcel(excelPath, sheetName, rowstartindex, rowendindex)
 
     config = {}
     for item in rowscontent:
-        index, c = parseLevelConfig(item)
+        index, c = parseSpeedConfig(item)
         config[index] = c
 
     print 'config', config
     convertoJs(config, savepath)
 
-
-def converStageConfig(excelPath,savepath):
-    rowstartindex = 1
-    rowendindex = 0
-    sheetName = 'stage'
-    rowscontent, err = readExcel(excelPath, sheetName, rowstartindex, rowendindex)
-
-    config = {}
-    for item in rowscontent:
-        index, c = parseStageConfig(item)
-        config[index] = c
-
-    print 'config', config
-    convertoJs(config, savepath)
-
-
-def converCycleConfig(excelPath, savepath):
-    rowstartindex = 1
-    rowendindex = 0
-    sheetName = 'cycle'
-    rowscontent, err = readExcel(excelPath, sheetName, rowstartindex, rowendindex)
-
-    config = {}
-    for item in rowscontent:
-        index, c = parseCycleConfig(item)
-        config[index] = c
-
-    print 'config', config
-    convertoJs(config, savepath)
 
 def converBlockConfig(excelPath, savepath):
     rowstartindex = 1
@@ -474,136 +288,59 @@ def converBlockConfig(excelPath, savepath):
     print 'config', config
     convertoJs(config, savepath)
 
-def converAcceleratorConfig(excelPath, savepath):
+def converCoinConfig(excelPath, savepath):
     rowstartindex = 1
     rowendindex = 0
-    sheetName = 'accelerator'
+    sheetName = 'coin'
     rowscontent, err = readExcel(excelPath, sheetName, rowstartindex, rowendindex)
 
     config = {}
     for item in rowscontent:
-        index, c = parseAcceleratorConfig(item)
+        index, c = parseCoinConfig(item)
         config[index] = c
 
     print 'config', config
     convertoJs(config, savepath)
 
-def converToolConfig(excelPath, savepath):
-        rowstartindex = 1
-        rowendindex = 0
-        sheetName = 'tool'
-        rowscontent, err = readExcel(excelPath, sheetName, rowstartindex, rowendindex)
 
-        config = {}
-        for item in rowscontent:
-            index, c = parseToolConfig(item)
-            config[index] = c
-
-        print 'config', config
-        convertoJs(config, savepath)
-
-def converAttributeConfig(excelPath, savepath):
-        rowstartindex = 1
-        rowendindex = 0
-        sheetName = 'attribute'
-        rowscontent, err = readExcel(excelPath, sheetName, rowstartindex, rowendindex)
-
-        config = {}
-        for item in rowscontent:
-            index, c = parseAttributeConfig(item)
-            config[index] = c
-
-        print 'config', config
-        convertoJs(config, savepath)
-
-
-
-def converEfficiencyConfig(excelPath, savepath):
-        rowstartindex = 1
-        rowendindex = 0
-        sheetName = 'efficiency'
-        rowscontent, err = readExcel(excelPath, sheetName, rowstartindex, rowendindex)
-
-        config = {}
-        for item in rowscontent:
-            index, c = parseEfficiencyConfig(item)
-            config[index] = c
-
-        print 'config', config
-        convertoJs(config, savepath)
-        
-
-
-def converBoxConfig(excelPath, savepath):
-    rowstartindex = 1
-    rowendindex = 0
-    sheetName = 'box'
-    rowscontent, err = readExcel(excelPath, sheetName, rowstartindex, rowendindex)
-
-    config = {}
-    for item in rowscontent:
-        index, c = parseBoxConfig(item)
-        config[index] = c
-
-    print 'config', config
-    convertoJs(config, savepath)
-
-def converRewardConfig(excelPath, savepath):
+def converRewardConfig(excelPath,savepath):
     rowstartindex = 1
     rowendindex = 0
     sheetName = 'reward'
     rowscontent, err = readExcel(excelPath, sheetName, rowstartindex, rowendindex)
-
     config = {}
     for item in rowscontent:
-        index, c = parseRewardConfig(item)
-        config[index] = c
-
-    print 'config', config
+        k,c = parseRewardConfig(item)
+        config[k] = c
+    print 'config',config
     convertoJs(config, savepath)
 
-def converSignInviteConfig(excelPath, savepath):
+def converInviteConfig(excelPath,savepath):
     rowstartindex = 1
     rowendindex = 0
-    sheetName = 'signinvite'
+    sheetName = 'invite'
     rowscontent, err = readExcel(excelPath, sheetName, rowstartindex, rowendindex)
-
     config = {}
+    config["invite"] = []
     for item in rowscontent:
-        index, c = parseSignInviteConfig(item)
-        config[index] = c
-
-    print 'config', config
+        k,c = parseInviteConfig(item)
+        config['invite'].append(c)
+    print 'config',config
     convertoJs(config, savepath)
 
-def converItemConfig(excelPath, savepath):
+def converSigninConfig(excelPath,savepath):
     rowstartindex = 1
     rowendindex = 0
-    sheetName = 'item'
+    sheetName = 'signin'
     rowscontent, err = readExcel(excelPath, sheetName, rowstartindex, rowendindex)
-
     config = {}
+    config['Signin'] = []
     for item in rowscontent:
-        index, c = parseItemConfig(item)
-        config[index] = c
-
-    print 'config', config
+        k,c = parseSigninConfig(item)
+        config['Signin'].append(c)
+    print 'config',config
     convertoJs(config, savepath)
-def converLanguageConfig(excelPath, savepath):
-    rowstartindex = 1
-    rowendindex = 0
-    sheetName = 'language'
-    rowscontent, err = readExcel(excelPath, sheetName, rowstartindex, rowendindex)
-
-    config = {}
-    for item in rowscontent:
-        index, c = parseLanguageConfig(item)
-        config[index] = c
-
-    print 'config', config
-    convertoJs(config, savepath)
-
-
+       
 def convertoJs(content,savefile='test.js'):
     json_string = json.dumps(content)
     print json_string
@@ -622,63 +359,34 @@ def converTank():
     # print str2i("")
     # return
 
-    excelPath = """/Users/bolex1/work/game/doc/daddy's treasure/gameconfig.xlsx"""
+    excelPath = """/Users/bolex1/work/game/doc/2048/gameconfig.xlsx"""
 
    
-    basePath = "/Users//bolex1/work/game/box/box/assets/src/config/"
-     # level
-    savepath = "LevelConfig.js"
-    converLevelConfig(excelPath,basePath + savepath)
+    basePath = "/Users//bolex1/work/game/2048/2048/assets/src/config/"
 
-
-     # stage
-    savepath = "StageConfig.js"
-    converStageConfig(excelPath,basePath + savepath)
 
     # cycle config
-    savepath = "CycleConfig.js"
-    converCycleConfig(excelPath, basePath+savepath)
-
-    # block config
     savepath = "BlockConfig.js"
     converBlockConfig(excelPath, basePath+savepath)
+    # speed config
+    savepath = "SpeedConfig.js"
+    converSpeedConfig(excelPath, basePath+savepath)
 
-    # accelerator
-    savepath = "AcceleratorConfig.js"
-    converAcceleratorConfig(excelPath, basePath+savepath)
-
-    # tool config
-    savepath = "ToolConfig.js"
-    converToolConfig(excelPath, basePath + savepath)
-
-    # attribute config
-    savepath = "AttributeConfig.js"
-    converAttributeConfig(excelPath, basePath + savepath)
-
-    # efficiency config
-    savepath = "EfficiencyConfig.js"
-    converEfficiencyConfig(excelPath, basePath + savepath)
-
-    # box config
-    savepath = "BoxConfig.js"
-    converBoxConfig(excelPath, basePath + savepath)
-
-    # box config
+    # speed config
+    savepath = "CoinConfig.js"
+    converCoinConfig(excelPath, basePath+savepath)
+   # reward config
     savepath = "RewardConfig.js"
-    converRewardConfig(excelPath, basePath + savepath)
-
-    #signinvate conifg
-    savepath = "SignInviteConfig.js"
-    converSignInviteConfig(excelPath, basePath + savepath)
-
-    # item config
-    savepath = "ItemConfig.js"
-    converItemConfig(excelPath, basePath + savepath)
+    converRewardConfig(excelPath, basePath+savepath)
 
 
-     # language config
-    savepath = "LanguageConfig.js"
-    converLanguageConfig(excelPath, basePath + savepath)
+    savepath = "InviteConfig.js"
+    converInviteConfig(excelPath, basePath+savepath)
+
+    savepath = "DailyBonusConfig.js"
+    converSigninConfig(excelPath, basePath+savepath)
+
+   
 
 
 if __name__ == "__main__":
